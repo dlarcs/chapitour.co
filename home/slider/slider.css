@@ -186,7 +186,7 @@
    RESPONSIVE
 ================================ */
 
-@media (max-width: 875px) {
+@media (max-width: 600px) {
   .hero-showcase {
     min-height: auto;
     grid-template-columns: 1fr;
