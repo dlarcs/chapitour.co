@@ -129,7 +129,7 @@
   width: clamp(240px, 30vw, 400px);
   height: clamp(115px, 22vw, 170px);
   text-decoration: none;
-  animation: floatUp 25s linear infinite;
+  animation: floatUp 26s linear infinite;
 }
 
 .gallery-card small {
@@ -167,13 +167,13 @@
 .img-2 { left: 36%; animation-delay: -3s; }
 .img-3 { left: 55%; animation-delay: -8s; }
 
-.img-4 { left: 5%;  animation-delay: -9s; }
-.img-5 { left: 36%; animation-delay: -12s; }
-.img-6 { left: 55%; animation-delay: -15s; }
+.img-4 { left: 5%;  animation-delay: -11s; }
+.img-5 { left: 36%; animation-delay: -14s; }
+.img-6 { left: 55%; animation-delay: -17s; }
 
-.img-7 { left: 5%;  animation-delay: -18s; }
-.img-8 { left: 36%; animation-delay: -21s; }
-.img-9 { left: 55%; animation-delay: -24s; }
+.img-7 { left: 5%;  animation-delay: -20s; }
+.img-8 { left: 36%; animation-delay: -23s; }
+.img-9 { left: 55%; animation-delay: -26s; }
 
 @keyframes floatUp {
   from {
