@@ -1,19 +1,4 @@
-const featuredPlaces = document.querySelector('.visible');
 
-if (featuredPlaces) {
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        featuredPlaces.classList.add('is-visible');
-        observer.unobserve(featuredPlaces);
-      }
-    });
-  }, {
-    threshold: 0.3
-  });
-
-  observer.observe(featuredPlaces);
-}
 document.addEventListener("DOMContentLoaded", () => {
   const preloader = document.getElementById("preloader");
 
