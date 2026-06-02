@@ -95,7 +95,7 @@ body::-webkit-scrollbar-thumb:hover {
   display: inline-block;
   font-size: clamp(1.8rem, 6vw, 8rem);
   font-weight: 700;
-  color: #dcb7ff;
+  color: #ff62ea;
   letter-spacing: -0.04em;
   animation: zoomRotate 1.2s ease-out forwards, colorize 2s linear;
   animation-delay: calc(0.1s * var(--index));
