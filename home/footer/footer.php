@@ -4,7 +4,7 @@ $cssFile = $base . '/home/footer/footer.css';
 $cssVer = is_file($cssFile) ? filemtime($cssFile) : '';
 ?>
 <link rel="stylesheet" href="home/footer/footer.css<?= $cssVer ? '?v=' . $cssVer : '' ?>">
-<footer class="site-footer">
+<footer class="site-footer visible">
   <div class="footer-inner">
 
     <div class="footer-brand">
