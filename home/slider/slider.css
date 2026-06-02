@@ -165,15 +165,15 @@
 
 .img-1 { left: 5%;  animation-delay: 0s; }
 .img-2 { left: 36%; animation-delay: -3s; }
-.img-3 { left: 55%; animation-delay: -8s; }
+.img-3 { left: 55%; animation-delay: -6s; }
 
 .img-4 { left: 5%;  animation-delay: -9s; }
 .img-5 { left: 36%; animation-delay: -12s; }
-.img-6 { left: 55%; animation-delay: -17s; }
+.img-6 { left: 55%; animation-delay: -15s; }
 
-.img-7 { left: 5%;  animation-delay: -20s; }
-.img-8 { left: 36%; animation-delay: -23s; }
-.img-9 { left: 55%; animation-delay: -26s; }
+.img-7 { left: 5%;  animation-delay: -18s; }
+.img-8 { left: 36%; animation-delay: -21s; }
+.img-9 { left: 55%; animation-delay: -24s; }
 
 @keyframes floatUp {
   from {
