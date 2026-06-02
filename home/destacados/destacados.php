@@ -10,7 +10,7 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
 
 <link rel="stylesheet" href="home/destacados/destacados.css<?= $cssVer ? '?v=' . $cssVer : '' ?>">
 
-<div class="featured-places">
+<div class="featured-places visible">
   <div class="interest-header">
     <h2>
       <span>☆</span>
