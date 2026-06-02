@@ -300,11 +300,11 @@
 
   @keyframes floatUp {
     from {
-      top: 105%;
+      top: 90%;
     }
 
     to {
-      top: -105%;
+      top: -90%;
     }
   }
 }
