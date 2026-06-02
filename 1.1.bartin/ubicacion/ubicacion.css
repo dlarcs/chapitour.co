@@ -4,13 +4,13 @@
 .business-location-social {
   color: #fafafa;
 }
-.visible {
+.visible_ubicacion {
   opacity: 0;
   transform: translateY(30px);
   transition: opacity 0.7s ease, transform 0.7s ease;
 }
 
-.visible.is-visible {
+.visible_ubicacion.is-visible {
   opacity: 1;
   transform: translateY(0);
 }

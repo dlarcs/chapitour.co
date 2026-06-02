@@ -1,4 +1,4 @@
-const featuredPlaces = document.querySelector('.visible');
+const featuredPlaces = document.querySelector('.visible_slider');
 
 if (featuredPlaces) {
   const observer = new IntersectionObserver((entries) => {
