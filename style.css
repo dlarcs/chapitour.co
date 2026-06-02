@@ -45,6 +45,10 @@ main {
   padding: 0rem;
 
 }
+.visible.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
 
 /* Scroll */
 body::-webkit-scrollbar {

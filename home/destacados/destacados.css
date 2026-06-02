@@ -16,10 +16,6 @@
   transition: opacity .7s ease, transform .7s ease;
 }
 
-.visible.is-visible {
-  opacity: 1;
-  transform: translateY(0);
-}
 
 .interest-header {
   width: 100%;
