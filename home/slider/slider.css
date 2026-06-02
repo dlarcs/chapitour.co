@@ -129,7 +129,7 @@
   width: clamp(240px, 30vw, 400px);
   height: clamp(115px, 22vw, 170px);
   text-decoration: none;
-  animation: floatUp 26s linear infinite;
+  animation: floatUp 25s linear infinite;
 }
 
 .gallery-card small {
