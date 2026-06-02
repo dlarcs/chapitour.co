@@ -1,0 +1,28 @@
+<?php
+$base = rtrim($_SERVER['DOCUMENT_ROOT'], '/');
+
+$cssFile = $base . '/1.1.bartin/galeria/galeria.css';
+
+$cssVer = is_file($cssFile) ? filemtime($cssFile) : '';
+?>
+
+<link rel="stylesheet" href="../1.1.bartin/galeria/galeria.css<?= $cssVer ? '?v=' . $cssVer : '' ?>">
+<section class="business-section business-gallery">
+  <span class="section-label">Galería</span>
+
+  <h2>Conoce el ambiente</h2>
+
+  <p>
+    Un lugar con estilo moderno, luces cálidas, buena música y espacios pensados
+    para disfrutar con amigos.
+  </p>
+
+  <div class="gallery-grid">
+    <img src="../home/img/sofa.png" alt="Interior del gastrobar">
+    <img src="../home/img/bar.png" alt="Barra del gastrobar">
+    <img src="../home/img/sofa.png" alt="Comida rápida">
+    <img src="../home/img/bar.png" alt="Bebidas y licores">
+    <img src="../home/img/sofa.png" alt="Comida rápida">
+
+  </div>
+</section>
