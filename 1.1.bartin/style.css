@@ -81,38 +81,6 @@ body::-webkit-scrollbar-thumb:hover {
   background: #111;
 }
 
-/* Preloader */
-.preloader {
-  position: fixed;
-  inset: 0;
-  display: grid;
-  place-items: center;
-  background:
-    radial-gradient(circle at center, rgba(118, 70, 143, .28), transparent 38%),
-    #050008;
-  z-index: 9999;
-  opacity: 1;
-  visibility: visible;
-}
-
-.preloader.fade-out {
-  animation: fadeOut 0.8s ease forwards;
-}
-
-.preloader.hidden {
-  display: none;
-}
-
-.loader span {
-  display: inline-block;
-  font-size: clamp(1.8rem, 5vw, 4rem);
-  font-weight: 700;
-  color: #ff62ea;
-  letter-spacing: -0.04em;
-  animation: zoomRotate 1.2s ease-out forwards, colorize 2s linear;
-  animation-delay: calc(0.1s * var(--index));
-}
-
 /* WhatsApp button */
 .whatsapp-fab {
   position: fixed;

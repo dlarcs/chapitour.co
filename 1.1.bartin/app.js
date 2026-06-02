@@ -1,105 +1,16 @@
-document.addEventListener("DOMContentLoaded", () => {
-  /* ===============================
-     Reveal section
-  ================================ */
-  const featuredPlaces = document.querySelectorAll(".visible")
+const featuredPlaces = document.querySelectorAll('.visible');
 
-  if (featuredPlaces) {
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          featuredPlaces.classList.add("is-visible");
-          observer.unobserve(featuredPlaces);
-        }
-      });
-    }, {
-      threshold: 0.3
+if (featuredPlaces) {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        featuredPlaces.classList.add('is-visible');
+        observer.unobserve(featuredPlaces);
+      }
     });
-
-    observer.observe(featuredPlaces);
-  }
-
-  /* ===============================
-     Preloader
-  ================================ */
-  const preloader = document.getElementById("preloader");
-
-  if (
-    !preloader ||
-    matchMedia("(prefers-reduced-motion: reduce)").matches
-  ) {
-    if (preloader) preloader.style.display = "none";
-    return;
-  }
-
-  const loader = preloader.querySelector(".loader");
-  if (!loader) return;
-
-  preloader.classList.add("fade-out");
-
-  const fadeMs =
-    parseFloat(getComputedStyle(preloader).transitionDuration) * 1000 || 1000;
-
-  preloader.classList.remove("fade-out");
-
-  "BARTINI RESTAURANT".split("").forEach((c, i) => {
-    const span = document.createElement("span");
-
-    span.textContent = c === " " ? "\u00A0" : c;
-    span.style.setProperty("--index", i);
-
-    loader.appendChild(span);
+  }, {
+    threshold: 0.3
   });
 
-  document.documentElement.classList.add("preloader-active");
-
-  const lastSpan = loader.lastElementChild;
-  let fallback = 5000;
-  let done = false;
-  let timer;
-
-  const finish = () => {
-    if (done) return;
-
-    done = true;
-    clearTimeout(timer);
-
-    preloader.classList.add("fade-out");
-
-    setTimeout(() => {
-      document.documentElement.classList.remove("preloader-active");
-      preloader.classList.add("hidden");
-      preloader.setAttribute("aria-hidden", "true");
-    }, fadeMs);
-  };
-
-  if (lastSpan) {
-    const cs = getComputedStyle(lastSpan);
-    const durStr = cs.animationDuration;
-    const delStr = cs.animationDelay;
-
-    const dur = Math.max(
-      ...durStr.split(",").map((s) => parseFloat(s) * 1000 || 0)
-    );
-
-    const del = Math.max(
-      ...delStr.split(",").map((s) => parseFloat(s) * 1000 || 0)
-    );
-
-    if (!isNaN(dur) && !isNaN(del)) {
-      fallback = dur + del + fadeMs + 500;
-    }
-
-    lastSpan.addEventListener(
-      "animationend",
-      (e) => {
-        if (e.animationName === "zoomRotate") {
-          finish();
-        }
-      },
-      { once: true }
-    );
-  }
-
-  timer = setTimeout(finish, fallback);
-});
+  observer.observe(featuredPlaces);
+}

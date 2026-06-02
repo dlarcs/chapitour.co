@@ -87,10 +87,6 @@
 </head>
 <body>
 
-   <div class="preloader" id="preloader">
-    <div class="loader">
-    </div>
-  </div>
   <script src="soporte.js"></script>
   <?php include "../global/menu/menu.php" ?>
   <?php include "../1.1.bartin/slider/slider.php" ?>
