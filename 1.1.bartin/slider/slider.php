@@ -2,7 +2,10 @@
 $base = rtrim($_SERVER['DOCUMENT_ROOT'], '/');
 
 $cssFile = $base . '/1.1.bartin/slider/slider.css';
-$cssVer  = is_file($cssFile) ? filemtime($cssFile) : '';
+$jsFile  = $base . '/1.1.bartin/slider/slider.js';
+
+$cssVer = is_file($cssFile) ? filemtime($cssFile) : '';
+$jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
 ?>
 
 <link rel="stylesheet" href="../1.1.bartin/slider/slider.css<?= $cssVer ? '?v=' . $cssVer : '' ?>">
@@ -95,3 +98,4 @@ $cssVer  = is_file($cssFile) ? filemtime($cssFile) : '';
   </div>
 
 </section>
+<script defer src="../1.1.bartin/slider/slider.js<?= $jsVer ? '?v=' . $jsVer : '' ?>"></script>

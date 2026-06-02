@@ -2,8 +2,12 @@
 $base = rtrim($_SERVER['DOCUMENT_ROOT'], '/');
 
 $cssFile = $base . '/1.1.bartin/acerca_nosotros/acerca_nosotros.css';
+$jsFile  = $base . '/1.1.bartin/acerca_nosotros/acerca_nosotros.js';
 
 $cssVer = is_file($cssFile) ? filemtime($cssFile) : '';
+$jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
+
+
 ?>
 
 <link rel="stylesheet" href="../1.1.bartin/acerca_nosotros/acerca_nosotros.css<?= $cssVer ? '?v=' . $cssVer : '' ?>">
@@ -29,3 +33,4 @@ $cssVer = is_file($cssFile) ? filemtime($cssFile) : '';
 
   <img src="../home/img/cocktel.png" alt="Experiencia en gastrobar">
 </section>
+<script defer src="../1.1.bartin/acerca_nosotros/acerca_nosotros.js<?= $jsVer ? '?v=' . $jsVer : '' ?>"></script>

@@ -2,8 +2,10 @@
 $base = rtrim($_SERVER['DOCUMENT_ROOT'], '/');
 
 $cssFile = $base . '/1.1.bartin/galeria/galeria.css';
+$jsFile  = $base . '/1.1.bartin/galeria/galeria.js';
 
 $cssVer = is_file($cssFile) ? filemtime($cssFile) : '';
+$jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
 ?>
 
 <link rel="stylesheet" href="../1.1.bartin/galeria/galeria.css<?= $cssVer ? '?v=' . $cssVer : '' ?>">
@@ -26,3 +28,4 @@ $cssVer = is_file($cssFile) ? filemtime($cssFile) : '';
 
   </div>
 </section>
+<script defer src="../1.1.bartin/galeria/galeria.js<?= $jsVer ? '?v=' . $jsVer : '' ?>"></script>

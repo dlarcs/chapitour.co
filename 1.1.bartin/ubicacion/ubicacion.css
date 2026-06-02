@@ -4,7 +4,10 @@
 .business-location-social {
   color: #fafafa;
 }
-
+.visible.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
 .business-location-social__inner {
   display: grid;
   grid-template-columns: 1.05fr .95fr;

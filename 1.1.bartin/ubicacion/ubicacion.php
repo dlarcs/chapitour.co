@@ -2,8 +2,10 @@
 $base = rtrim($_SERVER['DOCUMENT_ROOT'], '/');
 
 $cssFile = $base . '/1.1.bartin/ubicacion/ubicacion.css';
+$jsFile  = $base . '/1.1.bartin/ubicacion/ubicacion.js';
 
 $cssVer = is_file($cssFile) ? filemtime($cssFile) : '';
+$jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
 
 $googleMapsLink = 'https://www.google.com/maps'; // Aquí cargas el link real de Google Maps
 ?>
@@ -80,3 +82,4 @@ $googleMapsLink = 'https://www.google.com/maps'; // Aquí cargas el link real de
 
   </div>
 </section>
+<script defer src="../1.1.bartin/ubicacion/ubicacion.js<?= $jsVer ? '?v=' . $jsVer : '' ?>"></script>

@@ -12,7 +12,10 @@
   isolation: isolate;
   background: #050008;
 }
-
+.visible.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
 .business-hero__slide {
   position: absolute;
   inset: 0;

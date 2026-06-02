@@ -1,4 +1,4 @@
-const featuredPlaces = document.querySelectorAll('.visible');
+const featuredPlaces = document.querySelector('.visible');
 
 if (featuredPlaces) {
   const observer = new IntersectionObserver((entries) => {
