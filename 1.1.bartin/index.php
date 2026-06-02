@@ -87,7 +87,6 @@
 </head>
 <body>
 
-  <script src="soporte.js"></script>
   <?php include "../global/menu/menu.php" ?>
   <?php include "../1.1.bartin/slider/slider.php" ?>
   <div class="container_bartin">
