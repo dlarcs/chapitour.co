@@ -12,13 +12,13 @@
   isolation: isolate;
   background: #050008;
 }
-.visible_slider {
+.visible {
   opacity: 0;
   transform: translateY(30px);
   transition: opacity 0.7s ease, transform 0.7s ease;
 }
 
-.visible_slider.is-visible {
+.visible.is-visible {
   opacity: 1;
   transform: translateY(0);
 }

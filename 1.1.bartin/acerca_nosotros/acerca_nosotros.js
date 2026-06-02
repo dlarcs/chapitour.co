@@ -1,16 +1,20 @@
-const featuredPlaces = document.querySelector('.visible_acerca_nosotros');
+document.addEventListener("DOMContentLoaded", () => {
+  const sections = document.querySelectorAll(".visible");
 
-if (featuredPlaces) {
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        featuredPlaces.classList.add('is-visible');
-        observer.unobserve(featuredPlaces);
-      }
+  if (sections.length > 0) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.3
     });
-  }, {
-    threshold: 0.3
-  });
 
-  observer.observe(featuredPlaces);
-}
+    sections.forEach((section) => {
+      observer.observe(section);
+    });
+  }
+});

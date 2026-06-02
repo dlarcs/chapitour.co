@@ -10,7 +10,7 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
 
 <link rel="stylesheet" href="../1.1.bartin/slider/slider.css<?= $cssVer ? '?v=' . $cssVer : '' ?>">
 
-<section class="business-hero visible_slider" aria-label="Distrito Gastrobar slider">
+<section class="business-hero visible" aria-label="Distrito Gastrobar slider">
 
   <!-- Slide 1 -->
   <article
