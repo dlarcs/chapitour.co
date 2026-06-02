@@ -10,7 +10,7 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
 
 <link rel="stylesheet" href="../1.tipo_bares/seccion/tipo_bares.css<?= $cssVer ? '?v=' . $cssVer : '' ?>">
 
-<section class="main-categories">
+<section class="main-categories visible">
   <!-- LISTA DE FILTROS -->
   <ul class="filter-list">
     <li data-filter="all" class="active">Todos</li>
