@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const sections = document.querySelectorAll(".visible");
+  const sections = document.querySelectorAll(".visible_menu");
 
   if (sections.length > 0) {
     const observer = new IntersectionObserver((entries) => {

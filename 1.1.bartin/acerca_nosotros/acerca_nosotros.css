@@ -8,13 +8,13 @@
   transform: translateY(24px);
   transition: opacity .7s ease, transform .7s ease;
 }
-.visible {
+.visible_acerca_nosotros {
   opacity: 0;
   transform: translateY(30px);
   transition: opacity 0.7s ease, transform 0.7s ease;
 }
 
-.visible.is-visible {
+.visible_acerca_nosotros.is-visible {
   opacity: 1;
   transform: translateY(0);
 }

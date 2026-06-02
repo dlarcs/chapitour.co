@@ -5,13 +5,13 @@
   text-align: center;
 
 }
-.visible {
+.visible_menu {
   opacity: 0;
   transform: translateX(60px);
   transition: opacity 1s ease, transform 0.7s ease;
 }
 
-.visible.is-visible {
+.visible_menu.is-visible {
   opacity: 1;
   transform: translateX(0);
 }
