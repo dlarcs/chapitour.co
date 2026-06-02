@@ -9,10 +9,7 @@
     #050008;
     gap:10rem;
 }
-.visible.is-visible {
-  opacity: 1;
-  transform: translateY(0);
-}
+
 .title_ver_categoria{
   width: 100%;
   padding: 0 2rem;

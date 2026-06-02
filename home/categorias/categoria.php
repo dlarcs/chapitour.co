@@ -5,7 +5,7 @@ $jsTime = filemtime('home/categorias/categoria.js');   // ejemplo: '../Home/5.Vi
 <link rel="stylesheet" href="home/categorias/categoria.css?v=<?= $cssTime ?>">
 
 
-<section id="categoria"class="seccion-categorias visible">
+<section id="categoria"class="seccion-categorias">
   <div class="interest-header">
     <h2>
       <span>☆</span>
