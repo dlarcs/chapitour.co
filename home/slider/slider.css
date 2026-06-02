@@ -159,18 +159,21 @@
   box-shadow: 0 24px 60px rgba(0, 0, 0, .65);
 }
 
-/* Image positions */
-.img-1 { left: 5%; animation-delay: 0s; }
-.img-2 { left: 50%; transform: translateX(-50%); animation-delay: -3s; }
-.img-3 { right: 5%; animation-delay: -6s; }
+/* ===============================
+   IMAGE POSITIONS - DESKTOP
+================================ */
 
-.img-4 { left: 5%; animation-delay: -9s; }
-.img-5 { left: 50%; transform: translateX(-50%); animation-delay: -12s; }
-.img-6 { right: 5%; animation-delay: -15s; }
+.img-1 { left: 5%;  animation-delay: 0s; }
+.img-2 { left: 36%; animation-delay: -3s; }
+.img-3 { left: 67%; animation-delay: -6s; }
 
-.img-7 { left: 5%; animation-delay: -18s; }
-.img-8 { left: 50%; transform: translateX(-50%); animation-delay: -21s; }
-.img-9 { right: 5%; animation-delay: -24s; }
+.img-4 { left: 5%;  animation-delay: -9s; }
+.img-5 { left: 36%; animation-delay: -12s; }
+.img-6 { left: 67%; animation-delay: -15s; }
+
+.img-7 { left: 5%;  animation-delay: -18s; }
+.img-8 { left: 36%; animation-delay: -21s; }
+.img-9 { left: 67%; animation-delay: -24s; }
 
 @keyframes floatUp {
   from {
@@ -181,9 +184,60 @@
     top: -65%;
   }
 }
+/* ===============================
+   TABLET
+================================ */
+
+@media (max-width: 1024px) {
+  .hero-showcase {
+    grid-template-columns: 38% 62%;
+    min-height: 75vh;
+  }
+
+  .hero-card {
+    width: min(100%, 360px);
+    padding: 25% 1.5rem;
+  }
+
+  .hero-card h1 {
+    font-size: clamp(1.4rem, 3.5vw, 2rem);
+  }
+
+  .hero-card p {
+    font-size: .95rem;
+  }
+
+  .btn-primary {
+    min-width: 220px;
+  }
+
+  .hero-gallery {
+    min-height: 75vh;
+  }
+
+  .gallery-card {
+    width: clamp(190px, 26vw, 280px);
+    height: clamp(105px, 17vw, 145px);
+    animation-duration: 30s;
+  }
+
+  /* 2 columnas en tablet */
+  .img-1 { left: 8%;  animation-delay: 0s; }
+  .img-2 { left: 52%; animation-delay: -4s; }
+  .img-3 { left: 8%;  animation-delay: -8s; }
+
+  .img-4 { left: 52%; animation-delay: -12s; }
+  .img-5 { left: 8%;  animation-delay: -16s; }
+  .img-6 { left: 52%; animation-delay: -20s; }
+
+  .img-7 { left: 8%;  animation-delay: -24s; }
+  .img-8 { left: 52%; animation-delay: -28s; }
+  .img-9 { left: 30%; animation-delay: -32s; }
+}
+
 
 /* ===============================
-   RESPONSIVE
+   MOBILE
 ================================ */
 
 @media (max-width: 600px) {
@@ -194,42 +248,87 @@
   }
 
   .hero-chapitour {
-    padding: 1rem;
+    padding: 1.2rem;
   }
 
   .hero-card {
     width: min(100%, 430px);
+    padding: 3rem 1rem 2rem;
+  }
+
+  .hero-card h1 {
+    font-size: clamp(2rem, 10vw, 3rem);
+  }
+
+  .hero-card p {
+    max-width: 100%;
+    font-size: .95rem;
+  }
+
+  .btn-primary {
+    width: 100%;
+    min-width: 0;
   }
 
   .hero-gallery {
-    min-height: 52vh;
+    min-height: 65vh;
   }
 
   .gallery-card {
-    width: clamp(150px, 42vw, 230px);
-    height: clamp(90px, 25vw, 130px);
-    animation-duration: 32s;
+    width: clamp(145px, 42vw, 210px);
+    height: clamp(90px, 27vw, 125px);
+    animation-duration: 36s;
   }
 
-  .img-1 { left: 38%; animation-delay: 0s; }
-  .img-2 { left: 38%; transform: none; animation-delay: -4s; }
-  .img-3 { display: none; }
+  .gallery-card small {
+    font-size: .55rem;
+    padding: .3rem .55rem;
+  }
 
-  .img-4 { left: 15%; animation-delay: -8s; }
-  .img-5 { left: 38%; transform: none; animation-delay: -12s; }
-  .img-6 { left: 25%; animation-delay: -16s; }
+  /* 2 columnas suaves en móvil */
+  .img-1 { left: 5%;  animation-delay: 0s; }
+  .img-2 { left: 53%; animation-delay: -4s; }
+  .img-3 { left: 5%;  animation-delay: -8s; display: block; }
 
-  .img-7 { left: 15%; transform: none; animation-delay: -20s; }
-  .img-8 { left: 38%; transform: none; animation-delay: -24s; }
-  .img-9 { left: 25%; animation-delay: -28s; }
+  .img-4 { left: 53%; animation-delay: -12s; }
+  .img-5 { left: 5%;  animation-delay: -16s; }
+  .img-6 { left: 53%; animation-delay: -20s; }
+
+  .img-7 { left: 5%;  animation-delay: -24s; }
+  .img-8 { left: 53%; animation-delay: -28s; }
+  .img-9 { left: 29%; animation-delay: -32s; }
 
   @keyframes floatUp {
     from {
-      top: 105%;
+      top: 115%;
     }
 
     to {
-      top: -105%;
+      top: -115%;
     }
   }
+}
+
+
+/* ===============================
+   SMALL MOBILE
+================================ */
+
+@media (max-width: 390px) {
+  .gallery-card {
+    width: clamp(130px, 40vw, 170px);
+    height: clamp(82px, 25vw, 110px);
+  }
+
+  .img-1 { left: 4%; }
+  .img-2 { left: 54%; }
+  .img-3 { left: 4%; }
+
+  .img-4 { left: 54%; }
+  .img-5 { left: 4%; }
+  .img-6 { left: 54%; }
+
+  .img-7 { left: 4%; }
+  .img-8 { left: 54%; }
+  .img-9 { left: 29%; }
 }
