@@ -10,7 +10,7 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
 
 <link rel="stylesheet" href="../1.1.bartin/menu/menu.css<?= $cssVer ? '?v=' . $cssVer : '' ?>">
 
-<section class="business-section">
+<section class="business-section visible">
   <span class="section-label">Menú destacado</span>
 
   <h2>Sabores para compartir</h2>
