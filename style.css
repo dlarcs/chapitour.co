@@ -93,6 +93,7 @@ body::-webkit-scrollbar-thumb:hover {
 
 .loader span {
   display: inline-block;
+  font-family: 'Porky Bold', cursive;
   font-size: clamp(1.8rem, 6vw, 8rem);
   font-weight: 700;
   color: #ff62ea;
