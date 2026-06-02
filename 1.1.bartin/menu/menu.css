@@ -5,15 +5,15 @@
   text-align: center;
 
 }
-.visible_menu {
+.visible {
   opacity: 0;
-  transform: translateX(60px);
-  transition: opacity 1s ease, transform 0.7s ease;
+  transform: translateY(30px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
 }
 
-.visible_menu.is-visible {
+.visible.is-visible {
   opacity: 1;
-  transform: translateX(0);
+  transform: translateY(0);
 }
 .section-label {
   display: inline-block;
