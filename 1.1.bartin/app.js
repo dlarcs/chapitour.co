@@ -1,4 +1,27 @@
 document.addEventListener("DOMContentLoaded", () => {
+  /* ===============================
+     Reveal section
+  ================================ */
+  const featuredPlaces = document.querySelectorAll(".visible")
+
+  if (featuredPlaces) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          featuredPlaces.classList.add("is-visible");
+          observer.unobserve(featuredPlaces);
+        }
+      });
+    }, {
+      threshold: 0.3
+    });
+
+    observer.observe(featuredPlaces);
+  }
+
+  /* ===============================
+     Preloader
+  ================================ */
   const preloader = document.getElementById("preloader");
 
   if (
@@ -19,7 +42,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   preloader.classList.remove("fade-out");
 
-    "BARTINI RESTAURANT".split("").forEach((c, i) => {
+  "BARTINI RESTAURANT".split("").forEach((c, i) => {
     const span = document.createElement("span");
 
     span.textContent = c === " " ? "\u00A0" : c;
@@ -33,6 +56,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const lastSpan = loader.lastElementChild;
   let fallback = 5000;
   let done = false;
+  let timer;
 
   const finish = () => {
     if (done) return;
@@ -68,10 +92,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
     lastSpan.addEventListener(
       "animationend",
-      (e) => e.animationName === "zoomRotate" && finish(),
+      (e) => {
+        if (e.animationName === "zoomRotate") {
+          finish();
+        }
+      },
       { once: true }
     );
   }
 
-  const timer = setTimeout(finish, fallback);
+  timer = setTimeout(finish, fallback);
 });

@@ -8,7 +8,7 @@ $cssVer = is_file($cssFile) ? filemtime($cssFile) : '';
 
 <link rel="stylesheet" href="../1.1.bartin/acerca_nosotros/acerca_nosotros.css<?= $cssVer ? '?v=' . $cssVer : '' ?>">
 
-<section class="business-section business-about">
+<section class="business-section business-about visible">
   <div class="about-text">
     <span class="section-label">Acerca de nosotros</span>
 

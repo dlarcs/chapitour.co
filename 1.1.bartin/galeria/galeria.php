@@ -7,7 +7,7 @@ $cssVer = is_file($cssFile) ? filemtime($cssFile) : '';
 ?>
 
 <link rel="stylesheet" href="../1.1.bartin/galeria/galeria.css<?= $cssVer ? '?v=' . $cssVer : '' ?>">
-<section class="business-section business-gallery">
+<section class="business-section business-gallery visible">
   <span class="section-label">Galería</span>
 
   <h2>Conoce el ambiente</h2>

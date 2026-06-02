@@ -36,7 +36,10 @@ body {
   gap:2rem;
   margin: auto;
 }
-
+.visible.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
 img,
 video,
 iframe,
