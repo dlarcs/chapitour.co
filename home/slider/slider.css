@@ -319,7 +319,7 @@
   .gallery-card {
     width: clamp(130px, 40vw, 170px);
     height: clamp(82px, 25vw, 110px);
-    background-color: red;
+    background-color: green;
   }
 
   .img-1 { left: 15%; }
@@ -332,5 +332,15 @@
 
   .img-7 { left: 15%; }
   .img-8 { left: 45%; }
-  .img-9 { left: 16=5%; }
+  .img-9 { left: 15%; }
+
+  @keyframes floatUp {
+    from {
+      top: 90%;
+    }
+
+    to {
+      top: -90%;
+    }
+  }
 }
