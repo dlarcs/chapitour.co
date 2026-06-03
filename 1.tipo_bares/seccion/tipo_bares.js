@@ -1,5 +1,24 @@
 class CategoryFilter {
   constructor() {
+    const visibleSections = document.querySelectorAll('.visible');
+
+    if (visibleSections.length > 0) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, {
+        threshold: 0.3
+      });
+
+      visibleSections.forEach((section) => {
+        observer.observe(section);
+      });
+    }
+
     this.filterItems = document.querySelectorAll(".filter-list li");
     this.cards = document.querySelectorAll(".place-card");
 
