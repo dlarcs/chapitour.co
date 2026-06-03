@@ -316,9 +316,9 @@
 
 @media (max-width: 390px) {
   .gallery-card {
-    width: clamp(130px, 47vw, 170px);
-    height: clamp(82px, 32vw, 110px);
-    background-color: black;
+    width: clamp(130px, 47vw, 200px);
+    height: clamp(82px, 25vw, 110px);
+    background-color: orange;
       animation-duration: 34s;
   }
 
