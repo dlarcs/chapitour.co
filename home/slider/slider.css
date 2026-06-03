@@ -318,7 +318,7 @@
   .gallery-card {
     width: clamp(130px, 47vw, 200px);
     height: clamp(82px, 25vw, 110px);
-    background-color: orange;
+    background-color: black;
       animation-duration: 34s;
   }
 
