@@ -223,7 +223,7 @@
 @media (max-width: 600px) {
   .chapitour-header {
     min-height: 58px;
-    padding: 0.7rem 1rem;
+    padding: 1rem;
     justify-content:space-around;
     gap:2rem;
 
