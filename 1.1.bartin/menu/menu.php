@@ -21,7 +21,6 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
   </p>
   <div class="menu-grid">
 
-    <a href="#" download class="menu-card-link">
       <article class="menu-card">
         <img src="../home/img/hamburguesa.png" alt="Hamburguesa artesanal">
 
@@ -30,9 +29,7 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
           <p class="descripcion-card">Carne jugosa, queso fundido, vegetales frescos y salsa de la casa.</p>
         </div>
       </article>
-    </a>
 
-    <a href="#" download class="menu-card-link">
       <article class="menu-card">
         <img src="../home/img/cocktel.png" alt="Cóctel de la casa">
 
@@ -41,9 +38,7 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
           <p class="descripcion-card">Bebida especial con sabores frutales, presentación elegante y toque urbano.</p>
         </div>
       </article>
-     </a>
 
-    <a href="#" download class="menu-card-link">
       <article class="menu-card">
         <img src="../home/img/postre.png" alt="Papas especiales">
 
@@ -52,8 +47,6 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
           <p class="descripcion-card">Postres tres leches, con chocolate derretido, fresas, frambuesas y más.</p>
         </div>
       </article>
-    </a>
-    <a href="#" download class="menu-card-link">
       <article class="menu-card">
         <img src="../home/img/cafe1.png" alt="Papas especiales">
 
@@ -62,7 +55,6 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
           <p class="descripcion-card">Todo en café de especialidad, moca, latte, capuchino, mocachino entre otros</p>
         </div>
       </article>
-    </a>
   </div>
   <div class="button_container">
     <button class="btn btn30"type="button" name="button">Ver menú</button>
