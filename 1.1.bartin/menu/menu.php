@@ -21,7 +21,7 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
   </p>
   <div class="menu-grid">
 
-    <a href="" download class="menu-card-link">
+    <a href="#" download class="menu-card-link">
       <article class="menu-card">
         <img src="../home/img/hamburguesa.png" alt="Hamburguesa artesanal">
 
@@ -32,7 +32,7 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
       </article>
     </a>
 
-    <a href="" download class="menu-card-link">
+    <a href="#" download class="menu-card-link">
       <article class="menu-card">
         <img src="../home/img/cocktel.png" alt="Cóctel de la casa">
 
@@ -43,7 +43,7 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
       </article>
      </a>
 
-    <a href="" download class="menu-card-link">
+    <a href="#" download class="menu-card-link">
       <article class="menu-card">
         <img src="../home/img/postre.png" alt="Papas especiales">
 
