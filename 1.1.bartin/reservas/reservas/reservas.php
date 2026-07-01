@@ -80,37 +80,45 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
       </div>
 
       <div class="food-box" id="foodBox">
-        <div class="form-group">
-          <label for="food">Comida</label>
-          <select id="food" name="food">
-            <option value="">Selecciona una opción</option>
-            <option value="Hamburguesa artesanal">Hamburguesa artesanal</option>
-            <option value="Cóctel de la casa">Cóctel de la casa</option>
-            <option value="Postre especial">Postre especial</option>
-            <option value="Café de especialidad">Café de especialidad</option>
-            <option value="Menú para compartir">Menú para compartir</option>
-          </select>
-        </div>
+  <div class="form-group">
+    <label for="food">Comida</label>
+    <select id="food" name="food">
+      <option value="">Selecciona una opción</option>
+      <option value="Hamburguesa artesanal">Hamburguesa artesanal</option>
+      <option value="Cóctel de la casa">Cóctel de la casa</option>
+      <option value="Postre especial">Postre especial</option>
+      <option value="Café de especialidad">Café de especialidad</option>
+      <option value="Menú para compartir">Menú para compartir</option>
+    </select>
+  </div>
 
-        <div class="form-group">
-          <label for="quantity">Cantidad</label>
-          <input type="number" id="quantity" name="quantity" min="1" value="1">
-        </div>
+  <div class="form-group">
+    <label for="quantity">Cantidad</label>
+    <input type="number" id="quantity" name="quantity" min="1" value="1">
+  </div>
 
-        <div class="form-group">
-          <label for="notes">Notas adicionales</label>
-          <textarea id="notes" name="notes" placeholder="Ej: Sin cebolla, mesa en terraza, cumpleaños..."></textarea>
-          <button class="btn" type="">Separar con el 50%</button>
-          <button class="btn" type="">Separar con el 80%</button>
-          <button class="btn" type="">Separar con el 90%</button>
+  <div class="form-group">
+    <label for="notes">Notas adicionales</label>
+    <textarea
+      id="notes"
+      name="notes"
+      placeholder="Ej: Sin cebolla, mesa en terraza, cumpleaños..."></textarea>
+  </div>
 
-        </div>
-        <a href="../../1.1.bartin/index.php" class="dowload">
-          <div class="button_container">
-            <button class="btn btn30" type="button">Pagar anticipo</button>
-          </div>
-        </a>
-      </div>
+  <div class="form-group">
+    <label>Selecciona el porcentaje del anticipo</label>
+
+    <div class="payment-options">
+      <button class="btn" type="button">Pagar 50%</button>
+      <button class="btn" type="button">Pagar 80%</button>
+      <button class="btn" type="button">Pagar 90%</button>
+    </div>
+  </div>
+
+  <a href="../../1.1.bartin/index.php" class="btn btn30">
+    Pagar anticipo
+  </a>
+</div>
 
       <button class="btn btn30" type="submit">Reservar</button>
 
