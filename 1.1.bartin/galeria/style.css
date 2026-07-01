@@ -27,8 +27,7 @@ body {
 
 }
 .container_galeria{
-  padding: 2rem 1rem;
-  max-width: calc(100vw - 25%);
+
   display: flex;
   justify-content: center;
   align-items: center;

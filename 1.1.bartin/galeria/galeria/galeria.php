@@ -9,6 +9,7 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
 ?>
 
 <link rel="stylesheet" href="../../1.1.bartin/galeria/galeria/galeria.css<?= $cssVer ? '?v=' . $cssVer : '' ?>">
+
 <section class="business-section business-gallery visible">
   <span class="section-label">Galería</span>
 
@@ -20,25 +21,22 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
   </p>
 
   <div class="gallery-grid">
-    <!-- <img src="../home/img/sofa.png" alt="Interior del gastrobar"> -->
+    <img src="../../home/img/bar.png" alt="Ambiente del gastrobar">
     <img src="../../home/img/bar.png" alt="Barra del gastrobar">
-    <img src="../../home/img/bar.png" alt="Barra del gastrobar">
-    <img src="../../home/img/bar.png" alt="Barra del gastrobar">
-    <img src="../../home/img/bar.png" alt="Barra del gastrobar">
-    <img src="../../home/img/bar.png" alt="Barra del gastrobar">
-    <img src="../../home/img/bar.png" alt="Barra del gastrobar">
-    <img src="../../home/img/bar.png" alt="Barra del gastrobar">
-    <img src="../../home/img/bar.png" alt="Barra del gastrobar">
-    <img src="../../home/img/bar.png" alt="Barra del gastrobar">
-    <img src="../../home/img/bar.png" alt="Barra del gastrobar">
-    <img src="../../home/img/bar.png" alt="Barra del gastrobar">
-
-
+    <img src="../../home/img/bar.png" alt="Zona social del gastrobar">
+    <img src="../../home/img/bar.png" alt="Decoración del gastrobar">
+    <img src="../../home/img/bar.png" alt="Luces del gastrobar">
+    <img src="../../home/img/bar.png" alt="Espacio para compartir">
+    <img src="../../home/img/bar.png" alt="Interior moderno del gastrobar">
+    <img src="../../home/img/bar.png" alt="Ambiente nocturno del gastrobar">
+    <img src="../../home/img/bar.png" alt="Zona de bebidas del gastrobar">
+    <img src="../../home/img/bar.png" alt="Mesa del gastrobar">
+    <img src="../../home/img/bar.png" alt="Experiencia en el gastrobar">
   </div>
-  <a href="../../1.1.bartin/index.php">
-    <div class="button_container">
-      <button class="btn btn30"type="button" name="button">Volver</button>
-    </div>
-  </a>
+
+  <div class="button-container">
+    <a class="btn30" href="../../1.1.bartin/index.php">Volver</a>
+  </div>
 </section>
+
 <script defer src="../../1.1.bartin/galeria/galeria/galeria.js<?= $jsVer ? '?v=' . $jsVer : '' ?>"></script>
