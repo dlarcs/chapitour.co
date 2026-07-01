@@ -26,7 +26,7 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
     <img src="../home/img/bar.png" alt="Barra del gastrobar" style="@media (max-width: 820px) {display:none;">
 
   </div>
-  <a href="../1.1.bartin/home/pag_galeria/index.php">
+  <a href="../1.1.bartin/galeria/galeria/galeria.php">
     <div class="button_container">
       <button class="btn btn30"type="button" name="button">Ver galería</button>
     </div>

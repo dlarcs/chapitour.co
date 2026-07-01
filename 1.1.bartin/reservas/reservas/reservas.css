@@ -4,8 +4,10 @@
 
 .business-section {
   text-align: center;
-  padding: 70px 24px;
-  background-color: red;
+  margin-top: 2rem;
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity .7s ease, transform .7s ease;
 
 }
 
