@@ -54,6 +54,7 @@
   grid-auto-rows: 260px;
   gap: 18px;
   margin-top: 46px;
+  background-color: red;
 }
 
 .gallery-grid img {
