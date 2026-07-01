@@ -27,7 +27,7 @@ body {
 
 }
 .container_galeria{
-
+  max-width: calc(100vw - 10%);
   display: flex;
   justify-content: center;
   align-items: center;

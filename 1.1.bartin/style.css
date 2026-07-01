@@ -27,8 +27,7 @@ body {
 
 }
 .container_bartin{
-  padding: 2rem 1rem;
-  max-width: calc(100vw - 25%);
+  max-width: calc(100vw - 10%);
   display: flex;
   justify-content: center;
   align-items: center;

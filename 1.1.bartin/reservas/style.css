@@ -26,9 +26,8 @@ body {
   width: 100%;
 
 }
-.container_galeria{
-  padding: 2rem 1rem;
-  max-width: calc(100vw - 25%);
+.container_reservas{
+  max-width: calc(100vw - 10%);
   display: flex;
   justify-content: center;
   align-items: center;
