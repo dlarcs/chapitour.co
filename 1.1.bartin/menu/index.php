@@ -5,16 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="content-language" content="es-CO">
 
-  <title>Chapitour | Lugares para visitar en Chapinero, Bogotá</title>
+  <title>Menú</title>
 
   <?php
   $base = rtrim($_SERVER['DOCUMENT_ROOT'], '/');
 
-  $cssFile = $base . '/1.1.bartin/style.css';
-  $jsFile  = $base . '/1.1.bartin/app.js';
+  $cssFile = $base . '/1.1.bartin/menu/style.css';
 
   $cssVer = is_file($cssFile) ? filemtime($cssFile) : '';
-  $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
   ?>
 
   <!-- SEO principal para Google -->
@@ -44,12 +42,12 @@
 
   <!-- Iconos -->
   <link rel="icon" href="/home/img/cocktel.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/home/img/cocktel.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/home/img/cocktel.png">
-  <link rel="apple-touch-icon" sizes="180x180" href="/home/img/cocktel.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="../home/img/cocktel.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../home/img/cocktel.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="../home/img/cocktel.png">
 
   <!-- CSS -->
-  <link rel="stylesheet" href="../1.1.bartin/style.css<?= $cssVer ? '?v=' . $cssVer : '' ?>">
+  <link rel="stylesheet" href="../../1.1.bartin/menu/style.css<?= $cssVer ? '?v=' . $cssVer : '' ?>">
 
   <!-- Datos estructurados para Google -->
   <script type="application/ld+json">
@@ -82,25 +80,21 @@
   }
   </script>
 
-  <!-- JS -->
-  <script defer src="../1.1.bartin/app.js<?= $jsVer ? '?v=' . $jsVer : '' ?>"></script>
 </head>
 <body>
 
-  <?php include "../1.1.bartin/home/nav/nav.php" ?>
-  <?php include "../1.1.bartin/home/slider/slider.php" ?>
-  <div class="container_bartin">
-    <?php include "../1.1.bartin/home/menu/menu.php" ?>
-    <?php include "../1.1.bartin/home/galeria/galeria.php" ?>
-    <?php include "../1.1.bartin/home/acerca_nosotros/acerca_nosotros.php" ?>
-    <?php include "../1.1.bartin/home/ubicacion/ubicacion.php" ?>
+  <?php include "../../1.1.bartin/global/pag_nav/pag_nav.php" ?>
+  <?php include "../../1.1.bartin/global/pag_slider/pag_slider.php" ?>
+  <div class="container_galeria">
+    <?php include "../../1.1.bartin/menu/menu/menu.php" ?>
+
   </div>
-  <?php include "../global/footer/footer.php" ?>
+  <?php include "../../1.1.bartin/global/pag_footer/pag_footer.php" ?>
   <a class="whatsapp-fab"
 		href="https://wa.me/573138846378?text=Hola%20vengo%20desde%20la%20web%20de%20Bar%20Restaurant"
 		target="_blank" rel="noopener"
 		aria-label="Chatear por WhatsApp" >
-		<img src="../global/img/img_whatsApp.png"
+		<img src="../../global/img/img_whatsApp.png"
 		 alt="Contactar por WhatsApp" decoding="async">
 	</a>
 </body>

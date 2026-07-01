@@ -1,17 +1,17 @@
 <?php
 $base = rtrim($_SERVER['DOCUMENT_ROOT'], '/');
 
-$cssFile = $base . '/1.1.bartin/nav/nav.css';
-$jsFile  = $base . '/1.1.bartin/nav/nav.js';
+$cssFile = $base . '/1.1.bartin/global/pag_nav/pag_nav.css';
+$jsFile  = $base . '/1.1.bartin/global/pag_nav/pag_nav.js';
 
 $cssVer = is_file($cssFile) ? filemtime($cssFile) : '';
 $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
 ?>
 
-<link rel="stylesheet" href="../1.1.bartin/nav/nav.css<?= $cssVer ? '?v=' . $cssVer : '' ?>">
+<link rel="stylesheet" href="../../1.1.bartin/global/pag_nav/pag_nav.css<?= $cssVer ? '?v=' . $cssVer : '' ?>">
 
 <header class="chapitour-header">
-  <a href="../index.php" class="chapitour-logo" aria-label="Ir al inicio">
+  <a href="../../index.php" class="chapitour-logo" aria-label="Ir al inicio">
     <h1>Bartini</h1>
   </a>
 
@@ -35,6 +35,7 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
 
   <nav id="chapitour-menu" class="chapitour-menu" aria-label="Menú principal">
     <div class="menu-inner">
+      <a href="../../index.php">Inicio</a>
       <a href="#">Menú</a>
       <a href="#">Galería</a>
       <a href="#">Reservas</a>
@@ -48,4 +49,4 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
     </div>
   </nav>
 </header>
-<script defer src="../1.1.bartin/nav/nav.js<?= $jsVer ? '?v=' . $jsVer : '' ?>"></script>
+<script defer src="../../1.1.bartin/global/pag_nav/pag_nav.js<?= $jsVer ? '?v=' . $jsVer : '' ?>"></script>

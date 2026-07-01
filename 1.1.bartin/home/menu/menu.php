@@ -1,14 +1,14 @@
 <?php
 $base = rtrim($_SERVER['DOCUMENT_ROOT'], '/');
 
-$cssFile = $base . '/1.1.bartin/menu/menu.css';
-$jsFile  = $base . '/1.1.bartin/menu/menu.js';
+$cssFile = $base . '/1.1.bartin/home/menu/menu.css';
+$jsFile  = $base . '/1.1.bartin/home/menu/menu.js';
 
 $cssVer = is_file($cssFile) ? filemtime($cssFile) : '';
 $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
 ?>
 
-<link rel="stylesheet" href="../1.1.bartin/menu/menu.css<?= $cssVer ? '?v=' . $cssVer : '' ?>">
+<link rel="stylesheet" href="../1.1.bartin/home/menu/menu.css<?= $cssVer ? '?v=' . $cssVer : '' ?>">
 
 <section class="business-section visible">
   <span class="section-label">Menú destacado</span>
@@ -20,7 +20,6 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
     una tarde o noche en Chapinero.
   </p>
   <div class="menu-grid">
-
       <article class="menu-card">
         <img src="../home/img/hamburguesa.png" alt="Hamburguesa artesanal">
 
@@ -56,13 +55,20 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
         </div>
       </article>
   </div>
-  <div class="button_container">
-    <button class="btn btn30"type="button" name="button">Ver menú</button>
-  </div>
-  <a href="../pdf/menu-coctel.pdf">
-    <div class="button_container">
-      <button class="btn btn30"type="button" name="button">Descargar menú</button>
-    </div>
-  </a>
+<div class="dowload">
+    <a href="../1.1.bartin/menu/index.php" >
+      <div class="button_container">
+        <button class="btn btn30"type="button" name="button">Ver menú</button>
+      </div>
+    </a>
+    <a href="#">
+      <div class="button_container">
+        <button class="btn btn30"type="button" name="button">Descargar menú</button>
+      </div>
+    </a>
+
+
+</div>
+
 </section>
-<script defer src="../1.1.bartin/menu/menu.js<?= $jsVer ? '?v=' . $jsVer : '' ?>"></script>
+<script defer src="../1.1.bartin/home/menu/menu.js<?= $jsVer ? '?v=' . $jsVer : '' ?>"></script>

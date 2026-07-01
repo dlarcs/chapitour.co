@@ -1,8 +1,8 @@
 <?php
 $base = rtrim($_SERVER['DOCUMENT_ROOT'], '/');
 
-$cssFile = $base . '/1.1.bartin/ubicacion/ubicacion.css';
-$jsFile  = $base . '/1.1.bartin/ubicacion/ubicacion.js';
+$cssFile = $base . '/1.1.bartin/home/ubicacion/ubicacion.css';
+$jsFile  = $base . '/1.1.bartin/home/ubicacion/ubicacion.js';
 
 $cssVer = is_file($cssFile) ? filemtime($cssFile) : '';
 $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
@@ -10,7 +10,7 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
 $googleMapsLink = 'https://www.google.com/maps'; // Aquí cargas el link real de Google Maps
 ?>
 
-<link rel="stylesheet" href="../1.1.bartin/ubicacion/ubicacion.css<?= $cssVer ? '?v=' . $cssVer : '' ?>">
+<link rel="stylesheet" href="../1.1.bartin/home/ubicacion/ubicacion.css<?= $cssVer ? '?v=' . $cssVer : '' ?>">
 
 <section class="business-location-social business-section visible" id="ubicacion">
   <div class="business-location-social__inner">
@@ -82,4 +82,4 @@ $googleMapsLink = 'https://www.google.com/maps'; // Aquí cargas el link real de
 
   </div>
 </section>
-<script defer src="../1.1.bartin/ubicacion/ubicacion.js<?= $jsVer ? '?v=' . $jsVer : '' ?>"></script>
+<script defer src="../1.1.bartin/home/ubicacion/ubicacion.js<?= $jsVer ? '?v=' . $jsVer : '' ?>"></script>

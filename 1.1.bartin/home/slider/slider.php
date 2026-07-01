@@ -1,14 +1,14 @@
 <?php
 $base = rtrim($_SERVER['DOCUMENT_ROOT'], '/');
 
-$cssFile = $base . '/1.1.bartin/slider/slider.css';
-$jsFile  = $base . '/1.1.bartin/slider/slider.js';
+$cssFile = $base . '/1.1.bartin/home/slider/slider.css';
+$jsFile  = $base . '/1.1.bartin/home/slider/slider.js';
 
 $cssVer = is_file($cssFile) ? filemtime($cssFile) : '';
 $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
 ?>
 
-<link rel="stylesheet" href="../1.1.bartin/slider/slider.css<?= $cssVer ? '?v=' . $cssVer : '' ?>">
+<link rel="stylesheet" href="../1.1.bartin/home/slider/slider.css<?= $cssVer ? '?v=' . $cssVer : '' ?>">
 
 <section class="business-hero visible" aria-label="Distrito Gastrobar slider">
 
@@ -98,4 +98,4 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
   </div>
 
 </section>
-<script defer src="../1.1.bartin/slider/slider.js<?= $jsVer ? '?v=' . $jsVer : '' ?>"></script>
+<script defer src="../1.1.bartin/home/slider/slider.js<?= $jsVer ? '?v=' . $jsVer : '' ?>"></script>

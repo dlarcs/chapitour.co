@@ -163,3 +163,12 @@
     box-shadow: 0 0 10px #ff62ea, 0 0 30px #ff62ea;
   }
 }
+.dowload{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin: 0;
+  gap:1rem;
+}
