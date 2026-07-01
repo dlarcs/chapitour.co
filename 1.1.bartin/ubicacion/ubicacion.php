@@ -12,7 +12,7 @@ $googleMapsLink = 'https://www.google.com/maps'; // Aquí cargas el link real de
 
 <link rel="stylesheet" href="../1.1.bartin/ubicacion/ubicacion.css<?= $cssVer ? '?v=' . $cssVer : '' ?>">
 
-<section class="business-location-social business-section visible">
+<section class="business-location-social business-section visible" id="ubicacion">
   <div class="business-location-social__inner">
 
     <div class="business-location">

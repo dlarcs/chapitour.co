@@ -12,7 +12,7 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
 
 <link rel="stylesheet" href="../1.1.bartin/acerca_nosotros/acerca_nosotros.css<?= $cssVer ? '?v=' . $cssVer : '' ?>">
 
-<section class="business-section business-about visible">
+<section class="business-section business-about visible" id="acerca_nosotros">
   <div class="about-text">
     <span class="section-label">Acerca de nosotros</span>
 
@@ -32,5 +32,9 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
   </div>
 
   <img src="../home/img/cocktel.png" alt="Experiencia en gastrobar">
+
 </section>
+<div class="button_container">
+  <button class="btn btn30"type="button" name="button">Reservas</button>
+</div>
 <script defer src="../1.1.bartin/acerca_nosotros/acerca_nosotros.js<?= $jsVer ? '?v=' . $jsVer : '' ?>"></script>
