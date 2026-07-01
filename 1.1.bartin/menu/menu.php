@@ -53,7 +53,16 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
         </div>
       </article>
     </a>
+    <a href="#" download class="menu-card-link">
+      <article class="menu-card">
+        <img src="../home/img/cafe1.png" alt="Papas especiales">
 
+        <div>
+          <h3>Café</h3>
+          <p class="descripcion-card">Todo en café de especialidad, moca, latte, capuchino, mocachino entre otros</p>
+        </div>
+      </article>
+    </a>
   </div>
   <div class="button_container">
     <button class="btn btn30"type="button" name="button">Ver menú</button>

@@ -20,12 +20,8 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
   </p>
 
   <div class="gallery-grid">
-    <img src="../home/img/sofa.png" alt="Interior del gastrobar">
+    <!-- <img src="../home/img/sofa.png" alt="Interior del gastrobar"> -->
     <img src="../home/img/bar.png" alt="Barra del gastrobar">
-    <img src="../home/img/sofa.png" alt="Comida rápida">
-    <img src="../home/img/bar.png" alt="Bebidas y licores">
-    <img src="../home/img/sofa.png" alt="Comida rápida">
-
   </div>
   <div class="button_container">
     <button class="btn btn30"type="button" name="button">Ver galería</button>
