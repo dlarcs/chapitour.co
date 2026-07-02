@@ -61,27 +61,49 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
           <span class="card-location">🗓️ 26 de Agosto 2026</span>
         </div>
       </article>
-
       <article class="card">
         <div class="card-image">
-          <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1200&auto=format&fit=crop" alt="Galería">
-          <span class="card-badge">Entrada libre</span>
+          <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?q=80&w=1200&auto=format&fit=crop" alt="Pizza">
+          <span class="card-badge">2x1</span>
         </div>
 
         <div class="card-content">
-          <h3>Galería Casa Cuadrada</h3>
-          <p>Entrada libre a todas las exposiciones vigentes.</p>
-          <span class="card-location">📍 Carrera 7 #54-64</span>
+          <h3>La Pizzería</h3>
+          <p>2x1 en pizzas seleccionadas de lunes a jueves.</p>
+          <span class="card-location">🗓️ 14 de Julio 2026</span>
         </div>
       </article>
+
+      <article class="card">
+        <div class="card-image">
+          <img src="https://images.unsplash.com/photo-1470337458703-46ad1756a187?q=80&w=1200&auto=format&fit=crop" alt="Cóctel">
+          <span class="card-badge">Happy Hour</span>
+        </div>
+
+        <div class="card-content">
+          <h3>Salvo Patria</h3>
+          <p>Happy Hour en cócteles clásicos de 5:00 p.m. a 8:00 p.m.</p>
+          <span class="card-location">🗓️ 31 de Octubre 2026</span>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card-image">
+          <img src="https://images.unsplash.com/photo-1525351484163-7529414344d8?q=80&w=1200&auto=format&fit=crop" alt="Brunch">
+          <span class="card-badge">10% off</span>
+        </div>
+
+        <div class="card-content">
+          <h3>Azahar Café</h3>
+          <p>10% de descuento en brunch presentando esta promoción.</p>
+          <span class="card-location">🗓️ 26 de Agosto 2026</span>
+        </div>
+      </article>
+
     </div>
   </section>
 
-  <a href="../../1.1.bartin/index.php" class="dowload">
-    <div class="button_container">
-      <button class="btn btn30" type="button">Volver</button>
-    </div>
-  </a>
+
 </section>
 
 <script defer src="../../1.1.bartin/actividades/actividades/actividades.js<?= $jsVer ? '?v=' . $jsVer : '' ?>"></script>

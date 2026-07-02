@@ -84,11 +84,11 @@
 <body>
 
   <?php include "../../1.1.bartin/global/pag_nav/pag_nav.php" ?>
-  <?php include "../../1.1.bartin/global/pag_slider/pag_slider.php" ?>
   <div class="container_reservas">
     <?php include "../../1.1.bartin/reservas/reservas/reservas.php" ?>
-
   </div>
+  <?php include "../../1.1.bartin/global/pag_slider/pag_slider.php" ?>
+
   <?php include "../../1.1.bartin/global/pag_footer/pag_footer.php" ?>
   <a class="whatsapp-fab"
 		href="https://wa.me/573138846378?text=Hola%20vengo%20desde%20la%20web%20de%20Bar%20Restaurant"

@@ -5,6 +5,7 @@
 .business-section {
   text-align: center;
   margin-top: 2rem;
+  padding: 2rem 0;
   opacity: 0;
   transform: translateY(24px);
   transition: opacity .7s ease, transform .7s ease;
@@ -149,29 +150,7 @@
     height: 230px;
   }
 }
-.btn30 {
-  margin: 2rem auto;
-  background: transparent;
-  color: #fafafa;
-  border: 2px solid #ff62ea;
-  box-shadow: 0 0 10px #ff62ea;
-  animation: neon-border 1.5s infinite alternate;
-  padding: 10px 40px;
-  border-radius: 6px;
-  letter-spacing: 3px;
-  position: relative;
-  cursor: pointer;
-}
 
-@keyframes neon-border {
-  from {
-    box-shadow: 0 0 5px #ff62ea;
-  }
-
-  to {
-    box-shadow: 0 0 10px #ff62ea, 0 0 30px #ff62ea;
-  }
-}
 /* TARJETAS - CSS */
 * {
   box-sizing: border-box;

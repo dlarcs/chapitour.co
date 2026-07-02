@@ -5,6 +5,7 @@
 .business-section {
   text-align: center;
   margin-top: 2rem;
+  padding: 2rem 0;
   opacity: 0;
   transform: translateY(24px);
   transition: opacity .7s ease, transform .7s ease;

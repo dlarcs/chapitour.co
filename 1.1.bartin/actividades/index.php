@@ -10,7 +10,7 @@
   <?php
   $base = rtrim($_SERVER['DOCUMENT_ROOT'], '/');
 
-  $cssFile = $base . '/1.1.bartin/reservas/style.css';
+  $cssFile = $base . '/1.1.bartin/actividades/style.css';
 
   $cssVer = is_file($cssFile) ? filemtime($cssFile) : '';
   ?>
@@ -47,7 +47,7 @@
   <link rel="apple-touch-icon" sizes="180x180" href="/home/img/cocktel.png">
 
   <!-- CSS -->
-  <link rel="stylesheet" href="../../1.1.bartin/reservas/style.css<?= $cssVer ? '?v=' . $cssVer : '' ?>">
+  <link rel="stylesheet" href="../../1.1.bartin/actividades/style.css<?= $cssVer ? '?v=' . $cssVer : '' ?>">
 
   <!-- Datos estructurados para Google -->
   <script type="application/ld+json">
@@ -84,11 +84,11 @@
 <body>
 
   <?php include "../../1.1.bartin/global/pag_nav/pag_nav.php" ?>
-  <?php include "../../1.1.bartin/global/pag_slider/pag_slider.php" ?>
   <div class="container_reservas">
     <?php include "../../1.1.bartin/actividades/actividades/actividades.php" ?>
-
   </div>
+  <?php include "../../1.1.bartin/global/pag_slider/pag_slider.php" ?>
+  <?php include "../../1.1.bartin/global/boton/boton.php" ?>
   <?php include "../../1.1.bartin/global/pag_footer/pag_footer.php" ?>
   <a class="whatsapp-fab"
 		href="https://wa.me/573138846378?text=Hola%20vengo%20desde%20la%20web%20de%20Bar%20Restaurant"
