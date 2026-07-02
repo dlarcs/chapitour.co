@@ -11,9 +11,9 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
 <link rel="stylesheet" href="../1.1.bartin/home/menu/menu.css<?= $cssVer ? '?v=' . $cssVer : '' ?>">
 
 <section class="business-section visible">
-  <a href="../../1.1.bartin/actividades/index.php" class="dowload">
+  <a href="../1.1.bartin/actividades/index.php" class="dowload">
     <div class="button_container">
-      <button class="btn btn30" type="button">Volver</button>
+      <button class="btn btn30" type="button">Actividades y promociones</button>
     </div>
   </a>
   <span class="section-label">Menú destacado</span>

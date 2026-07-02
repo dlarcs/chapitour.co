@@ -86,7 +86,7 @@
   <?php include "../../1.1.bartin/global/pag_nav/pag_nav.php" ?>
   <?php include "../../1.1.bartin/global/pag_slider/pag_slider.php" ?>
   <div class="container_reservas">
-    <?php include "../../1.1.bartin/actividades/actividades/actividades.phpp" ?>
+    <?php include "../../1.1.bartin/actividades/actividades/actividades.php" ?>
 
   </div>
   <?php include "../../1.1.bartin/global/pag_footer/pag_footer.php" ?>

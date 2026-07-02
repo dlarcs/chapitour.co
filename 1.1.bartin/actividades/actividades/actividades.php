@@ -13,7 +13,7 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
 <section class="business-section visible">
   <span class="section-label">Actividades & Promociones</span>
 
-  <h2>Lo mejor de este mes</h2>
+  <h2>Lo mejor de este mes/año</h2>
 
   <p>
     Conoce nuestras promociones y actividades por mes, ven y disfruta de todo lo que te ofrecemos
@@ -21,7 +21,6 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
 
   <!-- TARJETAS - HTML -->
   <section class="cards-section">
-    <h2 class="cards-title">Promociones destacadas</h2>
 
     <div class="cards-grid">
       <article class="card">
@@ -33,7 +32,7 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
         <div class="card-content">
           <h3>La Pizzería</h3>
           <p>2x1 en pizzas seleccionadas de lunes a jueves.</p>
-          <span class="card-location">📍 Calle 60 #9-45</span>
+          <span class="card-location">🗓️ 14 de Julio 2026</span>
         </div>
       </article>
 
@@ -46,7 +45,7 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
         <div class="card-content">
           <h3>Salvo Patria</h3>
           <p>Happy Hour en cócteles clásicos de 5:00 p.m. a 8:00 p.m.</p>
-          <span class="card-location">📍 Calle 63 #8-21</span>
+          <span class="card-location">🗓️ 31 de Octubre 2026</span>
         </div>
       </article>
 
@@ -59,7 +58,7 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
         <div class="card-content">
           <h3>Azahar Café</h3>
           <p>10% de descuento en brunch presentando esta promoción.</p>
-          <span class="card-location">📍 Carrera 13 #64-41</span>
+          <span class="card-location">🗓️ 26 de Agosto 2026</span>
         </div>
       </article>
 
