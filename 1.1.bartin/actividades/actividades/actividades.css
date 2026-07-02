@@ -52,18 +52,10 @@
 * {
   box-sizing: border-box;
 }
-
 .cards-section {
   width: min(1200px, 92%);
   margin: 0 auto;
   padding: 60px 0;
-}
-
-.cards-title {
-  margin: 0 0 24px;
-  font-size: clamp(1.8rem, 3vw, 2.5rem);
-  color: #ffffff;
-  font-weight: 700;
 }
 
 .cards-grid {
@@ -77,12 +69,14 @@
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 22px;
   overflow: hidden;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
 }
 
 .card:hover {
   transform: translateY(-6px);
-  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 16px 35px rgba(0, 0, 0, 0.35);
+  border-color: rgba(255, 179, 71, 0.45);
 }
 
 .card-image {
@@ -101,7 +95,7 @@
 }
 
 .card:hover .card-image img {
-  transform: scale(1.05);
+  transform: scale(1.06);
 }
 
 .card-badge {
@@ -140,7 +134,7 @@
   font-weight: 500;
 }
 
-/* Móvil: una sola tarjeta */
+/* En móvil queda una sola tarjeta */
 @media (max-width: 599px) {
   .cards-grid {
     grid-template-columns: 1fr;

@@ -88,6 +88,8 @@
     <?php include "../../1.1.bartin/reservas/reservas/reservas.php" ?>
   </div>
   <?php include "../../1.1.bartin/global/pag_slider/pag_slider.php" ?>
+  <?php include "../../1.1.bartin/global/boton/boton.php" ?>
+
 
   <?php include "../../1.1.bartin/global/pag_footer/pag_footer.php" ?>
   <a class="whatsapp-fab"

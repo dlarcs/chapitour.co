@@ -34,9 +34,6 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
     <img src="../../home/img/bar.png" alt="Experiencia en el gastrobar">
   </div>
 
-  <div class="button-container">
-    <a class="btn30" href="../../1.1.bartin/index.php">Volver</a>
-  </div>
 </section>
 
 <script defer src="../../1.1.bartin/galeria/galeria/galeria.js<?= $jsVer ? '?v=' . $jsVer : '' ?>"></script>

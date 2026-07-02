@@ -119,18 +119,12 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
       Pagar anticipo
     </a> -->
 </div>
-
       <button class="btn btn30" type="submit">Reservar</button>
 
       <p class="booking-message" id="bookingMessage"></p>
     </form>
   </div>
 
-  <a href="../../1.1.bartin/index.php" class="dowload">
-    <div class="button_container">
-      <button class="btn btn30" type="button">Volver</button>
-    </div>
-  </a>
 </section>
 
 <script defer src="../../1.1.bartin/reservas/reservas/reservas.js<?= $jsVer ? '?v=' . $jsVer : '' ?>"></script>

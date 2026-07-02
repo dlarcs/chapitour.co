@@ -126,11 +126,5 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
         </div>
       </article>
   </div>
-
-  <a href="../../1.1.bartin/index.php" class="dowload">
-    <div class="button_container">
-      <button class="btn btn30"type="button" name="button">Volver</button>
-    </div>
-  </a>
 </section>
 <script defer src="../../1.1.bartin/menu/menu/menu.js<?= $jsVer ? '?v=' . $jsVer : '' ?>"></script>

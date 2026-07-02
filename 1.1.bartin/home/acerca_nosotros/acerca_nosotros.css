@@ -1,6 +1,9 @@
 * {
   box-sizing: border-box;
 }
+#acerca_nosotros {
+  scroll-margin-top: 110px;
+}
 .business-section {
   text-align: center;
   margin-top: 2rem;

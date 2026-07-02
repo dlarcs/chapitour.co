@@ -9,6 +9,13 @@
   transform: translateY(30px);
   transition: opacity 0.7s ease, transform 0.7s ease;
 }
+#redes_sociales {
+  scroll-margin-top: 150px;
+}
+#ubicacion {
+  scroll-margin-top: 150px;
+}
+
 
 .visible.is-visible {
   opacity: 1;

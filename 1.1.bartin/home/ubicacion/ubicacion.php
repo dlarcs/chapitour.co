@@ -12,10 +12,10 @@ $googleMapsLink = 'https://www.google.com/maps'; // Aquí cargas el link real de
 
 <link rel="stylesheet" href="../1.1.bartin/home/ubicacion/ubicacion.css<?= $cssVer ? '?v=' . $cssVer : '' ?>">
 
-<section class="business-location-social business-section visible" id="ubicacion">
+<section class="business-location-social business-section visible" >
   <div class="business-location-social__inner">
 
-    <div class="business-location">
+    <div class="business-location" id="ubicacion">
       <span class="section-label">Ubicación</span>
 
       <h2>Encuéntranos en Chapinero</h2>
@@ -47,7 +47,7 @@ $googleMapsLink = 'https://www.google.com/maps'; // Aquí cargas el link real de
       </a>
     </div>
 
-    <div class="business-social">
+    <div class="business-social" id="redes_sociales">
       <span class="section-label">Redes sociales</span>
 
       <h2>Síguenos</h2>

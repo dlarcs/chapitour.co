@@ -1,35 +1,49 @@
-document.addEventListener("DOMContentLoaded", () => {
-  const visibleElements = document.querySelectorAll(".visible");
+const whatsappNumber = "573138846378";
 
-  if (!("IntersectionObserver" in window)) {
-    visibleElements.forEach((element) => {
-      element.classList.add("is-visible");
-    });
-    return;
-  }
+const promoCards = document.querySelectorAll(".promo-card");
 
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("is-visible");
-        observer.unobserve(entry.target);
-      }
-    });
-  }, {
-    threshold: 0.1
-  });
+function generarCodigoPromo() {
+  const fecha = new Date();
 
-  visibleElements.forEach((element) => {
-    observer.observe(element);
-  });
-});
-// TARJETAS - JS
-document.addEventListener("DOMContentLoaded", () => {
-  const cards = document.querySelectorAll(".card");
+  const horas = String(fecha.getHours()).padStart(2, "0");
+  const minutos = String(fecha.getMinutes()).padStart(2, "0");
+  const dia = String(fecha.getDate()).padStart(2, "0");
+  const mes = String(fecha.getMonth() + 1).padStart(2, "0");
+  const año = fecha.getFullYear();
 
-  cards.forEach((card) => {
-    card.addEventListener("click", () => {
-      console.log("Tarjeta seleccionada:", card.querySelector("h3").textContent);
-    });
+  const codigo = `${horas}${minutos}${dia}${mes}${año}`;
+
+  return codigo;
+}
+
+promoCards.forEach((card) => {
+  card.addEventListener("click", () => {
+    const businessName = card.querySelector("h3").textContent.trim();
+    const description = card.querySelector("p").textContent.trim();
+    const date = card.querySelector(".card-location").textContent.trim();
+    const discount = card.querySelector(".card-badge").textContent.trim();
+
+    const code = generarCodigoPromo();
+
+    const message = `
+Hey, que tal?  vengo desde Chapitour.co.
+
+Quiero adquirir esta promoción:
+
+Negocio: ${businessName}
+Promoción: ${discount}
+Detalle: ${description}
+Fecha: ${date}
+Código de promoción: ${code}
+
+Con este código, puedo reclamar mi promoción en las proximas 42 horas.
+    `.trim();
+
+    const encodedMessage = encodeURIComponent(message);
+
+    window.open(
+      `https://wa.me/${whatsappNumber}?text=${encodedMessage}`,
+      "_blank"
+    );
   });
 });

@@ -11,7 +11,7 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
 <link rel="stylesheet" href="../1.1.bartin/home/nav/nav.css<?= $cssVer ? '?v=' . $cssVer : '' ?>">
 
 <header class="chapitour-header">
-  <a href="../index.php" class="chapitour-logo" aria-label="Ir al inicio">
+  <a href="../1.1.bartin/index.php" class="chapitour-logo" aria-label="Ir al inicio">
     <h1>Bartini</h1>
   </a>
 
@@ -35,9 +35,9 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
 
   <nav id="chapitour-menu" class="chapitour-menu" aria-label="Menú principal">
     <div class="menu-inner">
-      <a href="#">Menú</a>
-      <a href="#">Galería</a>
-      <a href="#">Reservas</a>
+      <a href="../1.1.bartin/menu/index.php">Menú</a>
+      <a href="../1.1.bartin/galeria/index.php">Galería</a>
+      <a href="../1.1.bartin/reservas/index.php">Reservas</a>
       <a href="#acerca_nosotros">Nosotros</a>
       <a href="#ubicacion">Redes sociales</a>
       <a href="#ubicacion">Ubicación</a>

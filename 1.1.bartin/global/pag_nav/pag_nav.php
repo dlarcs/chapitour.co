@@ -11,7 +11,7 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
 <link rel="stylesheet" href="../../1.1.bartin/global/pag_nav/pag_nav.css<?= $cssVer ? '?v=' . $cssVer : '' ?>">
 
 <header class="chapitour-header">
-  <a href="../../index.php" class="chapitour-logo" aria-label="Ir al inicio">
+  <a href="../../1.1.bartin/index.php" class="chapitour-logo" aria-label="Ir al inicio">
     <h1>Bartini</h1>
   </a>
 
@@ -35,13 +35,12 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
 
   <nav id="chapitour-menu" class="chapitour-menu" aria-label="Menú principal">
     <div class="menu-inner">
-      <a href="../../index.php">Inicio</a>
-      <a href="#">Menú</a>
-      <a href="#">Galería</a>
-      <a href="#">Reservas</a>
-      <a href="#acerca_nosotros">Nosotros</a>
-      <a href="#ubicacion">Redes sociales</a>
-      <a href="#ubicacion">Ubicación</a>
+      <a href="../../1.1.bartin/menu/index.php">Menú</a>
+      <a href="../../1.1.bartin/galeria/index.php">Galería</a>
+      <a href="../../1.1.bartin/reservas/index.php">Reservas</a>
+      <a href="../../1.1.bartin/index.php#acerca_nosotros">Nosotros</a>
+      <a href="../../1.1.bartin/index.php#redes_sociales">Redes sociales</a>
+      <a href="../../1.1.bartin/index.php#ubicacion">Ubicación</a>
       <a href="https://wa.me/573138846378?text=Hola%20vengo%20desde%20la%20web%20de%20Bar%20Restaurant">Contactanos</a>
 
 
