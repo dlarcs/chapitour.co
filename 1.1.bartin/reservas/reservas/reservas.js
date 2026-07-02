@@ -12,7 +12,7 @@ if (featuredPlaces.length > 0) {
       });
     },
     {
-      threshold: 0.3,
+      threshold: 0.1,
     }
   );
 
