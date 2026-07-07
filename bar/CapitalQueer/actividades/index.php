@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="content-language" content="es-CO">
 
-  <title>Reservas</title>
+  <title>Actividades y promociones</title>
 
   <?php
   $base = rtrim($_SERVER['DOCUMENT_ROOT'], '/');
