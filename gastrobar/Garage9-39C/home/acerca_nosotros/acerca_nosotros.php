@@ -26,7 +26,7 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
     </p>
   </div>
 
-  <img src="../../gastrobar/Garage9-39C/img/general10.jpg" alt="Experiencia en Capital Queer">
+  <img src="../../gastrobar/Garage9-39C/img/general11.jpg" alt="Experiencia en Capital Queer">
 
 </section>
 
