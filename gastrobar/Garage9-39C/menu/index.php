@@ -5,12 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="content-language" content="es-CO">
 
-  <title>Reservas</title>
+  <title>Menú</title>
 
   <?php
   $base = rtrim($_SERVER['DOCUMENT_ROOT'], '/');
 
-  $cssFile = $base . '/gastrobar/Garage9-39C/reservas/style.css';
+  $cssFile = $base . '/gastrobar/Garage9-39C/menu/style.css';
 
   $cssVer = is_file($cssFile) ? filemtime($cssFile) : '';
   ?>
@@ -30,7 +30,7 @@
   <meta property="og:url" content="https://www.chapitour.co/">
   <meta property="og:image" content="https://www.chapitour.co/gastrobar/Garage9-39C/img/general11.jpg">
   <meta property="og:image:secure_url" content="https://www.chapitour.co/gastrobar/Garage9-39C/img/general11.jpg">
-  <meta property="og:image:type" content="image/jpeg">
+  <meta property="og:image:type" content="image/jpg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
 
@@ -42,12 +42,12 @@
 
   <!-- Iconos -->
   <link rel="icon" href="/gastrobar/Garage9-39C/img/general11.jpg">
-  <link rel="icon" type="image/png" sizes="32x32" href="/gastrobar/Garage9-39C/img/general11.jpg">
-  <link rel="icon" type="image/png" sizes="16x16" href="/gastrobar/Garage9-39C/img/general11.jpg">
-  <link rel="apple-touch-icon" sizes="180x180" href="/gastrobar/Garage9-39C/img/general11.jpg">
+  <link rel="icon" type="image/png" sizes="32x32" href="../gastrobar/Garage9-39C/img/general11.jpg">
+  <link rel="icon" type="image/png" sizes="16x16" href="../gastrobar/Garage9-39C/img/general11.jpg">
+  <link rel="apple-touch-icon" sizes="180x180" href="../gastrobar/Garage9-39C/img/general11.jpg">
 
   <!-- CSS -->
-  <link rel="stylesheet" href="../../../gastrobar/Garage9-39C/reservas/style.css<?= $cssVer ? '?v=' . $cssVer : '' ?>">
+  <link rel="stylesheet" href="../../../gastrobar/Garage9-39C/menu/style.css<?= $cssVer ? '?v=' . $cssVer : '' ?>">
 
   <!-- Datos estructurados para Google -->
   <script type="application/ld+json">
@@ -84,15 +84,13 @@
 <body>
 
   <?php include "../../../gastrobar/Garage9-39C/global/pag_nav/pag_nav.php" ?>
-  <div class="container_reservas">
-    <?php include "../../../gastrobar/Garage9-39C/reservas/reservas/reservas.php" ?>
+  <div class="container_menu">
+    <?php include "../../../gastrobar/Garage9-39C/menu/menu/menu.php" ?>
   </div>
   <?php include "../../../gastrobar/Garage9-39C/global/boton/boton.php" ?>
-
-
   <?php include "../../../gastrobar/Garage9-39C/global/pag_footer/pag_footer.php" ?>
   <a class="whatsapp-fab"
-		href="https://wa.me/573156175056?text=Hola%20vengo%20desde%20la%20web%20de%20Bar%20Restaurant"
+		href="https://wa.me/573138846378?text=Hola%20vengo%20desde%20la%20web%20de%20Bar%20Restaurant"
 		target="_blank" rel="noopener"
 		aria-label="Chatear por WhatsApp" >
 		<img src="../../../global/img/img_whatsApp.png"

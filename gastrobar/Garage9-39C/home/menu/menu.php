@@ -1,8 +1,8 @@
 <?php
 $base = rtrim($_SERVER['DOCUMENT_ROOT'], '/');
 
-$cssFile = $base . '/gastrobar/Garage9-39C/home/menu/menu.css';
-$jsFile  = $base . '/gastrobar/Garage9-39C/home/menu/menu.js';
+$cssFile = $base . '/gastrobar/Garage9-39C/menu/menu/menu.css';
+$jsFile  = $base . '/gastrobar/Garage9-39C/menu/menu/menu.js';
 
 $cssVer = is_file($cssFile) ? filemtime($cssFile) : '';
 $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
@@ -11,74 +11,73 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
 <link rel="stylesheet" href="../../gastrobar/Garage9-39C/home/menu/menu.css<?= $cssVer ? '?v=' . $cssVer : '' ?>">
 
 <section class="business-section visible">
+  <span class="section-label">Menú destacado</span>
 
-  <span class="section-label">Planes</span>
+  <h2>Sabores para la rumba</h2>
 
-  <h2>Planes para vivir Garage 9-39C</h2>
 
   <p>
-    Disfruta un disco bar y gastrobar LGBTIQ+ en Chapinero, con música, comida,
-    bebidas, rumba y un ambiente diverso para compartir con libertad y buena energía.
+    Disfruta comida, bebidas, cocteles y opciones ideales para compartir antes,
+    durante o después de una noche llena de música y buena energía en Chapinero.
   </p>
-
+  <a href="../../gastrobar/Garage9-39C/menu/index.php" class="dowload">
+    <div class="button_container">
+      <button class="btn btn30" type="button">Ver menú</button>
+    </div>
+  </a>
   <div class="menu-grid">
 
     <article class="menu-card">
-      <img src="../../gastrobar/Garage9-39C/img/general1.jpg" alt="Noche de rumba en Garage 9-39C">
+      <img src="../../gastrobar/Garage9-39C/img/general.jpg" alt="Hamburguesas Garage 9-39C">
 
       <div>
-        <h3>Noche de rumba</h3>
+        <h3>Hamburguesas</h3>
         <p class="descripcion-card">
-          Un plan perfecto para bailar, cantar, brindar y disfrutar la noche en un ambiente
-          diverso, libre y lleno de energía.
+          Hamburguesas con carne jugosa, queso fundido, vegetales frescos y salsas llenas de sabor.
         </p>
       </div>
     </article>
 
     <article class="menu-card">
-      <img src="../../gastrobar/Garage9-39C/img/general15.jpg" alt="Cócteles y música en Garage 9-39C">
+      <img src="../../gastrobar/Garage9-39C/img/general2.jpg" alt="Cocteles Garage 9-39C">
 
       <div>
-        <h3>Cócteles y música</h3>
+        <h3>Cocteles</h3>
         <p class="descripcion-card">
-          Bebidas, música y buena vibra para desconectarte de la rutina y compartir
-          con amigos en el corazón de Chapinero.
+          Bebidas especiales para brindar, compartir y acompañar la noche con buena vibra.
         </p>
       </div>
     </article>
 
     <article class="menu-card">
-      <img src="../../gastrobar/Garage9-39C/img/general3.jpg" alt="Noches temáticas Garage 9-39C">
+      <img src="../../gastrobar/Garage9-39C/img/general3.jpg" alt="Picadas Garage 9-39C">
 
       <div>
-        <h3>Noches temáticas</h3>
+        <h3>Picadas para compartir</h3>
         <p class="descripcion-card">
-          Shows, fiestas especiales, celebraciones y actividades pensadas para vivir
-          momentos diferentes dentro de Garage 9-39C.
+          Opciones ideales para disfrutar en grupo mientras compartes música, conversación y rumba.
         </p>
       </div>
     </article>
 
     <article class="menu-card">
-      <img src="../../gastrobar/Garage9-39C/img/general6.jpg" alt="Gastrobar en Chapinero">
+      <img src="../../gastrobar/Garage9-39C/img/general4.jpg" alt="Bebidas Garage 9-39C">
 
       <div>
-        <h3>Gastrobar para compartir</h3>
+        <h3>Bebidas</h3>
         <p class="descripcion-card">
-          Un espacio para disfrutar comida, bebidas, música y conversación antes,
-          durante o después de la rumba.
+          Licores, cervezas, mezclas y bebidas para acompañar cada momento de la noche.
         </p>
       </div>
     </article>
+
 
   </div>
-
   <a href="../../gastrobar/Garage9-39C/actividades/index.php" class="dowload">
     <div class="button_container">
       <button class="btn btn30" type="button">Ver actividades y promociones</button>
     </div>
   </a>
-
 </section>
 
-<script defer src="../../gastrobar/Garage9-39C/home/menu/menu.js<?= $jsVer ? '?v=' . $jsVer : '' ?>"></script>
+<script defer src="../../gastrobar/Garage9-39C/menu/menu/menu.js<?= $jsVer ? '?v=' . $jsVer : '' ?>"></script>

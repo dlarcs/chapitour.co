@@ -13,14 +13,11 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
 <section class="business-section business-about visible" id="acerca_nosotros">
   <div class="about-text">
     <span class="section-label">Acerca de nosotros</span>
-
-    <h2>Un bar libre, diverso y seguro</h2>
+    <h2>Un disco bar y gastrobar libre, diverso y seguro</h2>
 
     <p>
-      Capital Queer es un espacio en Chapinero creado especialmente para mujeres,
-      donde también cualquier persona puede entrar, compartir y disfrutar con respeto.
-      Nuestra propuesta combina música, bebidas, encuentros y un ambiente pensado
-      para vivir la noche con libertad y buena energía.
+      Garage 9-39C es un espacio LGBTIQ+ en Chapinero creado para disfrutar la noche
+      con música, rumba, comida, bebidas y un ambiente lleno de respeto, libertad y buena energía.
     </p>
 
     <p>

@@ -13,11 +13,11 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
 <section class="business-section business-gallery visible">
   <span class="section-label">Galería</span>
 
-  <h2>Conoce el ambiente de Capital Queer</h2>
+  <h2>Conoce el ambiente de Garage 9-39C</h2>
 
   <p>
-    Un espacio diverso, libre y seguro, pensado especialmente para mujeres,
-    con música, luces, encuentros y momentos para compartir con respeto y buena energía.
+    Un disco bar y gastrobar LGBTIQ+ en Chapinero, con música, luces, rumba,
+    comida, bebidas y un ambiente diverso para compartir con libertad, respeto y buena energía.
   </p>
 
   <div class="gallery-grid">

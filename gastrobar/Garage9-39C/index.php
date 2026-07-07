@@ -30,8 +30,8 @@
   <meta property="og:title" content="Garage 9-39C | Disco bar y gastrobar LGBTIQ+">
   <meta property="og:description" content="Garage 9-39C es un espacio LGBTIQ+ en Chapinero para disfrutar música, rumba, comida, bebidas y un ambiente diverso con buena energía.">
   <meta property="og:url" content="https://chapitour.co/gastrobar/Garage9-39C/">
-  <meta property="og:image" content="https://chapitour.co/gastrobar/Garage9-39C/img/general17.jpg">
-  <meta property="og:image:secure_url" content="https://chapitour.co/gastrobar/Garage9-39C/img/general17.jpg">
+  <meta property="og:image" content="https://chapitour.co/gastrobar/Garage9-39C/img/general11.jpg">
+  <meta property="og:image:secure_url" content="https://chapitour.co/gastrobar/Garage9-39C/img/general11.jpg">
   <meta property="og:image:type" content="image/jpg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
@@ -40,13 +40,13 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Garage 9-39C | Disco bar y gastrobar LGBTIQ+">
   <meta name="twitter:description" content="Disco bar y gastrobar LGBTIQ+ en Chapinero con música, comida, bebidas, rumba y ambiente diverso.">
-  <meta name="twitter:image" content="https://chapitour.co/gastrobar/Garage9-39C/img/general17.jpg">
+  <meta name="twitter:image" content="https://chapitour.co/gastrobar/Garage9-39C/img/general11.jpg">
 
   <!-- Iconos -->
-  <link rel="icon" href="/gastrobar/Garage9-39C/img/general17.jpg">
-  <link rel="icon" type="image/jpg" sizes="32x32" href="/gastrobar/Garage9-39C/img/general17.jpg">
-  <link rel="icon" type="image/jpg" sizes="16x16" href="/gastrobar/Garage9-39C/img/general17.jpg">
-  <link rel="apple-touch-icon" sizes="180x180" href="/gastrobar/Garage9-39C/img/general17.jpg">
+  <link rel="icon" href="/gastrobar/Garage9-39C/img/general11.jpg">
+  <link rel="icon" type="image/jpg" sizes="32x32" href="/gastrobar/Garage9-39C/img/general11.jpg">
+  <link rel="icon" type="image/jpg" sizes="16x16" href="/gastrobar/Garage9-39C/img/general11.jpg">
+  <link rel="apple-touch-icon" sizes="180x180" href="/gastrobar/Garage9-39C/img/general11.jpg">
 
   <!-- CSS -->
   <link rel="stylesheet" href="../../gastrobar/Garage9-39C/style.css<?= $cssVer ? '?v=' . $cssVer : '' ?>">
@@ -70,7 +70,7 @@
         "name": "Garage 9-39C",
         "description": "Disco bar y gastrobar LGBTIQ+ en Chapinero, Bogotá, ideal para disfrutar rumba, música, comida, bebidas y un ambiente diverso, libre y lleno de energía.",
         "url": "https://chapitour.co/gastrobar/Garage9-39C/",
-        "image": "https://chapitour.co/gastrobar/Garage9-39C/img/general17.jpg",
+        "image": "https://chapitour.co/gastrobar/Garage9-39C/img/general11.jpg",
         "telephone": "+573007795016",
         "servesCuisine": "Gastrobar",
         "priceRange": "$$",

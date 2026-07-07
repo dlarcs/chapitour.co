@@ -7,12 +7,12 @@ $jsFile  = $base . '/gastrobar/Garage9-39C/home/ubicacion/ubicacion.js';
 $cssVer = is_file($cssFile) ? filemtime($cssFile) : '';
 $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
 
-$googleMapsLink = 'https://maps.app.goo.gl/NToBxLE8EheaadzY6'; // Aquí cargas el link real de Google Maps
+$googleMapsLink = 'https://maps.app.goo.gl/NToBxLE8EheaadzY6';
 ?>
 
 <link rel="stylesheet" href="../../gastrobar/Garage9-39C/home/ubicacion/ubicacion.css<?= $cssVer ? '?v=' . $cssVer : '' ?>">
 
-<section class="business-location-social business-section visible" >
+<section class="business-location-social business-section visible">
   <div class="business-location-social__inner">
 
     <div class="business-location" id="ubicacion">
@@ -21,24 +21,25 @@ $googleMapsLink = 'https://maps.app.goo.gl/NToBxLE8EheaadzY6'; // Aquí cargas e
       <h2>Encuéntranos en Chapinero</h2>
 
       <p>
-        Estamos ubicados en una zona estratégica de Chapinero, ideal para
-        disfrutar un ambiente Queer, es seguro y divertido.
+        Estamos ubicados en una zona estratégica de Chapinero, ideal para disfrutar
+        un ambiente LGBTIQ+, seguro, diverso y divertido, con música, rumba,
+        comida, bebidas y buena energía.
       </p>
 
       <div class="location-info">
         <p>
           <strong>Dirección:</strong>
-          Carrera 9 #59-38, Chapinero, Bogotá
+          Calle 59 #9-39, Chapinero, Bogotá
         </p>
 
         <p>
           <strong>Horario:</strong>
-         Jueves a Sabado · 6:30 p.m. - 4:00 a.m.
+            5:00 p.m. - 5:00 a.m.
         </p>
 
         <p>
           <strong>WhatsApp:</strong>
-          <a href="https://wa.me/573156175056"> 3156175056</a>
+          <a href="https://wa.me/573156175056">3156175056</a>
         </p>
       </div>
 
@@ -53,24 +54,24 @@ $googleMapsLink = 'https://maps.app.goo.gl/NToBxLE8EheaadzY6'; // Aquí cargas e
       <h2>Síguenos</h2>
 
       <p>
-        Conoce nuestros eventos, promociones, actividades y momentos
-        especiales a través de nuestras redes sociales y página web.
+        Conoce nuestros eventos, promociones, actividades, noches especiales
+        y momentos destacados a través de nuestras redes sociales y página web.
       </p>
 
       <div class="social-links">
         <a href="#" class="social-card">
           <span>Instagram</span>
-          <small>@distritogastrobar</small>
+          <small>@garage939c</small>
         </a>
 
         <a href="#" class="social-card">
           <span>Facebook</span>
-          <small>Distrito Gastrobar</small>
+          <small>Garage 9-39C</small>
         </a>
 
         <a href="#" class="social-card">
           <span>TikTok</span>
-          <small>@distritogastrobar</small>
+          <small>@garage939c</small>
         </a>
 
         <a href="https://wa.me/573156175056" class="social-card">
@@ -82,4 +83,5 @@ $googleMapsLink = 'https://maps.app.goo.gl/NToBxLE8EheaadzY6'; // Aquí cargas e
 
   </div>
 </section>
+
 <script defer src="../../gastrobar/Garage9-39C/home/ubicacion/ubicacion.js<?= $jsVer ? '?v=' . $jsVer : '' ?>"></script>
