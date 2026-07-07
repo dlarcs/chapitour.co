@@ -21,7 +21,7 @@
   <meta name="description" content="Capital Queer es un bar en Chapinero, Bogotá, creado especialmente para mujeres y abierto a todas las personas que quieran disfrutar con respeto, libertad, música y buena energía.">
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
   <meta name="googlebot" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
-  <link rel="canonical" href="https://www.chapitour.co/bar/CapitalQueer/">
+  <link rel="canonical" href="https://chapitour.co/bar/CapitalQueer/index.php">
   <meta name="theme-color" content="#005548">
 
   <!-- Open Graph: WhatsApp / Facebook -->
@@ -29,9 +29,9 @@
   <meta property="og:site_name" content="Chapitour">
   <meta property="og:title" content="Capital Queer | Bar en Chapinero">
   <meta property="og:description" content="Un espacio especialmente para mujeres, abierto a todas las personas, con música, ambiente seguro, diversidad y buena energía en Chapinero, Bogotá.">
-  <meta property="og:url" content="https://www.chapitour.co/bar/CapitalQueer/">
-  <meta property="og:image" content="https://www.chapitour.co/bar/CapitalQueer/img/general17.jpg">
-  <meta property="og:image:secure_url" content="https://www.chapitour.co/bar/CapitalQueer/img/general17.jpg">
+  <meta property="og:url" content="https://chapitour.co/bar/CapitalQueer/">
+  <meta property="og:image" content="https://chapitour.co/bar/CapitalQueer/img/general17.jpg">
+  <meta property="og:image:secure_url" content="https://chapitour.co/bar/CapitalQueer/img/general17.jpg">
   <meta property="og:image:type" content="image/jpg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
@@ -40,7 +40,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Capital Queer | Bar en Chapinero">
   <meta name="twitter:description" content="Un bar especialmente para mujeres, abierto a todas las personas, con ambiente diverso, seguro y libre en Chapinero, Bogotá.">
-  <meta name="twitter:image" content="https://www.chapitour.co/bar/CapitalQueer/img/general17.jpg">
+  <meta name="twitter:image" content="https://chapitour.co/bar/CapitalQueer/img/general17.jpg">
 
   <!-- Iconos -->
   <link rel="icon" href="/bar/CapitalQueer/img/general17.jpg">
@@ -58,19 +58,19 @@
     "@graph": [
       {
         "@type": "WebSite",
-        "@id": "https://www.chapitour.co/#website",
+        "@id": "https://chapitour.co/#website",
         "name": "Chapitour",
-        "url": "https://www.chapitour.co/",
+        "url": "https://chapitour.co/",
         "inLanguage": "es-CO",
         "description": "Guía turística y comercial de lugares para visitar en Chapinero, Bogotá."
       },
       {
         "@type": "BarOrPub",
-        "@id": "https://www.chapitour.co/bar/CapitalQueer/#business",
+        "@id": "https://chapitour.co/bar/CapitalQueer/#business",
         "name": "Capital Queer",
         "description": "Bar en Chapinero, Bogotá, creado especialmente para mujeres y abierto a todas las personas que quieran compartir con respeto, libertad y buena energía.",
-        "url": "https://www.chapitour.co/bar/CapitalQueer/",
-        "image": "https://www.chapitour.co/bar/CapitalQueer/img/general17.jpg",
+        "url": "https://chapitour.co/bar/CapitalQueer/",
+        "image": "https://chapitour.co/bar/CapitalQueer/img/general17.jpg",
         "telephone": "+573007795016",
         "servesCuisine": "Bar",
         "priceRange": "$$",
