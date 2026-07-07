@@ -21,17 +21,29 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
   </p>
 
   <div class="gallery-grid">
-    <img src="../../../home/img/bar.png" alt="Ambiente del gastrobar">
-    <img src="../../../home/img/bar.png" alt="Barra del gastrobar">
-    <img src="../../../home/img/bar.png" alt="Zona social del gastrobar">
-    <img src="../../../home/img/bar.png" alt="Decoración del gastrobar">
-    <img src="../../../home/img/bar.png" alt="Luces del gastrobar">
-    <img src="../../../home/img/bar.png" alt="Espacio para compartir">
-    <img src="../../../home/img/bar.png" alt="Interior moderno del gastrobar">
-    <img src="../../../home/img/bar.png" alt="Ambiente nocturno del gastrobar">
-    <img src="../../../home/img/bar.png" alt="Zona de bebidas del gastrobar">
-    <img src="../../../home/img/bar.png" alt="Mesa del gastrobar">
-    <img src="../../../home/img/bar.png" alt="Experiencia en el gastrobar">
+    <img src="../../../bar/CapitalQueer/img/general.png" alt="Ambiente de Capital Queer">
+    <img src="../../../bar/CapitalQueer/img/general1.png" alt="Barra de Capital Queer">
+    <img src="../../../bar/CapitalQueer/img/general2.png" alt="Zona social de Capital Queer">
+    <img src="../../../bar/CapitalQueer/img/general3.png" alt="Decoración de Capital Queer">
+    <img src="../../../bar/CapitalQueer/img/general4.png" alt="Luces de Capital Queer">
+    <img src="../../../bar/CapitalQueer/img/general5.png" alt="Espacio para compartir en Capital Queer">
+    <img src="../../../bar/CapitalQueer/img/general6.png" alt="Interior moderno de Capital Queer">
+    <img src="../../../bar/CapitalQueer/img/general7.png" alt="Ambiente nocturno de Capital Queer">
+    <img src="../../../bar/CapitalQueer/img/general8.png" alt="Zona de bebidas de Capital Queer">
+    <img src="../../../bar/CapitalQueer/img/general9.png" alt="Mesa de Capital Queer">
+    <img src="../../../bar/CapitalQueer/img/general10.png" alt="Experiencia en Capital Queer">
+    <img src="../../../bar/CapitalQueer/img/general11.png" alt="Noche especial en Capital Queer">
+    <img src="../../../bar/CapitalQueer/img/general12.png" alt="Música en Capital Queer">
+    <img src="../../../bar/CapitalQueer/img/general13.png" alt="Celebración en Capital Queer">
+    <img src="../../../bar/CapitalQueer/img/general14.png" alt="Cocteles en Capital Queer">
+    <img src="../../../bar/CapitalQueer/img/general15.png" alt="Encuentro entre amigas en Capital Queer">
+    <img src="../../../bar/CapitalQueer/img/general16.png" alt="Ambiente queer en Capital Queer">
+    <img src="../../../bar/CapitalQueer/img/general17.png" alt="Espacio seguro en Capital Queer">
+    <img src="../../../bar/CapitalQueer/img/general18.png" alt="Fiesta en Capital Queer">
+    <img src="../../../bar/CapitalQueer/img/general19.png" alt="Evento especial en Capital Queer">
+    <img src="../../../bar/CapitalQueer/img/general20.png" alt="Noche de baile en Capital Queer">
+    <img src="../../../bar/CapitalQueer/img/general21.png" alt="Compartir en Capital Queer">
+    <img src="../../../bar/CapitalQueer/img/general22.png" alt="Experiencia nocturna en Capital Queer">
   </div>
 
 </section>
