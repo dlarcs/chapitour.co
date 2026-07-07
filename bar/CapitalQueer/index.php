@@ -30,8 +30,8 @@
   <meta property="og:title" content="Capital Queer | Bar en Chapinero">
   <meta property="og:description" content="Un espacio especialmente para mujeres, abierto a todas las personas, con música, ambiente seguro, diversidad y buena energía en Chapinero, Bogotá.">
   <meta property="og:url" content="https://www.chapitour.co/bar/CapitalQueer/">
-  <meta property="og:image" content="https://www.chapitour.co/bar/CapitalQueer/img/general17.png">
-  <meta property="og:image:secure_url" content="https://www.chapitour.co/bar/CapitalQueer/img/general17.png">
+  <meta property="og:image" content="https://www.chapitour.co/bar/CapitalQueer/img/general17.jpg">
+  <meta property="og:image:secure_url" content="https://www.chapitour.co/bar/CapitalQueer/img/general17.jpg">
   <meta property="og:image:type" content="image/png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
@@ -40,13 +40,13 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Capital Queer | Bar en Chapinero">
   <meta name="twitter:description" content="Un bar especialmente para mujeres, abierto a todas las personas, con ambiente diverso, seguro y libre en Chapinero, Bogotá.">
-  <meta name="twitter:image" content="https://www.chapitour.co/bar/CapitalQueer/img/general17.png">
+  <meta name="twitter:image" content="https://www.chapitour.co/bar/CapitalQueer/img/general17.jpg">
 
   <!-- Iconos -->
-  <link rel="icon" href="/bar/CapitalQueer/img/general17.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/bar/CapitalQueer/img/general17.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/bar/CapitalQueer/img/general17.png">
-  <link rel="apple-touch-icon" sizes="180x180" href="/bar/CapitalQueer/img/general17.png">
+  <link rel="icon" href="/bar/CapitalQueer/img/general17.jpg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/bar/CapitalQueer/img/general17.jpg">
+  <link rel="icon" type="image/png" sizes="16x16" href="/bar/CapitalQueer/img/general17.jpg">
+  <link rel="apple-touch-icon" sizes="180x180" href="/bar/CapitalQueer/img/general17.jpg">
 
   <!-- CSS -->
   <link rel="stylesheet" href="../../bar/CapitalQueer/style.css<?= $cssVer ? '?v=' . $cssVer : '' ?>">
@@ -70,7 +70,7 @@
         "name": "Capital Queer",
         "description": "Bar en Chapinero, Bogotá, creado especialmente para mujeres y abierto a todas las personas que quieran compartir con respeto, libertad y buena energía.",
         "url": "https://www.chapitour.co/bar/CapitalQueer/",
-        "image": "https://www.chapitour.co/bar/CapitalQueer/img/general17.png",
+        "image": "https://www.chapitour.co/bar/CapitalQueer/img/general17.jpg",
         "telephone": "+573007795016",
         "servesCuisine": "Bar",
         "priceRange": "$$",
@@ -111,7 +111,7 @@
     href="https://wa.me/573007795016?text=Hola%20vengo%20desde%20la%20web%20de%20Capital%20Queer"
     target="_blank" rel="noopener"
     aria-label="Chatear por WhatsApp">
-    <img src="../../global/img/img_whatsApp.png"
+    <img src="../../global/img/img_whatsApp.jpg"
       alt="Contactar a Capital Queer por WhatsApp" decoding="async">
   </a>
 
