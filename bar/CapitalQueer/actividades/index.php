@@ -28,8 +28,8 @@
   <meta property="og:title" content="Chapitour | Lugares para visitar en Chapinero, Bogotá">
   <meta property="og:description" content="Explora Chapinero, Bogotá: cafés, restaurantes, bares, cultura, planes locales, alojamiento y lugares para visitar.">
   <meta property="og:url" content="https://www.chapitour.co/">
-  <meta property="og:image" content="https://www.chapitour.co/home/img/cocktel.png">
-  <meta property="og:image:secure_url" content="https://www.chapitour.co/home/img/cocktel.png">
+  <meta property="og:image" content="https://www.chapitour.co/bar/CapitalQueer/img/general18.png">
+  <meta property="og:image:secure_url" content="https://www.chapitour.co/bar/CapitalQueer/img/general18.png">
   <meta property="og:image:type" content="image/jpeg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
@@ -38,13 +38,13 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Chapitour | Lugares para visitar en Chapinero, Bogotá">
   <meta name="twitter:description" content="Descubre cafés, restaurantes, cultura, bares, alojamiento y planes locales en Chapinero, Bogotá.">
-  <meta name="twitter:image" content="https://www.chapitour.co/home/img/cocktel.png">
+  <meta name="twitter:image" content="https://www.chapitour.co/bar/CapitalQueer/img/general18.png">
 
   <!-- Iconos -->
-  <link rel="icon" href="/home/img/cocktel.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/home/img/cocktel.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/home/img/cocktel.png">
-  <link rel="apple-touch-icon" sizes="180x180" href="/home/img/cocktel.png">
+  <link rel="icon" href="/bar/CapitalQueer/img/general18.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/bar/CapitalQueer/img/general18.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/bar/CapitalQueer/img/general18.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/bar/CapitalQueer/img/general18.png">
 
   <!-- CSS -->
   <link rel="stylesheet" href="../../../bar/CapitalQueer/actividades/style.css<?= $cssVer ? '?v=' . $cssVer : '' ?>">
