@@ -54,7 +54,7 @@ $googleMapsLink = 'https://maps.app.goo.gl/EiY5d6CNqpgfw1CM8'; // Aquí cargas e
 
       <p>
         Conoce nuestros eventos, promociones, actividades y momentos
-        especiales a través de nuestras redes sociales página web.
+        especiales a través de nuestras redes sociales y página web.
       </p>
 
       <div class="social-links">

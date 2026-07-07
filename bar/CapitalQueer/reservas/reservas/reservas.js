@@ -25,7 +25,7 @@ const bookingMessage = document.getElementById("bookingMessage");
 
 // Cambia este número por el WhatsApp del negocio
 // Formato: código país + número, sin espacios ni +
-const whatsappNumber = "573138846378";
+const whatsappNumber = "573007795016";
 
 if (bookingForm && bookingMessage) {
   bookingForm.addEventListener("submit", (e) => {
