@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="content-language" content="es-CO">
 
-  <title>Capital Queer | Bar en Chapinero para mujeres y diversidad</title>
+  <title>Capital Queer | Bar en Chapinero para mujeres y diversidad LGBTIQ+</title>
 
   <?php
   $base = rtrim($_SERVER['DOCUMENT_ROOT'], '/');
@@ -21,7 +21,7 @@
   <meta name="description" content="Capital Queer es un bar en Chapinero, Bogotá, creado especialmente para mujeres y abierto a todas las personas que quieran disfrutar con respeto, libertad, música y buena energía.">
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
   <meta name="googlebot" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
-  <link rel="canonical" href="https://chapitour.co/bar/CapitalQueer/index.php">
+  <link rel="canonical" href="https://chapitour.co/bar/CapitalQueer/">
   <meta name="theme-color" content="#005548">
 
   <!-- Open Graph: WhatsApp / Facebook -->

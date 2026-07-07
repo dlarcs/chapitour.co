@@ -1,16 +1,16 @@
 <?php
 $base = rtrim($_SERVER['DOCUMENT_ROOT'], '/');
 
-$cssFile = $base . '/bar/CapitalQueer/home/ubicacion/ubicacion.css';
-$jsFile  = $base . '/bar/CapitalQueer/home/ubicacion/ubicacion.js';
+$cssFile = $base . '/gastrobar/Garage9-39C/home/ubicacion/ubicacion.css';
+$jsFile  = $base . '/gastrobar/Garage9-39C/home/ubicacion/ubicacion.js';
 
 $cssVer = is_file($cssFile) ? filemtime($cssFile) : '';
 $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
 
-$googleMapsLink = 'https://maps.app.goo.gl/9VNL1w3sdMUqa2KV8'; // Aquí cargas el link real de Google Maps
+$googleMapsLink = 'https://maps.app.goo.gl/NToBxLE8EheaadzY6'; // Aquí cargas el link real de Google Maps
 ?>
 
-<link rel="stylesheet" href="../../bar/CapitalQueer/home/ubicacion/ubicacion.css<?= $cssVer ? '?v=' . $cssVer : '' ?>">
+<link rel="stylesheet" href="../../gastrobar/Garage9-39C/home/ubicacion/ubicacion.css<?= $cssVer ? '?v=' . $cssVer : '' ?>">
 
 <section class="business-location-social business-section visible" >
   <div class="business-location-social__inner">
@@ -38,7 +38,7 @@ $googleMapsLink = 'https://maps.app.goo.gl/9VNL1w3sdMUqa2KV8'; // Aquí cargas e
 
         <p>
           <strong>WhatsApp:</strong>
-          <a href="https://wa.me/573007795016"> 3007795016</a>
+          <a href="https://wa.me/573156175056"> 3156175056</a>
         </p>
       </div>
 
@@ -73,7 +73,7 @@ $googleMapsLink = 'https://maps.app.goo.gl/9VNL1w3sdMUqa2KV8'; // Aquí cargas e
           <small>@distritogastrobar</small>
         </a>
 
-        <a href="https://wa.me/573007795016" class="social-card">
+        <a href="https://wa.me/573156175056" class="social-card">
           <span>WhatsApp</span>
           <small>Reservas y contacto</small>
         </a>
@@ -82,4 +82,4 @@ $googleMapsLink = 'https://maps.app.goo.gl/9VNL1w3sdMUqa2KV8'; // Aquí cargas e
 
   </div>
 </section>
-<script defer src="../../bar/CapitalQueer/home/ubicacion/ubicacion.js<?= $jsVer ? '?v=' . $jsVer : '' ?>"></script>
+<script defer src="../../gastrobar/Garage9-39C/home/ubicacion/ubicacion.js<?= $jsVer ? '?v=' . $jsVer : '' ?>"></script>
