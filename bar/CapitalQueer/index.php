@@ -111,7 +111,7 @@
     href="https://wa.me/573007795016?text=Hola%20vengo%20desde%20la%20web%20de%20Capital%20Queer"
     target="_blank" rel="noopener"
     aria-label="Chatear por WhatsApp">
-    <img src="../../global/img/img_whatsApp.jpg"
+    <img src="../../global/img/img_whatsApp.png"
       alt="Contactar a Capital Queer por WhatsApp" decoding="async">
   </a>
 
