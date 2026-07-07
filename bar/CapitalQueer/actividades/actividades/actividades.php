@@ -26,7 +26,7 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
 
       <article class="card promo-card" data-code="CAPITAL-AMOR-AMISTAD-001">
         <div class="card-image">
-          <img src="../../../bar/CapitalQueer/img/general7.jpg" alt="Amor y amistad">
+          <img src="../../../bar/CapitalQueer/img/general17.jpg" alt="Amor y amistad">
           <span class="card-badge">Noche especial</span>
         </div>
 
