@@ -21,7 +21,7 @@ $cssVer = is_file($cssFile) ? filemtime($cssFile) : '';
     <div class="footer-col">
       <h5>Categorías</h5>
       <a href="../../../1.tipo_bares/index.php">Bar</a>
-      <a href="../../../2.planes_bares/index.php">Gastro bar</a>x
+      <a href="../../../2.planes_bares/index.php">Gastro bar</a>
       <a href="../../../3.cafes/index.php">Café</a>
       <a href="../../../4.postres/index.php">Postres</a>
       <a href="../../../5.LGBTIQ+/index.php">LGBTIQ+</a>

@@ -81,7 +81,7 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
           <img src="../../../bar/CapitalQueer/img/general21.png" alt="Fin de año">
           <span class="card-badge">Fin de año</span>
         </div>
-
+ 
         <div class="card-content">
           <h3>Despedida de Año</h3>
           <p>Despidamos el año con fiesta, buena música, brindis y una noche inolvidable.</p>
