@@ -37,7 +37,7 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
 
     <article class="menu-card">
       <img src="../../bar/CapitalQueer/img/general15.png" alt="Cócteles y música">
-
+      
       <div>
         <h3>Cócteles y música</h3>
         <p class="descripcion-card">
