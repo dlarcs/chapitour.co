@@ -38,8 +38,8 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
     <img src="../../../bar/CapitalQueer/img/general14.png" alt="Cocteles en Capital Queer">
     <img src="../../../bar/CapitalQueer/img/general15.png" alt="Encuentro entre amigas en Capital Queer">
     <img src="../../../bar/CapitalQueer/img/general16.png" alt="Ambiente queer en Capital Queer">
-    <img src="../../../bar/CapitalQueer/img/general17.png" alt="Espacio seguro en Capital Queer">
-    <img src="../../../bar/CapitalQueer/img/general18.png" alt="Fiesta en Capital Queer">
+    <img src="../../../bar/CapitalQueer/img/general17.jpg" alt="Espacio seguro en Capital Queer">
+    <img src="../../../bar/CapitalQueer/img/general18.jpg" alt="Fiesta en Capital Queer">
     <img src="../../../bar/CapitalQueer/img/general19.png" alt="Evento especial en Capital Queer">
     <img src="../../../bar/CapitalQueer/img/general20.png" alt="Noche de baile en Capital Queer">
     <img src="../../../bar/CapitalQueer/img/general21.png" alt="Compartir en Capital Queer">

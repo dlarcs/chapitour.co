@@ -22,7 +22,7 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
 
   <div class="gallery-grid">
     <img src="../../bar/CapitalQueer/img/general21.png" alt="Ambiente de Capital Queer">
-    <img src="../../bar/CapitalQueer/img/general17.png" alt="Bar de Capital Queer">
+    <img src="../../bar/CapitalQueer/img/general17.jpg" alt="Bar de Capital Queer">
     <img src="../../bar/CapitalQueer/img/general22.png" alt="Espacio social de Capital Queer" class="gallery-img-mobile-hide">
   </div>
 

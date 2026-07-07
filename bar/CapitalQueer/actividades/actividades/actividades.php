@@ -26,7 +26,7 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
 
       <article class="card promo-card" data-code="CAPITAL-AMOR-AMISTAD-001">
         <div class="card-image">
-          <img src="../../../bar/CapitalQueer/img/general7.png" alt="Amor y amistad">
+          <img src="../../../bar/CapitalQueer/img/general7.jpg" alt="Amor y amistad">
           <span class="card-badge">Noche especial</span>
         </div>
 
@@ -52,7 +52,7 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
 
       <article class="card promo-card" data-code="CAPITAL-VELITAS-003">
         <div class="card-image">
-          <img src="../../../bar/CapitalQueer/img/general18.png" alt="Día de velitas">
+          <img src="../../../bar/CapitalQueer/img/general18.jpg" alt="Día de velitas">
           <span class="card-badge">Velitas</span>
         </div>
 
@@ -81,7 +81,7 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
           <img src="../../../bar/CapitalQueer/img/general21.png" alt="Fin de año">
           <span class="card-badge">Fin de año</span>
         </div>
- 
+
         <div class="card-content">
           <h3>Despedida de Año</h3>
           <p>Despidamos el año con fiesta, buena música, brindis y una noche inolvidable.</p>
