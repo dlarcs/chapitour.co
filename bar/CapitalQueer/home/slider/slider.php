@@ -49,7 +49,7 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
     <div class="business-hero__content">
       <span>Especialmente para mujeres</span>
 
-      <h1>Un lugar para sentirte libre</h1>
+      <h1>Sientete sentirte libre</h1>
 
       <p>
         Capital Queer ofrece un ambiente pensado para que las mujeres puedan
