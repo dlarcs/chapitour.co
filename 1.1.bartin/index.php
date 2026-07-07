@@ -95,7 +95,7 @@
     <?php include "../1.1.bartin/home/acerca_nosotros/acerca_nosotros.php" ?>
     <?php include "../1.1.bartin/home/ubicacion/ubicacion.php" ?>
   </div>
-  <?php include "../global/footer/footer.php" ?>
+  <?php include "../1.1.bartin/home/footer/footer.php" ?>
   <a class="whatsapp-fab"
 		href="https://wa.me/573138846378?text=Hola%20vengo%20desde%20la%20web%20de%20Bar%20Restaurant"
 		target="_blank" rel="noopener"

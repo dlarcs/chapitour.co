@@ -118,8 +118,9 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
     <a  href="../../1.1.bartin/index.php" class="btn btn30">
       Pagar anticipo
     </a> -->
+    <button class="btn btn30" type="submit">Reservar</button>
+
 </div>
-      <button class="btn btn30" type="submit">Reservar</button>
 
       <p class="booking-message" id="bookingMessage"></p>
     </form>

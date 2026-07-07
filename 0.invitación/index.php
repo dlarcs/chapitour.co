@@ -91,9 +91,8 @@
     </div>
   </div> -->
   <script src="soporte.js"></script>
-  <?php include "../global/menu/menu.php" ?>
   <?php include "../0.invitación/seccion/invitacion.php" ?>
-  <?php include "../global/footer/footer.php" ?>
+  <?php include "../0.invitación/boton/boton.php" ?>
 
 </body>
 </html>

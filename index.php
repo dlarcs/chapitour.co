@@ -22,7 +22,7 @@
   <meta name="description" content="Descubre qué hacer en Chapinero, Bogotá: restaurantes, cafés, bares, cultura, alojamiento, promociones y planes locales recomendados por Chapitour.">
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
   <meta name="googlebot" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
-  <link rel="canonical" href="https://www.chapitour.co/">
+  <link rel="canonical" href="https://chapitour.co/">
   <meta name="theme-color" content="#005548">
 
   <!-- Open Graph: WhatsApp / Facebook -->
@@ -137,23 +137,22 @@ discover Chapinero,
 Chapinero business directory
 ">
 
-
+  <meta property="og:type" content="website">
   <meta property="og:site_name" content="Chapitour">
   <meta property="og:title" content="Chapitour | Lugares para visitar en Chapinero, Bogotá">
   <meta property="og:description" content="Explora Chapinero, Bogotá: cafés, restaurantes, bares, cultura, planes locales, alojamiento y lugares para visitar.">
-  <meta property="og:url" content="https://www.chapitour.co/">
-  <meta property="og:image" content="https://www.chapitour.co/home/img/letrero_bogota.png">
-  <meta property="og:image:secure_url" content="https://www.chapitour.co/home/img/letrero_bogota.png">
-  <meta property="og:image:type" content="image/jpeg">
+  <meta property="og:url" content="https://chapitour.co/">
+  <meta property="og:image" content="https://chapitour.co/home/img/letrero_bogota.png">
+  <meta property="og:image:secure_url" content="https://chapitour.co/home/img/letrero_bogota.png">
+  <meta property="og:image:type" content="image/png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta property="og:image:alt" content="Guía digital Chapitour de Chapinero, Bogotá">
-
   <!-- Twitter / X -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Chapitour | Lugares para visitar en Chapinero, Bogotá">
   <meta name="twitter:description" content="Descubre cafés, restaurantes, cultura, bares, alojamiento y planes locales en Chapinero, Bogotá.">
-  <meta name="twitter:image" content="https://www.chapitour.co/home/img/letrero_bogota.png">
+  <meta name="twitter:image" content="https://chapitour.co/home/img/letrero_bogota.png">
   <meta name="twitter:image:alt" content="Guía digital Chapitour de Chapinero, Bogotá">
 
 
@@ -173,19 +172,19 @@ Chapinero business directory
     "@graph": [
       {
         "@type": "WebSite",
-        "@id": "https://www.chapitour.co/#website",
+        "@id": "https://chapitour.co/#website",
         "name": "Chapitour",
-        "url": "https://www.chapitour.co/",
+        "url": "https://chapitour.co/",
         "inLanguage": "es-CO",
         "description": "Catálogo turístico y comercial de lugares para visitar en Chapinero, Bogotá."
       },
       {
         "@type": "TouristDestination",
-        "@id": "https://www.chapitour.co/#destination",
+        "@id": "https://chapitour.co/#destination",
         "name": "Chapinero, Bogotá",
         "description": "Zona de Bogotá con cafés, restaurantes, bares, cultura, comercio local, alojamiento y planes para visitar.",
-        "url": "https://www.chapitour.co/",
-        "image": "https://www.chapitour.co/home/img/letrero_bogota.png",
+        "url": "https://chapitour.co/",
+        "image": "https://chapitour.co/home/img/letrero_bogota.png",
         "address": {
           "@type": "PostalAddress",
           "addressLocality": "Chapinero",

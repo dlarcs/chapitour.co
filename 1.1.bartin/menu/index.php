@@ -87,7 +87,6 @@
   <div class="container_menu">
     <?php include "../../1.1.bartin/menu/menu/menu.php" ?>
   </div>
-  <?php include "../../1.1.bartin/global/pag_slider/pag_slider.php" ?>
   <?php include "../../1.1.bartin/global/boton/boton.php" ?>
 
 

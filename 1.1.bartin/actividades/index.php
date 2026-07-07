@@ -38,7 +38,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Chapitour | Lugares para visitar en Chapinero, Bogotá">
   <meta name="twitter:description" content="Descubre cafés, restaurantes, cultura, bares, alojamiento y planes locales en Chapinero, Bogotá.">
-  <meta name="twitter:image" content="https://www.chapitour.co/home/home/img/cocktel.png">
+  <meta name="twitter:image" content="https://www.chapitour.co/home/img/cocktel.png">
 
   <!-- Iconos -->
   <link rel="icon" href="/home/img/cocktel.png">
@@ -86,8 +86,8 @@
   <?php include "../../1.1.bartin/global/pag_nav/pag_nav.php" ?>
   <div class="container_reservas">
     <?php include "../../1.1.bartin/actividades/actividades/actividades.php" ?>
+
   </div>
-  <?php include "../../1.1.bartin/global/pag_slider/pag_slider.php" ?>
   <?php include "../../1.1.bartin/global/boton/boton.php" ?>
   <?php include "../../1.1.bartin/global/pag_footer/pag_footer.php" ?>
   <a class="whatsapp-fab"

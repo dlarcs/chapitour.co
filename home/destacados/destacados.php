@@ -14,7 +14,7 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
   <div class="interest-header">
     <h2>
       <span>☆</span>
-      Lugares recomendados
+      Actividades y promociones
     </h2>
 
     <a href="destacados/index.php" class="interest-more">
