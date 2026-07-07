@@ -7,7 +7,7 @@ $jsFile  = $base . '/bar/CapitalQueer/home/ubicacion/ubicacion.js';
 $cssVer = is_file($cssFile) ? filemtime($cssFile) : '';
 $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
 
-$googleMapsLink = 'https://maps.app.goo.gl/EiY5d6CNqpgfw1CM8'; // Aquí cargas el link real de Google Maps
+$googleMapsLink = 'https://maps.app.goo.gl/NToBxLE8EheaadzY6'; // Aquí cargas el link real de Google Maps
 ?>
 
 <link rel="stylesheet" href="../../bar/CapitalQueer/home/ubicacion/ubicacion.css<?= $cssVer ? '?v=' . $cssVer : '' ?>">
