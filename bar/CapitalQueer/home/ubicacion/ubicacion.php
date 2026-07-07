@@ -7,7 +7,7 @@ $jsFile  = $base . '/bar/CapitalQueer/home/ubicacion/ubicacion.js';
 $cssVer = is_file($cssFile) ? filemtime($cssFile) : '';
 $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
 
-$googleMapsLink = 'https://www.google.com/maps'; // Aquí cargas el link real de Google Maps
+$googleMapsLink = 'https://maps.app.goo.gl/EiY5d6CNqpgfw1CM8'; // Aquí cargas el link real de Google Maps
 ?>
 
 <link rel="stylesheet" href="../../bar/CapitalQueer/home/ubicacion/ubicacion.css<?= $cssVer ? '?v=' . $cssVer : '' ?>">
@@ -22,7 +22,7 @@ $googleMapsLink = 'https://www.google.com/maps'; // Aquí cargas el link real de
 
       <p>
         Estamos ubicados en una zona estratégica de Chapinero, ideal para
-        disfrutar comida rápida, cocteles, música y un buen ambiente con amigos.
+        disfrutar un ambiente Queer, es seguro y divertido.
       </p>
 
       <div class="location-info">
@@ -38,7 +38,7 @@ $googleMapsLink = 'https://www.google.com/maps'; // Aquí cargas el link real de
 
         <p>
           <strong>WhatsApp:</strong>
-          <a href="https://wa.me/573138846378"> 3138846378</a>
+          <a href="https://wa.me/573007795016"> 3007795016</a>
         </p>
       </div>
 
@@ -53,8 +53,8 @@ $googleMapsLink = 'https://www.google.com/maps'; // Aquí cargas el link real de
       <h2>Síguenos</h2>
 
       <p>
-        Conoce nuestros eventos, promociones, platos destacados y momentos
-        especiales a través de nuestras redes sociales.
+        Conoce nuestros eventos, promociones, actividades y momentos
+        especiales a través de nuestras redes sociales página web.
       </p>
 
       <div class="social-links">
@@ -73,7 +73,7 @@ $googleMapsLink = 'https://www.google.com/maps'; // Aquí cargas el link real de
           <small>@distritogastrobar</small>
         </a>
 
-        <a href="https://wa.me/573138846378" class="social-card">
+        <a href="https://wa.me/573007795016" class="social-card">
           <span>WhatsApp</span>
           <small>Reservas y contacto</small>
         </a>
