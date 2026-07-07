@@ -16,7 +16,7 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
   <!-- Slide 1 -->
   <article
     class="business-hero__slide business-hero__slide--2"
-    style="background-image: url('../../gastrobar/Garage9-39C/img/general11.jpg');"
+    style="background-image: url('../../gastrobar/Garage9-39C/img/general10.jpg');"
   >
     <div class="business-hero__overlay"></div>
 
