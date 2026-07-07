@@ -13,7 +13,7 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
 <section class="business-section visible">
   <span class="section-label">Actividades & Promociones</span>
 
-  <h2>Lo mejor de este mes/año</h2>
+  <h2>Lo mejor de este año</h2>
 
   <p>
     Conoce nuestras promociones y actividades por mes, ven y disfruta de todo lo que te ofrecemos
