@@ -32,7 +32,7 @@
   <meta property="og:url" content="https://www.chapitour.co/bar/CapitalQueer/">
   <meta property="og:image" content="https://www.chapitour.co/bar/CapitalQueer/img/general17.jpg">
   <meta property="og:image:secure_url" content="https://www.chapitour.co/bar/CapitalQueer/img/general17.jpg">
-  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:type" content="image/jpg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
 
@@ -44,8 +44,8 @@
 
   <!-- Iconos -->
   <link rel="icon" href="/bar/CapitalQueer/img/general17.jpg">
-  <link rel="icon" type="image/png" sizes="32x32" href="/bar/CapitalQueer/img/general17.jpg">
-  <link rel="icon" type="image/png" sizes="16x16" href="/bar/CapitalQueer/img/general17.jpg">
+  <link rel="icon" type="image/jpg" sizes="32x32" href="/bar/CapitalQueer/img/general17.jpg">
+  <link rel="icon" type="image/jpg" sizes="16x16" href="/bar/CapitalQueer/img/general17.jpg">
   <link rel="apple-touch-icon" sizes="180x180" href="/bar/CapitalQueer/img/general17.jpg">
 
   <!-- CSS -->
