@@ -48,7 +48,7 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
     </article>
 
     <article class="menu-card">
-      <img src="../../bar/CapitalQueer/img/general20.png" alt="Noches temáticas">
+      <img src="../../bar/CapitalQueer/img/general3.png" alt="Noches temáticas">
 
       <div>
         <h3>Noches temáticas</h3>
