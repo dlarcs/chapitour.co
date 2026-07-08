@@ -14,29 +14,33 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
   <div class="about-text">
     <span class="section-label">Acerca de nosotros</span>
 
-    <h2>Un club para bailar, tomar y celebrar</h2>
+    <h2>Bar, discoteca y eventos en un solo lugar</h2>
 
     <p>
-      Gran&Chela Club es un bar y discoteca LGBTIQ+ en Chapinero, creado para
-      disfrutar la noche con libertad, música, baile, buenas bebidas y un ambiente
-      diverso, alegre y seguro. Es un espacio donde puedes compartir con amigos,
-      celebrar fechas especiales y vivir una experiencia llena de energía.
+      Gran&Chela Club es un bar y discoteca en Chapinero, pensado para disfrutar
+      la noche con buena música, baile, licores, cervezas, micheladas y un ambiente
+      alegre para compartir con amigos.
     </p>
 
     <p>
-      Además de ser un lugar para bailar y tomar, también prestamos el espacio
-      para eventos privados, celebraciones, reuniones y planes especiales. Contamos
-      con promociones según el día, para que cada visita tenga algo diferente por
-      descubrir.
+      Aquí puedes vivir noches de karaoke, salsa, rumba y promociones especiales
+      según el día. Es un espacio creado para cantar, bailar, brindar y pasar
+      momentos inolvidables con buena energía.
     </p>
 
     <p>
-      Hacemos parte de Chapitour.co para conectar con más personas, visibilizar
-      espacios diversos en Chapinero y seguir fortaleciendo el comercio local.
+      Además, Gran&Chela Club presta su espacio para eventos privados,
+      cumpleaños, celebraciones, reuniones, fiestas y planes especiales con
+      reserva previa.
+    </p>
+
+    <p>
+      Hacemos parte de Chapitour.co para conectar con más personas, dar a conocer
+      los mejores planes de Chapinero y seguir fortaleciendo el comercio local.
     </p>
   </div>
 
-  <img src="../../bar/Gran&Chela_Club/img/general18.jpg" alt="Experiencia en Gran&Chela Club">
+  <img src="../../bar/Gran&Chela_Club/img/logo_lema.jpg" alt="Ambiente de bar y discoteca en Gran&Chela Club">
 
 </section>
 

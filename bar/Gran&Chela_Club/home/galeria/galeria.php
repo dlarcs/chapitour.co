@@ -13,17 +13,18 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
 <section class="business-section business-gallery visible">
   <span class="section-label">Galería</span>
 
-  <h2>Conoce el ambiente de Capital Queer</h2>
+  <h2>Conoce el ambiente de Gran&Chela Club</h2>
 
   <p>
-    Un espacio diverso, libre y seguro, pensado especialmente para mujeres,
-    con música, luces, encuentros y momentos para compartir con respeto y buena energía.
+    Un bar discoteca con buena música, luces, licores, cervezas,
+    micheladas y espacios ideales para bailar, cantar, celebrar
+    y compartir momentos especiales con amigos.
   </p>
 
   <div class="gallery-grid">
-    <img src="../../bar/Gran&Chela_Club/img/general21.png" alt="Ambiente de Capital Queer">
-    <img src="../../bar/Gran&Chela_Club/img/general17.jpg" alt="Bar de Capital Queer">
-    <img src="../../bar/Gran&Chela_Club/img/general22.png" alt="Espacio social de Capital Queer" class="gallery-img-mobile-hide">
+    <img src="../../bar/Gran&Chela_Club/img/general1.jpg" alt="Ambiente de Gran&Chela Club">
+    <img src="../../bar/Gran&Chela_Club/img/general7.jpg" alt="Bar y discoteca Gran&Chela Club">
+    <img src="../../bar/Gran&Chela_Club/img/general2.jpg" alt="Espacio para eventos en Gran&Chela Club" class="gallery-img-mobile-hide">
   </div>
 
   <a href="../../bar/Gran&Chela_Club/galeria/index.php">

@@ -7,7 +7,7 @@ $jsFile  = $base . '/bar/Gran&Chela_Club/home/ubicacion/ubicacion.js';
 $cssVer = is_file($cssFile) ? filemtime($cssFile) : '';
 $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
 
-$googleMapsLink = 'https://maps.app.goo.gl/7kCxVj9r8EvT7BT27'; // Aquí cargas el link real de Google Maps
+$googleMapsLink = 'https://maps.app.goo.gl/ooTuqaX2yxjp4wMu6'; // Aquí cargas el link real de Google Maps
 ?>
 
 <link rel="stylesheet" href="../../bar/Gran&Chela_Club/home/ubicacion/ubicacion.css<?= $cssVer ? '?v=' . $cssVer : '' ?>">
@@ -22,13 +22,13 @@ $googleMapsLink = 'https://maps.app.goo.gl/7kCxVj9r8EvT7BT27'; // Aquí cargas e
 
       <p>
         Estamos ubicados en una zona estratégica de Chapinero, ideal para
-        disfrutar un ambiente Queer, es seguro y divertido.
+        disfrutar, es seguro y divertido.
       </p>
 
       <div class="location-info">
         <p>
           <strong>Dirección:</strong>
-          Carrera 9 #59-38, Chapinero, Bogotá
+          Calle 59 #10-24, Chapinero, Bogotá
         </p>
 
         <p>
@@ -38,7 +38,7 @@ $googleMapsLink = 'https://maps.app.goo.gl/7kCxVj9r8EvT7BT27'; // Aquí cargas e
 
         <p>
           <strong>WhatsApp:</strong>
-          <a href="https://wa.me/573007795016"> 3007795016</a>
+          <a href="https://wa.me/573224680419"> 3224680419</a>
         </p>
       </div>
 

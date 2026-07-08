@@ -10,24 +10,23 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
 
 <link rel="stylesheet" href="../../bar/Gran&Chela_Club/home/slider/slider.css<?= $cssVer ? '?v=' . $cssVer : '' ?>">
 
-<section class="business-hero visible" aria-label="Capital Queer slider">
+<section class="business-hero visible" aria-label="Gran&Chela Club slider">
 
   <!-- Slide 1 -->
   <article
     class="business-hero__slide business-hero__slide--1"
-    style="background-image: url('../../bar/Gran&Chela_Club/img/general3.png');"
+    style="background-image: url('../../bar/Gran&Chela_Club/img/general2.jpg');"
   >
     <div class="business-hero__overlay"></div>
 
     <div class="business-hero__content">
-      <span>Bar · Diversidad · Ambiente seguro</span>
+      <span>Bar · Discoteca · Buena rumba</span>
 
-      <h1>Capital Queer</h1>
+      <h1>Gran&Chela Club</h1>
 
       <p>
-        Creado especialmente para mujeres, donde también
-        cualquier persona puede entrar, compartir y disfrutar de un ambiente libre,
-        seguro y diverso.
+        Un lugar para disfrutar la noche con buena música, licores, cervezas,
+        micheladas y un ambiente lleno de energía para compartir con amigos.
       </p>
 
       <div class="business-stars">
@@ -35,26 +34,25 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
         <small>4.8 / 5</small>
       </div>
 
-      <a href="https://wa.me/573007795016">Reservar o contactar</a>
+      <a href="https://wa.me/573224680419">Reservar o contactar</a>
     </div>
   </article>
 
   <!-- Slide 2 -->
   <article
     class="business-hero__slide business-hero__slide--2"
-    style="background-image: url('../../bar/Gran&Chela_Club/img/general.png');"
+    style="background-image: url('../../bar/Gran&Chela_Club/img/general12.jpg');"
   >
     <div class="business-hero__overlay"></div>
 
     <div class="business-hero__content">
-      <span>Especialmente para mujeres</span>
+      <span>Karaoke · Salsa · Promociones</span>
 
-      <h1>Sientete sentirte libre</h1>
+      <h1>Rumba, sabor y buenos momentos</h1>
 
       <p>
-        Capital Queer ofrece un ambiente pensado para que las mujeres puedan
-        disfrutar la noche con tranquilidad, música, compañía y una experiencia
-        auténtica en Chapinero.
+        Vive noches especiales con karaoke, salsa, micheladas, promociones
+        y música para bailar, cantar, brindar y pasarla bien.
       </p>
 
       <div class="business-stars">
@@ -62,26 +60,25 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
         <small>4.8 / 5</small>
       </div>
 
-      <a href="https://wa.me/573007795016">Conocer más</a>
+      <a href="https://wa.me/573224680419">Conocer más</a>
     </div>
   </article>
 
   <!-- Slide 3 -->
   <article
     class="business-hero__slide business-hero__slide--3"
-    style="background-image: url('../../bar/Gran&Chela_Club/img/general15.png');"
+    style="background-image: url('../../bar/Gran&Chela_Club/img/general11.jpg');"
   >
     <div class="business-hero__overlay"></div>
 
     <div class="business-hero__content">
-      <span>Inclusión · Música · Encuentro</span>
+      <span>Eventos · Reservas · Celebraciones</span>
 
-      <h1>Diversidad que se vive</h1>
+      <h1>Alquila el espacio para tu evento</h1>
 
       <p>
-        Aunque es un espacio enfocado especialmente en mujeres, Capital Queer
-        recibe a todas las personas que quieran compartir con respeto, buena energía
-        y libertad.
+        En Gran&Chela Club también prestamos el espacio para cumpleaños,
+        reuniones, celebraciones privadas y eventos especiales con reserva previa.
       </p>
 
       <div class="business-stars">
@@ -89,7 +86,7 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
         <small>4.8 / 5</small>
       </div>
 
-      <a href="https://wa.me/573007795016">Conocer más</a>
+      <a href="https://wa.me/573224680419">Reservar evento</a>
     </div>
   </article>
 

@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="content-language" content="es-CO">
 
-  <title>Gran&Chela Club | Bar y discoteca LGBTIQ+ en Chapinero</title>
+  <title> Gran&Chela Club  </title>
 
   <?php
   $base = rtrim($_SERVER['DOCUMENT_ROOT'], '/');
@@ -30,8 +30,8 @@
   <meta property="og:title" content="Gran&Chela Club | Bar y discoteca LGBTIQ+ en Chapinero">
   <meta property="og:description" content="Un espacio diverso para bailar, tomar, celebrar eventos y disfrutar promociones especiales según el día en Chapinero, Bogotá.">
   <meta property="og:url" content="https://chapitour.co/bar/Gran&Chela_Club/">
-  <meta property="og:image" content="https://chapitour.co/bar/Gran&Chela_Club/img/general17.jpg">
-  <meta property="og:image:secure_url" content="https://chapitour.co/bar/Gran&Chela_Club/img/general17.jpg">
+  <meta property="og:image" content="https://chapitour.co/bar/Gran&Chela_Club/img/logo.jpg">
+  <meta property="og:image:secure_url" content="https://chapitour.co/bar/Gran&Chela_Club/img/logo.jpg">
   <meta property="og:image:type" content="image/jpg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
@@ -40,13 +40,13 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Gran&Chela Club | Bar y discoteca LGBTIQ+ en Chapinero">
   <meta name="twitter:description" content="Bar, discoteca y espacio LGBTIQ+ para bailar, tomar, reservar eventos y disfrutar promociones por día.">
-  <meta name="twitter:image" content="https://chapitour.co/bar/Gran&Chela_Club/img/general17.jpg">
+  <meta name="twitter:image" content="https://chapitour.co/bar/Gran&Chela_Club/img/logo.jpg">
 
   <!-- Iconos -->
-  <link rel="icon" href="/bar/Gran&Chela_Club/img/general17.jpg">
-  <link rel="icon" type="image/jpg" sizes="32x32" href="/bar/Gran&Chela_Club/img/general17.jpg">
-  <link rel="icon" type="image/jpg" sizes="16x16" href="/bar/Gran&Chela_Club/img/general17.jpg">
-  <link rel="apple-touch-icon" sizes="180x180" href="/bar/Gran&Chela_Club/img/general17.jpg">
+  <link rel="icon" href="/bar/Gran&Chela_Club/img/logo.jpg">
+  <link rel="icon" type="image/jpg" sizes="32x32" href="/bar/Gran&Chela_Club/img/logo.jpg">
+  <link rel="icon" type="image/jpg" sizes="16x16" href="/bar/Gran&Chela_Club/img/logo.jpg">
+  <link rel="apple-touch-icon" sizes="180x180" href="/bar/Gran&Chela_Club/img/logo.jpg">
 
   <!-- CSS -->
   <link rel="stylesheet" href="../../bar/Gran&Chela_Club/style.css<?= $cssVer ? '?v=' . $cssVer : '' ?>">
@@ -58,9 +58,9 @@
     "@graph": [
       {
         "@type": "WebSite",
-        "@id": "https://chapitour.co/#website",
+        "@id": "https://chapitour.co/bar/Gran&Chela_Club/index.php",
         "name": "Chapitour",
-        "url": "https://chapitour.co/",
+        "url": "https://chapitour.co/bar/Gran&Chela_Club/index.php",
         "inLanguage": "es-CO",
         "description": "Guía turística y comercial de lugares para visitar en Chapinero, Bogotá."
       },
@@ -69,8 +69,8 @@
         "@id": "https://chapitour.co/bar/Gran&Chela_Club/#business",
         "name": "Gran&Chela Club",
         "description": "Bar y discoteca LGBTIQ+ en Chapinero, Bogotá. Un lugar para bailar, tomar, celebrar eventos especiales y disfrutar promociones según el día.",
-        "url": "https://chapitour.co/bar/Gran&Chela_Club/",
-        "image": "https://chapitour.co/bar/Gran&Chela_Club/img/general17.jpg",
+        "url": "https://chapitour.co/bar/Gran&Chela_Club/index.php",
+        "image": "https://chapitour.co/bar/Gran&Chela_Club/img/logo.jpg",
         "telephone": "+573007795016",
         "servesCuisine": "Bar",
         "priceRange": "$$",

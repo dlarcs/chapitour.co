@@ -14,59 +14,68 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
 
   <span class="section-label">Actividades</span>
 
-  <h2>Planes para vivir Capital Queer</h2>
+  <h2>Planes para vivir Gran&Chela Club</h2>
 
   <p>
-    Disfruta un espacio pensado especialmente para mujeres, con actividades para
-    compartir, bailar, conversar y vivir la noche con libertad, respeto y buena energía.
+    Disfruta un bar discoteca con karaoke, salsa, promociones en bebidas,
+    eventos especiales y un ambiente ideal para bailar, cantar, brindar
+    y compartir con amigos.
   </p>
 
   <div class="menu-grid">
 
     <article class="menu-card">
-      <img src="../../bar/Gran&Chela_Club/img/general1.png" alt="Noche de amigas">
+      <video class="menu-card-video" autoplay  loop playsinline preload="metadata">
+        <source src="../../bar/Gran&Chela_Club/img/video.mp4" type="video/mp4">
+      </video>
 
       <div>
-        <h3>Noche de amigas</h3>
+        <h3>Miércoles de voces y copas</h3>
         <p class="descripcion-card">
-          Un plan perfecto para reunirse, conversar, brindar y disfrutar un ambiente seguro,
-          cómodo y lleno de buena energía.
+          Una noche de karaoke para cantar tus canciones favoritas, brindar
+          con amigos y disfrutar un plan diferente entre semana.
         </p>
       </div>
     </article>
 
     <article class="menu-card">
-      <img src="../../bar/Gran&Chela_Club/img/general15.png" alt="Cócteles y música">
+      <video class="menu-card-video" autoplay muted loop playsinline preload="metadata">
+        <source src="../../bar/Gran&Chela_Club/img/video1.mp4" type="video/mp4">
+      </video>
 
       <div>
-        <h3>Cócteles y música</h3>
+        <h3>Jueves salsero: azúcar y sabor</h3>
         <p class="descripcion-card">
-          Bebidas, música y un ambiente ideal para desconectarte de la rutina y compartir
-          con personas que vibran con la misma energía.
+          Solo salsa para bailar toda la noche, disfrutar buena música
+          y vivir un ambiente lleno de ritmo, sabor y energía.
         </p>
       </div>
     </article>
 
     <article class="menu-card">
-      <img src="../../bar/Gran&Chela_Club/img/general3.png" alt="Noches temáticas">
+      <video class="menu-card-video" autoplay muted loop playsinline preload="metadata">
+        <source src="../../bar/Gran&Chela_Club/img/video2.mp4" type="video/mp4">
+      </video>
 
       <div>
-        <h3>Noches temáticas</h3>
+        <h3>Viernes de michelada doble</h3>
         <p class="descripcion-card">
-          Actividades especiales, celebraciones, dinámicas y encuentros pensados para crear
-          momentos diferentes dentro de Capital Queer.
+          Disfruta la promoción 2x1 en micheladas de cualquier cerveza,
+          perfecta para empezar el fin de semana con buena rumba.
         </p>
       </div>
     </article>
 
     <article class="menu-card">
-      <img src="../../bar/Gran&Chela_Club/img/general6.png" alt="Espacio para compartir">
+      <video class="menu-card-video" autoplay muted loop playsinline preload="metadata">
+        <source src="../../bar/Gran&Chela_Club/img/video3.mp4" type="video/mp4">
+      </video>
 
       <div>
-        <h3>Espacio para compartir</h3>
+        <h3>Eventos especiales con reserva</h3>
         <p class="descripcion-card">
-          Un lugar abierto a todas las personas, especialmente pensado para mujeres que buscan
-          un ambiente libre, diverso y respetuoso.
+          Prestamos el espacio para cumpleaños, reuniones, celebraciones
+          privadas y eventos especiales con reserva previa.
         </p>
       </div>
     </article>

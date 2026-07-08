@@ -13,96 +13,114 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
 <section class="business-section visible">
   <span class="section-label">Actividades & Promociones</span>
 
-  <h2>Lo mejor de este año</h2>
+  <h2>Rumba, sabor y buenos momentos</h2>
 
   <p>
-    Conoce nuestras promociones y actividades por mes, ven y disfruta de todo lo que te ofrecemos
+    Conoce las actividades, promociones y eventos especiales de Gran&Chela Club.
+    Ven a cantar, bailar, brindar y disfrutar la noche con buena música y excelente ambiente.
   </p>
 
-  <!-- TARJETAS - HTML -->
-  <!-- TARJETAS - HTML -->
   <section class="cards-section">
     <div class="cards-grid">
 
-      <article class="card promo-card" data-code="CAPITAL-AMOR-AMISTAD-001">
+      <article class="card promo-card" data-code="GRAN-CHELA-KARAOKE-001">
         <div class="card-image">
-          <img src="../../../bar/Gran&Chela_Club/img/general17.jpg" alt="Amor y amistad">
-          <span class="card-badge">Noche especial</span>
+          <img src="../../../bar/Gran&Chela_Club/img/general7.jpg" alt="Miércoles de karaoke en Gran&Chela Club">
+          <span class="card-badge">Karaoke</span>
         </div>
 
         <div class="card-content">
-          <h3>Amor y Amistad Queer</h3>
-          <p>Una noche para celebrar el amor, la amistad, la música y las conexiones bonitas.</p>
-          <span class="card-location"><span>&#128467;&#65039;</span> 19 de Septiembre 2026</span>
+          <h3>Miércoles de Voces y Copas</h3>
+          <p>
+            Una noche para cantar tus canciones favoritas, brindar con amigos
+            y disfrutar un plan diferente entre semana.
+          </p>
+          <span class="card-location"><span>&#128467;&#65039;</span> Todos los miércoles</span>
         </div>
       </article>
 
-      <article class="card promo-card" data-code="CAPITAL-HALLOWEEN-002">
+      <article class="card promo-card" data-code="GRAN-CHELA-SALSA-002">
         <div class="card-image">
-          <img src="../../../bar/Gran&Chela_Club/img/general13.png" alt="Halloween">
-          <span class="card-badge">Halloween</span>
+          <img src="../../../bar/Gran&Chela_Club/img/general3.jpg" alt="Jueves de salsa en Gran&Chela Club">
+          <span class="card-badge">Salsa</span>
         </div>
 
         <div class="card-content">
-          <h3>Halloween Party</h3>
-          <p>Ven con tu mejor disfraz y disfruta una noche llena de música, shows y sorpresas.</p>
-          <span class="card-location"><span>&#128467;&#65039;</span> 31 de Octubre 2026</span>
+          <h3>Jueves Salsero: Azúcar y Sabor</h3>
+          <p>
+            Solo salsa para bailar toda la noche, disfrutar buena música
+            y vivir un ambiente lleno de ritmo y energía.
+          </p>
+          <span class="card-location"><span>&#128467;&#65039;</span> Todos los jueves</span>
         </div>
       </article>
 
-      <article class="card promo-card" data-code="CAPITAL-VELITAS-003">
+      <article class="card promo-card" data-code="GRAN-CHELA-MICHELADAS-003">
         <div class="card-image">
-          <img src="../../../bar/Gran&Chela_Club/img/general18.jpg" alt="Día de velitas">
-          <span class="card-badge">Velitas</span>
+          <img src="../../../bar/Gran&Chela_Club/img/general8.jpg" alt="Promoción de micheladas en Gran&Chela Club">
+          <span class="card-badge">2x1</span>
         </div>
 
         <div class="card-content">
-          <h3>Noche de Velitas</h3>
-          <p>Una noche mágica para brindar, compartir y empezar diciembre con buena energía.</p>
-          <span class="card-location"><span>&#128467;&#65039;</span> 7 de Diciembre 2026</span>
+          <h3>Viernes de Michelada Doble</h3>
+          <p>
+            Disfruta la promoción 2x1 en micheladas de cualquier cerveza,
+            perfecta para empezar el fin de semana con buena rumba.
+          </p>
+          <span class="card-location"><span>&#128467;&#65039;</span> Todos los viernes</span>
         </div>
       </article>
 
-      <article class="card promo-card" data-code="CAPITAL-NAVIDAD-004">
+      <article class="card promo-card" data-code="GRAN-CHELA-SABADO-004">
         <div class="card-image">
-          <img src="../../../bar/Gran&Chela_Club/img/general3.png" alt="Navidad">
-          <span class="card-badge">Navidad</span>
+          <img src="../../../bar/Gran&Chela_Club/img/general3.jpg" alt="Sábado de salsa en Gran&Chela Club">
+          <span class="card-badge">Sábado</span>
         </div>
 
         <div class="card-content">
-          <h3>Pre Navidad Capital</h3>
-          <p>Una celebración navideña para disfrutar entre amigas, cocteles, música y mucho ambiente.</p>
-          <span class="card-location"><span>&#128467;&#65039;</span> 24 de Diciembre 2026</span>
+          <h3>Sábado Salsa Club</h3>
+          <p>
+            Una noche de salsa, rumba y mucho sabor para bailar,
+            compartir y disfrutar con amigos hasta el cierre.
+          </p>
+          <span class="card-location"><span>&#128467;&#65039;</span> Todos los sábados</span>
         </div>
       </article>
 
-      <article class="card promo-card" data-code="CAPITAL-FIN-DE-ANO-005">
+      <article class="card promo-card" data-code="GRAN-CHELA-EVENTOS-005">
         <div class="card-image">
-          <img src="../../../bar/Gran&Chela_Club/img/general21.png" alt="Fin de año">
-          <span class="card-badge">Fin de año</span>
+          <img src="../../../bar/Gran&Chela_Club/img/general12.jpg" alt="Eventos especiales en Gran&Chela Club">
+          <span class="card-badge">Eventos</span>
         </div>
 
         <div class="card-content">
-          <h3>Despedida de Año</h3>
-          <p>Despidamos el año con fiesta, buena música, brindis y una noche inolvidable.</p>
-          <span class="card-location"><span>&#128467;&#65039;</span> 31 de Diciembre 2026</span>
+          <h3>Eventos Especiales con Reserva</h3>
+          <p>
+            Prestamos el espacio para cumpleaños, reuniones, celebraciones
+            privadas y eventos especiales con reserva previa.
+          </p>
+          <span class="card-location"><span>&#128467;&#65039;</span> Reserva previa</span>
         </div>
       </article>
 
-      <article class="card promo-card" data-code="CAPITAL-VIERNES-006">
+      <article class="card promo-card" data-code="GRAN-CHELA-RUMBA-006">
         <div class="card-image">
-          <img src="../../../bar/Gran&Chela_Club/img/general10.png" alt="Viernes de amigas">
-          <span class="card-badge">Viernes</span>
+          <img src="../../../bar/Gran&Chela_Club/img/general10.jpg" alt="Rumba en Gran&Chela Club">
+          <span class="card-badge">Rumba</span>
         </div>
 
         <div class="card-content">
-          <h3>Viernes de Amigas</h3>
-          <p>Todos los viernes tenemos ambiente especial para venir, bailar y compartir entre mujeres.</p>
-          <span class="card-location"><span>&#128467;&#65039;</span> Todos los viernes desde Julio 2026</span>
+          <h3>Noches de Rumba y Amigos</h3>
+          <p>
+            Licores, cervezas, micheladas, música y un ambiente ideal
+            para bailar, brindar y pasar una noche llena de buenos momentos.
+          </p>
+          <span class="card-location"><span>&#128467;&#65039;</span> Viernes y sábados</span>
         </div>
       </article>
 
     </div>
   </section>
+</section>
 
 <script defer src="../../../bar/Gran&Chela_Club/actividades/actividades/actividades.js<?= $jsVer ? '?v=' . $jsVer : '' ?>"></script>

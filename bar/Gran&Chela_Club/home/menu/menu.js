@@ -29,8 +29,8 @@ descripciones.forEach((descripcion) => {
   const textoCompleto = descripcion.textContent.trim();
   const palabras = textoCompleto.split(" ");
 
-  if (palabras.length > 2) {
-    const textoCorto = palabras.slice(0, 2).join(" ");
+  if (palabras.length > 7) {
+    const textoCorto = palabras.slice(0, 7).join(" ");
     let expandido = false;
 
     descripcion.textContent = `${textoCorto}...`;

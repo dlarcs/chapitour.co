@@ -84,7 +84,7 @@
 
 .business-hero__content h1 {
   margin: 0;
-  font-size: clamp(3rem, 7vw, 7rem);
+  font-size: clamp(2rem, 5vw, 6rem);
   line-height: 0.95;
 }
 
@@ -104,7 +104,7 @@
 }
 
 .business-stars strong {
-  color: #ffd36a;
+  color: #F7AF21;
   letter-spacing: 2px;
 }
 

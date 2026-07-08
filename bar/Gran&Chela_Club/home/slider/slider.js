@@ -18,3 +18,29 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+  const videos = document.querySelectorAll(".menu-card-video");
+
+  videos.forEach((video) => {
+    // Intenta reproducir automáticamente
+    const playPromise = video.play();
+
+    if (playPromise !== undefined) {
+      playPromise.catch(() => {
+        video.classList.add("video-paused");
+      });
+    }
+
+    // Click para reproducir o parar
+    video.addEventListener("click", () => {
+      if (video.paused) {
+        video.play();
+        video.classList.remove("video-paused");
+      } else {
+        video.pause();
+        video.classList.add("video-paused");
+      }
+    });
+  });
+});
