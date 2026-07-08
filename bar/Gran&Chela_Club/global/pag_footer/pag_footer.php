@@ -1,9 +1,9 @@
 <?php
 $base = rtrim($_SERVER['DOCUMENT_ROOT'], '/');
-$cssFile = $base . '/bar/CapitalQueer/global/pag_footer/pag_footer.css';
+$cssFile = $base . '/bar/Gran&Chela_Club/global/pag_footer/pag_footer.css';
 $cssVer = is_file($cssFile) ? filemtime($cssFile) : '';
 ?>
-<link rel="stylesheet" href="../../../bar/CapitalQueer/global/pag_footer/pag_footer.css<?= $cssVer ? '?v=' . $cssVer : '' ?>">
+<link rel="stylesheet" href="../../../bar/Gran&Chela_Club/global/pag_footer/pag_footer.css<?= $cssVer ? '?v=' . $cssVer : '' ?>">
 <footer class="site-footer">
   <div class="footer-inner">
 

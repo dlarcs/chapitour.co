@@ -22,7 +22,7 @@
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
   <meta name="googlebot" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
   <link rel="canonical" href="https://chapitour.co/bar/CapitalQueer/">
-  <meta name="theme-color" content="#005548">
+  <meta name="theme-color" content="#5b1380">
 
   <!-- Open Graph: WhatsApp / Facebook -->
   <meta property="og:type" content="website">
