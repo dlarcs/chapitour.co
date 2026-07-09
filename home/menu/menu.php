@@ -43,7 +43,7 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
       <a href="categorias/8.artesanias/index.php">Artesanías</a>
       <a href="categorias/9.panaderia/index.php">Panaderías</a>
       <a href="categorias/category/index.php">Categorías</a>
-      <a href="categorias/destacados/index.php">Destacados</a>
+      <a href="categorias/10.destacados/index.php">Destacados</a>
     </div>
   </nav>
 </header>
