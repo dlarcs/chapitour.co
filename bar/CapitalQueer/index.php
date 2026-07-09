@@ -27,7 +27,7 @@
   <meta property="og:site_name" content="Chapitour">
   <meta property="og:title" content="Capital Queer | Bar para mujeres y diversidad en Chapinero">
   <meta property="og:description" content="Un espacio seguro, diverso y abierto para todas las personas, diseñado especialmente para mujeres en Chapinero, Bogotá.">
-  <meta property="og:url" content="https://chapitour.co/bar/CapitalQueer/">
+  <meta property="og:url" content="https://chapitour.co/bar/CapitalQueer/index.php/">
   <meta property="og:image" content="https://chapitour.co/bar/CapitalQueer/img/logo.jpg">
   <meta property="og:image:secure_url" content="https://chapitour.co/bar/CapitalQueer/img/logo.jpg">
   <meta property="og:image:type" content="image/jpg">
