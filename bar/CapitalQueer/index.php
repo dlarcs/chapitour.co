@@ -64,7 +64,7 @@
       },
       {
         "@type": "BarOrPub",
-        "@id": "https://chapitour.co/bar/CapitalQueer/#business",
+        "@id": "https://chapitour.co/bar/CapitalQueer/index.php#bar",
         "name": "Capital Queer",
         "description": "Bar en Chapinero, Bogotá, creado especialmente para mujeres y abierto a todas las personas. Un espacio diverso para compartir, bailar, tomar y disfrutar con respeto y buena energía.",
         "url": "https://chapitour.co/bar/CapitalQueer/index.php",

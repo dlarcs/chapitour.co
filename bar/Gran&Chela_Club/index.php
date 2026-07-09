@@ -58,7 +58,7 @@
     "@graph": [
       {
         "@type": "WebSite",
-        "@id": "https://chapitour.co/bar/Gran&Chela_Club/index.php",
+        "@id": "https://chapitour.co/bar/Gran&Chela_Club/index.php#bar",
         "name": "Chapitour",
         "url": "https://chapitour.co/bar/Gran&Chela_Club/index.php",
         "inLanguage": "es-CO",
@@ -66,7 +66,7 @@
       },
       {
         "@type": "BarOrPub",
-        "@id": "https://chapitour.co/bar/Gran&Chela_Club/#business",
+        "@id": "https://chapitour.co/bar/Gran&Chela_Club/index.php#bar",
         "name": "Gran&Chela Club",
         "description": "Bar y discoteca LGBTIQ+ en Chapinero, Bogotá. Un lugar para bailar, tomar, celebrar eventos especiales y disfrutar promociones según el día.",
         "url": "https://chapitour.co/bar/Gran&Chela_Club/index.php",
