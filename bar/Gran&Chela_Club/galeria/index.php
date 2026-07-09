@@ -92,7 +92,7 @@
 
   <?php include "../../../bar/Gran&Chela_Club/global/pag_footer/pag_footer.php" ?>
   <a class="whatsapp-fab"
-		href="https://wa.me/573007795016?text=Hola%20vengo%20desde%20la%20web%20de%20Bar%20Restaurant"
+		href="https://wa.me/573224680419?text=Hola%20vengo%20desde%20la%20web%20de%20Bar%20Restaurant"
 		target="_blank" rel="noopener"
 		aria-label="Chatear por WhatsApp" >
 		<img src="../../../global/img/img_whatsApp.png"

@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="content-language" content="es-CO">
 
-  <title> Gran&Chela Club | Bar Club en Chapinero </title>
+  <title> Gran&Chela Club |  Discoteca  en Chapinero </title>
 
   <?php
   $base = rtrim($_SERVER['DOCUMENT_ROOT'], '/');
@@ -71,7 +71,7 @@
         "description": "Bar y discoteca LGBTIQ+ en Chapinero, Bogotá. Un lugar para bailar, tomar, celebrar eventos especiales y disfrutar promociones según el día.",
         "url": "https://chapitour.co/bar/Gran&Chela_Club/index.php",
         "image": "https://chapitour.co/bar/Gran&Chela_Club/img/logo.jpg",
-        "telephone": "+573007795016",
+        "telephone": "+573224680419",
         "servesCuisine": "Bar",
         "priceRange": "$$",
         "address": {
@@ -130,7 +130,7 @@
   <?php include "../../bar/Gran&Chela_Club/home/footer/footer.php" ?>
 
   <a class="whatsapp-fab"
-    href="https://wa.me/573007795016?text=Hola%20vengo%20desde%20la%20web%20de%20Gran%26Chela%20Club%20y%20quiero%20mas%20informacion"
+    href="https://wa.me/573224680419?text=Hola%20vengo%20desde%20la%20web%20de%20Gran%26Chela%20Club%20y%20quiero%20mas%20informacion"
     target="_blank" rel="noopener"
     aria-label="Chatear por WhatsApp">
     <img src="../../global/img/img_whatsApp.png"

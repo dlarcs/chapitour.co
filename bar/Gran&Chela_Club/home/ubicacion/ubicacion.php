@@ -58,22 +58,19 @@ $googleMapsLink = 'https://maps.app.goo.gl/ooTuqaX2yxjp4wMu6'; // Aquí cargas e
       </p>
 
       <div class="social-links">
-        <a href="#" class="social-card">
+        <a href="https://www.instagram.com/granychela.club/" class="social-card">
           <span>Instagram</span>
-          <small>@distritogastrobar</small>
+          <small>@granychela.club</small>
         </a>
 
-        <a href="#" class="social-card">
+        <a href="https://www.facebook.com/profile.php?id=61591409664220" class="social-card">
           <span>Facebook</span>
           <small>Distrito Gastrobar</small>
         </a>
 
-        <a href="#" class="social-card">
-          <span>TikTok</span>
-          <small>@distritogastrobar</small>
-        </a>
 
-        <a href="https://wa.me/573007795016" class="social-card">
+
+        <a href="https://wa.me/573224680419" class="social-card">
           <span>WhatsApp</span>
           <small>Reservas y contacto</small>
         </a>
