@@ -54,3 +54,10 @@ descripciones.forEach((descripcion) => {
     });
   }
 });
+function toggleVideo(video) {
+  if (video.paused) {
+    video.play();
+  } else {
+    video.pause();
+  }
+}

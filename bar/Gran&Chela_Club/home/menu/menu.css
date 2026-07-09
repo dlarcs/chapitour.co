@@ -199,7 +199,9 @@
   .menu-card img {
     height: 130px;
   }
-
+  .menu-card-video{
+    height: 240px;
+  }
   .menu-card div {
     padding: 12px;
   }
