@@ -114,8 +114,6 @@
   }
   </script>
 
-  <!-- JS -->
-  <script defer src="../../bar/CapitalQueer/app.js<?= $jsVer ? '?v=' . $jsVer : '' ?>"></script>
 </head>
 
 <body>

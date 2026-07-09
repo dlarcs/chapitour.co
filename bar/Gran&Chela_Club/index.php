@@ -11,10 +11,8 @@
   $base = rtrim($_SERVER['DOCUMENT_ROOT'], '/');
 
   $cssFile = $base . '/bar/Gran&Chela_Club/style.css';
-  $jsFile  = $base . '/bar/Gran&Chela_Club/app.js';
 
   $cssVer = is_file($cssFile) ? filemtime($cssFile) : '';
-  $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
   ?>
 
   <!-- SEO principal para Google -->
@@ -111,8 +109,6 @@
   }
   </script>
 
-  <!-- JS -->
-  <script defer src="../../bar/Gran&Chela_Club/app.js<?= $jsVer ? '?v=' . $jsVer : '' ?>"></script>
 </head>
 
 <body>
