@@ -40,7 +40,7 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
 
     <article class="menu-card">
       <video class="menu-card-video" muted loop playsinline preload="metadata">
-        <source src="../../bar/Gran&Chela_Club/img/video1.mp4" type="video/mp4">
+        <source src="../../bar/Gran&Chela_Club/img/video1.mp4#t=0.1" type="video/mp4">
       </video>
 
       <div>
@@ -54,7 +54,7 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
 
     <article class="menu-card">
       <video class="menu-card-video" muted loop playsinline preload="metadata">
-        <source src="../../bar/Gran&Chela_Club/img/video2.mp4" type="video/mp4">
+        <source src="../../bar/Gran&Chela_Club/img/video2.mp4#t=0.1" type="video/mp4">
       </video>
 
       <div>
@@ -68,7 +68,7 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
 
     <article class="menu-card">
       <video class="menu-card-video" muted loop playsinline preload="metadata">
-        <source src="../../bar/Gran&Chela_Club/img/video3.mp4" type="video/mp4">
+        <source src="../../bar/Gran&Chela_Club/img/video3.mp4#t=0.1" type="video/mp4">
       </video>
 
       <div>
