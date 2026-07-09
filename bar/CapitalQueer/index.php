@@ -5,49 +5,49 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="content-language" content="es-CO">
 
-  <title>Capital Queer | Bar en Chapinero para mujeres y diversidad</title>
+  <title> Gran&Chela Club |  Discoteca  en Chapinero </title>
 
   <?php
   $base = rtrim($_SERVER['DOCUMENT_ROOT'], '/');
 
-  $cssFile = $base . '/bar/CapitalQueer/style.css';
+  $cssFile = $base . '/bar/Gran&Chela_Club/style.css';
 
   $cssVer = is_file($cssFile) ? filemtime($cssFile) : '';
   ?>
 
   <!-- SEO principal para Google -->
-  <meta name="description" content="Capital Queer es un bar en Chapinero, Bogotá, creado especialmente para mujeres y abierto a todas las personas. Un lugar diverso para compartir, bailar, tomar y disfrutar con respeto y buena energía.">
+  <meta name="description" content="Gran&Chela Club es un bar y discoteca LGBTIQ+ en Chapinero, Bogotá. Un lugar para bailar, tomar, disfrutar promociones por día y reservar eventos especiales.">
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
   <meta name="googlebot" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
-  <link rel="canonical" href="https://chapitour.co/bar/CapitalQueer/">
+  <link rel="canonical" href="https://chapitour.co/bar/Gran&Chela_Club/">
   <meta name="theme-color" content="#5b1380">
 
   <!-- Open Graph: WhatsApp / Facebook -->
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Chapitour">
-  <meta property="og:title" content="Capital Queer | Bar en Chapinero para mujeres y diversidad">
-  <meta property="og:description" content="Un espacio en Chapinero creado especialmente para mujeres, abierto a todas las personas que quieran disfrutar con respeto, libertad, música y buena energía.">
-  <meta property="og:url" content="https://chapitour.co/bar/CapitalQueer/">
-  <meta property="og:image" content="https://chapitour.co/bar/CapitalQueer/img/logo.jpg">
-  <meta property="og:image:secure_url" content="https://chapitour.co/bar/CapitalQueer/img/logo.jpg">
+  <meta property="og:title" content="Gran&Chela Club | Bar y discoteca LGBTIQ+ en Chapinero">
+  <meta property="og:description" content="Un espacio diverso para bailar, tomar, celebrar eventos y disfrutar promociones especiales según el día en Chapinero, Bogotá.">
+  <meta property="og:url" content="https://chapitour.co/bar/Gran&Chela_Club/">
+  <meta property="og:image" content="https://chapitour.co/bar/Gran&Chela_Club/img/logo.jpg">
+  <meta property="og:image:secure_url" content="https://chapitour.co/bar/Gran&Chela_Club/img/logo.jpg">
   <meta property="og:image:type" content="image/jpg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
 
   <!-- Twitter / X -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Capital Queer | Bar en Chapinero para mujeres y diversidad">
-  <meta name="twitter:description" content="Bar en Chapinero creado especialmente para mujeres y abierto a todas las personas. Música, bebidas, respeto y un ambiente diverso.">
-  <meta name="twitter:image" content="https://chapitour.co/bar/CapitalQueer/img/logo.jpg">
+  <meta name="twitter:title" content="Gran&Chela Club | Bar y discoteca LGBTIQ+ en Chapinero">
+  <meta name="twitter:description" content="Bar, discoteca y espacio LGBTIQ+ para bailar, tomar, reservar eventos y disfrutar promociones por día.">
+  <meta name="twitter:image" content="https://chapitour.co/bar/Gran&Chela_Club/img/logo.jpg">
 
   <!-- Iconos -->
-  <link rel="icon" href="/bar/CapitalQueer/img/logo.jpg">
-  <link rel="icon" type="image/jpg" sizes="32x32" href="/bar/CapitalQueer/img/logo.jpg">
-  <link rel="icon" type="image/jpg" sizes="16x16" href="/bar/CapitalQueer/img/logo.jpg">
-  <link rel="apple-touch-icon" sizes="180x180" href="/bar/CapitalQueer/img/logo.jpg">
+  <link rel="icon" href="/bar/Gran&Chela_Club/img/logo.jpg">
+  <link rel="icon" type="image/jpg" sizes="32x32" href="/bar/Gran&Chela_Club/img/logo.jpg">
+  <link rel="icon" type="image/jpg" sizes="16x16" href="/bar/Gran&Chela_Club/img/logo.jpg">
+  <link rel="apple-touch-icon" sizes="180x180" href="/bar/Gran&Chela_Club/img/logo.jpg">
 
   <!-- CSS -->
-  <link rel="stylesheet" href="../../bar/CapitalQueer/style.css<?= $cssVer ? '?v=' . $cssVer : '' ?>">
+  <link rel="stylesheet" href="../../bar/Gran&Chela_Club/style.css<?= $cssVer ? '?v=' . $cssVer : '' ?>">
 
   <!-- Datos estructurados para Google -->
   <script type="application/ld+json">
@@ -56,20 +56,20 @@
     "@graph": [
       {
         "@type": "WebSite",
-        "@id": "https://chapitour.co/bar/CapitalQueer/index.php",
+        "@id": "https://chapitour.co/bar/Gran&Chela_Club/index.php#bar",
         "name": "Chapitour",
-        "url": "https://chapitour.co/bar/CapitalQueer/index.php",
+        "url": "https://chapitour.co/bar/Gran&Chela_Club/index.php",
         "inLanguage": "es-CO",
         "description": "Guía turística y comercial de lugares para visitar en Chapinero, Bogotá."
       },
       {
         "@type": "BarOrPub",
-        "@id": "https://chapitour.co/bar/CapitalQueer/index.php#bar",
-        "name": "Capital Queer",
-        "description": "Bar en Chapinero, Bogotá, creado especialmente para mujeres y abierto a todas las personas. Un espacio diverso para compartir, bailar, tomar y disfrutar con respeto y buena energía.",
-        "url": "https://chapitour.co/bar/CapitalQueer/index.php",
-        "image": "https://chapitour.co/bar/CapitalQueer/img/logo.jpg",
-        "telephone": "+573007795016",
+        "@id": "https://chapitour.co/bar/Gran&Chela_Club/index.php#bar",
+        "name": "Gran&Chela Club",
+        "description": "Bar y discoteca LGBTIQ+ en Chapinero, Bogotá. Un lugar para bailar, tomar, celebrar eventos especiales y disfrutar promociones según el día.",
+        "url": "https://chapitour.co/bar/Gran&Chela_Club/index.php",
+        "image": "https://chapitour.co/bar/Gran&Chela_Club/img/logo.jpg",
+        "telephone": "+573224680419",
         "servesCuisine": "Bar",
         "priceRange": "$$",
         "address": {
@@ -85,27 +85,22 @@
         "amenityFeature": [
           {
             "@type": "LocationFeatureSpecification",
-            "name": "Espacio pensado para mujeres",
+            "name": "Ambiente LGBTIQ+",
             "value": true
           },
           {
             "@type": "LocationFeatureSpecification",
-            "name": "Abierto a todas las personas",
+            "name": "Discoteca y baile",
             "value": true
           },
           {
             "@type": "LocationFeatureSpecification",
-            "name": "Ambiente diverso e inclusivo",
+            "name": "Reserva para eventos",
             "value": true
           },
           {
             "@type": "LocationFeatureSpecification",
-            "name": "Música, bebidas y baile",
-            "value": true
-          },
-          {
-            "@type": "LocationFeatureSpecification",
-            "name": "Espacio para compartir con respeto",
+            "name": "Promociones por día",
             "value": true
           }
         ]
@@ -118,24 +113,24 @@
 
 <body>
 
-  <?php include "../../bar/CapitalQueer/home/nav/nav.php" ?>
-  <?php include "../../bar/CapitalQueer/home/slider/slider.php" ?>
+  <?php include "../../bar/Gran&Chela_Club/home/nav/nav.php" ?>
+  <?php include "../../bar/Gran&Chela_Club/home/slider/slider.php" ?>
 
-  <div class="container_capitalQueer">
-    <?php include "../../bar/CapitalQueer/home/menu/menu.php" ?>
-    <?php include "../../bar/CapitalQueer/home/galeria/galeria.php" ?>
-    <?php include "../../bar/CapitalQueer/home/acerca_nosotros/acerca_nosotros.php" ?>
-    <?php include "../../bar/CapitalQueer/home/ubicacion/ubicacion.php" ?>
+  <div class="container_gran_chela_club">
+    <?php include "../../bar/Gran&Chela_Club/home/menu/menu.php" ?>
+    <?php include "../../bar/Gran&Chela_Club/home/galeria/galeria.php" ?>
+    <?php include "../../bar/Gran&Chela_Club/home/acerca_nosotros/acerca_nosotros.php" ?>
+    <?php include "../../bar/Gran&Chela_Club/home/ubicacion/ubicacion.php" ?>
   </div>
 
-  <?php include "../../bar/CapitalQueer/home/footer/footer.php" ?>
+  <?php include "../../bar/Gran&Chela_Club/home/footer/footer.php" ?>
 
   <a class="whatsapp-fab"
-  href="https://wa.me/573007795016?text=Hola%20vengo%20desde%20la%20web%20de%20Capital%20Queer"
+    href="https://wa.me/573224680419?text=Hola%20vengo%20desde%20la%20web%20de%20Gran%26Chela%20Club%20y%20quiero%20mas%20informacion"
     target="_blank" rel="noopener"
     aria-label="Chatear por WhatsApp">
     <img src="../../global/img/img_whatsApp.png"
-      alt="Contactar a Capital Queer por WhatsApp" decoding="async">
+      alt="Contactar a Gran&Chela Club por WhatsApp" decoding="async">
   </a>
 
 </body>
