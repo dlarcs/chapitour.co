@@ -12,7 +12,7 @@ $jsTime = filemtime('home/categorias/categoria.js');   // ejemplo: '../Home/5.Vi
       Categorías
     </h2>
 
-    <a href="categorias/index.php" class="interest-more">
+    <a href="categorias/category/index.php" class="interest-more">
       Ver lugares
       <span>→</span>
     </a>
