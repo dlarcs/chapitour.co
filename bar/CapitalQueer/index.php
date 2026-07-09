@@ -69,7 +69,7 @@
         "@id": "https://chapitour.co/bar/CapitalQueer/#business",
         "name": "Capital Queer",
         "description": "Bar en Chapinero, Bogotá, creado especialmente para mujeres y abierto a todas las personas que quieran compartir con respeto, libertad y buena energía.",
-        "url": "https://https://chapitour.co/bar/CapitalQueer/index.php",
+        "url": "https://chapitour.co/bar/CapitalQueer/index.php",
         "image": "https://chapitour.co/bar/CapitalQueer/img/general17.jpg",
         "telephone": "+573007795016",
         "servesCuisine": "Bar",
