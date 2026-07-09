@@ -19,7 +19,7 @@
   <meta name="description" content="Capital Queer es un bar en Chapinero, Bogotá, diseñado especialmente para mujeres. Un espacio seguro, diverso y abierto para todas las personas que quieran disfrutar con respeto, música, bebidas y buena energía.">
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
   <meta name="googlebot" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
-  <link rel="canonical" href="https://chapitour.co/bar/CapitalQueer/index.php">
+  <link rel="canonical" href="https://chapitour.co/bar/CapitalQueer/">
   <meta name="theme-color" content="#5b1380">
 
   <!-- Open Graph: WhatsApp / Facebook -->
