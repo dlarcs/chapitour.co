@@ -48,7 +48,7 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
 
         <div class="category-card__content">
           <div class="category-card__icon">🍺</div>
-          <h5>Tipos de bares</h5>
+          <h5>Bar</h5>
           <small>Bares clásicos, gastrobares, bares temáticos, coctelerías y espacios para disfrutar la noche.</small>
         </div>
 
@@ -61,7 +61,7 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
 
         <div class="category-card__content">
           <div class="category-card__icon">🍸</div>
-          <h5>Planes en bares</h5>
+          <h5>Gastro bar</h5>
           <small>Noches de música, cocteles, comida, amigos, celebraciones y ambientes para compartir.</small>
         </div>
 
