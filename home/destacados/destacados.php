@@ -17,7 +17,7 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
       Actividades y promociones
     </h2>
 
-    <a href="destacados/index.php" class="interest-more">
+    <a href="categorias/10.destacados/index.php" class="interest-more">
       Ver lugares
       <span>→</span>
     </a>
