@@ -19,7 +19,7 @@
   <meta name="description" content="Descubre Chapinero, Bogotá con Chapitour: cafés, restaurantes, bares, cultura, alojamiento, planes locales y lugares para visitar.">
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
   <meta name="googlebot" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
-  <link rel="canonical" href="https://www.chapitour.co/">
+  <link rel="canonical" href="https://www.chapitour.co/bar/CapitalQueer/index.php/">
   <meta name="theme-color" content="#005548">
 
   <!-- Open Graph: WhatsApp / Facebook -->
@@ -58,12 +58,12 @@
         "@type": "WebSite",
         "@id": "https://www.chapitour.co/bar/CapitalQueer/index.php#bar",
         "name": "Chapitour",
-        "url": "https://www.chapitour.co/",
+        "url": "https://www.chapitour.co/bar/CapitalQueer/index.php",
         "inLanguage": "es-CO",
         "description": "Catálogo turístico y comercial de lugares para visitar en Chapinero, Bogotá."
       },
       {
-        "@type": "TouristDestination",
+        "@type": "BarOrPub",
         "@id": "https://www.chapitour.co/bar/CapitalQueer/index.php#bar",
         "name": "Chapinero, Bogotá",
         "description": "Zona de Bogotá con cafés, restaurantes, bares, cultura, comercio local, alojamiento y planes para visitar.",

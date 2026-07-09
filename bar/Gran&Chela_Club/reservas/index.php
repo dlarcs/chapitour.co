@@ -28,8 +28,8 @@
   <meta property="og:title" content="Chapitour | Lugares para visitar en Chapinero, Bogotá">
   <meta property="og:description" content="Explora Chapinero, Bogotá: cafés, restaurantes, bares, cultura, planes locales, alojamiento y lugares para visitar.">
   <meta property="og:url" content="https://www.chapitour.co/">
-  <meta property="og:image" content="https://www.chapitour.co/bar/Gran&Chela_Club/img/general18.jpg">
-  <meta property="og:image:secure_url" content="https://www.chapitour.co/bar/Gran&Chela_Club/img/general18.jpg">
+  <meta property="og:image" content="https://www.chapitour.co/bar/Gran&Chela_Club/img/logo.jpg">
+  <meta property="og:image:secure_url" content="https://www.chapitour.co/bar/Gran&Chela_Club/img/logo.jpg">
   <meta property="og:image:type" content="image/jpeg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
@@ -38,13 +38,13 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Chapitour | Lugares para visitar en Chapinero, Bogotá">
   <meta name="twitter:description" content="Descubre cafés, restaurantes, cultura, bares, alojamiento y planes locales en Chapinero, Bogotá.">
-  <meta name="twitter:image" content="https://www.chapitour.co/home/bar/Gran&Chela_Club/img/general18.jpg">
+  <meta name="twitter:image" content="https://www.chapitour.co/home/bar/Gran&Chela_Club/img/logo.jpg">
 
   <!-- Iconos -->
-  <link rel="icon" href="/bar/Gran&Chela_Club/img/general18.jpg">
-  <link rel="icon" type="image/png" sizes="32x32" href="/bar/Gran&Chela_Club/img/general18.jpg">
-  <link rel="icon" type="image/png" sizes="16x16" href="/bar/Gran&Chela_Club/img/general18.jpg">
-  <link rel="apple-touch-icon" sizes="180x180" href="/bar/Gran&Chela_Club/img/general18.jpg">
+  <link rel="icon" href="/bar/Gran&Chela_Club/img/logo.jpg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/bar/Gran&Chela_Club/img/logo.jpg">
+  <link rel="icon" type="image/png" sizes="16x16" href="/bar/Gran&Chela_Club/img/logo.jpg">
+  <link rel="apple-touch-icon" sizes="180x180" href="/bar/Gran&Chela_Club/img/logo.jpg">
 
   <!-- CSS -->
   <link rel="stylesheet" href="../../../bar/Gran&Chela_Club/reservas/style.css<?= $cssVer ? '?v=' . $cssVer : '' ?>">
@@ -56,18 +56,18 @@
     "@graph": [
       {
         "@type": "WebSite",
-        "@id": "https://www.chapitour.co/#website",
+        "@id": "https://www.chapitour.co/bar/Gran&Chela_Club/index.php#bar",
         "name": "Chapitour",
-        "url": "https://www.chapitour.co/",
+        "url": "https://www.chapitour.co/bar/Gran&Chela_Club/index.php",
         "inLanguage": "es-CO",
         "description": "Catálogo turístico y comercial de lugares para visitar en Chapinero, Bogotá."
       },
       {
-        "@type": "TouristDestination",
-        "@id": "https://www.chapitour.co/#destination",
+        "@type": "BarOrPub",
+        "@id": "https://www.chapitour.co/bar/Gran&Chela_Club/index.php#bar",
         "name": "Chapinero, Bogotá",
         "description": "Zona de Bogotá con cafés, restaurantes, bares, cultura, comercio local, alojamiento y planes para visitar.",
-        "url": "https://www.chapitour.co/",
+        "url": "https://www.chapitour.co/bar/Gran&Chela_Club/index.php",
         "image": "https://www.chapitour.co/home/img/logo1.jpeg",
         "address": {
           "@type": "PostalAddress",
