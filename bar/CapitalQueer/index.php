@@ -11,10 +11,8 @@
   $base = rtrim($_SERVER['DOCUMENT_ROOT'], '/');
 
   $cssFile = $base . '/bar/CapitalQueer/style.css';
-  $jsFile  = $base . '/bar/CapitalQueer/app.js';
 
   $cssVer = is_file($cssFile) ? filemtime($cssFile) : '';
-  $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
   ?>
 
   <!-- SEO principal para Google -->
@@ -125,7 +123,7 @@
   <?php include "../../bar/CapitalQueer/home/nav/nav.php" ?>
   <?php include "../../bar/CapitalQueer/home/slider/slider.php" ?>
 
-  <div class="container_capital_queer">
+  <div class="container_capitalQueer">
     <?php include "../../bar/CapitalQueer/home/menu/menu.php" ?>
     <?php include "../../bar/CapitalQueer/home/galeria/galeria.php" ?>
     <?php include "../../bar/CapitalQueer/home/acerca_nosotros/acerca_nosotros.php" ?>
