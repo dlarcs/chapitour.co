@@ -33,17 +33,17 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
 
   <nav id="chapitour-menu" class="chapitour-menu" aria-label="Menú principal">
     <div class="menu-inner">
-      <a href="1.tipo_bares/index.php">Tipos de bares</a>
-      <a href="2.planes_bares/index.php">Planes en bares</a>
-      <a href="3.cafes/index.php">Café</a>
-      <a href="4.postres/index.php">Postres</a>
-      <a href="5.LGBTIQ+/index.php">LGBTIQ+</a>
-      <a href="6.comida_rapida/index.php">Comida rápida</a>
-      <a href="7.gastronomia/index.php">Gastronomía</a>
-      <a href="8.artesanias/index.php">Artesanías</a>
-      <a href="9.panaderia/index.php">Panaderías</a>
-      <a href="categorias/index.php">Categorías</a>
-      <a href="destacados/index.php">Destacados</a>
+      <a href="categorias/1.tipo_bares/index.php">Bares</a>
+      <a href="categorias/2.planes_bares/index.php">Gastrobares</a>
+      <a href="categorias/3.cafes/index.php">Café</a>
+      <a href="categorias/4.postres/index.php">Postres</a>
+      <a href="categorias/5.LGBTIQ+/index.php">LGBTIQ+</a>
+      <a href="categorias/6.comida_rapida/index.php">Comida rápida</a>
+      <a href="categorias/7.gastronomia/index.php">Gastronomía</a>
+      <a href="categorias/8.artesanias/index.php">Artesanías</a>
+      <a href="categorias/9.panaderia/index.php">Panaderías</a>
+      <a href="categorias/categorias/index.php">Categorías</a>
+      <a href="categorias/destacados/index.php">Destacados</a>
     </div>
   </nav>
 </header>
