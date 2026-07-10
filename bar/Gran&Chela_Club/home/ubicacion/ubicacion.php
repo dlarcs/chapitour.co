@@ -58,19 +58,19 @@ $googleMapsLink = 'https://maps.app.goo.gl/ooTuqaX2yxjp4wMu6'; // Aquí cargas e
       </p>
 
       <div class="social-links">
-        <a href="https://www.instagram.com/granychela.club/" class="social-card">
+        <a href="https://www.instagram.com/granychela.club/" class="social-card" target="_blank">
           <span>Instagram</span>
           <small>@granychela.club</small>
         </a>
 
-        <a href="https://www.facebook.com/profile.php?id=61591409664220" class="social-card">
+        <a href="https://www.facebook.com/profile.php?id=61591409664220" class="social-card" target="_blank">
           <span>Facebook</span>
           <small>Gran&chela Club.</small>
         </a>
 
 
 
-        <a href="https://wa.me/573224680419" class="social-card">
+        <a href="https://wa.me/573224680419" class="social-card" target="_blank">
           <span>WhatsApp</span>
           <small>Reservas y contacto</small>
         </a>

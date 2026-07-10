@@ -58,7 +58,7 @@ $googleMapsLink = 'https://maps.app.goo.gl/7kCxVj9r8EvT7BT27'; // Aquí cargas e
       </p>
 
       <div class="social-links">
-        <a href="https://www.instagram.com/capital_queer_/" class="social-card">
+        <a href="https://www.instagram.com/capital_queer_/" class="social-card" target="_blank">
           <span>Instagram</span>
           <small>@capital_queer_</small>
         </a>
@@ -70,7 +70,7 @@ $googleMapsLink = 'https://maps.app.goo.gl/7kCxVj9r8EvT7BT27'; // Aquí cargas e
           <small>@Capital Queer</small>
         </a>
 
-        <a href="https://wa.me/573007795016" class="social-card">
+        <a href="https://wa.me/573007795016" class="social-card" target="_blank">
           <span>WhatsApp</span>
           <small>Reservas y contacto</small>
         </a>

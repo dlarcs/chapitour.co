@@ -74,7 +74,7 @@ $googleMapsLink = 'https://maps.app.goo.gl/NToBxLE8EheaadzY6';
           <small>@garage939c</small>
         </a>
 
-        <a href="https://wa.me/573156175056" class="social-card">
+        <a href="https://wa.me/573156175056" class="social-card" target="_blank">
           <span>WhatsApp</span>
           <small>Reservas y contacto</small>
         </a>
