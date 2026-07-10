@@ -15,37 +15,6 @@
   $cssVer = is_file($cssFile) ? filemtime($cssFile) : '';
   ?>
 
-  <!-- SEO principal para Google -->
-  <meta name="description" content="Capital Queer es un bar en Chapinero, Bogotá, diseñado especialmente para mujeres. Un espacio seguro, diverso y abierto para todas las personas que quieran disfrutar con respeto, música, bebidas y buena energía.">
-  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
-  <meta name="googlebot" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
-  <link rel="canonical" href="https://chapitour.co/bar/CapitalQueer/index.php/">
-  <meta name="theme-color" content="#5b1380">
-
-  <!-- Open Graph: WhatsApp / Facebook -->
-  <meta property="og:type" content="website">
-  <meta property="og:site_name" content="Chapitour">
-  <meta property="og:title" content="Capital Queer | Bar para mujeres y diversidad en Chapinero">
-  <meta property="og:description" content="Un espacio seguro, diverso y abierto para todas las personas, diseñado especialmente para mujeres en Chapinero, Bogotá.">
-  <meta property="og:url" content="https://chapitour.co/bar/CapitalQueer/index.php/">
-  <meta property="og:image" content="https://chapitour.co/bar/CapitalQueer/img/logo.jpg">
-  <meta property="og:image:secure_url" content="https://chapitour.co/bar/CapitalQueer/img/logo.jpg">
-  <meta property="og:image:type" content="image/jpg">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
-
-  <!-- Twitter / X -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Capital Queer | Bar para mujeres y diversidad en Chapinero">
-  <meta name="twitter:description" content="Bar en Chapinero diseñado especialmente para mujeres. Un espacio seguro, diverso y abierto para todas las personas.">
-  <meta name="twitter:image" content="https://chapitour.co/bar/CapitalQueer/img/logo.jpg">
-
-  <!-- Iconos -->
-  <link rel="icon" href="/bar/CapitalQueer/img/logo.jpg">
-  <link rel="icon" type="image/jpg" sizes="32x32" href="/bar/CapitalQueer/img/logo.jpg">
-  <link rel="icon" type="image/jpg" sizes="16x16" href="/bar/CapitalQueer/img/logo.jpg">
-  <link rel="apple-touch-icon" sizes="180x180" href="/bar/CapitalQueer/img/logo.jpg">
-
   <!-- CSS -->
   <link rel="stylesheet" href="../../bar/CapitalQueer/style.css<?= $cssVer ? '?v=' . $cssVer : '' ?>">
 
