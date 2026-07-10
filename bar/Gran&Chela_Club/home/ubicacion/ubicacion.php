@@ -65,7 +65,7 @@ $googleMapsLink = 'https://maps.app.goo.gl/ooTuqaX2yxjp4wMu6'; // Aquí cargas e
 
         <a href="https://www.facebook.com/profile.php?id=61591409664220" class="social-card">
           <span>Facebook</span>
-          <small>Distrito Gastrobar</small>
+          <small>Gran&chela Club.</small>
         </a>
 
 
