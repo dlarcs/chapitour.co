@@ -31,63 +31,26 @@
 
   <!-- Open Graph: WhatsApp / Facebook -->
   <meta property="og:type" content="website">
-
   <meta property="og:site_name" content="Chapitour">
-
-  <meta
-    property="og:title"
-    content="Capital Queer | Bar para mujeres y diversidad en Chapinero"
-  >
-
-  <meta
-    property="og:description"
-    content="Un espacio seguro, diverso y abierto para todas las personas, diseñado especialmente para mujeres en Chapinero, Bogotá."
-  >
-
-  <meta
-    property="og:url"
-    content="https://chapitour.co/bar/CapitalQueer/index.php"
-  >
-
-  <meta
-    property="og:image"
-    content="https://chapitour.co/bar/CapitalQueer/img/portada-whatsapp-v2.jpg"
-  >
-
-  <meta
-    property="og:image:secure_url"
-    content="https://chapitour.co/bar/CapitalQueer/img/portada-whatsapp-v2.jpg"
-  >
-
+  <meta property="og:title"content="Capital Queer | Bar para mujeres y diversidad en Chapinero">
+  <meta property="og:description"content="Un espacio seguro, diverso y abierto para todas las personas, diseñado especialmente para mujeres en Chapinero, Bogotá.">
+  <meta property="og:url"content="https://chapitour.co/bar/CapitalQueer/index.php">
+  <meta property="og:image"content="https://chapitour.co/bar/CapitalQueer/img/logoCapitalQueer.jpg">
+  <meta property="og:image:secure_url"content="https://chapitour.co/bar/CapitalQueer/img/logoCapitalQueer.jpg">
   <meta property="og:image:type" content="image/jpeg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta
-    property="og:image:alt"
-    content="Capital Queer, bar para mujeres y diversidad en Chapinero">
+  <meta property="og:image:alt"content="Capital Queer, bar para mujeres y diversidad en Chapinero">
   <meta property="og:locale" content="es_CO">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta
-    name="twitter:title"
-    content="Capital Queer | Bar para mujeres y diversidad en Chapinero">
-  <meta
-    name="twitter:description"
-    content="Bar en Chapinero diseñado especialmente para mujeres y abierto para todas las personas."
-  >
 
-  <meta
-    name="twitter:image"
-    content="https://chapitour.co/bar/CapitalQueer/img/portada-whatsapp-v2.jpg"
-  >
-
-  <!-- Twitter / X -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Capital Queer | Bar para mujeres y diversidad en Chapinero">
-  <meta name="twitter:description" content="Bar en Chapinero diseñado especialmente para mujeres. Un espacio seguro, diverso y abierto para todas las personas.">
+  <meta name="twitter:description" content="Bar en Chapinero diseñado especialmente para mujeres y abierto para todas las personas.">
   <meta name="twitter:image" content="https://chapitour.co/bar/CapitalQueer/img/logoCapitalQueer.jpg">
 
+
   <!-- Iconos -->
-  <link rel="icon" href="/bar/CapitalQueer/img/logoCapitalQueer.jpg">
+  <link rel="icon" href="/bar/CapitalQueer/img/logoCapitalQueer.jpg?v=2">
   <link rel="icon" type="image/jpg" sizes="32x32" href="/bar/CapitalQueer/img/logoCapitalQueer.jpg">
   <link rel="icon" type="image/jpg" sizes="16x16" href="/bar/CapitalQueer/img/logoCapitalQueer.jpg">
   <link rel="apple-touch-icon" sizes="1024x1240" href="/bar/CapitalQueer/img/logoCapitalQueer.jpg">
