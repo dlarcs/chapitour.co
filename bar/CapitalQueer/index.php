@@ -38,8 +38,8 @@
   <meta property="og:image"content="https://chapitour.co/bar/CapitalQueer/img/logoCapitalQueer.jpg">
   <meta property="og:image:secure_url"content="https://chapitour.co/bar/CapitalQueer/img/logoCapitalQueer.jpg">
   <meta property="og:image:type" content="image/jpeg">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
+  <meta property="og:image:width" content="1024">
+<meta property="og:image:height" content="1024">
   <meta property="og:image:alt"content="Capital Queer, bar para mujeres y diversidad en Chapinero">
   <meta property="og:locale" content="es_CO">
 
