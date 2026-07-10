@@ -84,13 +84,13 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Capital Queer | Bar para mujeres y diversidad en Chapinero">
   <meta name="twitter:description" content="Bar en Chapinero diseñado especialmente para mujeres. Un espacio seguro, diverso y abierto para todas las personas.">
-  <meta name="twitter:image" content="https://chapitour.co/bar/CapitalQueer/img/logo.jpg">
+  <meta name="twitter:image" content="https://chapitour.co/bar/CapitalQueer/img/logoCapitalQueer.jpg">
 
   <!-- Iconos -->
-  <link rel="icon" href="/bar/CapitalQueer/img/logo.jpg">
-  <link rel="icon" type="image/jpg" sizes="32x32" href="/bar/CapitalQueer/img/logo.jpg">
-  <link rel="icon" type="image/jpg" sizes="16x16" href="/bar/CapitalQueer/img/logo.jpg">
-  <link rel="apple-touch-icon" sizes="180x180" href="/bar/CapitalQueer/img/logo.jpg">
+  <link rel="icon" href="/bar/CapitalQueer/img/logoCapitalQueer.jpg">
+  <link rel="icon" type="image/jpg" sizes="32x32" href="/bar/CapitalQueer/img/logoCapitalQueer.jpg">
+  <link rel="icon" type="image/jpg" sizes="16x16" href="/bar/CapitalQueer/img/logoCapitalQueer.jpg">
+  <link rel="apple-touch-icon" sizes="1024x1240" href="/bar/CapitalQueer/img/logoCapitalQueer.jpg">
 
   <!-- CSS -->
   <link rel="stylesheet" href="../../bar/CapitalQueer/style.css<?= $cssVer ? '?v=' . $cssVer : '' ?>">
@@ -114,7 +114,7 @@
         "name": "Capital Queer",
         "description": "Bar en Chapinero, Bogotá, diseñado especialmente para mujeres. Un espacio seguro, diverso y abierto para todas las personas que quieran disfrutar con respeto, libertad, música, bebidas y buena energía.",
         "url": "https://chapitour.co/bar/CapitalQueer/index.php",
-        "image": "https://chapitour.co/bar/CapitalQueer/img/logo.jpg",
+        "image": "https://chapitour.co/bar/CapitalQueer/img/logoCapitalQueer.jpg",
         "telephone": "+573007795016",
         "servesCuisine": "Bar",
         "priceRange": "$$",
