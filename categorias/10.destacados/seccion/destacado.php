@@ -15,7 +15,7 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
   <div class="main-categories__inner">
 
     <div class="main-categories__header">
-      <span>Lugares recomendados</span>
+      <span>Actividades espaciales</span>
 
       <h1>¿Quieres visitar lo mejor de Chapinero?</h1>
 

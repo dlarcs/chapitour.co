@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="content-language" content="es-CO">
 
-  <title>Destacados y recomendados | Chapitour en Chapinero, Bogotá</title>
+  <title>Actividades Especiales | Chapitour en Chapinero, Bogotá</title>
 
   <?php
   $base = rtrim($_SERVER['DOCUMENT_ROOT'], '/');
