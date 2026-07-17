@@ -11,13 +11,11 @@ class ClassClick {
   }
   async click(){
 
-    const boton_click = document.getElementById('boton_click');
 
     const url = "../1.1.bartin/controller/click.php";
     const url_page = window.location.href;
     const data = {
       action: "click",
-      boton : boton_click,
       url_page: url_page
     };
 

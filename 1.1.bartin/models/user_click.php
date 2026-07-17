@@ -5,17 +5,23 @@
  */
 class UserClick
 {
+
   private PDO $db;
-  private $direccionPagina = "";
-  private $fechaHora = "";
+  private $direccion_pagina = "";
+  private $fecha_hora = "";
 
     public function __construct(Database $connection){
+
     $this->db = $connection->getConnection();
+
   }
-  public function setdireccionPagina($direccionPagina){$this->direccionPagina = $direccionPagina;}
-  public function setfechaHora($fechaHora){$this->fechaHora = $fechaHora;}
+  public function setDireccionPagina($direccion_pagina){$this->direccion_pagina = $direccion_pagina;
+}
+
+  public function setFechaHora($fecha_hora){$this->fecha_hora = $fecha_hora;}
 
     public function createclick(){
+      // echo json_encode($this->direccion_pagina.$this->fecha_hora);exit;
 
       try {
 

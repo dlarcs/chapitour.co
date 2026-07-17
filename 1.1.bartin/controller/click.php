@@ -35,13 +35,13 @@ class ClassClick
 
     $connection = new Database();
     $user = new UserClick($connection);
-    echo json_encode("hola nosotros");exit;
 
     $fecha_hora = date("Y-m-d H:i:s");
-    $user->setdireccionPagina($data['url_page']??'');
-    $user->setfechaHora($fecha_hora);
+    $user->setDireccionPagina($data['url_page']??'');
+    $user->setFechaHora($fecha_hora);
 
     $response = $user->createclick();
+
     echo json_encode([
       "success" => true,
       "message" => $response

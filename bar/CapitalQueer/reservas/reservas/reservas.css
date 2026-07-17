@@ -114,6 +114,7 @@
 .form-row {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
+  width: 100%;
   gap: 18px;
 }
 
@@ -256,6 +257,7 @@
   }
 
   .form-row {
+    width: 100%;
     grid-template-columns: 1fr;
     gap: 0;
   }
