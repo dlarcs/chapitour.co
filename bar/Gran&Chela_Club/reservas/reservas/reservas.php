@@ -119,7 +119,6 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
       Pagar anticipo
     </a> -->
     <button class="btn btn30" type="submit">Reservar</button>
-</div>
 
 
       <p class="booking-message" id="bookingMessage"></p>

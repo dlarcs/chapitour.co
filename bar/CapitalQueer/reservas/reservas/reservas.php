@@ -47,7 +47,7 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
     <form class="booking-form" id="bookingForm">
       <div class="form-group">
         <label for="name">Nombre completo</label>
-        <input type="text" id="name" name="name" placeholder="Ej: Laura Rozo" required>
+        <input type="text" id="name" name="name" placeholder="Ej: Catalina Garcia" required>
       </div>
 
       <div class="form-group">
@@ -117,12 +117,12 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
       Pagar anticipo
     </a> -->
     <button class="btn btn30" type="submit">Reservar</button>
-</div>
 
 
       <p class="booking-message" id="bookingMessage"></p>
     </form>
   </div>
+
 
 </section>
 
