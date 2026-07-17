@@ -55,7 +55,6 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
         <input type="tel" id="phone" name="phone" placeholder="Ej: 300 123 4567" required>
       </div>
 
-      <div class="form-row">
         <div class="form-group">
           <label for="date">Fecha</label>
           <input type="date" id="date" name="date" required>
@@ -65,7 +64,6 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
           <label for="time">Hora</label>
           <input type="time" id="time" name="time" required>
         </div>
-      </div>
 
       <div class="form-group">
         <label for="people">Cantidad de personas</label>
