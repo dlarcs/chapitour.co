@@ -89,7 +89,7 @@
 
 .step-card p {
   margin: 0;
-  color: #222;
+  color: #000;
   line-height: 1.5;
 }
 
@@ -101,6 +101,7 @@
   background: #fafafa;
   text-align: left;
   box-shadow: 0 20px 50px rgba(55, 32, 67, 0.18);
+
 }
 
 .booking-box h3 {
@@ -113,6 +114,7 @@
 .form-row {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
+  width: 100%;
   gap: 18px;
 }
 
@@ -123,7 +125,7 @@
 .form-group label {
   display: block;
   margin-bottom: 8px;
-  color: #222;
+  color: #000;
   font-size: 0.9rem;
   font-weight: 700;
 }
@@ -131,14 +133,15 @@
 .form-group input,
 .form-group select,
 .form-group textarea {
-  width: 100%;
+  width: 90%;
   padding: 13px 14px;
   border: 1px solid #ded6df;
   border-radius: 12px;
   font-size: 0.95rem;
   outline: none;
-  background: #fff;
-  color: #222;
+  background: #fafafa;
+  color: #000;
+  box-sizing: border-box;
 }
 
 .form-group input:focus,
@@ -164,7 +167,7 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  color: #222;
+  color: #000;
   font-weight: 700;
   cursor: pointer;
 }
@@ -188,17 +191,17 @@
 }
 
 .booking-form .btn30 {
-  display: block;
-  width: 100%;
+  width: 50%;
   margin: 24px 0 0;
   background: #000;
-
-
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .booking-message {
   margin: 18px 0 0;
-  color: #222;
+  color: #000;
   text-align: center;
   font-weight: 700;
   line-height: 1.5;
@@ -216,6 +219,7 @@
   letter-spacing: 3px;
   position: relative;
   cursor: pointer;
+
 }
 
 @keyframes neon-border {
@@ -254,6 +258,7 @@
   }
 
   .form-row {
+    width: 100%;
     grid-template-columns: 1fr;
     gap: 0;
   }
