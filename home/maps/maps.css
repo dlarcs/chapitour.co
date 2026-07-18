@@ -1,0 +1,632 @@
+/* ===============================
+   CONFIGURACIÓN GENERAL
+================================ */
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  min-height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+button,
+a,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+/* ===============================
+   APLICACIÓN DEL MAPA
+================================ */
+
+.mapa-aplicacion {
+  display: grid;
+  grid-template-columns: 320px minmax(0, 1fr);
+  gap: 14px;
+
+  width: 100%;
+  min-height: 100vh;
+  padding: 14px;
+
+  background-color: #f3f1ed;
+
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* ===============================
+   BARRA LATERAL
+================================ */
+
+.barra-lateral {
+  position: relative;
+  z-index: 1000;
+
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
+  height: calc(100vh - 28px);
+  min-height: 600px;
+  padding: 26px 20px;
+
+  overflow-y: auto;
+
+  background-color: #fffdf9;
+  border: 1px solid rgba(33, 47, 54, 0.08);
+  border-radius: 24px;
+
+  box-shadow: 0 18px 45px rgba(25, 32, 35, 0.12);
+}
+
+.encabezado-lateral {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+}
+
+.icono-mapa {
+  display: grid;
+  place-items: center;
+
+  flex-shrink: 0;
+
+  width: 48px;
+  height: 48px;
+
+  border-radius: 50%;
+
+  background-color: #ffffff;
+  color: #712e91;
+
+  font-size: 25px;
+
+  box-shadow: 0 8px 24px rgba(34, 40, 43, 0.12);
+}
+
+.encabezado-lateral h1 {
+  margin: 0 0 9px;
+
+  color: #1f282d;
+
+  font-size: 26px;
+  line-height: 1.08;
+}
+
+.encabezado-lateral p {
+  margin: 0;
+
+  color: #70777a;
+
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+.barra-lateral hr {
+  width: 100%;
+  margin: 24px 0;
+
+  border: 0;
+  border-top: 1px solid #ded8d0;
+}
+
+/* ===============================
+   CATEGORÍAS
+================================ */
+
+.categorias {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  width: 100%;
+}
+
+.categoria {
+  display: grid;
+  grid-template-columns: 38px minmax(0, 1fr) 30px;
+  align-items: center;
+  gap: 8px;
+
+  width: 100%;
+  min-height: 54px;
+  padding: 8px 13px;
+
+  border: 1px solid #e9e2da;
+  border-radius: 17px;
+
+  background-color: #fffdf9;
+  color: #253036;
+
+  font-size: 14px;
+  text-align: left;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.2s ease,
+    background-color 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.categoria:hover {
+  transform: translateY(-2px);
+
+  border-color: #d7cbdc;
+
+  box-shadow: 0 8px 19px rgba(35, 42, 46, 0.09);
+}
+
+.categoria.activa {
+  border-color: #111b22;
+
+  background-color: #111b22;
+  color: #ffffff;
+}
+
+.categoria-icono {
+  display: grid;
+  place-items: center;
+
+  font-size: 21px;
+}
+
+.categoria-nombre {
+  min-width: 0;
+
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.categoria-cantidad {
+  display: grid;
+  place-items: center;
+
+  width: 30px;
+  height: 30px;
+
+  border-radius: 50%;
+
+  background-color: rgba(0, 0, 0, 0.06);
+
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.categoria.activa .categoria-cantidad {
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+/* ===============================
+   INFORMACIÓN DE CHAPINERO
+================================ */
+
+.informacion-barrio {
+  margin-top: 25px;
+  padding: 20px;
+
+  border-radius: 20px;
+
+  background: linear-gradient(
+    145deg,
+    #fde9de,
+    #f8eee5
+  );
+}
+
+.informacion-barrio strong {
+  display: block;
+
+  margin-bottom: 12px;
+
+  color: #293338;
+
+  font-size: 15px;
+}
+
+.informacion-barrio p {
+  margin: 0 0 17px;
+
+  color: #4e5659;
+
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.informacion-barrio span {
+  display: block;
+
+  color: #712e91;
+
+  font-size: 17px;
+  font-style: italic;
+  font-weight: 700;
+  text-align: center;
+}
+
+/* ===============================
+   CONTENEDOR DEL MAPA
+================================ */
+
+.contenedor-mapa {
+  position: relative;
+
+  width: 100%;
+  min-width: 0;
+  height: calc(100vh - 28px);
+  min-height: 600px;
+
+  overflow: hidden;
+
+  border: 1px solid rgba(33, 47, 54, 0.08);
+  border-radius: 24px;
+
+  background-color: #dce4dc;
+
+  box-shadow: 0 18px 45px rgba(25, 32, 35, 0.12);
+}
+
+#map {
+  position: relative;
+
+  width: 100%;
+  height: 100%;
+  min-height: 600px;
+
+  background-color: #dce4dc;
+}
+
+/* ===============================
+   MARCADORES
+================================ */
+
+.marcador-personalizado {
+  background: transparent !important;
+  border: 0 !important;
+}
+
+.pin {
+  position: relative;
+
+  display: grid;
+  place-items: center;
+
+  width: 54px;
+  height: 54px;
+
+  color: #ffffff;
+
+  font-size: 30px;
+
+}
+
+.pin span {
+  display: block;
+
+  transform: rotate(45deg);
+}
+
+.pin-diverso {
+  background: linear-gradient(145deg, #9a40bb, #4b1767);
+}
+
+.pin-discoteca {
+  background: linear-gradient(145deg, #171717, #712e91);
+}
+
+.pin-cafe {
+  background: linear-gradient(145deg, #9b6a44, #56331e);
+}
+
+.pin-gastronomia {
+  background: linear-gradient(145deg, #e08432, #a23c1d);
+}
+
+.pin-comidas-rapidas {
+  background: linear-gradient(145deg, #e8a51c, #d15817);
+}
+
+.pin-postres {
+  background: linear-gradient(145deg, #ea78ad, #a93c75);
+}
+
+/* Compatibilidad con nombres anteriores */
+
+.Bar,
+.pin-bar {
+  background: linear-gradient(145deg, #7b3496, #4a1768);
+}
+
+.pin-gastrobar {
+  background: linear-gradient(145deg, #d95569, #8d2342);
+}
+
+/* ===============================
+   POPUP DE LEAFLET
+================================ */
+
+.leaflet-popup-content-wrapper {
+  padding: 0;
+
+  overflow: hidden;
+
+  border-radius: 22px;
+
+  box-shadow: 0 18px 40px rgba(22, 29, 32, 0.23);
+}
+
+.leaflet-popup-content {
+  width: 310px !important;
+  margin: 0 !important;
+}
+
+.popup-negocio {
+  width: 100%;
+
+  overflow: hidden;
+
+  background-color: #ffffff;
+}
+
+.popup-imagen {
+  display: block;
+
+  width: 100%;
+  height: 145px;
+
+  object-fit: cover;
+
+  background-color: #e8e8e8;
+}
+
+.popup-contenido {
+  padding: 19px;
+}
+
+.popup-categoria {
+  display: inline-block;
+
+  margin-bottom: 8px;
+
+  color: #783394;
+
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.popup-contenido h2 {
+  margin: 0 0 9px;
+
+  color: #172027;
+
+  font-size: 21px;
+  line-height: 1.15;
+}
+
+.popup-contenido p {
+  margin: 0 0 14px;
+
+  color: #626a6e;
+
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.popup-etiquetas {
+  display: block;
+
+  margin-bottom: 16px;
+
+  color: #8a6d94;
+
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.boton-negocio {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  width: 100%;
+  min-height: 45px;
+  padding: 10px 15px;
+
+  border-radius: 13px;
+
+  background: linear-gradient(
+    135deg,
+    #783394,
+    #9c4aba
+  );
+
+  color: #ffffff;
+
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.boton-negocio:hover {
+  transform: translateY(-2px);
+
+  box-shadow: 0 9px 18px rgba(120, 51, 148, 0.28);
+}
+
+.negocio-ejemplo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  min-height: 43px;
+  padding: 10px;
+
+  border: 1px dashed #bfaec6;
+  border-radius: 13px;
+
+  background-color: #f8f3fa;
+  color: #783394;
+
+  font-size: 13px;
+  font-weight: 700;
+}
+
+/* ===============================
+   CONTROLES DE LEAFLET
+================================ */
+
+.leaflet-control-zoom {
+  overflow: hidden;
+
+  border: 0 !important;
+  border-radius: 14px !important;
+
+  box-shadow: 0 8px 22px rgba(25, 33, 37, 0.18) !important;
+}
+
+.leaflet-control-zoom a {
+  border: 0 !important;
+}
+
+.leaflet-control-attribution {
+  font-size: 10px !important;
+}
+
+/* ===============================
+   TABLET
+================================ */
+
+@media screen and (max-width: 900px) {
+  .mapa-aplicacion {
+    display: flex;
+    flex-direction: column;
+
+    min-height: 100vh;
+
+    padding: 9px;
+    gap: 9px;
+  }
+
+  .barra-lateral {
+    width: 100%;
+    height: auto;
+    min-height: auto;
+
+    padding: 20px;
+
+    overflow: visible;
+
+    border-radius: 20px;
+  }
+
+  .categorias {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+  }
+
+  .contenedor-mapa {
+    width: 100%;
+    height: 70vh;
+    min-height: 550px;
+
+    border-radius: 20px;
+  }
+
+  #map {
+    width: 100%;
+    height: 100%;
+    min-height: 550px;
+  }
+}
+
+/* ===============================
+   CELULAR
+================================ */
+
+@media screen and (max-width: 600px) {
+  .mapa-aplicacion {
+    padding: 0;
+    gap: 0;
+
+    background-color: #ffffff;
+  }
+
+  .barra-lateral {
+    padding: 18px 14px;
+
+    border: 0;
+    border-radius: 0;
+
+    box-shadow: none;
+  }
+
+  .encabezado-lateral h1 {
+    font-size: 23px;
+  }
+
+  .categorias {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .categoria {
+    display: grid;
+    grid-template-columns: 32px minmax(0, 1fr);
+
+    min-height: 50px;
+    padding: 8px;
+
+    font-size: 12px;
+  }
+
+  .categoria-cantidad {
+    display: none;
+  }
+
+  .contenedor-mapa {
+    height: 70vh;
+    min-height: 500px;
+
+    border: 0;
+    border-radius: 0;
+
+    box-shadow: none;
+  }
+
+  #map {
+    height: 70vh;
+    min-height: 500px;
+  }
+
+  .leaflet-popup-content {
+    width: 250px !important;
+  }
+
+  .popup-imagen {
+    height: 120px;
+  }
+}
+
+@media screen and (max-width: 380px) {
+  .categorias {
+    grid-template-columns: 1fr;
+  }
+
+  .categoria {
+    grid-template-columns: 36px minmax(0, 1fr) 30px;
+  }
+
+  .categoria-cantidad {
+    display: grid;
+  }
+}

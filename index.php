@@ -211,6 +211,7 @@ Chapinero business directory
     <?php include "home/categorias/categoria.php" ?>
     <?php include "home/destacados/destacados.php" ?>
     <?php include "home/interes/interes.php" ?>
+    <?php include "home/maps/maps.php" ?>
   </div>
   <?php include "home/footer/footer.php" ?>
 </body>
