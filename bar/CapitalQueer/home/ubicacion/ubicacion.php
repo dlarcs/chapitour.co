@@ -65,7 +65,7 @@ $googleMapsLink = 'https://maps.app.goo.gl/7kCxVj9r8EvT7BT27'; // Aquí cargas e
 
 
 
-        <a href="https://www.tiktok.com/@capital.queer?_d=secCgYIASAHKAESPgo8Iuy3wUZbl%2FeVIGA1O%2By5QbEqi4jzSw3Vs3OjNkvTKFqAqEq3W953e38no%2BpcrkKNzA9ovt2pJmM5uLPoGgA%3D&_r=1&_svg=1&checksum=8abc37b340f1266ee4e24e77435b6570270be6926e609f2606a884816c1ab6df&lang=es&reflow_sign_scene=7&rgssign=8.1.3BCSPW6Bh9Po_Bm9NIOmwA&sec_uid=MS4wLjABAAAAVOk7FAKCVsUFU6Zo6BMB18vdI6Y-gsT-_Hjp2XynCfgYAsJ7tsoXGmqx460a_8po&sec_user_id=MS4wLjABAAAAVOk7FAKCVsUFU6Zo6BMB18vdI6Y-gsT-_Hjp2XynCfgYAsJ7tsoXGmqx460a_8po&share_app_id=1340&share_author_id=7618361413047911445&share_link_id=17d31ed6-860a-418e-8401-47f7319b66f4&share_region=CO&share_scene=1&sharer_language=es&source=h5_m&timestamp=1783641712&u_code=f2efea0ak5lcad&ugbiz_name=Account&user_id=7618361413047911445&utm_campaign=client_share&utm_source=whatsapp" class="social-card">
+        <a href="https://www.tiktok.com/@capital.queer" class="social-card">
           <span>TikTok</span>
           <small>@Capital Queer</small>
         </a>
