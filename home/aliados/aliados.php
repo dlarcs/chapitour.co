@@ -29,7 +29,7 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
     <ul class="filter-list">
       <li data-filter="all" class="active">Todos</li>
       <li data-filter="bares">Bar</li>
-      <li data-filter="gastro-bares">Gastro Bar</li>
+      <li data-filter="Crossover">Crossover</li>
       <li data-filter="discoteca">Discoteca</li>
       <li data-filter="lgbtiq">LGBTIQ+</li>
 
@@ -51,7 +51,7 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
       </a>
 
 
-      <a href="bar/Gran&Chela_Club/index.php" class="category-card place-card" data-category="lgbtiq bares discoteca">
+      <a href="bar/Gran&Chela_Club/index.php" class="category-card place-card" data-category="lgbtiq bares discoteca Crossover">
         <img src="bar/Gran&Chela_Club/img/logo.jpg" alt="Panaderías y pastelerías en Chapinero">
         <div class="category-card__overlay"></div>
 
