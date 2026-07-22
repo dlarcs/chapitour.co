@@ -34,7 +34,7 @@ $cssTime = filemtime('home/slider/slider.css');
   </section>
 
   <section class="hero-gallery">
-      <a href="categorias/7.gastronomia/index.php" class="gallery-card img-1">
+      <a href="#aliados" class="gallery-card img-1">
         <small>Sabores y Experiencias</small>
         <img src="home/img/restaurante.png"
         class="gallery-img"
@@ -42,7 +42,7 @@ $cssTime = filemtime('home/slider/slider.css');
         style="object-fit: cover; object-position: 60% 55%;">
       </a>
 
-    <a href="categorias/5.LGBTIQ+/index.php" class="gallery-card img-2">
+    <a href="#aliados" class="gallery-card img-2">
       <small>Orgullo y Planes</small>
       <img src="home/img/lgbti_lugar.png"
       class="gallery-img"
@@ -50,7 +50,7 @@ $cssTime = filemtime('home/slider/slider.css');
       style="object-fit: cover; object-position: 60% 55%;">
     </a>
 
-    <a href="categorias/6.comida_rapida/index.php" class="gallery-card img-3">
+    <a href="#aliados" class="gallery-card img-3">
       <small>Rápidos y Sabrosos</small>
       <img src="home/img/hamburguesa.png"
       class="gallery-img"
@@ -58,7 +58,7 @@ $cssTime = filemtime('home/slider/slider.css');
       style="object-fit: cover; object-position: 60% 55%;">
     </a>
 
-    <a href="categorias/9.panaderia/index.php" class="gallery-card img-4">
+    <a href="#aliados" class="gallery-card img-4">
       <small>Dulce Tradición</small>
       <img src="home/img/panaderia2.png"
       class="gallery-img"
@@ -66,7 +66,7 @@ $cssTime = filemtime('home/slider/slider.css');
       style="object-fit: cover; object-position: 60% 55%;">
     </a>
 
-    <a href="categorias/2.planes_bares/index.php" class="gallery-card img-5">
+    <a href="#aliados" class="gallery-card img-5">
       <small>Noches de chapinero</small>
       <img src="home/img/bar1.png"
       class="gallery-img"
@@ -74,7 +74,7 @@ $cssTime = filemtime('home/slider/slider.css');
       style="object-fit: cover; object-position: 60% 55%;">
     </a>
 
-    <a href="categorias/1.tipo_bares/index.php" class="gallery-card img-6">
+    <a href="#aliados" class="gallery-card img-6">
       <small>Tertulias de Chapinero</small>
       <img src="home/img/bar_coctel.png"
       class="gallery-img"
@@ -82,7 +82,7 @@ $cssTime = filemtime('home/slider/slider.css');
       style="object-fit: cover; object-position: 60% 55%;">
     </a>
 
-    <a href="categorias/4.postres/index.php" class="gallery-card img-7">
+    <a href="#aliados" class="gallery-card img-7">
       <small>Dulce Pecado</small>
       <img src="home/img/postre1.png"
       class="gallery-img"
@@ -90,7 +90,7 @@ $cssTime = filemtime('home/slider/slider.css');
       style="object-fit: cover; object-position: 60% 55%;">
     </a>
 
-    <a href="categorias/3.cafes/index.php" class="gallery-card img-8">
+    <a href="#aliados" class="gallery-card img-8">
       <small>Rincones de café</small>
       <img src="home/img/cafe1.png"
       class="gallery-img"
@@ -98,7 +98,7 @@ $cssTime = filemtime('home/slider/slider.css');
       style="object-fit: cover; object-position: 60% 55%;">
     </a>
 
-    <a href="categorias/8.artesanias/index.php" class="gallery-card img-9">
+    <a href="#aliados" class="gallery-card img-9">
       <small>Tesoros Artesanales</small>
       <img
         src="home/img/artesanias_bolso.png"

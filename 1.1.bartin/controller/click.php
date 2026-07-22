@@ -14,11 +14,11 @@ class ClassClick
     $input = file_get_contents('php://input');
     $data = json_decode($input, true);
 
-    switch ($data['action']) {
+    switch ($data['action']) { //estructura de control
       case 'click':
 
         $this->click($data);
-        break;
+        break; //salir del switch
 
 
       default:
@@ -37,10 +37,10 @@ class ClassClick
     $user = new UserClick($connection);
 
     $fecha_hora = date("Y-m-d H:i:s");
-    $user->setDireccionPagina($data['url_page']??'');
+    $user->setDireccionPagina($data['url_page']??''); //acceder
     $user->setFechaHora($fecha_hora);
 
-    $response = $user->createclick();
+    $response = $user->createclick();//metodo
 
     echo json_encode([
       "success" => true,

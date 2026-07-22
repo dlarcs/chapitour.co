@@ -2,11 +2,11 @@
 
 class Database
 {
-  private $servername = "localhost";
+  private $servername = "localhost"; //propiedad
   private $dbname = "Chapitour.co";
   private $username = "root";
   private $password = "";
-  private $connection;
+  private $connection; //se declara, se prepara
 
   public function __construct()
   {

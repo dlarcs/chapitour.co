@@ -14,13 +14,13 @@ class ClassClick {
 
     const url = "../1.1.bartin/controller/click.php";
     const url_page = window.location.href;
-    const data = {
+    const data = { 
       action: "click",
       url_page: url_page
     };
 
 
-    const response = await this.makeclick(url,data);
+    const response = await this.makeclick(url,data); //argumento
 
     if (!response) return;
     alert(JSON.stringify(response));
