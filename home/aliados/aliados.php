@@ -29,8 +29,9 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
     <ul class="filter-list">
       <li data-filter="all" class="active">Todos</li>
       <li data-filter="bares">Bar</li>
-      <li data-filter="Crossover">Crossover</li>
+
       <li data-filter="discoteca">Discoteca</li>
+      <li data-filter="Crossover">Crossover</li>
       <li data-filter="lgbtiq">LGBTIQ+</li>
 
     </ul>
