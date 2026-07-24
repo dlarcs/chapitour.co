@@ -29,10 +29,11 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
     <ul class="filter-list">
       <li data-filter="all" class="active">Todos</li>
       <li data-filter="bares">Bar</li>
-
+      <li data-filter="gastrobar">gastrobar</li>
       <li data-filter="discoteca">Discoteca</li>
       <li data-filter="Crossover">Crossover</li>
       <li data-filter="lgbtiq">LGBTIQ+</li>
+
 
     </ul>
 
@@ -57,7 +58,7 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
         <div class="category-card__overlay"></div>
 
         <div class="category-card__content">
-          <div class="category-card__icon">🍸</div>
+          <div class="category-card__icon">🍺</div>
           <h5>Gran&Chela Club</h5>
           <small>Bar, discoteca y eventos, todo en uno</small>
         </div>
@@ -65,6 +66,18 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
         <span class="category-card__arrow">→</span>
       </a>
 
+      <a href="gastrobar/Garage9-39C/index.php" class="category-card place-card" data-category="lgbtiq bares discoteca Crossover gastrobar">
+        <img src="gastrobar/Garage9-39C/img/general11.jpg" alt="Panaderías y pastelerías en Chapinero">
+        <div class="category-card__overlay"></div>
+
+        <div class="category-card__content">
+          <div class="category-card__icon">🍸</div>
+          <h5>Garage 9|39C</h5>
+          <small>Bar, discoteca y eventos, todo en uno</small>
+        </div>
+
+        <span class="category-card__arrow">→</span>
+      </a>
     </div>
   </div>
 </section>

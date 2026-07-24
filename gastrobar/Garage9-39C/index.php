@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="content-language" content="es-CO">
 
-  <title>Garage 9-39C | Disco bar y gastrobar LGBTIQ+ en Chapinero</title>
+  <title>Garage 9|39C | Disco bar y gastrobar LGBTIQ+ en Chapinero</title>
 
   <?php
   $base = rtrim($_SERVER['DOCUMENT_ROOT'], '/');

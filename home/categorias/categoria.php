@@ -21,7 +21,7 @@ $jsTime = filemtime('home/categorias/categoria.js');   // ejemplo: '../Home/5.Vi
     <div class="seccion-slider">
       <div class="carousel" id="categoryCarousel">
         <div class="card-category">
-          <a href="categorias/1.tipo_bares/index.php" aria-label="Ver Bares"></a>
+          <a href="#aliados" aria-label="Ver Bares"></a>
           <div class="card-content">
             <small>Bares</small>
             <h2>Tertulias de Chapinero</h2>
@@ -30,7 +30,7 @@ $jsTime = filemtime('home/categorias/categoria.js');   // ejemplo: '../Home/5.Vi
         </div>
 
         <div class="card-category">
-          <a href="categorias/2.planes_bares/index.php" aria-label="Ver Gastrobares"></a>
+          <a href="#aliados" aria-label="Ver Gastrobares"></a>
           <div class="card-content">
             <small>Gastro Bar</small>
             <h2>Noches de chapinero</h2>
@@ -38,7 +38,7 @@ $jsTime = filemtime('home/categorias/categoria.js');   // ejemplo: '../Home/5.Vi
           </div>
         </div>
         <div class="card-category">
-          <a href="categorias/3.cafes/index.php" aria-label="Ver Comida colombiana"></a>
+          <a href="#aliados" aria-label="Ver Comida colombiana"></a>
           <div class="card-content">
             <small>Café</small>
             <h2>Rincones de café</h2>
@@ -47,7 +47,7 @@ $jsTime = filemtime('home/categorias/categoria.js');   // ejemplo: '../Home/5.Vi
         </div>
 
         <div class="card-category">
-          <a href="categorias/6.comida_rapida/index.php" aria-label="Ver Comida rápida"></a>
+          <a href="#aliados" aria-label="Ver Comida rápida"></a>
           <div class="card-content">
             <small>Comida rápida</small>
             <h2>Rápidos y Sabrosos</h2>
@@ -56,7 +56,7 @@ $jsTime = filemtime('home/categorias/categoria.js');   // ejemplo: '../Home/5.Vi
         </div>
 
         <div class="card-category">
-          <a href="categorias/7.gastronomia/index.php" aria-label="Ver Almuerzos"></a>
+          <a href="#aliados" aria-label="Ver Almuerzos"></a>
           <div class="card-content">
             <small>Gastronomía</small>
             <h2>Sabores y experiencias</h2>
@@ -65,7 +65,7 @@ $jsTime = filemtime('home/categorias/categoria.js');   // ejemplo: '../Home/5.Vi
         </div>
 
         <div class="card-category">
-          <a href="categorias/8.artesanias/index.php" aria-label="Ver Artesanías"></a>
+          <a href="#aliados" aria-label="Ver Artesanías"></a>
           <div class="card-content">
             <small>Artesanías</small>
             <h2>Tesoros Artesanales</h2>
@@ -74,7 +74,7 @@ $jsTime = filemtime('home/categorias/categoria.js');   // ejemplo: '../Home/5.Vi
         </div>
 
         <div class="card-category">
-          <a href="categorias/9.panaderia/index.php" aria-label="Ver Panaderías y pastelerías"></a>
+          <a href="#aliados" aria-label="Ver Panaderías y pastelerías"></a>
           <div class="card-content">
             <small>Panaderías y pastelerías</small>
             <h2>Dulce Tradición</h2>
@@ -83,7 +83,7 @@ $jsTime = filemtime('home/categorias/categoria.js');   // ejemplo: '../Home/5.Vi
         </div>
 
         <div class="card-category">
-          <a href="categorias/5.LGBTIQ+/index.php" aria-label="Ver espacios LGBTIQ+"></a>
+          <a href="#aliados" aria-label="Ver espacios LGBTIQ+"></a>
           <div class="card-content">
             <small>LGBTIQ+</small>
             <h2>Orgullo y planes</h2>
@@ -91,7 +91,7 @@ $jsTime = filemtime('home/categorias/categoria.js');   // ejemplo: '../Home/5.Vi
           </div>
         </div>
         <div class="card-category">
-          <a href="categorias/4.postres/index.php" aria-label="Ver espacios LGBTIQ+"></a>
+          <a href="#aliados" aria-label="Ver espacios LGBTIQ+"></a>
           <div class="card-content">
             <small>Postres</small>
             <h2>Dulce pecado</h2>

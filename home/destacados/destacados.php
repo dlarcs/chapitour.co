@@ -17,7 +17,7 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
       Actividades especiales
     </h2>
 
-    <a href="categorias/10.destacados/index.php" class="interest-more">
+    <a href="#aliados" class="interest-more">
       Ver lugares
       <span>→</span>
     </a>
@@ -35,12 +35,12 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
         </div>
 
         <div class="featured-card__content">
-          <h4 id="featuredTitle">Azul Restaurante</h4>
+          <h4 id="featuredTitle">Actividades</h4>
 
           <div class="featured-card__meta">
-            <p id="featuredLocation">📍 Zona T</p>
-            <p id="featuredCategory">🍽️ Cocina contemporánea</p>
-            <p id="featuredRating">★ 4.8 (245)</p>
+            <p id="featuredLocation">📍 Chapinero central</p>
+            <p id="featuredCategory">🍽️ Actividades</p>
+            <p id="featuredRating">★ 4.8 (25)</p>
           </div>
         </div>
       </article>
@@ -57,50 +57,50 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
 
     <div class="featured-places__list">
 
-      <a href="0.invitación/index.php">
+      <a href="bar/Gran&Chela_Club/index.php">
         <article class="place-mini-card">
-          <img src="home/img/esta_apartado.png" alt="El Jardín Secreto">
+          <img src="bar/Gran&Chela_Club/img/general6.jpg" alt="El Jardín Secreto">
           <div>
-            <h4>El Jardín Secreto</h4>
-            <p>Café & Bistro</p>
+            <h4>Gran&Chela Club</h4>
+            <p>Granizado Monster 2x1</p>
           </div>
           <small>4.6 ★</small>
         </article>
       </a>
 
-      <a href="0.invitación/index.php">
+      <a href="bar/Gran&Chela_Club/index.php">
         <article class="place-mini-card">
-          <img src="home/img/esta_apartado.png" alt="La Esquina del Sabor">
+          <img src="bar/Gran&Chela_Club/img/general8.jpg" alt="La Esquina del Sabor">
           <div>
-            <h4>La Esquina del Sabor</h4>
-            <p>Comida local</p>
+            <h4>Gran&Chela Club§</h4>
+            <p>Cerveza 2x1</p>
           </div>
           <small>4.5 ★</small>
         </article>
       </a>
 
-      <a href="0.invitación/index.php">
+      <a href="bar/Gran&Chela_Club/index.php">
         <article class="place-mini-card">
-          <img src="home/img/esta_libre.png" alt="Bar 80/20">
+          <img src="bar/Gran&Chela_Club/img/general10.jpg" alt="Bar 80/20">
           <div>
-            <h4>Bar 80/20</h4>
-            <p>Cócteles & Música</p>
+            <h4>Gran&Chela Club</h4>
+            <p>Eventos Especiales</p>
           </div>
           <small>4.7 ★</small>
         </article>
       </a>
 
-      <a href="0.invitación/index.php">
+      <a href="bar/Gran&Chela_Club/index.php">
         <article class="place-mini-card">
-          <img src="home/img/esta_libre.png" alt="Mercado del Chef">
+          <img src="bar/Gran&Chela_Club/img/general6.jpg" alt="Mercado del Chef">
           <div>
-            <h4>Mercado del Chef</h4>
-            <p>Experiencia gastronómica</p>
+            <h4>Gran&Chela Club</h4>
+            <p>Micheladas 2x1</p>
           </div>
           <small>4.6 ★</small>
         </article>
       </a>
-      <a href="0.invitación/index.php" class="featured-places__btn featured-places__btn--mobile">
+      <a href="#aliados" class="featured-places__btn featured-places__btn--mobile">
         <small>Ver más lugares</small>
         <span>→</span>
       </a>

@@ -16,44 +16,44 @@ if (featuredPlaces) {
 }
 const places = [
   {
-    image: 'home/img/cocktel.png',
-    title: 'Azul Restaurante',
-    location: '📍 Zona T',
-    category: '🍽️ Cocina contemporánea',
+    image: 'bar/CapitalQueer/img/general.png',
+    title: 'Capital Queer',
+    location: '📍 Chapinero central',
+    category: '🍺 Capital Queer',
     rating: '★ 4.8 (245)',
-    alt: 'Azul Restaurante'
+    alt: 'Bar de mujeres'
   },
   {
-    image: 'home/img/cafe1.png',
-    title: 'El Jardín Secreto',
-    location: '📍 Chapinero',
-    category: '☕ Café & Bistro',
-    rating: '★ 4.6 (180)',
-    alt: 'El Jardín Secreto'
+    image: 'bar/CapitalQueer/img/general1.png',
+    title: 'Viernes de rumba',
+    location: '📍 Chapinero central',
+    category: '🍺 Capital Queer',
+    rating: '★ 4.8 (245)',
+    alt: 'Bar de mujeres'
   },
   {
-    image: 'home/img/hamburguesa1.png',
-    title: 'La Esquina del Sabor',
-    location: '📍 Zona G',
-    category: '🍲 Comida local',
-    rating: '★ 4.5 (132)',
-    alt: 'La Esquina del Sabor'
+    image: 'bar/Gran&Chela_Club/img/general5.jpg',
+    title: 'Micheladas 2x1',
+    location: '📍 Chapinero central',
+    category: '🍺 Gran&Chela Club',
+    rating: '★ 4.8 (245)',
+    alt: 'Bar de mujeres'
   },
   {
-    image: 'home/img/lgbtiq+.png',
-    title: 'Bar 80/20',
-    location: '📍 Chapinero Alto',
-    category: '🍸 Cócteles & Música',
+    image: 'bar/Gran&Chela_Club/img/general9.jpg',
+    title: 'Miércoles de Voces y Copas',
+    location: '📍 Chapinero central',
+    category: '🍺 Gran&Chela Club',
     rating: '★ 4.7 (210)',
-    alt: 'Bar 80/20'
+    alt: 'Gran&Chela Club'
   },
   {
-    image: 'home/img/artesanias_bolso.png',
-    title: 'Mercado del Chef',
-    location: '📍 Quinta Camacho',
-    category: '🍴 Experiencia gastronómica',
+    image: 'bar/Gran&Chela_Club/img/general4.jpg',
+    title: 'Micheladas 2x1',
+    location: '📍 Chapinero central',
+    category: '🍺 Gran&Chela Club',
     rating: '★ 4.6 (165)',
-    alt: 'Mercado del Chef'
+    alt: 'Gran&Chela Club'
   }
 ];
 
