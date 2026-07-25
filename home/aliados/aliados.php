@@ -72,8 +72,8 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
 
         <div class="category-card__content">
           <div class="category-card__icon">🍸</div>
-          <h5>Garage 9|39C</h5>
-          <small>Bar, discoteca y eventos, todo en uno</small>
+          <h5>Garage Disco Bar</h5>
+          <small>Cocteles</small>
         </div>
 
         <span class="category-card__arrow">→</span>
