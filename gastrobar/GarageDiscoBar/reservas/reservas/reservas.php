@@ -47,7 +47,7 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
     <form class="booking-form" id="bookingForm">
       <div class="form-group">
         <label for="name">Nombre completo</label>
-        <input type="text" id="name" name="name" placeholder="Ej: Laura Rozo" required>
+        <input type="text" id="name" name="name" placeholder="Ej: Kelly Romero" required>
       </div>
 
       <div class="form-group">

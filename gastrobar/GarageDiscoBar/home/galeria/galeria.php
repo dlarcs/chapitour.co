@@ -13,7 +13,7 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
 <section class="business-section business-gallery visible">
   <span class="section-label">Galería</span>
 
-  <h2>Conoce el ambiente de Garage 9|39C</h2>
+  <h2>Conoce Garage Disco Bar</h2>
 
   <p>
     Un disco bar y gastrobar LGBTIQ+ en Chapinero, con música, luces, rumba,

@@ -18,20 +18,18 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
 
   <span class="section-label">Experiencias</span>
 
-  <h2>Disfruta en Garage Disco bar Club</h2>
+  <h2>Disfruta en Garage Disco bar </h2>
 
   <p>
     Vive una experiencia completa con música, baile, comida, cócteles,
     licores y espacios para celebrar tus momentos especiales en el corazón
     de Chapinero.
   </p>
-  <a
-  href="../../gastrobar/GarageDiscoBar/img/Garage_Menu.pdf"
-  class="btn btn30"
-  download
->
-  Descargar menú
-</a>
+  <a href="../../gastrobar/GarageDiscoBar/img/Garage_Menu.pdf">
+    <div class="button_container">
+      <button class="btn btn30"type="button" name="button">Descargar menú</button>
+    </div>
+  </a>
   <div class="menu-grid">
 
     <!-- TARJETA DE BAILE -->

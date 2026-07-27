@@ -16,7 +16,7 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
     <h2>Un disco bar y gastrobar libre, diverso y seguro</h2>
 
     <p>
-      Garage 9-39C es un espacio LGBTIQ+ en Chapinero creado para disfrutar la noche
+      Garage Disco Bar, es un espacio en Chapinero creado para disfrutar la noche
       con música, rumba, comida, bebidas y un ambiente lleno de respeto, libertad y buena energía.
     </p>
 

@@ -7,7 +7,7 @@ $jsFile  = $base . '/gastrobar/GarageDiscoBar/home/ubicacion/ubicacion.js';
 $cssVer = is_file($cssFile) ? filemtime($cssFile) : '';
 $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
 
-$googleMapsLink = 'https://maps.app.goo.gl/NToBxLE8EheaadzY6';
+$googleMapsLink = 'https://maps.app.goo.gl/EnKkPuRb64VNMnQ77';
 ?>
 
 <link rel="stylesheet" href="../../gastrobar/GarageDiscoBar/home/ubicacion/ubicacion.css<?= $cssVer ? '?v=' . $cssVer : '' ?>">
@@ -22,7 +22,7 @@ $googleMapsLink = 'https://maps.app.goo.gl/NToBxLE8EheaadzY6';
 
       <p>
         Estamos ubicados en una zona estratégica de Chapinero, ideal para disfrutar
-        un ambiente LGBTIQ+, seguro, diverso y divertido, con música, rumba,
+        un ambiente de gastrobar, seguro, diverso y divertido, con música, rumba,
         comida, bebidas y buena energía.
       </p>
 
@@ -59,19 +59,14 @@ $googleMapsLink = 'https://maps.app.goo.gl/NToBxLE8EheaadzY6';
       </p>
 
       <div class="social-links">
-        <a href="#" class="social-card">
+        <a href="https://www.instagram.com/garagediscobar_?igsh=MXI2YTFuZ2JlMXpsMA%3D%3D" class="social-card">
           <span>Instagram</span>
           <small>@garage939c</small>
         </a>
 
-        <a href="#" class="social-card">
+        <a href="https://www.facebook.com/GARAGECHAPINERO9.34?mibextid=wwXIfr&rdid=nNeIixoVCmRKpngW&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F191aEZi498%2F%3Fmibextid%3DwwXIfr" class="social-card">
           <span>Facebook</span>
           <small>Garage 9-39C</small>
-        </a>
-
-        <a href="#" class="social-card">
-          <span>TikTok</span>
-          <small>@garage939c</small>
         </a>
 
         <a href="https://wa.me/573156175056" class="social-card" target="_blank">
