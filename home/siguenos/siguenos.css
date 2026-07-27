@@ -1,0 +1,598 @@
+
+/* ==========================================
+   PAGE
+========================================== */
+
+.page {
+    width: 100%;
+    min-height: 100vh;
+
+    padding: clamp(1rem, 3vw, 3rem);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+
+/* ==========================================
+   FOLLOW SECTION
+========================================== */
+
+.follow-section {
+    position: relative;
+
+    width: min(100%, 1500px);
+    min-height: 700px;
+
+    padding:
+        clamp(3rem, 7vw, 7rem)
+        clamp(1.5rem, 6vw, 6rem);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    overflow: hidden;
+    isolation: isolate;
+
+}
+/* DECORATION */
+.follow-section__dots {
+    position: absolute;
+    left: 20px;
+    bottom: 25px;
+
+    width: 180px;
+    height: 180px;
+
+    opacity: 0.5;
+
+    background-image:
+        radial-gradient(
+            circle,
+            rgba(255, 0, 170, 0.75) 3px,
+            transparent 4px
+        );
+
+    background-size: 22px 22px;
+
+    mask-image:
+        linear-gradient(
+            to top right,
+            black,
+            transparent 75%
+        );
+
+    z-index: -2;
+}
+
+
+/* ==========================================
+   CONTENT
+========================================== */
+
+.follow-section__content {
+    position: relative;
+    z-index: 4;
+
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: clamp(2rem, 6vw, 7rem);
+}
+
+
+/* ==========================================
+   TEXT
+========================================== */
+
+.follow-section__text {
+    position: relative;
+    max-width: 760px;
+}
+
+.follow-section__eyebrow {
+    margin-bottom: 0.8rem;
+
+    color: rgba(255, 255, 255, 0.72);
+
+    font-size: clamp(0.75rem, 1vw, 0.95rem);
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+}
+
+.follow-section__title {
+    display: inline-block;
+
+    font-family:
+        Impact,
+        Haettenschweiler,
+        "Arial Narrow Bold",
+        sans-serif;
+
+    font-size: clamp(3rem, 4vw, 5rem);
+    font-weight: 900;
+    line-height: 0.88;
+    letter-spacing: -0.035em;
+
+    color: transparent;
+
+    background:
+        linear-gradient(
+            110deg,
+            #ff009d 5%,
+            #ff286c 40%,
+            #ff6b3d 70%,
+            #ffc400 100%
+        );
+
+    background-clip: text;
+    -webkit-background-clip: text;
+
+    filter:
+        drop-shadow(
+            0 10px 25px rgba(255, 0, 136, 0.2)
+        );
+}
+
+.follow-section__brush {
+    width: min(50%, 380px);
+    height: 23px;
+
+    margin-top: 1.4rem;
+    margin-left: -15px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            #ff008c 7%,
+            #ff008c 88%,
+            transparent
+        );
+
+    clip-path:
+        polygon(
+            0 52%,
+            10% 22%,
+            47% 12%,
+            82% 32%,
+            100% 20%,
+            94% 61%,
+            63% 69%,
+            26% 81%,
+            7% 67%
+        );
+
+    transform: rotate(-2deg);
+
+    filter:
+        drop-shadow(
+            0 0 13px rgba(255, 0, 157, 0.75)
+        );
+}
+
+.follow-section__description {
+    max-width: 360px;
+
+    margin-top: 2rem;
+
+    color: rgba(255, 255, 255, 0.7);
+
+    font-size: clamp(1rem, 1.5vw, 1.18rem);
+    line-height: 1.7;
+}
+
+
+/* ==========================================
+   ARROW
+========================================== */
+
+.follow-section__arrow {
+    width: min(100%, 430px);
+    height: auto;
+
+    margin-top: 1rem;
+    margin-left: 40%;
+
+    overflow: visible;
+
+    filter:
+        drop-shadow(
+            0 0 7px rgba(255, 191, 0, 0.9)
+        );
+}
+
+.follow-section__arrow-line,
+.follow-section__arrow-head {
+    fill: none;
+    stroke: #ffbb00;
+    stroke-width: 8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.follow-section__arrow-line {
+    stroke-dasharray: 4 10;
+}
+
+
+/* ==========================================
+   SOCIAL
+========================================== */
+
+.follow-section__social {
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    z-index: 5;
+}
+
+.instagram-button {
+    position: relative;
+
+    width: clamp(130px, 16vw, 290px);
+    aspect-ratio: 1;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    text-decoration: none;
+
+    background:
+        radial-gradient(
+            circle at 50% 45%,
+            rgba(37, 9, 50, 0.97),
+            rgba(8, 2, 15, 0.98) 70%
+        );
+
+    box-shadow:
+        0 0 30px rgba(255, 0, 174, 0.25),
+        0 0 80px rgba(153, 0, 255, 0.18),
+        inset 0 0 40px rgba(255, 255, 255, 0.03);
+
+    transition:
+        transform 300ms ease,
+        box-shadow 300ms ease;
+}
+
+.instagram-button::before {
+    content: "";
+
+    position: absolute;
+    inset: -14px;
+
+    border-radius: inherit;
+
+    padding: 5px;
+
+    background:
+        conic-gradient(
+            from 210deg,
+            #ffbd00,
+            #ff4d35,
+            #ff009d,
+            #b200ff,
+            #ff009d,
+            #ffbd00
+        );
+
+    mask:
+        linear-gradient(#ffffff 0 0) content-box,
+        linear-gradient(#ffffff 0 0);
+
+    mask-composite: exclude;
+    -webkit-mask-composite: xor;
+
+    filter:
+        drop-shadow(
+            0 0 9px rgba(255, 0, 153, 0.9)
+        )
+        drop-shadow(
+            0 0 22px rgba(255, 172, 0, 0.45)
+        );
+}
+
+.instagram-button::after {
+    content: "";
+
+    position: absolute;
+    inset: -35px;
+
+    border-radius: inherit;
+
+    border: 1px solid rgba(255, 0, 183, 0.18);
+
+    box-shadow:
+        0 0 60px rgba(255, 0, 157, 0.25);
+
+    pointer-events: none;
+}
+
+.instagram-button__ring {
+    position: absolute;
+    inset: 18px;
+
+    border-radius: 50%;
+
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.instagram-button__icon {
+    width: 53%;
+    aspect-ratio: 1;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    transition: transform 300ms ease;
+}
+
+.instagram-button__icon svg {
+    width: 100%;
+    height: 100%;
+
+    overflow: visible;
+
+    filter:
+        drop-shadow(
+            0 0 18px rgba(255, 0, 157, 0.35)
+        );
+}
+
+.instagram-button:hover {
+    transform: scale(1.05) rotate(1deg);
+
+    box-shadow:
+        0 0 45px rgba(255, 0, 174, 0.4),
+        0 0 110px rgba(153, 0, 255, 0.28),
+        inset 0 0 50px rgba(255, 255, 255, 0.04);
+}
+
+.instagram-button:hover .instagram-button__icon {
+    transform: scale(1.08);
+}
+
+.instagram-button:focus-visible {
+    outline: 4px solid #ffffff;
+    outline-offset: 20px;
+}
+
+.instagram-username {
+    margin-top: 2.2rem;
+
+    color: rgba(255, 255, 255, 0.85);
+
+    font-size: clamp(1rem, 1.5vw, 1.3rem);
+    font-weight: 700;
+    letter-spacing: 0.05em;
+
+    text-decoration: none;
+
+    transition:
+        color 200ms ease,
+        transform 200ms ease;
+}
+
+.instagram-username:hover {
+    color: #ffb800;
+    transform: translateY(-2px);
+}
+
+
+/* ==========================================
+   CITY DECORATION
+========================================== */
+
+.cityscape {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+
+    width: 42%;
+    height: 55%;
+
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    gap: 9px;
+
+    padding-right: 2%;
+
+    opacity: 0.45;
+
+    z-index: 1;
+
+    mask-image:
+        linear-gradient(
+            to top,
+            black,
+            transparent 95%
+        );
+}
+
+.cityscape__building {
+    position: relative;
+    display: block;
+
+    width: 70px;
+
+    border: 1px solid rgba(255, 0, 183, 0.25);
+
+    background:
+        repeating-linear-gradient(
+            to bottom,
+            rgba(255, 185, 0, 0.42) 0,
+            rgba(255, 185, 0, 0.42) 4px,
+            transparent 4px,
+            transparent 18px
+        ),
+        linear-gradient(
+            to top,
+            rgba(20, 0, 28, 0.96),
+            rgba(39, 2, 55, 0.8)
+        );
+
+    box-shadow:
+        0 0 30px rgba(255, 0, 191, 0.12);
+}
+
+.cityscape__building--one {
+    height: 35%;
+}
+
+.cityscape__building--two {
+    height: 62%;
+}
+
+.cityscape__building--three {
+    height: 88%;
+}
+
+.cityscape__building--four {
+    height: 50%;
+}
+
+
+/* ==========================================
+   TABLET
+========================================== */
+
+@media (max-width: 950px) {
+
+    .follow-section {
+        min-height: auto;
+
+        padding-top: 5rem;
+        padding-bottom: 5rem;
+    }
+
+    .follow-section__content {
+        grid-template-columns: 1fr;
+
+        text-align: center;
+    }
+
+    .follow-section__text {
+        max-width: 760px;
+        margin: 0 auto;
+    }
+
+    .follow-section__brush {
+        margin-right: auto;
+        margin-left: auto;
+    }
+
+    .follow-section__description {
+        margin-right: auto;
+        margin-left: auto;
+    }
+
+    .follow-section__arrow {
+        width: 280px;
+
+        margin-top: 2rem;
+        margin-right: auto;
+        margin-left: auto;
+
+        transform: rotate(65deg);
+    }
+
+    .cityscape {
+        width: 65%;
+        opacity: 0.25;
+    }
+
+}
+
+
+/* ==========================================
+   MOBILE
+========================================== */
+
+@media (max-width: 600px) {
+
+    .page {
+        padding: 0;
+    }
+    .follow-section__arrow {
+        display: none;
+    }
+    .follow-section {
+        min-height: 100vh;
+
+        padding:
+            4rem
+            1.2rem;
+
+        border: none;
+        border-radius: 0;
+    }
+
+    .follow-section__title {
+      font-size: clamp(2rem, 3vw, 4rem);
+
+    }
+
+    .follow-section__description {
+        font-size: 0.98rem;
+    }
+
+    .follow-section__arrow {
+        width: 210px;
+
+        margin-top: 0.5rem;
+
+        transform: rotate(70deg);
+    }
+
+    .instagram-button {
+        width: min(70vw, 280px);
+    }
+
+    .instagram-button::before {
+        inset: -10px;
+        padding: 4px;
+    }
+
+    .instagram-button::after {
+        inset: -22px;
+    }
+
+    .cityscape {
+        width: 100%;
+        height: 38%;
+        opacity: 0.17;
+    }
+
+}
+
+
+/* ==========================================
+   REDUCED MOTION
+========================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .instagram-button,
+    .instagram-button__icon,
+    .instagram-username {
+        transition: none;
+    }
+
+}

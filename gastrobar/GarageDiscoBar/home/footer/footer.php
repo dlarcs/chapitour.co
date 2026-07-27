@@ -1,9 +1,9 @@
 <?php
 $base = rtrim($_SERVER['DOCUMENT_ROOT'], '/');
-$cssFile = $base . '/global/footer/footer.css';
+$cssFile = $base . '/gastrobar/GarageDiscoBar/home/footer/footer.css';
 $cssVer = is_file($cssFile) ? filemtime($cssFile) : '';
 ?>
-<link rel="stylesheet" href="../../global/footer/footer.css<?= $cssVer ? '?v=' . $cssVer : '' ?>">
+<link rel="stylesheet" href="../../gastrobar/GarageDiscoBar/home/footer/footer.css<?= $cssVer ? '?v=' . $cssVer : '' ?>">
 <footer class="site-footer">
   <div class="footer-inner">
 
@@ -34,15 +34,14 @@ $cssVer = is_file($cssFile) ? filemtime($cssFile) : '';
     <div class="footer-col">
       <h5>De interes</h5>
       <a href="../../categorias/category/index.php">Categorías</a>
-      <a href="../../categorias/10.destacados/index.php">Destacados</a>
+      <a href="../../destacados/index.php">Destacados</a>
       <a href="https://Arbelaez.com.co">Arbelaez.com.co</a>
     </div>
 
   </div>
 
   <div class="footer-bottom">
-
-    <a href="index.php"><small>© 2026 Chapitour.co</small></a>
+    <small>© 2024 Chapitour.co</small>
     <small>Todos los derechos reservados.</small>
   </div>
 </footer>

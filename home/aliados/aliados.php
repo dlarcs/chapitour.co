@@ -20,7 +20,7 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
       <h3>¿Dónde quieres divertirte?</h3>
 
       <small>
-        Elige un un lugar y encuentra lugares para disfrutar, bailar,
+        Elige un lugar y encuentra lugares para disfrutar, bailar,
         salir de noche y hacer amigos.
       </small>
     </div>
@@ -32,6 +32,7 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
       <li data-filter="gastrobar">gastrobar</li>
       <li data-filter="discoteca">Discoteca</li>
       <li data-filter="Crossover">Crossover</li>
+      <li data-filter="cover">No cover</li>
       <li data-filter="lgbtiq">LGBTIQ+</li>
 
 
@@ -39,7 +40,7 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
 
     <div class="categories-grid">
 
-      <a href="bar/CapitalQueer/index.php" class="category-card place-card" data-category="lgbtiq bares">
+      <a href="bar/CapitalQueer/index.php" class="category-card place-card" data-category="lgbtiq bares cover">
         <img src="bar/CapitalQueer/img/logoCapitalQueer.jpg" alt="Tipos de bares en Chapinero">
         <div class="category-card__overlay"></div>
 
@@ -53,7 +54,7 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
       </a>
 
 
-      <a href="bar/Gran&Chela_Club/index.php" class="category-card place-card" data-category="lgbtiq bares discoteca Crossover">
+      <a href="bar/Gran&Chela_Club/index.php" class="category-card place-card" data-category="lgbtiq bares discoteca Crossover cover">
         <img src="bar/Gran&Chela_Club/img/logo.jpg" alt="Panaderías y pastelerías en Chapinero">
         <div class="category-card__overlay"></div>
 
@@ -66,7 +67,7 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
         <span class="category-card__arrow">→</span>
       </a>
 
-      <a href="gastrobar/Garage9-39C/index.php" class="category-card place-card" data-category="lgbtiq bares discoteca Crossover gastrobar">
+      <a href="gastrobar/Garage9-39C/index.php" class="category-card place-card" data-category="lgbtiq bares discoteca Crossover gastrobar cover">
         <img src="gastrobar/Garage9-39C/img/general11.jpg" alt="Panaderías y pastelerías en Chapinero">
         <div class="category-card__overlay"></div>
 

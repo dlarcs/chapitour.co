@@ -209,6 +209,7 @@ Chapinero business directory
   <div class="container_body">
     <?php include "home/slider/slider.php" ?>
     <?php include "home/aliados/aliados.php" ?>
+    <?php include "home/siguenos/siguenos.php" ?>
     <?php include "home/categorias/categoria.php" ?>
     <?php include "home/destacados/destacados.php" ?>
     <?php include "home/interes/interes.php" ?>
