@@ -18,7 +18,7 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
 
   <span class="section-label">Experiencias</span>
 
-  <h2>Todo lo que puedes disfrutar en Garage Disco bar Club</h2>
+  <h2>Disfruta en Garage Disco bar Club</h2>
 
   <p>
     Vive una experiencia completa con música, baile, comida, cócteles,
