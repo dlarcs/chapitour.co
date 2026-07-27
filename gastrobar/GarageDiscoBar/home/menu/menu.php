@@ -25,11 +25,13 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
     licores y espacios para celebrar tus momentos especiales en el corazón
     de Chapinero.
   </p>
-  <a href="../../gastrobar/GarageDiscoBar/img/Garage_Menú.pdf">
-    <div class="button_container">
-      <button class="btn btn30"type="button" name="button">Descargar menú</button>
-    </div>
-  </a>
+  <a
+  href="../../gastrobar/GarageDiscoBar/img/Garage_Menu.pdf"
+  class="btn btn30"
+  download
+>
+  Descargar menú
+</a>
   <div class="menu-grid">
 
     <!-- TARJETA DE BAILE -->
