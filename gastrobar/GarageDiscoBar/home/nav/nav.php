@@ -12,7 +12,7 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
 
 <header class="chapitour-header">
   <a href="../../gastrobar/GarageDiscoBar/index.php" class="chapitour-logo" aria-label="Ir al inicio">
-    <h1>Garage Disco Bar</h1>
+    <h2>Garage Disco Bar</h2>
   </a>
 
   <div class="chapitour-actions">

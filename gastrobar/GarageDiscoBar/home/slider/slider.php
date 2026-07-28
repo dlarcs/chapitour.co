@@ -23,7 +23,7 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
     <div class="business-hero__content">
       <span>Rumba · Música · Buena energía</span>
 
-      <h1>Vive la noche</h1>
+      <h2>Vive la noche</h2>
 
       <p>
         Garage 9-39C combina música, luces, baile y un ambiente perfecto para
@@ -49,7 +49,7 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
     <div class="business-hero__content">
       <span>Inclusión · Diversidad · Encuentro</span>
 
-      <h1>Diversidad que se celebra</h1>
+      <h2>Diversidad que se celebra</h2>
 
       <p>
         Un lugar LGBTIQ+ abierto para compartir con respeto, libertad,
@@ -75,7 +75,7 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
     <div class="business-hero__content">
       <span>Comida · Bebidas · Gastrobar</span>
 
-      <h1>Sabor de la noche</h1>
+      <h2>Sabor de la noche</h2>
 
       <p>
         Disfruta una experiencia de gastrobar con comida, bebidas y cocteles
