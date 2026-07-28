@@ -54,7 +54,7 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
       </a>
 
 
-      <a href="bar/Gran&Chela_Club/index.php" class="category-card place-card" data-category="lgbtiq bares discoteca Crossover cover">
+      <a href="https://granychelaclub.com" class="category-card place-card" data-category="lgbtiq bares discoteca Crossover cover">
         <img src="bar/Gran&Chela_Club/img/logo.jpg" alt="Panaderías y pastelerías en Chapinero">
         <div class="category-card__overlay"></div>
 
