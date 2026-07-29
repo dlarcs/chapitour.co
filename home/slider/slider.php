@@ -21,11 +21,11 @@ $cssTime = filemtime('home/slider/slider.css');
       </p>
 
       <div class="hero-actions">
-        <a href="categorias/category/index.php" class="btn-primary">
+        <a href="#aliados" class="btn-primary">
           Explorar lugares <span>→</span>
         </a>
 
-        <a href="categorias/category/index.php" class="btn-video">
+        <a href="#aliados" class="btn-video">
           <span class="play">▶</span>
           Ver experiencias
         </a>
