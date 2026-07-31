@@ -11,98 +11,98 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
 <link rel="stylesheet" href="../../../gastrobar/GarageDiscoBar/actividades/actividades/actividades.css<?= $cssVer ? '?v=' . $cssVer : '' ?>">
 
 <section class="business-section visible">
-  <span class="section-label">Actividades & Promociones</span>
+  <span class="section-label">Actividades & Eventos</span>
 
-  <h2>Lo mejor de este año</h2>
+  <h2>Planes para disfrutar en Garage Disco Bar</h2>
 
   <p>
-    Conoce nuestras promociones y actividades por mes, ven y disfruta de todo lo que te ofrecemos
+    Disfruta noches de karaoke, baile, música crossover, shows especiales y una propuesta de gastrobar para compartir con amigos.
   </p>
 
-  <!-- TARJETAS - HTML -->
   <!-- TARJETAS - HTML -->
   <section class="cards-section">
     <div class="cards-grid">
 
-      <article class="card promo-card" data-code="CAPITAL-AMOR-AMISTAD-001">
+      <article class="card promo-card" data-code="GARAGE-KARAOKE-001">
         <div class="card-image">
-          <img src="../../../gastrobar/GarageDiscoBar/img/general15.jpg" alt="Amor y amistad">
-          <span class="card-badge">Noche especial</span>
+          <img src="../../../gastrobar/GarageDiscoBar/img/general15.jpg" alt="Noche de karaoke">
+          <span class="card-badge">Karaoke</span>
         </div>
 
         <div class="card-content">
-          <h3>Amor y Amistad Queer</h3>
-          <p>Una noche para celebrar el amor, la amistad, la música y las conexiones bonitas.</p>
-          <span class="card-location"><span>&#128467;&#65039;</span> 19 de Septiembre 2026</span>
+          <h3>Noches de Karaoke</h3>
+          <p>Sube al escenario, canta tus canciones favoritas y comparte una noche diferente con tus amigos.</p>
+          <span class="card-location"><span>&#127908;</span> Karaoke para cantar y disfrutar</span>
         </div>
       </article>
 
-      <article class="card promo-card" data-code="CAPITAL-HALLOWEEN-002">
+      <article class="card promo-card" data-code="GARAGE-CROSSOVER-002">
         <div class="card-image">
-          <img src="../../../gastrobar/GarageDiscoBar/img/general13.jpg" alt="Halloween">
-          <span class="card-badge">Halloween</span>
+          <img src="../../../gastrobar/GarageDiscoBar/img/general13.jpg" alt="Fiesta crossover">
+          <span class="card-badge">Crossover</span>
         </div>
 
         <div class="card-content">
-          <h3>Halloween Party</h3>
-          <p>Ven con tu mejor disfraz y disfruta una noche llena de música, shows y sorpresas.</p>
-          <span class="card-location"><span>&#128467;&#65039;</span> 31 de Octubre 2026</span>
+          <h3>Fiesta Crossover</h3>
+          <p>Baila diferentes géneros musicales en una noche llena de ritmo, energía y el mejor ambiente.</p>
+          <span class="card-location"><span>&#127925;</span> Música para todos los gustos</span>
         </div>
       </article>
 
-      <article class="card promo-card" data-code="CAPITAL-VELITAS-003">
+      <article class="card promo-card" data-code="GARAGE-SHOWS-003">
         <div class="card-image">
-          <img src="../../../gastrobar/GarageDiscoBar/img/general17.jpg" alt="Día de velitas">
-          <span class="card-badge">Velitas</span>
+          <img src="../../../gastrobar/GarageDiscoBar/img/general17.jpg" alt="Shows especiales">
+          <span class="card-badge">Shows</span>
         </div>
 
         <div class="card-content">
-          <h3>Noche de Velitas</h3>
-          <p>Una noche mágica para brindar, compartir y empezar diciembre con buena energía.</p>
-          <span class="card-location"><span>&#128467;&#65039;</span> 7 de Diciembre 2026</span>
+          <h3>Shows Cada 15 Días</h3>
+          <p>Disfruta presentaciones especiales, artistas invitados y experiencias preparadas para sorprenderte.</p>
+          <span class="card-location"><span>&#127917;</span> Shows especiales cada quince días</span>
         </div>
       </article>
 
-      <article class="card promo-card" data-code="CAPITAL-NAVIDAD-004">
+      <article class="card promo-card" data-code="GARAGE-GASTROBAR-004">
         <div class="card-image">
-          <img src="../../../gastrobar/GarageDiscoBar/img/general6.jpg" alt="Navidad">
-          <span class="card-badge">Navidad</span>
+          <img src="../../../gastrobar/GarageDiscoBar/img/general6.jpg" alt="Comida y bebidas">
+          <span class="card-badge">Gastrobar</span>
         </div>
 
         <div class="card-content">
-          <h3>Pre Navidad Capital</h3>
-          <p>Una celebración navideña para disfrutar entre amigas, cocteles, música y mucho ambiente.</p>
-          <span class="card-location"><span>&#128467;&#65039;</span> 24 de Diciembre 2026</span>
+          <h3>Sabores de Gastrobar</h3>
+          <p>Acompaña tu noche con comida, bebidas y opciones ideales para compartir antes de salir a bailar.</p>
+          <span class="card-location"><span>&#127828;</span> Comida, bebidas y buena compañía</span>
         </div>
       </article>
 
-      <article class="card promo-card" data-code="CAPITAL-FIN-DE-ANO-005">
+      <article class="card promo-card" data-code="GARAGE-DISCOBAR-005">
         <div class="card-image">
-          <img src="../../../gastrobar/GarageDiscoBar/img/general1.jpg" alt="Fin de año">
-          <span class="card-badge">Fin de año</span>
+          <img src="../../../gastrobar/GarageDiscoBar/img/general1.jpg" alt="Garage Disco Bar">
+          <span class="card-badge">Disco Bar</span>
         </div>
 
         <div class="card-content">
-          <h3>Despedida de Año</h3>
-          <p>Despidamos el año con fiesta, buena música, brindis y una noche inolvidable.</p>
-          <span class="card-location"><span>&#128467;&#65039;</span> 31 de Diciembre 2026</span>
+          <h3>Ambiente de Disco Bar</h3>
+          <p>Vive una noche completa con luces, música, bebidas y un espacio preparado para bailar y celebrar.</p>
+          <span class="card-location"><span>&#127926;</span> Fiesta, música y diversión</span>
         </div>
       </article>
 
-      <article class="card promo-card" data-code="CAPITAL-VIERNES-006">
+      <article class="card promo-card" data-code="GARAGE-BAILE-006">
         <div class="card-image">
-          <img src="../../../gastrobar/GarageDiscoBar/img/general10.jpg" alt="Viernes de amigas">
-          <span class="card-badge">Viernes</span>
+          <img src="../../../gastrobar/GarageDiscoBar/img/general10.jpg" alt="Noche de baile">
+          <span class="card-badge">Baile</span>
         </div>
 
         <div class="card-content">
-          <h3>Viernes de Amigas</h3>
-          <p>Todos los viernes tenemos ambiente especial para venir, bailar y compartir entre mujeres.</p>
-          <span class="card-location"><span>&#128467;&#65039;</span> Todos los viernes desde Julio 2026</span>
+          <h3>Noches para Bailar</h3>
+          <p>Reúne a tus amigos y disfruta una pista llena de música crossover, alegría y mucho movimiento.</p>
+          <span class="card-location"><span>&#128131;</span> Baila y celebra con nosotros</span>
         </div>
       </article>
 
     </div>
   </section>
+</section>
 
 <script defer src="../../../gastrobar/GarageDiscoBar/actividades/actividades/actividades.js<?= $jsVer ? '?v=' . $jsVer : '' ?>"></script>
