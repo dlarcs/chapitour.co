@@ -61,12 +61,12 @@ $googleMapsLink = 'https://maps.app.goo.gl/EnKkPuRb64VNMnQ77';
       <div class="social-links">
         <a href="https://www.instagram.com/garagediscobar_?igsh=MXI2YTFuZ2JlMXpsMA%3D%3D" class="social-card">
           <span>Instagram</span>
-          <small>@garage939c</small>
+          <small>@Luis Rios</small>
         </a>
 
         <a href="https://www.facebook.com/GARAGECHAPINERO9.34?mibextid=wwXIfr&rdid=nNeIixoVCmRKpngW&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F191aEZi498%2F%3Fmibextid%3DwwXIfr" class="social-card">
           <span>Facebook</span>
-          <small>Garage 9-39C</small>
+          <small>Luis Rios</small>
         </a>
 
         <a href="https://wa.me/573156175056" class="social-card" target="_blank">
