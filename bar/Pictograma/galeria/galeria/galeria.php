@@ -44,6 +44,21 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
     <img src="../../../bar/Pictograma/img/general20.png" alt="Plan para disfrutar en Pictogramas Cafe Bar">
     <img src="../../../bar/Pictograma/img/general21.png" alt="Compartir bebidas en Pictogramas Cafe Bar">
     <img src="../../../bar/Pictograma/img/general22.png" alt="Experiencia en Pictogramas Cafe Bar">
+    <img src="../../../bar/Pictograma/img/general23.png" alt="Amigos disfrutando en Pictogramas Cafe Bar">
+    <img src="../../../bar/Pictograma/img/general24.png" alt="Zona de entretenimiento de Pictogramas Cafe Bar">
+    <img src="../../../bar/Pictograma/img/general25.png" alt="Clientes compartiendo en Pictogramas Cafe Bar">
+    <img src="../../../bar/Pictograma/img/general26.png" alt="Ambiente acogedor de Pictogramas Cafe Bar">
+    <img src="../../../bar/Pictograma/img/general27.png" alt="Noche de amigos en Pictogramas Cafe Bar">
+    <img src="../../../bar/Pictograma/img/general28.png" alt="Bar y entretenimiento en Pictogramas Cafe Bar">
+    <img src="../../../bar/Pictograma/img/general29.png" alt="Cervezas y buena compañía en Pictogramas Cafe Bar">
+    <img src="../../../bar/Pictograma/img/general30.png" alt="Zona deportiva de Pictogramas Cafe Bar">
+    <img src="../../../bar/Pictograma/img/general31.png" alt="Partidos de fútbol en Pictogramas Cafe Bar">
+    <img src="../../../bar/Pictograma/img/general32.png" alt="Celebración entre amigos en Pictogramas Cafe Bar">
+    <img src="../../../bar/Pictograma/img/general33.png" alt="Diversión y bebidas en Pictogramas Cafe Bar">
+    <img src="../../../bar/Pictograma/img/general34.png" alt="Espacio acogedor para compartir en Pictogramas Cafe Bar">
+    <img src="../../../bar/Pictograma/img/general35.png" alt="Clientes disfrutando la noche en Pictogramas Cafe Bar">
+    <img src="../../../bar/Pictograma/img/general36.png" alt="Experiencia nocturna en Pictogramas Cafe Bar">
+    <img src="../../../bar/Pictograma/img/general37.png" alt="Momentos especiales en Pictogramas Cafe Bar">
   </div>
 </section>
 

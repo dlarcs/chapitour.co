@@ -38,7 +38,7 @@ $whatsappLink = "https://wa.me/{$whatsappNumber}?text={$whatsappText}";
 
         <p>
           <strong>Horario:</strong>
-          Lunes a Domingo 11:00am a 3:00pm
+          Lunes a Domingo 11:00am a 3:00am
         </p>
 
         <p>
