@@ -74,7 +74,19 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
         <div class="category-card__content">
           <div class="category-card__icon">🍸</div>
           <h5>Garage Disco Bar</h5>
-          <small>Cocteles</small>
+          <small>Cocteles, crossover, gastrobar</small>
+        </div>
+
+        <span class="category-card__arrow">→</span>
+      </a>
+      <a href="gastrobar/GarageDiscoBar/index.php" class="category-card place-card" data-category="lgbtiq bares discoteca Crossover gastrobar cover">
+        <img src="gastrobar/GarageDiscoBar/img/general11.jpg" alt="Panaderías y pastelerías en Chapinero">
+        <div class="category-card__overlay"></div>
+
+        <div class="category-card__content">
+          <div class="category-card__icon">🍸</div>
+          <h5>Píctogramas Café bar</h5>
+          <small>Cocteles, café, bar, bolirana</small>
         </div>
 
         <span class="category-card__arrow">→</span>
