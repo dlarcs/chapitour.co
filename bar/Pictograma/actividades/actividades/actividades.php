@@ -13,96 +13,96 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
 <section class="business-section visible">
   <span class="section-label">Actividades & Promociones</span>
 
-  <h2>Lo mejor de este año</h2>
+  <h2>Planes para disfrutar en Pictograma</h2>
 
   <p>
-    Conoce nuestras promociones y actividades por mes, ven y disfruta de todo lo que te ofrecemos
+    Disfruta cócteles, licores, café y granizados en un ambiente agradable, rodeado de banderas y acompañado de buena música, amigos y bolirrana.
   </p>
 
-  <!-- TARJETAS - HTML -->
   <!-- TARJETAS - HTML -->
   <section class="cards-section">
     <div class="cards-grid">
 
-      <article class="card promo-card" data-code="CAPITAL-AMOR-AMISTAD-001">
+      <article class="card promo-card" data-code="PICTOGRAMA-COCTELES-001">
         <div class="card-image">
-          <img src="../../../bar/CapitalQueer/img/general17.jpg" alt="Amor y amistad">
-          <span class="card-badge">Noche especial</span>
+          <img src="../../../bar/Pictograma/img/general1.png" alt="Noche de cócteles en Pictograma">
+          <span class="card-badge">Cócteles</span>
         </div>
 
         <div class="card-content">
-          <h3>Amor y Amistad Queer</h3>
-          <p>Una noche para celebrar el amor, la amistad, la música y las conexiones bonitas.</p>
-          <span class="card-location"><span>&#128467;&#65039;</span> 19 de Septiembre 2026</span>
+          <h3>Noche de Cócteles</h3>
+          <p>Prueba diferentes combinaciones, sabores y colores mientras disfrutas de un ambiente tranquilo y agradable.</p>
+          <span class="card-location"><span>&#127864;</span> Cócteles para compartir</span>
         </div>
       </article>
 
-      <article class="card promo-card" data-code="CAPITAL-HALLOWEEN-002">
+      <article class="card promo-card" data-code="PICTOGRAMA-BOLIRRANA-002">
         <div class="card-image">
-          <img src="../../../bar/CapitalQueer/img/general13.png" alt="Halloween">
-          <span class="card-badge">Halloween</span>
+          <img src="../../../bar/Pictograma/img/general2.png" alt="Juego de bolirrana">
+          <span class="card-badge">Bolirrana</span>
         </div>
 
         <div class="card-content">
-          <h3>Halloween Party</h3>
-          <p>Ven con tu mejor disfraz y disfruta una noche llena de música, shows y sorpresas.</p>
-          <span class="card-location"><span>&#128467;&#65039;</span> 31 de Octubre 2026</span>
+          <h3>Reto de Bolirrana</h3>
+          <p>Arma tu grupo de amigos, demuestra tu puntería y disfruta una competencia amistosa acompañada de tu bebida favorita.</p>
+          <span class="card-location"><span>&#127919;</span> Diversión entre amigos</span>
         </div>
       </article>
 
-      <article class="card promo-card" data-code="CAPITAL-VELITAS-003">
+      <article class="card promo-card" data-code="PICTOGRAMA-BANDERAS-003">
         <div class="card-image">
-          <img src="../../../bar/CapitalQueer/img/general18.jpg" alt="Día de velitas">
-          <span class="card-badge">Velitas</span>
+          <img src="../../../bar/Pictograma/img/general3.png" alt="Decoración de banderas en el techo">
+          <span class="card-badge">Experiencia</span>
         </div>
 
         <div class="card-content">
-          <h3>Noche de Velitas</h3>
-          <p>Una noche mágica para brindar, compartir y empezar diciembre con buena energía.</p>
-          <span class="card-location"><span>&#128467;&#65039;</span> 7 de Diciembre 2026</span>
+          <h3>Una Vuelta por el Mundo</h3>
+          <p>Disfruta la decoración de banderas en el techo, conoce nuevos sabores y vive una experiencia diferente sin salir de la ciudad.</p>
+          <span class="card-location"><span>&#127758;</span> Ambiente internacional</span>
         </div>
       </article>
 
-      <article class="card promo-card" data-code="CAPITAL-NAVIDAD-004">
+      <article class="card promo-card" data-code="PICTOGRAMA-CAFE-004">
         <div class="card-image">
-          <img src="../../../bar/CapitalQueer/img/general3.png" alt="Navidad">
-          <span class="card-badge">Navidad</span>
+          <img src="../../../bar/Pictograma/img/general4.png" alt="Café para compartir">
+          <span class="card-badge">Café</span>
         </div>
 
         <div class="card-content">
-          <h3>Pre Navidad Capital</h3>
-          <p>Una celebración navideña para disfrutar entre amigas, cocteles, música y mucho ambiente.</p>
-          <span class="card-location"><span>&#128467;&#65039;</span> 24 de Diciembre 2026</span>
+          <h3>Tardes de Café</h3>
+          <p>Haz una pausa, conversa y disfruta una deliciosa taza de café en un espacio cómodo y acogedor.</p>
+          <span class="card-location"><span>&#9749;</span> Un plan para conversar</span>
         </div>
       </article>
 
-      <article class="card promo-card" data-code="CAPITAL-FIN-DE-ANO-005">
+      <article class="card promo-card" data-code="PICTOGRAMA-GRANIZADOS-005">
         <div class="card-image">
-          <img src="../../../bar/CapitalQueer/img/general21.png" alt="Fin de año">
-          <span class="card-badge">Fin de año</span>
+          <img src="../../../bar/Pictograma/img/general5.png" alt="Granizados de diferentes sabores">
+          <span class="card-badge">Granizados</span>
         </div>
 
         <div class="card-content">
-          <h3>Despedida de Año</h3>
-          <p>Despidamos el año con fiesta, buena música, brindis y una noche inolvidable.</p>
-          <span class="card-location"><span>&#128467;&#65039;</span> 31 de Diciembre 2026</span>
+          <h3>Granizados de Sabores</h3>
+          <p>Refréscate con granizados llenos de sabor, perfectos para acompañar una tarde o comenzar una noche entre amigos.</p>
+          <span class="card-location"><span>&#129482;</span> Refrescantes y deliciosos</span>
         </div>
       </article>
 
-      <article class="card promo-card" data-code="CAPITAL-VIERNES-006">
+      <article class="card promo-card" data-code="PICTOGRAMA-AMIGOS-006">
         <div class="card-image">
-          <img src="../../../bar/CapitalQueer/img/general10.png" alt="Viernes de amigas">
-          <span class="card-badge">Viernes</span>
+          <img src="../../../bar/Pictograma/img/general6.png" alt="Encuentro entre amigos">
+          <span class="card-badge">Buen ambiente</span>
         </div>
 
         <div class="card-content">
-          <h3>Viernes de Amigas</h3>
-          <p>Todos los viernes tenemos ambiente especial para venir, bailar y compartir entre mujeres.</p>
-          <span class="card-location"><span>&#128467;&#65039;</span> Todos los viernes desde Julio 2026</span>
+          <h3>Encuentro entre Amigos</h3>
+          <p>Comparte licores, cócteles y buena música en un ambiente ideal para conversar, reír y pasar un momento especial.</p>
+          <span class="card-location"><span>&#127881;</span> Música, bebidas y diversión</span>
         </div>
       </article>
 
     </div>
   </section>
+</section>
 
 <script defer src="../../../bar/Pictograma/actividades/actividades/actividades.js<?= $jsVer ? '?v=' . $jsVer : '' ?>"></script>

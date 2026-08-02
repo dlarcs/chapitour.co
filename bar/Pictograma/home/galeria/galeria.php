@@ -22,7 +22,7 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
 
   <div class="gallery-grid">
     <img src="../../bar/Pictograma/img/general21.png" alt="Ambiente de Pictogramas Cafe Bar">
-    <img src="../../bar/Pictograma/img/general17.jpg" alt="Bar y zona de bebidas de Pictogramas Cafe Bar">
+    <img src="../../bar/Pictograma/img/general17.png" alt="Bar y zona de bebidas de Pictogramas Cafe Bar">
     <img src="../../bar/Pictograma/img/general22.png" alt="Espacio para compartir en Pictogramas Cafe Bar" class="gallery-img-mobile-hide">
   </div>
 

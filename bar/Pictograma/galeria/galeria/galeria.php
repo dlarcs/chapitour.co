@@ -38,8 +38,8 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
     <img src="../../../bar/Pictograma/img/general14.png" alt="Cócteles de Pictogramas Cafe Bar">
     <img src="../../../bar/Pictograma/img/general15.png" alt="Encuentro entre amigos en Pictogramas Cafe Bar">
     <img src="../../../bar/Pictograma/img/general16.png" alt="Ambiente para compartir en Pictogramas Cafe Bar">
-    <img src="../../../bar/Pictograma/img/general17.jpg" alt="Espacio agradable de Pictogramas Cafe Bar">
-    <img src="../../../bar/Pictograma/img/general18.jpg" alt="Diversión en Pictogramas Cafe Bar">
+    <img src="../../../bar/Pictograma/img/general17.png" alt="Espacio agradable de Pictogramas Cafe Bar">
+    <img src="../../../bar/Pictograma/img/general18.png" alt="Diversión en Pictogramas Cafe Bar">
     <img src="../../../bar/Pictograma/img/general19.png" alt="Evento especial en Pictogramas Cafe Bar">
     <img src="../../../bar/Pictograma/img/general20.png" alt="Plan para disfrutar en Pictogramas Cafe Bar">
     <img src="../../../bar/Pictograma/img/general21.png" alt="Compartir bebidas en Pictogramas Cafe Bar">

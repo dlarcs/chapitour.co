@@ -60,12 +60,12 @@
 
   <meta
     property="og:image"
-    content="https://chapitour.co/bar/Pictograma/img/logoPictograma.jpg"
+    content="https://chapitour.co/bar/Pictograma/img/logo.jpeg"
   >
 
   <meta
     property="og:image:secure_url"
-    content="https://chapitour.co/bar/Pictograma/img/logoPictograma.jpg"
+    content="https://chapitour.co/bar/Pictograma/img/logo.jpeg"
   >
 
   <meta property="og:image:type" content="image/jpeg">
@@ -94,7 +94,7 @@
 
   <meta
     name="twitter:image"
-    content="https://chapitour.co/bar/Pictograma/img/logoPictograma.jpg"
+    content="https://chapitour.co/bar/Pictograma/img/logo.jpeg"
   >
 
   <meta
@@ -106,26 +106,26 @@
   <link
     rel="icon"
     type="image/jpeg"
-    href="/bar/Pictograma/img/logoPictograma.jpg?v=2"
+    href="/bar/Pictograma/img/logo.jpeg?v=2"
   >
 
   <link
     rel="icon"
     type="image/jpeg"
     sizes="32x32"
-    href="/bar/Pictograma/img/logoPictograma.jpg"
+    href="/bar/Pictograma/img/logo.jpeg"
   >
 
   <link
     rel="icon"
     type="image/jpeg"
     sizes="16x16"
-    href="/bar/Pictograma/img/logoPictograma.jpg"
+    href="/bar/Pictograma/img/logo.jpeg"
   >
 
   <link
     rel="apple-touch-icon"
-    href="/bar/Pictograma/img/logoPictograma.jpg"
+    href="/bar/Pictograma/img/logo.jpeg"
   >
 
   <!-- CSS -->
@@ -153,7 +153,7 @@
         "name": "Pictogramas Cafe Bar",
         "description": "Pictogramas Cafe Bar es un lugar en Chapinero para disfrutar cócteles, granizados, licores, micheladas, bolivianas, cervezas, café y partidas de bolirana en un ambiente agradable para compartir con amigos.",
         "url": "https://chapitour.co/bar/Pictograma/index.php",
-        "image": "https://chapitour.co/bar/Pictograma/img/logoPictograma.jpg",
+        "image": "https://chapitour.co/bar/Pictograma/img/logo.jpeg",
         "telephone": "+573138846378",
         "servesCuisine": [
           "Cócteles",

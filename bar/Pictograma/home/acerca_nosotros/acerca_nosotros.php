@@ -31,7 +31,7 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
   </div>
 
   <img
-    src="../../bar/Pictograma/img/general18.jpg"
+    src="../../bar/Pictograma/img/logo.jpeg"
     alt="Ambiente y experiencia en Pictogramas Cafe Bar"
   >
 </section>

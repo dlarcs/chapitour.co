@@ -59,12 +59,12 @@
 
   <meta
     property="og:image"
-    content="https://www.chapitour.co/bar/Pictograma/img/logoPictograma.jpg"
+    content="https://www.chapitour.co/bar/Pictograma/img/logo.jpeg"
   >
 
   <meta
     property="og:image:secure_url"
-    content="https://www.chapitour.co/bar/Pictograma/img/logoPictograma.jpg"
+    content="https://www.chapitour.co/bar/Pictograma/img/logo.jpeg"
   >
 
   <meta property="og:image:type" content="image/jpeg">
@@ -93,7 +93,7 @@
 
   <meta
     name="twitter:image"
-    content="https://www.chapitour.co/bar/Pictograma/img/logoPictograma.jpg"
+    content="https://www.chapitour.co/bar/Pictograma/img/logo.jpeg"
   >
 
   <meta
@@ -105,12 +105,12 @@
   <link
     rel="icon"
     type="image/jpeg"
-    href="/bar/Pictograma/img/logoPictograma.jpg"
+    href="/bar/Pictograma/img/logo.jpeg"
   >
 
   <link
     rel="apple-touch-icon"
-    href="/bar/Pictograma/img/logoPictograma.jpg"
+    href="/bar/Pictograma/img/logo.jpeg"
   >
 
   <!-- CSS -->
@@ -137,7 +137,7 @@
         "name": "Pictogramas Cafe Bar",
         "description": "Pictogramas Cafe Bar es un espacio para disfrutar cócteles, granizados, licores, micheladas, bolivianas, cervezas y café. También cuenta con bolirana para compartir y divertirse con amigos.",
         "url": "https://www.chapitour.co/bar/Pictograma/index.php",
-        "image": "https://www.chapitour.co/bar/Pictograma/img/logoPictograma.jpg",
+        "image": "https://www.chapitour.co/bar/Pictograma/img/logo.jpeg",
         "servesCuisine": [
           "Cócteles",
           "Granizados",
