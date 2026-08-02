@@ -38,7 +38,7 @@ $googleMapsLink = 'https://maps.app.goo.gl/7kCxVj9r8EvT7BT27'; // Aquí cargas e
 
         <p>
           <strong>WhatsApp:</strong>
-          <a href="https://wa.me/573007795016"> 3007795016</a>
+          <a href="https://wa.me/573007795016"> 300 779 50 16</a>
         </p>
       </div>
 
