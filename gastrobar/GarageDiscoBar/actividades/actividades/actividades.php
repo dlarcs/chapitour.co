@@ -11,12 +11,12 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
 <link rel="stylesheet" href="../../../gastrobar/GarageDiscoBar/actividades/actividades/actividades.css<?= $cssVer ? '?v=' . $cssVer : '' ?>">
 
 <section class="business-section visible">
-  <span class="section-label">Actividades & Eventos</span>
+  <span class="section-label">Experiencias & Eventos</span>
 
-  <h2>Planes para disfrutar en Garage Disco Bar</h2>
+  <h2>Aquí cada noche se convierte en una historia</h2>
 
   <p>
-    Disfruta noches de karaoke, baile, música crossover, shows especiales y una propuesta de gastrobar para compartir con amigos.
+    Canta, baila, celebra y disfruta experiencias llenas de música, sabor y diversión. En Garage Disco Bar siempre hay un plan esperando por ti.
   </p>
 
   <!-- TARJETAS - HTML -->
@@ -25,79 +25,79 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
 
       <article class="card promo-card" data-code="GARAGE-KARAOKE-001">
         <div class="card-image">
-          <img src="../../../gastrobar/GarageDiscoBar/img/general15.jpg" alt="Noche de karaoke">
+          <img src="../../../gastrobar/GarageDiscoBar/img/general15.jpg" alt="Noche de karaoke en Garage Disco Bar">
           <span class="card-badge">Karaoke</span>
         </div>
 
         <div class="card-content">
-          <h3>Noches de Karaoke</h3>
-          <p>Sube al escenario, canta tus canciones favoritas y comparte una noche diferente con tus amigos.</p>
-          <span class="card-location"><span>&#127908;</span> Karaoke para cantar y disfrutar</span>
+          <h3>¡El escenario es tuyo!</h3>
+          <p>Toma el micrófono, canta ese éxito que nunca falla y vive una noche llena de música, risas y momentos inolvidables.</p>
+          <span class="card-location"><span>&#127908;</span> Canta, disfruta y sorprende a todos</span>
         </div>
       </article>
 
       <article class="card promo-card" data-code="GARAGE-CROSSOVER-002">
         <div class="card-image">
-          <img src="../../../gastrobar/GarageDiscoBar/img/general13.jpg" alt="Fiesta crossover">
+          <img src="../../../gastrobar/GarageDiscoBar/img/general13.jpg" alt="Fiesta crossover en Garage Disco Bar">
           <span class="card-badge">Crossover</span>
         </div>
 
         <div class="card-content">
-          <h3>Fiesta Crossover</h3>
-          <p>Baila diferentes géneros musicales en una noche llena de ritmo, energía y el mejor ambiente.</p>
+          <h3>Una noche, todos los ritmos</h3>
+          <p>Del reguetón a la salsa y de los clásicos a los éxitos del momento. Ven preparado para bailar sin parar.</p>
           <span class="card-location"><span>&#127925;</span> Música para todos los gustos</span>
         </div>
       </article>
 
       <article class="card promo-card" data-code="GARAGE-SHOWS-003">
         <div class="card-image">
-          <img src="../../../gastrobar/GarageDiscoBar/img/general17.jpg" alt="Shows especiales">
-          <span class="card-badge">Shows</span>
+          <img src="../../../gastrobar/GarageDiscoBar/img/general17.jpg" alt="Shows especiales en Garage Disco Bar">
+          <span class="card-badge">Shows en vivo</span>
         </div>
 
         <div class="card-content">
-          <h3>Shows Cada 15 Días</h3>
-          <p>Disfruta presentaciones especiales, artistas invitados y experiencias preparadas para sorprenderte.</p>
-          <span class="card-location"><span>&#127917;</span> Shows especiales cada quince días</span>
+          <h3>Cada 15 días, algo nuevo</h3>
+          <p>Déjate sorprender por artistas invitados, presentaciones especiales y espectáculos que harán de tu noche una experiencia diferente.</p>
+          <span class="card-location"><span>&#127917;</span> Presentaciones para vivir y compartir</span>
         </div>
       </article>
 
       <article class="card promo-card" data-code="GARAGE-GASTROBAR-004">
         <div class="card-image">
-          <img src="../../../gastrobar/GarageDiscoBar/img/general6.jpg" alt="Comida y bebidas">
+          <img src="../../../gastrobar/GarageDiscoBar/img/general6.jpg" alt="Comida y bebidas en Garage Disco Bar">
           <span class="card-badge">Gastrobar</span>
         </div>
 
         <div class="card-content">
-          <h3>Sabores de Gastrobar</h3>
-          <p>Acompaña tu noche con comida, bebidas y opciones ideales para compartir antes de salir a bailar.</p>
-          <span class="card-location"><span>&#127828;</span> Comida, bebidas y buena compañía</span>
+          <h3>El sabor también es parte de la fiesta</h3>
+          <p>Disfruta comida, cocteles y bebidas ideales para compartir mientras te preparas para una gran noche.</p>
+          <span class="card-location"><span>&#127828;</span> Sabores para acompañar cada momento</span>
         </div>
       </article>
 
       <article class="card promo-card" data-code="GARAGE-DISCOBAR-005">
         <div class="card-image">
-          <img src="../../../gastrobar/GarageDiscoBar/img/general1.jpg" alt="Garage Disco Bar">
+          <img src="../../../gastrobar/GarageDiscoBar/img/general1.jpg" alt="Ambiente de fiesta en Garage Disco Bar">
           <span class="card-badge">Disco Bar</span>
         </div>
 
         <div class="card-content">
-          <h3>Ambiente de Disco Bar</h3>
-          <p>Vive una noche completa con luces, música, bebidas y un espacio preparado para bailar y celebrar.</p>
-          <span class="card-location"><span>&#127926;</span> Fiesta, música y diversión</span>
+          <h3>Enciende la noche</h3>
+          <p>Luces, música, bebidas y toda la energía que necesitas para celebrar cumpleaños, encuentros y noches especiales.</p>
+          <span class="card-location"><span>&#127926;</span> El punto de encuentro para celebrar</span>
         </div>
       </article>
 
       <article class="card promo-card" data-code="GARAGE-BAILE-006">
         <div class="card-image">
-          <img src="../../../gastrobar/GarageDiscoBar/img/general10.jpg" alt="Noche de baile">
+          <img src="../../../gastrobar/GarageDiscoBar/img/general10.jpg" alt="Noche de baile en Garage Disco Bar">
           <span class="card-badge">Baile</span>
         </div>
 
         <div class="card-content">
-          <h3>Noches para Bailar</h3>
-          <p>Reúne a tus amigos y disfruta una pista llena de música crossover, alegría y mucho movimiento.</p>
-          <span class="card-location"><span>&#128131;</span> Baila y celebra con nosotros</span>
+          <h3>Que nadie se quede sentado</h3>
+          <p>Reúne a tu parche, entra a la pista y déjate llevar por una noche cargada de ritmo, alegría y buena energía.</p>
+          <span class="card-location"><span>&#128131;</span> Ven a bailar y celebra con nosotros</span>
         </div>
       </article>
 
