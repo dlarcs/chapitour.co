@@ -44,7 +44,7 @@ $whatsappLink = "https://wa.me/{$whatsappNumber}?text={$whatsappText}";
         <p>
           <strong>WhatsApp:</strong>
           <a href="<?= $whatsappLink ?>" target="_blank" rel="noopener noreferrer">
-            313 884 6378
+            350 283 56 48
           </a>
         </p>
       </div>
