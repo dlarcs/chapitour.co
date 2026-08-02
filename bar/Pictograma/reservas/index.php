@@ -194,7 +194,7 @@
 
   <a
     class="whatsapp-fab"
-    href="https://wa.me/573138846378?text=Hola%2C%20vengo%20desde%20la%20p%C3%A1gina%20de%20Pictogramas%20Cafe%20Bar%20en%20Chapitour%20y%20quiero%20hacer%20una%20reserva."
+    href="https://wa.me/573502835648?text=Hola%2C%20vengo%20desde%20la%20p%C3%A1gina%20de%20Pictogramas%20Cafe%20Bar%20en%20Chapitour%20y%20quiero%20hacer%20una%20reserva."
     target="_blank"
     rel="noopener noreferrer"
     aria-label="Reservar en Pictogramas Cafe Bar por WhatsApp"

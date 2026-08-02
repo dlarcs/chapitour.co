@@ -10,7 +10,7 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
 $address = 'Calle 59 #13-20, Chapinero, Bogotá';
 $googleMapsLink = 'https://www.google.com/maps/search/?api=1&query=' . urlencode($address);
 
-$whatsappNumber = '573138846378';
+$whatsappNumber = '573502835648';
 $whatsappText = urlencode('Hola, vengo desde Chapitour y quiero recibir más información sobre Pictogramas Cafe Bar.');
 $whatsappLink = "https://wa.me/{$whatsappNumber}?text={$whatsappText}";
 ?>

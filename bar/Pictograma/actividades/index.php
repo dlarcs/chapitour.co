@@ -186,7 +186,7 @@
 
   <a
     class="whatsapp-fab"
-    href="https://wa.me/573138846378?text=Hola%2C%20vengo%20desde%20la%20p%C3%A1gina%20de%20actividades%20de%20Pictogramas%20Cafe%20Bar%20y%20quiero%20conocer%20las%20promociones%20disponibles."
+    href="https://wa.me/573502835648?text=Hola%2C%20vengo%20desde%20la%20p%C3%A1gina%20de%20actividades%20de%20Pictogramas%20Cafe%20Bar%20y%20quiero%20conocer%20las%20promociones%20disponibles."
     target="_blank"
     rel="noopener noreferrer"
     aria-label="Consultar actividades y promociones de Pictogramas Cafe Bar por WhatsApp"

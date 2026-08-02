@@ -154,7 +154,7 @@
         "description": "Pictogramas Cafe Bar es un lugar en Chapinero para disfrutar cócteles, granizados, licores, micheladas, bolivianas, cervezas, café y partidas de bolirana en un ambiente agradable para compartir con amigos.",
         "url": "https://chapitour.co/bar/Pictograma/index.php",
         "image": "https://chapitour.co/bar/Pictograma/img/logo.jpeg",
-        "telephone": "+573138846378",
+        "telephone": "+573502835648",
         "servesCuisine": [
           "Cócteles",
           "Granizados",
@@ -234,7 +234,7 @@
 
   <a
     class="whatsapp-fab"
-    href="https://wa.me/573138846378?text=Hola%2C%20vengo%20desde%20la%20p%C3%A1gina%20de%20Pictogramas%20Cafe%20Bar%20en%20Chapitour%20y%20quiero%20recibir%20m%C3%A1s%20informaci%C3%B3n."
+    href="https://wa.me/573502835648?text=Hola%2C%20vengo%20desde%20la%20p%C3%A1gina%20de%20Pictogramas%20Cafe%20Bar%20en%20Chapitour%20y%20quiero%20recibir%20m%C3%A1s%20informaci%C3%B3n."
     target="_blank"
     rel="noopener noreferrer"
     aria-label="Contactar a Pictogramas Cafe Bar por WhatsApp"
