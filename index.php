@@ -210,6 +210,8 @@ Chapinero business directory
     <?php include "home/slider/slider.php" ?>
     <?php include "home/aliados/aliados.php" ?>
     <?php include "home/siguenos/siguenos.php" ?>
+
+    <?php include "home/destacados/destacados.php" ?>
     <?php include "home/interes/interes.php" ?>
   </div>
   <?php include "home/footer/footer.php" ?>
