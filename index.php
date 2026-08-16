@@ -200,11 +200,7 @@ Chapinero business directory
   <script defer src="app.js<?= $jsVer ? '?v=' . $jsVer : '' ?>"></script>
 </head>
 <body>
-  <!-- <div class="preloader" id="preloader">
-    <div class="loader">
-    </div>
-  </div> -->
-  <script src="soporte.js"></script>
+  
   <?php include "home/menu/menu.php" ?>
   <div class="container_body">
     <?php include "home/slider/slider.php" ?>

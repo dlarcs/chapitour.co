@@ -2,10 +2,8 @@
 $base = rtrim($_SERVER['DOCUMENT_ROOT'], '/');
 
 $cssFile = $base . '/home/destacados/destacados.css';
-$jsFile  = $base . '/home/destacados/destacados.js';
 
 $cssVer = is_file($cssFile) ? filemtime($cssFile) : '';
-$jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
 ?>
 
 <link rel="stylesheet" href="home/destacados/destacados.css<?= $cssVer ? '?v=' . $cssVer : '' ?>">
@@ -109,5 +107,3 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
 
   </div>
 </div>
-
-<script defer src="home/destacados/destacados.js<?= $jsVer ? '?v=' . $jsVer : '' ?>"></script>
