@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="content-language" content="es-CO">
 
-  <title>Qué hacer en Chapinero: restaurantes, cafés y planes | Chapitour.co</title>
+  <title> Chapitour.co | Lugares para visitar en Chapinero, Bogotá</title>
 
   <?php
   $base = rtrim($_SERVER['DOCUMENT_ROOT'], '/');
@@ -200,7 +200,7 @@ Chapinero business directory
   <script defer src="app.js<?= $jsVer ? '?v=' . $jsVer : '' ?>"></script>
 </head>
 <body>
-  
+
   <?php include "home/menu/menu.php" ?>
   <div class="container_body">
     <?php include "home/slider/slider.php" ?>

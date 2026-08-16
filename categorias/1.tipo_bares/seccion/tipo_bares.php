@@ -28,11 +28,11 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
   <!-- LISTA DE FILTROS -->
   <ul class="filter-list">
     <li data-filter="all" class="active">Todos</li>
-    <li data-filter="bar">Metal</li>
-    <li data-filter="gastro-bar">Rock</li>
-    <li data-filter="bar-metal">Salsa</li>
-    <li data-filter="bar-gay">Bar LGBTIQ+</li>
-    <li data-filter="cocteleria">Deportes</li>
+    <li data-filter="bar">Solo mujeres</li>
+    <li data-filter="gastro-bar">Discoteca</li>
+    <li data-filter="bar-metal">Gastrobar</li>
+    <li data-filter="bar-gay">LGBTIQ+</li>
+    <li data-filter="cocteleria"></li>
   </ul>
   <div class="categories-grid">
 

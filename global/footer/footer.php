@@ -8,7 +8,7 @@ $cssVer = is_file($cssFile) ? filemtime($cssFile) : '';
   <div class="footer-inner">
 
     <div class="footer-brand">
-      <h1>Chapitour.co</h1>
+      <a href="index.php"><h1>Chapitour.co</h1></a>
       <p>Los mejores lugares, sabores y experiencias te esperan.</p>
 
       <div class="footer-social">

@@ -8,13 +8,12 @@ $cssVer = is_file($cssFile) ? filemtime($cssFile) : '';
   <div class="footer-inner">
 
     <div class="footer-brand">
-      <h1>Chapitour.co</h1>
+        <a href="index.php"><h1>Chapitour.co</h1></a>
       <p>Los mejores lugares, sabores y experiencias te esperan.</p>
 
       <div class="footer-social">
-        <a href="#" aria-label="Instagram">◎</a>
-        <a href="#" aria-label="Facebook">f</a>
-        <a href="#" aria-label="TikTok">♪</a>
+        <a href="https://www.instagram.com/chapitour.co/" aria-label="Instagram">◎</a>
+
       </div>
     </div>
 
@@ -23,12 +22,8 @@ $cssVer = is_file($cssFile) ? filemtime($cssFile) : '';
       <a href="categorias/1.tipo_bares/index.php">Bar</a>
       <a href="categorias/2.planes_bares/index.php">Gastro Bar</a>
       <a href="categorias/3.cafes/index.php">Café</a>
-      <a href="categorias/4.postres/index.php">Postres</a>
-      <a href="categorias/5.LGBTIQ+/index.php">LGBTIQ+</a>
-      <a href="categorias/6.comida_rapida/index.php">Comida rápida</a>
+      <a href="categorias/5.LGBTIQ+/index.php">Jilmar </a>
       <a href="categorias/7.gastronomia/index.php">Gastronomía</a>
-      <a href="categorias/8.artesanias/index.php">Artesanías</a>
-      <a href="categorias/9.panaderia/index.php">Panaderías y pastelerías</a>
     </div>
 
     <div class="footer-col">
