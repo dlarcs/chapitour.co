@@ -99,7 +99,7 @@
   <?php include "../../juegos/JimarFactory/home/nav/nav.php" ?>
   <?php include "../../juegos/JimarFactory/home/slider/slider.php" ?>
 
-  <div class="container_GarageDiscoBar">
+  <div class="container_JimarFactory">
     <?php include "../../juegos/JimarFactory/home/menu/menu.php" ?>
     <?php include "../../juegos/JimarFactory/home/galeria/galeria.php" ?>
     <?php include "../../juegos/JimarFactory/home/acerca_nosotros/acerca_nosotros.php" ?>
