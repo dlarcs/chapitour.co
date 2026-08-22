@@ -1,17 +1,17 @@
 <?php
 $base = rtrim($_SERVER['DOCUMENT_ROOT'], '/');
 
-$cssFile = $base . '/gastrobar/GarageDiscoBar/home/nav/nav.css';
-$jsFile  = $base . '/gastrobar/GarageDiscoBar/home/nav/nav.js';
+$cssFile = $base . '/juegos/JilmarFactory/home/nav/nav.css';
+$jsFile  = $base . '/juegos/JilmarFactory/home/nav/nav.js';
 
 $cssVer = is_file($cssFile) ? filemtime($cssFile) : '';
 $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
 ?>
 
-<link rel="stylesheet" href="../../gastrobar/GarageDiscoBar/home/nav/nav.css<?= $cssVer ? '?v=' . $cssVer : '' ?>">
+<link rel="stylesheet" href="../../juegos/JilmarFactory/home/nav/nav.css<?= $cssVer ? '?v=' . $cssVer : '' ?>">
 
 <header class="chapitour-header">
-  <a href="../../gastrobar/GarageDiscoBar/index.php" class="chapitour-logo" aria-label="Ir al inicio">
+  <a href="../../juegos/JilmarFactory/index.php" class="chapitour-logo" aria-label="Ir al inicio">
     <h2>Garage Disco Bar</h2>
   </a>
 
@@ -35,9 +35,9 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
 
   <nav id="chapitour-menu" class="chapitour-menu" aria-label="Menú principal">
     <div class="menu-inner">
-      <a href="../../gastrobar/GarageDiscoBar/menu/index.php">Menú</a>
-      <a href="../../gastrobar/GarageDiscoBar/galeria/index.php">Galería</a>
-      <a href="../../gastrobar/GarageDiscoBar/reservas/index.php">Reservas</a>
+      <a href="../../juegos/JilmarFactory/menu/index.php">Menú</a>
+      <a href="../../juegos/JilmarFactory/galeria/index.php">Galería</a>
+      <a href="../../juegos/JilmarFactory/reservas/index.php">Reservas</a>
       <a href="#acerca_nosotros">Nosotros</a>
       <a href="#ubicacion">Redes sociales</a>
       <a href="#ubicacion">Ubicación</a>
@@ -48,4 +48,4 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
     </div>
   </nav>
 </header>
-<script defer src="../../gastrobar/GarageDiscoBar/home/nav/nav.js<?= $jsVer ? '?v=' . $jsVer : '' ?>"></script>
+<script defer src="../../juegos/JilmarFactory/home/nav/nav.js<?= $jsVer ? '?v=' . $jsVer : '' ?>"></script>

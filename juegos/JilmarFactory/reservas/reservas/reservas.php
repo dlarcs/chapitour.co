@@ -1,14 +1,14 @@
 <?php
 $base = rtrim($_SERVER['DOCUMENT_ROOT'], '/');
 
-$cssFile = $base . '/gastrobar/GarageDiscoBar/reservas/reservas/reservas.css';
-$jsFile  = $base . '/gastrobar/GarageDiscoBar/reservas/reservas/reservas.js';
+$cssFile = $base . '/juegos/JilmarFactory/reservas/reservas/reservas.css';
+$jsFile  = $base . '/juegos/JilmarFactory/reservas/reservas/reservas.js';
 
 $cssVer = is_file($cssFile) ? filemtime($cssFile) : '';
 $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
 ?>
 
-<link rel="stylesheet" href="../../../gastrobar/GarageDiscoBar/reservas/reservas/reservas.css<?= $cssVer ? '?v=' . $cssVer : '' ?>">
+<link rel="stylesheet" href="../../../juegos/JilmarFactory/reservas/reservas/reservas.css<?= $cssVer ? '?v=' . $cssVer : '' ?>">
 
 <section class="business-section visible">
   <span class="section-label">Reservas</span>
@@ -115,7 +115,7 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
       </div>
     </div>
 
-    <a  href="../../../gastrobar/GarageDiscoBar/index.php" class="btn btn30">
+    <a  href="../../../juegos/JilmarFactory/index.php" class="btn btn30">
       Pagar anticipo
     </a> -->
     <button class="btn btn30" type="submit">Reservar</button>
@@ -128,4 +128,4 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
 
 </section>
 
-<script defer src="../../../gastrobar/GarageDiscoBar/reservas/reservas/reservas.js<?= $jsVer ? '?v=' . $jsVer : '' ?>"></script>
+<script defer src="../../../juegos/JilmarFactory/reservas/reservas/reservas.js<?= $jsVer ? '?v=' . $jsVer : '' ?>"></script>

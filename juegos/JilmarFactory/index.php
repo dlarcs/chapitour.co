@@ -10,8 +10,8 @@
   <?php
   $base = rtrim($_SERVER['DOCUMENT_ROOT'], '/');
 
-  $cssFile = $base . '/gastrobar/GarageDiscoBar/style.css';
-  $jsFile  = $base . '/gastrobar/GarageDiscoBar/app.js';
+  $cssFile = $base . '/juegos/JilmarFactory/style.css';
+  $jsFile  = $base . '/juegos/JilmarFactory/app.js';
 
   $cssVer = is_file($cssFile) ? filemtime($cssFile) : '';
   $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
@@ -21,7 +21,7 @@
   <meta name="description" content="Garage 9-39C es un disco bar y gastrobar LGBTIQ+ en Chapinero, Bogotá, con música, ambiente diverso, rumba, comida, bebidas y una experiencia nocturna llena de energía.">
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
   <meta name="googlebot" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
-  <link rel="canonical" href="https://chapitour.co/gastrobar/GarageDiscoBar/index.php">
+  <link rel="canonical" href="https://chapitour.co/juegos/JilmarFactory/index.php">
   <meta name="theme-color" content="#5b1380">
 
   <!-- Open Graph: WhatsApp / Facebook -->
@@ -29,9 +29,9 @@
   <meta property="og:site_name" content="Chapitour">
   <meta property="og:title" content="Garage 9-39C | Disco bar y gastrobar LGBTIQ+">
   <meta property="og:description" content="Garage 9-39C es un espacio LGBTIQ+ en Chapinero para disfrutar música, rumba, comida, bebidas y un ambiente diverso con buena energía.">
-  <meta property="og:url" content="https://chapitour.co/gastrobar/GarageDiscoBar/">
-  <meta property="og:image" content="https://chapitour.co/gastrobar/GarageDiscoBar/img/general11.jpg">
-  <meta property="og:image:secure_url" content="https://chapitour.co/gastrobar/GarageDiscoBar/img/general11.jpg">
+  <meta property="og:url" content="https://chapitour.co/juegos/JilmarFactory/">
+  <meta property="og:image" content="https://chapitour.co/juegos/JilmarFactory/img/general11.jpg">
+  <meta property="og:image:secure_url" content="https://chapitour.co/juegos/JilmarFactory/img/general11.jpg">
   <meta property="og:image:type" content="image/jpg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
@@ -40,16 +40,16 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Garage 9-39C | Disco bar y gastrobar LGBTIQ+">
   <meta name="twitter:description" content="Disco bar y gastrobar LGBTIQ+ en Chapinero con música, comida, bebidas, rumba y ambiente diverso.">
-  <meta name="twitter:image" content="https://chapitour.co/gastrobar/GarageDiscoBar/img/general11.jpg">
+  <meta name="twitter:image" content="https://chapitour.co/juegos/JilmarFactory/img/general11.jpg">
 
   <!-- Iconos -->
-  <link rel="icon" href="/gastrobar/GarageDiscoBar/img/general11.jpg">
-  <link rel="icon" type="image/jpg" sizes="32x32" href="/gastrobar/GarageDiscoBar/img/general11.jpg">
-  <link rel="icon" type="image/jpg" sizes="16x16" href="/gastrobar/GarageDiscoBar/img/general11.jpg">
-  <link rel="apple-touch-icon" sizes="180x180" href="/gastrobar/GarageDiscoBar/img/general11.jpg">
+  <link rel="icon" href="/juegos/JilmarFactory/img/general11.jpg">
+  <link rel="icon" type="image/jpg" sizes="32x32" href="/juegos/JilmarFactory/img/general11.jpg">
+  <link rel="icon" type="image/jpg" sizes="16x16" href="/juegos/JilmarFactory/img/general11.jpg">
+  <link rel="apple-touch-icon" sizes="180x180" href="/juegos/JilmarFactory/img/general11.jpg">
 
   <!-- CSS -->
-  <link rel="stylesheet" href="../../gastrobar/GarageDiscoBar/style.css<?= $cssVer ? '?v=' . $cssVer : '' ?>">
+  <link rel="stylesheet" href="../../juegos/JilmarFactory/style.css<?= $cssVer ? '?v=' . $cssVer : '' ?>">
 
   <!-- Datos estructurados para Google -->
   <script type="application/ld+json">
@@ -66,11 +66,11 @@
       },
       {
         "@type": "BarOrPub",
-        "@id": "https://chapitour.co/gastrobar/GarageDiscoBar/#business",
+        "@id": "https://chapitour.co/juegos/JilmarFactory/#business",
         "name": "Garage 9-39C",
         "description": "Disco bar y gastrobar LGBTIQ+ en Chapinero, Bogotá, ideal para disfrutar rumba, música, comida, bebidas y un ambiente diverso, libre y lleno de energía.",
-        "url": "https://chapitour.co/gastrobar/GarageDiscoBar/",
-        "image": "https://chapitour.co/gastrobar/GarageDiscoBar/img/general11.jpg",
+        "url": "https://chapitour.co/juegos/JilmarFactory/",
+        "image": "https://chapitour.co/juegos/JilmarFactory/img/general11.jpg",
         "telephone": "+573007795016",
         "servesCuisine": "Gastrobar",
         "priceRange": "$$",
@@ -91,22 +91,22 @@
   </script>
 
   <!-- JS -->
-  <script defer src="../../gastrobar/GarageDiscoBar/app.js<?= $jsVer ? '?v=' . $jsVer : '' ?>"></script>
+  <script defer src="../../juegos/JilmarFactory/app.js<?= $jsVer ? '?v=' . $jsVer : '' ?>"></script>
 </head>
 
 <body>
 
-  <?php include "../../gastrobar/GarageDiscoBar/home/nav/nav.php" ?>
-  <?php include "../../gastrobar/GarageDiscoBar/home/slider/slider.php" ?>
+  <?php include "../../juegos/JilmarFactory/home/nav/nav.php" ?>
+  <?php include "../../juegos/JilmarFactory/home/slider/slider.php" ?>
 
   <div class="container_GarageDiscoBar">
-    <?php include "../../gastrobar/GarageDiscoBar/home/menu/menu.php" ?>
-    <?php include "../../gastrobar/GarageDiscoBar/home/galeria/galeria.php" ?>
-    <?php include "../../gastrobar/GarageDiscoBar/home/acerca_nosotros/acerca_nosotros.php" ?>
-    <?php include "../../gastrobar/GarageDiscoBar/home/ubicacion/ubicacion.php" ?>
+    <?php include "../../juegos/JilmarFactory/home/menu/menu.php" ?>
+    <?php include "../../juegos/JilmarFactory/home/galeria/galeria.php" ?>
+    <?php include "../../juegos/JilmarFactory/home/acerca_nosotros/acerca_nosotros.php" ?>
+    <?php include "../../juegos/JilmarFactory/home/ubicacion/ubicacion.php" ?>
   </div>
 
-  <?php include "../../gastrobar/GarageDiscoBar/home/footer/footer.php" ?>
+  <?php include "../../juegos/JilmarFactory/home/footer/footer.php" ?>
 
   <a class="whatsapp-fab"
     href="https://wa.me/573156175056?text=Hola%20vengo%20desde%20la%20web%20de%20Garage%209-39C"

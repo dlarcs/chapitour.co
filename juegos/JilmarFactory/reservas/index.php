@@ -10,7 +10,7 @@
   <?php
   $base = rtrim($_SERVER['DOCUMENT_ROOT'], '/');
 
-  $cssFile = $base . '/gastrobar/GarageDiscoBar/reservas/style.css';
+  $cssFile = $base . '/juegos/JilmarFactory/reservas/style.css';
 
   $cssVer = is_file($cssFile) ? filemtime($cssFile) : '';
   ?>
@@ -28,8 +28,8 @@
   <meta property="og:title" content="Chapitour | Lugares para visitar en Chapinero, Bogotá">
   <meta property="og:description" content="Explora Chapinero, Bogotá: cafés, restaurantes, bares, cultura, planes locales, alojamiento y lugares para visitar.">
   <meta property="og:url" content="https://www.chapitour.co/">
-  <meta property="og:image" content="https://www.chapitour.co/gastrobar/GarageDiscoBar/img/general11.jpg">
-  <meta property="og:image:secure_url" content="https://www.chapitour.co/gastrobar/GarageDiscoBar/img/general11.jpg">
+  <meta property="og:image" content="https://www.chapitour.co/juegos/JilmarFactory/img/general11.jpg">
+  <meta property="og:image:secure_url" content="https://www.chapitour.co/juegos/JilmarFactory/img/general11.jpg">
   <meta property="og:image:type" content="image/jpeg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
@@ -38,16 +38,16 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Chapitour | Lugares para visitar en Chapinero, Bogotá">
   <meta name="twitter:description" content="Descubre cafés, restaurantes, cultura, bares, alojamiento y planes locales en Chapinero, Bogotá.">
-  <meta name="twitter:image" content="https://www.chapitour.co/home/gastrobar/GarageDiscoBar/img/general11.jpg">
+  <meta name="twitter:image" content="https://www.chapitour.co/home/juegos/JilmarFactory/img/general11.jpg">
 
   <!-- Iconos -->
-  <link rel="icon" href="/gastrobar/GarageDiscoBar/img/general11.jpg">
-  <link rel="icon" type="image/png" sizes="32x32" href="/gastrobar/GarageDiscoBar/img/general11.jpg">
-  <link rel="icon" type="image/png" sizes="16x16" href="/gastrobar/GarageDiscoBar/img/general11.jpg">
-  <link rel="apple-touch-icon" sizes="180x180" href="/gastrobar/GarageDiscoBar/img/general11.jpg">
+  <link rel="icon" href="/juegos/JilmarFactory/img/general11.jpg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/juegos/JilmarFactory/img/general11.jpg">
+  <link rel="icon" type="image/png" sizes="16x16" href="/juegos/JilmarFactory/img/general11.jpg">
+  <link rel="apple-touch-icon" sizes="180x180" href="/juegos/JilmarFactory/img/general11.jpg">
 
   <!-- CSS -->
-  <link rel="stylesheet" href="../../../gastrobar/GarageDiscoBar/reservas/style.css<?= $cssVer ? '?v=' . $cssVer : '' ?>">
+  <link rel="stylesheet" href="../../../juegos/JilmarFactory/reservas/style.css<?= $cssVer ? '?v=' . $cssVer : '' ?>">
 
   <!-- Datos estructurados para Google -->
   <script type="application/ld+json">
@@ -83,14 +83,14 @@
 </head>
 <body>
 
-  <?php include "../../../gastrobar/GarageDiscoBar/global/pag_nav/pag_nav.php" ?>
+  <?php include "../../../juegos/JilmarFactory/global/pag_nav/pag_nav.php" ?>
   <div class="container_reservas">
-    <?php include "../../../gastrobar/GarageDiscoBar/reservas/reservas/reservas.php" ?>
+    <?php include "../../../juegos/JilmarFactory/reservas/reservas/reservas.php" ?>
   </div>
-  <?php include "../../../gastrobar/GarageDiscoBar/global/boton/boton.php" ?>
+  <?php include "../../../juegos/JilmarFactory/global/boton/boton.php" ?>
 
 
-  <?php include "../../../gastrobar/GarageDiscoBar/global/pag_footer/pag_footer.php" ?>
+  <?php include "../../../juegos/JilmarFactory/global/pag_footer/pag_footer.php" ?>
   <a class="whatsapp-fab"
     href="https://wa.me/573156175056?text=Hola%20vengo%20desde%20la%20web%20de%20Garage%209-39C"
     target="_blank" rel="noopener"

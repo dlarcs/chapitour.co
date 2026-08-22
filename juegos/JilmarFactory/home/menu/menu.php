@@ -1,8 +1,8 @@
 <?php
 $base = rtrim($_SERVER['DOCUMENT_ROOT'], '/');
 
-$cssFile = $base . '/gastrobar/GarageDiscoBar/home/menu/menu.css';
-$jsFile  = $base . '/gastrobar/GarageDiscoBar/home/menu/menu.js';
+$cssFile = $base . '/juegos/JilmarFactory/home/menu/menu.css';
+$jsFile  = $base . '/juegos/JilmarFactory/home/menu/menu.js';
 
 $cssVer = is_file($cssFile) ? filemtime($cssFile) : '';
 $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
@@ -10,7 +10,7 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
 
 <link
   rel="stylesheet"
-  href="../../gastrobar/GarageDiscoBar/home/menu/menu.css<?= $cssVer ? '?v=' . $cssVer : '' ?>"
+  href="../../juegos/JilmarFactory/home/menu/menu.css<?= $cssVer ? '?v=' . $cssVer : '' ?>"
 >
 
 
@@ -25,7 +25,7 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
     licores y espacios para celebrar tus momentos especiales en el corazón
     de Chapinero.
   </p>
-  <a href="../../gastrobar/GarageDiscoBar/img/Garage_Menu.pdf">
+  <a href="../../juegos/JilmarFactory/img/Garage_Menu.pdf">
     <div class="button_container">
       <button class="btn btn30"type="button" name="button">Descargar menú</button>
     </div>
@@ -37,7 +37,7 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
 
       <img
         class="menu-card-img"
-        src="../../gastrobar/GarageDiscoBar/img/general7.jpg"
+        src="../../juegos/JilmarFactory/img/general7.jpg"
         alt="Personas bailando en Garage Disco bar Club"
         loading="lazy"
       >
@@ -59,7 +59,7 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
 
       <img
         class="menu-card-img"
-        src="../../gastrobar/GarageDiscoBar/img/general14.jpg"
+        src="../../juegos/JilmarFactory/img/general14.jpg"
         alt="Comida para compartir en Garage Disco bar Club"
         loading="lazy"
       >
@@ -81,7 +81,7 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
 
       <img
         class="menu-card-img"
-        src="../../gastrobar/GarageDiscoBar/img/general4.jpg"
+        src="../../juegos/JilmarFactory/img/general4.jpg"
         alt="Celebración de un evento en Garage Disco bar Club"
         loading="lazy"
       >
@@ -103,7 +103,7 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
 
       <img
         class="menu-card-img"
-        src="../../gastrobar/GarageDiscoBar/img/general5.jpg"
+        src="../../juegos/JilmarFactory/img/general5.jpg"
         alt="Cócteles y licores de Garage Disco bar Club"
         loading="lazy"
       >
@@ -123,7 +123,7 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
   </div>
 
   <a
-    href="../../gastrobar/GarageDiscoBar/actividades/index.php"
+    href="../../juegos/JilmarFactory/actividades/index.php"
     class="dowload"
   >
     <div class="button_container">
@@ -140,5 +140,5 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
 
 <script
   defer
-  src="../../gastrobar/GarageDiscoBar/home/menu/menu.js<?= $jsVer ? '?v=' . $jsVer : '' ?>"
+  src="../../juegos/JilmarFactory/home/menu/menu.js<?= $jsVer ? '?v=' . $jsVer : '' ?>"
 ></script>

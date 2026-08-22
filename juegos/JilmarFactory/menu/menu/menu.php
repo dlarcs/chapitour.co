@@ -1,14 +1,14 @@
 <?php
 $base = rtrim($_SERVER['DOCUMENT_ROOT'], '/');
 
-$cssFile = $base . '/gastrobar/GarageDiscoBar/menu/menu/menu.css';
-$jsFile  = $base . '/gastrobar/GarageDiscoBar/menu/menu/menu.js';
+$cssFile = $base . '/juegos/JilmarFactory/menu/menu/menu.css';
+$jsFile  = $base . '/juegos/JilmarFactory/menu/menu/menu.js';
 
 $cssVer = is_file($cssFile) ? filemtime($cssFile) : '';
 $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
 ?>
 
-<link rel="stylesheet" href="../../../gastrobar/GarageDiscoBar/menu/menu/menu.css<?= $cssVer ? '?v=' . $cssVer : '' ?>">
+<link rel="stylesheet" href="../../../juegos/JilmarFactory/menu/menu/menu.css<?= $cssVer ? '?v=' . $cssVer : '' ?>">
 
 <section class="business-section visible">
   <span class="section-label">Menú destacado</span>
@@ -127,4 +127,4 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
       </article>
   </div>
 </section>
-<script defer src="../../../gastrobar/GarageDiscoBar/menu/menu/menu.js<?= $jsVer ? '?v=' . $jsVer : '' ?>"></script>
+<script defer src="../../../juegos/JilmarFactory/menu/menu/menu.js<?= $jsVer ? '?v=' . $jsVer : '' ?>"></script>

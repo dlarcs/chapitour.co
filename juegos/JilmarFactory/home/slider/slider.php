@@ -1,14 +1,14 @@
 <?php
 $base = rtrim($_SERVER['DOCUMENT_ROOT'], '/');
 
-$cssFile = $base . '/gastrobar/GarageDiscoBar/home/slider/slider.css';
-$jsFile  = $base . '/gastrobar/GarageDiscoBar/home/slider/slider.js';
+$cssFile = $base . '/juegos/JilmarFactory/home/slider/slider.css';
+$jsFile  = $base . '/juegos/JilmarFactory/home/slider/slider.js';
 
 $cssVer = is_file($cssFile) ? filemtime($cssFile) : '';
 $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
 ?>
 
-<link rel="stylesheet" href="../../gastrobar/GarageDiscoBar/home/slider/slider.css<?= $cssVer ? '?v=' . $cssVer : '' ?>">
+<link rel="stylesheet" href="../../juegos/JilmarFactory/home/slider/slider.css<?= $cssVer ? '?v=' . $cssVer : '' ?>">
 
 <section class="business-hero visible" aria-label="Garage 9-39C slider">
 
@@ -16,7 +16,7 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
   <!-- Slide 1 -->
   <article
     class="business-hero__slide business-hero__slide--2"
-    style="background-image: url('../../gastrobar/GarageDiscoBar/img/general10.jpg');"
+    style="background-image: url('../../juegos/JilmarFactory/img/general10.jpg');"
   >
     <div class="business-hero__overlay"></div>
 
@@ -42,7 +42,7 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
   <!-- Slide 2 -->
   <article
     class="business-hero__slide business-hero__slide--3"
-    style="background-image: url('../../gastrobar/GarageDiscoBar/img/general5.jpg');"
+    style="background-image: url('../../juegos/JilmarFactory/img/general5.jpg');"
   >
     <div class="business-hero__overlay"></div>
 
@@ -68,7 +68,7 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
   <!-- Slide 3 -->
   <article
     class="business-hero__slide business-hero__slide--4"
-    style="background-image: url('../../gastrobar/GarageDiscoBar/img/general15.jpg');"
+    style="background-image: url('../../juegos/JilmarFactory/img/general15.jpg');"
   >
     <div class="business-hero__overlay"></div>
 
@@ -102,4 +102,4 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
 
 </section>
 
-<script defer src="../../gastrobar/GarageDiscoBar/home/slider/slider.js<?= $jsVer ? '?v=' . $jsVer : '' ?>"></script>
+<script defer src="../../juegos/JilmarFactory/home/slider/slider.js<?= $jsVer ? '?v=' . $jsVer : '' ?>"></script>

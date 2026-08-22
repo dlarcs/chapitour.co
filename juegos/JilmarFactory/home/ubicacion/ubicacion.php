@@ -1,8 +1,8 @@
 <?php
 $base = rtrim($_SERVER['DOCUMENT_ROOT'], '/');
 
-$cssFile = $base . '/gastrobar/GarageDiscoBar/home/ubicacion/ubicacion.css';
-$jsFile  = $base . '/gastrobar/GarageDiscoBar/home/ubicacion/ubicacion.js';
+$cssFile = $base . '/juegos/JilmarFactory/home/ubicacion/ubicacion.css';
+$jsFile  = $base . '/juegos/JilmarFactory/home/ubicacion/ubicacion.js';
 
 $cssVer = is_file($cssFile) ? filemtime($cssFile) : '';
 $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
@@ -10,7 +10,7 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
 $googleMapsLink = 'https://maps.app.goo.gl/EnKkPuRb64VNMnQ77';
 ?>
 
-<link rel="stylesheet" href="../../gastrobar/GarageDiscoBar/home/ubicacion/ubicacion.css<?= $cssVer ? '?v=' . $cssVer : '' ?>">
+<link rel="stylesheet" href="../../juegos/JilmarFactory/home/ubicacion/ubicacion.css<?= $cssVer ? '?v=' . $cssVer : '' ?>">
 
 <section class="business-location-social business-section visible">
   <div class="business-location-social__inner">
@@ -79,4 +79,4 @@ $googleMapsLink = 'https://maps.app.goo.gl/EnKkPuRb64VNMnQ77';
   </div>
 </section>
 
-<script defer src="../../gastrobar/GarageDiscoBar/home/ubicacion/ubicacion.js<?= $jsVer ? '?v=' . $jsVer : '' ?>"></script>
+<script defer src="../../juegos/JilmarFactory/home/ubicacion/ubicacion.js<?= $jsVer ? '?v=' . $jsVer : '' ?>"></script>
