@@ -16,6 +16,7 @@
   $cssVer = is_file($cssFile) ? filemtime($cssFile) : '';
   $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
   ?>
+  <link rel="stylesheet" href="../1.1.bartin/style.css<?= $cssVer ? '?v=' . $cssVer : '' ?>">
 
 </head>
 <body>
