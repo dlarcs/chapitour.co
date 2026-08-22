@@ -20,10 +20,10 @@ $cssVer = is_file($cssFile) ? filemtime($cssFile) : '';
     <div class="footer-col">
       <h5>Categorías</h5>
       <a href="categorias/1.tipo_bares/index.php">Bar</a>
-      <a href="categorias/2.planes_bares/index.php">Gastro Bar</a>
+      <a href="categorias/7.gastronomia/index.php">Gastro Bar</a>
       <a href="categorias/3.cafes/index.php">Café</a>
-      <a href="categorias/5.LGBTIQ+/index.php">Jilmar </a>
-      <a href="categorias/7.gastronomia/index.php">Gastronomía</a>
+      <a href="categorias/2.planes_bares/index.php">Juegos</a>
+      <a href="categorias/5.LGBTIQ+/index.php">LGBTIQ+</a>
     </div>
 
     <div class="footer-col">

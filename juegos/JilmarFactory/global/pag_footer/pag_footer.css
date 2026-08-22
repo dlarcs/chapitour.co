@@ -1,0 +1,139 @@
+.site-footer {
+  padding: 3rem 1.5rem 1.5rem;
+  background:
+    radial-gradient(circle at center, rgba(118, 70, 143, .28), transparent 38%),
+    #050008;
+  color: #ebeaf0;
+}
+
+.footer-inner {
+  width: min(1100px, 100%);
+  margin: auto;
+  display: grid;
+  grid-template-columns: 1.3fr 1fr 1fr;
+  gap: 2rem;
+}
+
+.footer-brand h1 {
+  margin: 0 0 .7rem;
+  margin: 0;
+  font-size: clamp(2rem, 3.4vw, 3.4rem);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: 0.02em;
+
+  color: transparent;
+  background:
+    linear-gradient(
+      135deg,
+      #ff4b00 0%,
+      #ffb000 22%,
+      #e8f200 38%,
+      #00d084 54%,
+      #0099ff 74%,
+      #7657ff 100%
+    );
+  background-size: 220% 220%;
+  background-clip: text;
+  -webkit-background-clip: text;
+
+  animation: chapitourTitle 12s ease-in-out infinite;
+  }
+
+  @keyframes chapitourTitle {
+  0% {
+    background-position: 0% 50%;
+    transform: rotate(-1deg);
+  }
+
+  50% {
+    background-position: 100% 50%;
+    transform: rotate(1deg);
+  }
+
+  100% {
+    background-position: 0% 50%;
+    transform: rotate(-1deg);
+  }
+  }
+
+
+
+.footer-brand p {
+  max-width: 330px;
+  margin: 0;
+  color: rgba(235, 234, 240, .75);
+  line-height: 1.5;
+}
+
+.footer-social {
+  display: flex;
+  gap: 1.2rem;
+  margin-top: 1.4rem;
+}
+
+.footer-social a {
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  color: #ebeaf0;
+  text-decoration: none;
+  font-weight: 800;
+  background: rgba(255, 255, 255, .06);
+  border: 1px solid rgba(255, 255, 255, .16);
+  box-shadow: 0 0 16px rgba(118, 70, 143, .35);
+}
+
+.footer-col h5 {
+  margin: 0 0 1rem;
+  color: #ebeaf0;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.footer-col a {
+  display: block;
+  margin-bottom: .65rem;
+  color: rgba(235, 234, 240, .7);
+  text-decoration: none;
+}
+
+.footer-col a:hover,
+.footer-social a:hover {
+  color: #ff62ea;
+  text-shadow: red;
+}
+
+.footer-bottom {
+  width: min(1100px, 100%);
+  margin: 2.5rem auto 0;
+  padding-top: 1.3rem;
+  display: grid;
+  gap: .25rem;
+  text-align: center;
+  color: rgba(235, 234, 240, .65);
+  border-top: 1px solid rgba(255, 255, 255, .1);
+}
+
+
+
+@media (max-width: 768px) {
+  .site-footer {
+    text-align: center;
+  }
+
+  .footer-inner {
+    grid-template-columns: 1fr;
+    gap: 2.2rem;
+  }
+
+  .footer-brand p {
+    margin: auto;
+  }
+
+  .footer-social {
+    justify-content: center;
+  }
+}
