@@ -12,6 +12,12 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
   rel="stylesheet"
   href="../../juegos/JimarFactory/home/menu/menu.css<?= $cssVer ? '?v=' . $cssVer : '' ?>"
 >
+
+<section
+
+  class="business-section visible"
+  aria-labelledby="titulo-experiencias-jimar"
+>
 <a
   href="../../juegos/JimarFactory/img/Jimar_Menu.pdf"
   class="dowload"
@@ -23,10 +29,6 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
     <span class="btn30">Ver carta de bebidas</span>
   </div>
 </a>
-<section
-  class="business-section visible"
-  aria-labelledby="titulo-experiencias-jimar"
->
 
   <span class="section-label">Servicios y experiencias</span>
 

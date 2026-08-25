@@ -32,7 +32,9 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
       <li data-filter="gastrobar">gastrobar</li>
       <li data-filter="discoteca">Discoteca</li>
       <li data-filter="Crossover">Crossover</li>
+      <li data-filter="juegos">Juegos</li>
       <li data-filter="cover">No cover</li>
+
       <li data-filter="lgbtiq">LGBTIQ+</li>
 
 
@@ -55,7 +57,7 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
 
 
       <a href="https://granychelaclub.com" class="category-card place-card" data-category="lgbtiq bares discoteca Crossover cover">
-        <img src="bar/Gran&Chela_Club/img/logo.jpg" alt="Panaderías y pastelerías en Chapinero">
+        <img src="bar/Gran&Chela_Club/img/logo.jpg" alt="Bar, granizados">
         <div class="category-card__overlay"></div>
 
         <div class="category-card__content">
@@ -67,8 +69,8 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
         <span class="category-card__arrow">→</span>
       </a>
 
-      <a href="gastrobar/GarageDiscoBar/index.php" class="category-card place-card" data-category="lgbtiq bares discoteca Crossover gastrobar cover">
-        <img src="gastrobar/GarageDiscoBar/img/general11.jpg" alt="Panaderías y pastelerías en Chapinero">
+      <a href="gastrobar/GarageDiscoBar/index.php" class="category-card place-card" data-category="lgbtiq bares discoteca Crossover  cover">
+        <img src="gastrobar/GarageDiscoBar/img/general11.jpg" alt="Disco bar">
         <div class="category-card__overlay"></div>
 
         <div class="category-card__content">
@@ -79,14 +81,26 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
 
         <span class="category-card__arrow">→</span>
       </a>
-      <a href="bar/Pictograma/index.php" class="category-card place-card" data-category="lgbtiq bares discoteca Crossover gastrobar cover">
-        <img src="bar/Pictograma/img/logo.jpeg" alt="Panaderías y pastelerías en Chapinero">
+      <a href="bar/Pictograma/index.php" class="category-card place-card" data-category="lgbtiq bares discoteca Crossover  cover">
+        <img src="bar/Pictograma/img/logo.jpeg" alt="Café, bar, granizado">
         <div class="category-card__overlay"></div>
 
         <div class="category-card__content">
           <div class="category-card__icon">🍸</div>
           <h5>Píctogramas Café bar</h5>
           <small>Cocteles, café, bar, bolirana</small>
+        </div>
+
+        <span class="category-card__arrow">→</span>
+      </a>
+      <a href="bar/Pictograma/index.php" class="category-card place-card" data-category="lgbtiq bares juegos Crossover cover">
+        <img src="juegos/JimarFactory/img/logo.jpeg" alt="Billar, pool, cafe, bar">
+        <div class="category-card__overlay"></div>
+
+        <div class="category-card__content">
+          <div class="category-card__icon">🍸</div>
+          <h5>Jimar Factory Chapinero</h5>
+          <small>Billar tres bandas y pool, bebidas, domingo a domingo </small>
         </div>
 
         <span class="category-card__arrow">→</span>
