@@ -18,17 +18,7 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
   class="business-section visible"
   aria-labelledby="titulo-experiencias-jimar"
 >
-<a
-  href="../../juegos/JimarFactory/img/Jimar_Menu.pdf"
-  class="dowload"
-  target="_blank"
-  rel="noopener"
-  aria-label="Ver la carta de Jimar Factory Chapinero en formato PDF"
->
-  <div class="button_container">
-    <span class="btn30">Ver carta de bebidas</span>
-  </div>
-</a>
+
 
   <span class="section-label">Servicios y experiencias</span>
 
@@ -40,7 +30,17 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
     Disfruta billar de tres bandas, pool, cócteles, café y una amplia
     variedad de bebidas en la Calle 58 #13-93, Chapinero. Domingo a domingo, de 9:00 a. m. a 12:00 a. m.
   </p>
-
+  <a
+    href="../../juegos/JimarFactory/img/Jimar_Menu.pdf"
+    class="dowload"
+    target="_blank"
+    rel="noopener"
+    aria-label="Ver la carta de Jimar Factory Chapinero en formato PDF"
+  >
+    <div class="button_container">
+      <span class="btn30">Ver carta de bebidas</span>
+    </div>
+  </a>
 
 
   <div class="menu-grid">
