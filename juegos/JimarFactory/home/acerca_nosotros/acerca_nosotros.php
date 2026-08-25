@@ -38,7 +38,7 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
   </div>
 
   <img
-    src="../../juegos/JimarFactory/img/general11.jpeg"
+    src="../../juegos/JimarFactory/img/logo.jpeg"
     alt="Mesas de billar en Jimar Factory Chapinero, Bogotá"
     loading="lazy"
     decoding="async"

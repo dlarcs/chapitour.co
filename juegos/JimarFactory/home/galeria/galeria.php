@@ -24,17 +24,17 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
 
   <div class="gallery-grid">
     <img
-      src="../../juegos/JimarFactory/img/general3.jpeg"
+      src="../../juegos/JimarFactory/img/general6.jpeg"
       alt="Mesas de billar en Jimar Factory Chapinero"
     >
 
     <img
-      src="../../juegos/JimarFactory/img/general17.jpeg"
+      src="../../juegos/JimarFactory/img/general26.jpeg"
       alt="Ambiente de Jimar Factory Chapinero"
     >
 
     <img
-      src="../../juegos/JimarFactory/img/general15.jpeg"
+      src="../../juegos/JimarFactory/img/general38.jpeg"
       alt="Zona social y de bebidas de Jimar Factory Chapinero"
       class="gallery-img-mobile-hide"
     >

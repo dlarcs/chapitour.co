@@ -40,7 +40,7 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
 
       <img
         class="menu-card-img"
-        src="../../juegos/JimarFactory/img/general7.jpeg"
+        src="../../juegos/JimarFactory/img/general41.jpeg"
         alt="Mesa de billar de tres bandas en Jimar Factory Chapinero"
         loading="lazy"
         decoding="async"
@@ -63,7 +63,7 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
 
       <img
         class="menu-card-img"
-        src="../../juegos/JimarFactory/img/general14.jpeg"
+        src="../../juegos/JimarFactory/img/general20.jpeg"
         alt="Mesa de pool en Jimar Factory Chapinero"
         loading="lazy"
         decoding="async"
@@ -86,7 +86,7 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
 
       <img
         class="menu-card-img"
-        src="../../juegos/JimarFactory/img/general4.jpeg"
+        src="../../juegos/JimarFactory/img/general25.jpeg"
         alt="Cócteles y bebidas en Jimar Factory Chapinero"
         loading="lazy"
         decoding="async"
@@ -109,7 +109,7 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
 
       <img
         class="menu-card-img"
-        src="../../juegos/JimarFactory/img/general5.jpeg"
+        src="../../juegos/JimarFactory/img/general23.jpeg"
         alt="Café y materiales de juego disponibles en Jimar Factory Chapinero"
         loading="lazy"
         decoding="async"

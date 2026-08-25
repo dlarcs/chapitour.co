@@ -18,7 +18,7 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
   <!-- Slide 1: Billar -->
   <article
     class="business-hero__slide business-hero__slide--2"
-    style="background-image: url('../../juegos/JimarFactory/img/general10.jpeg');"
+    style="background-image: url('../../juegos/JimarFactory/img/general39.jpeg');"
   >
     <div class="business-hero__overlay"></div>
 
@@ -52,7 +52,7 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
   <!-- Slide 2: Bebidas -->
   <article
     class="business-hero__slide business-hero__slide--3"
-    style="background-image: url('../../juegos/JimarFactory/img/general5.jpeg');"
+    style="background-image: url('../../juegos/JimarFactory/img/general16.jpeg');"
   >
     <div class="business-hero__overlay"></div>
 
@@ -86,7 +86,7 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
   <!-- Slide 3: Materiales y ubicación -->
   <article
     class="business-hero__slide business-hero__slide--4"
-    style="background-image: url('../../juegos/JimarFactory/img/general15.jpeg');"
+    style="background-image: url('../../juegos/JimarFactory/img/general23.jpeg');"
   >
     <div class="business-hero__overlay"></div>
 
