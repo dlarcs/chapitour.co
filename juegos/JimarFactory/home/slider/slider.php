@@ -10,94 +10,135 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
 
 <link rel="stylesheet" href="../../juegos/JimarFactory/home/slider/slider.css<?= $cssVer ? '?v=' . $cssVer : '' ?>">
 
-<section class="business-hero visible" aria-label="Garage 9-39C slider">
+<section
+  class="business-hero visible"
+  aria-label="Carrusel principal de Jimar Factory Chapinero"
+>
 
-
-  <!-- Slide 1 -->
+  <!-- Slide 1: Billar -->
   <article
     class="business-hero__slide business-hero__slide--2"
-    style="background-image: url('../../juegos/JimarFactory/img/general10.jpg');"
+    style="background-image: url('../../juegos/JimarFactory/img/general10.jpeg');"
   >
     <div class="business-hero__overlay"></div>
 
     <div class="business-hero__content">
-      <span>Rumba · Música · Buena energía</span>
+      <span>Billar · Tres bandas · Pool</span>
 
-      <h2>Vive la noche</h2>
+      <h2>Vive el mejor ambiente de billar</h2>
 
       <p>
-        Garage 9-39C combina música, luces, baile y un ambiente perfecto para
-        compartir con amigos y disfrutar la noche.
+        Disfruta partidas de tres bandas y pool en Jimar Factory Chapinero,
+        un espacio de entretenimiento, precisión y buena energía para compartir
+        con amigos.
       </p>
 
       <div class="business-stars">
-        <strong>★★★★★</strong>
-        <small>4.8 / 5</small>
+        <strong>Domingo a domingo</strong>
+        <small>9:00 a. m. a 12:00 a. m.</small>
       </div>
 
-      <a href="https://wa.me/573007795016?text=Hola%20quiero%20conocer%20Garage%209-39C">Conocer más</a>
+      <a
+        href="https://wa.me/573165180649?text=Hola%2C%20vengo%20desde%20Chapitour%20y%20quiero%20conocer%20Jimar%20Factory%20Chapinero."
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Contactar a Jimar Factory Chapinero por WhatsApp"
+      >
+        Conocer más
+      </a>
     </div>
   </article>
 
-  <!-- Slide 2 -->
+  <!-- Slide 2: Bebidas -->
   <article
     class="business-hero__slide business-hero__slide--3"
-    style="background-image: url('../../juegos/JimarFactory/img/general5.jpg');"
+    style="background-image: url('../../juegos/JimarFactory/img/general5.jpeg');"
   >
     <div class="business-hero__overlay"></div>
 
     <div class="business-hero__content">
-      <span>Inclusión · Diversidad · Encuentro</span>
+      <span>Bebidas · Cócteles · Café</span>
 
-      <h2>Diversidad que se celebra</h2>
+      <h2>Acompaña cada partida</h2>
 
       <p>
-        Un lugar LGBTIQ+ abierto para compartir con respeto, libertad,
-        autenticidad y buena vibra.
+        Encuentra variedad de bebidas, cócteles, café y productos con alcohol
+        para mayores de 18 años, acompañados de una atención cercana los siete
+        días de la semana.
       </p>
 
       <div class="business-stars">
-        <strong>★★★★★</strong>
-        <small>4.8 / 5</small>
+        <strong>Variedad y servicio</strong>
+        <small>Todo en un mismo lugar</small>
       </div>
 
-      <a href="https://wa.me/573007795016?text=Hola%20quiero%20información%20sobre%20Garage%209-39C">Contactar</a>
+      <a
+        href="https://wa.me/573165180649?text=Hola%2C%20quiero%20recibir%20informaci%C3%B3n%20sobre%20las%20bebidas%20y%20servicios%20de%20Jimar%20Factory%20Chapinero."
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Solicitar información sobre Jimar Factory Chapinero"
+      >
+        Contactar
+      </a>
     </div>
   </article>
 
-  <!-- Slide 3 -->
+  <!-- Slide 3: Materiales y ubicación -->
   <article
     class="business-hero__slide business-hero__slide--4"
-    style="background-image: url('../../juegos/JimarFactory/img/general15.jpg');"
+    style="background-image: url('../../juegos/JimarFactory/img/general15.jpeg');"
   >
     <div class="business-hero__overlay"></div>
 
     <div class="business-hero__content">
-      <span>Comida · Bebidas · Gastrobar</span>
+      <span>Materiales de juego · Servicio · Entretenimiento</span>
 
-      <h2>Sabor de la noche</h2>
+      <h2>Todo para disfrutar el billar</h2>
 
       <p>
-        Disfruta una experiencia de gastrobar con comida, bebidas y cocteles
-        ideales para comenzar o cerrar la rumba.
+        Además de nuestras mesas de tres bandas y pool, ofrecemos materiales
+        y accesorios de juego para mayores de 18 años. Visítanos en el corazón
+        de Chapinero.
       </p>
 
       <div class="business-stars">
-        <strong>★★★★★</strong>
-        <small>4.8 / 5</small>
+        <strong>Calle 58 #13-93</strong>
+        <small>Chapinero, Bogotá</small>
       </div>
 
-      <a href="https://wa.me/573007795016?text=Hola%20quiero%20reservar%20en%20Garage%209-39C">Reservar</a>
+      <a
+        href="https://wa.me/573165180649?text=Hola%2C%20quiero%20visitar%20Jimar%20Factory%20Chapinero%20en%20la%20Calle%2058%20%2313-93."
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Consultar cómo llegar a Jimar Factory Chapinero"
+      >
+        Cómo llegar
+      </a>
     </div>
   </article>
 
+  <!-- Controles -->
+  <div
+    class="business-hero__controls"
+    aria-label="Controles del carrusel"
+  >
+    <button
+      class="hero-dot"
+      type="button"
+      aria-label="Mostrar información sobre billar tres bandas y pool"
+    ></button>
 
-  <!-- Controls -->
-  <div class="business-hero__controls" aria-label="Slider controls">
-    <button class="hero-dot" type="button" aria-label="Slide 1"></button>
-    <button class="hero-dot" type="button" aria-label="Slide 2"></button>
-    <button class="hero-dot" type="button" aria-label="Slide 3"></button>
+    <button
+      class="hero-dot"
+      type="button"
+      aria-label="Mostrar información sobre bebidas, cócteles y café"
+    ></button>
 
+    <button
+      class="hero-dot"
+      type="button"
+      aria-label="Mostrar información sobre materiales de juego y ubicación"
+    ></button>
   </div>
 
 </section>

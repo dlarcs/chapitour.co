@@ -12,7 +12,7 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
 
 <header class="chapitour-header">
   <a href="../../../juegos/JimarFactory/index.php" class="chapitour-logo" aria-label="Ir al inicio">
-    <h2>Garage Disco Bar</h2>
+    <h2>Jimar Factory Chapinero</h2>
   </a>
 
   <div class="chapitour-actions">

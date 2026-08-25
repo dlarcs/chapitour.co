@@ -13,35 +13,106 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
 <section class="business-section business-gallery visible">
   <span class="section-label">Galería</span>
 
-  <h2>Conoce el ambiente</h2>
+  <h2>Conoce el ambiente de Jimar Factory Chapinero</h2>
 
   <p>
-    Un lugar con estilo moderno, luces cálidas, buena música y espacios pensados
-    para disfrutar con amigos.
+    Disfruta del mejor ambiente de billar en Bogotá, con mesas de tres bandas y
+    pool, bebidas, cócteles, café y entretenimiento para mayores de 18 años.
+    Visítanos en la calle 58 #13-93, de domingo a domingo, de 9:00 a. m. a
+    12:00 a. m.
   </p>
 
   <div class="gallery-grid">
-    <img src="../../../juegos/JimarFactory/img/general.jpg" alt="Ambiente de Capital Queer">
-    <img src="../../../juegos/JimarFactory/img/general1.jpg" alt="Barra de Capital Queer">
-    <img src="../../../juegos/JimarFactory/img/general2.jpg" alt="Zona social de Capital Queer">
-    <img src="../../../juegos/JimarFactory/img/general3.jpg" alt="Decoración de Capital Queer">
-    <img src="../../../juegos/JimarFactory/img/general4.jpg" alt="Luces de Capital Queer">
-    <img src="../../../juegos/JimarFactory/img/general5.jpg" alt="Espacio para compartir en Capital Queer">
-    <img src="../../../juegos/JimarFactory/img/general6.jpg" alt="Interior moderno de Capital Queer">
-    <img src="../../../juegos/JimarFactory/img/general7.jpg" alt="Ambiente nocturno de Capital Queer">
-    <img src="../../../juegos/JimarFactory/img/general8.jpg" alt="Zona de bebidas de Capital Queer">
-    <img src="../../../juegos/JimarFactory/img/general9.jpg" alt="Mesa de Capital Queer">
-    <img src="../../../juegos/JimarFactory/img/general10.jpg" alt="Experiencia en Capital Queer">
-    <img src="../../../juegos/JimarFactory/img/general11.jpg" alt="Noche especial en Capital Queer">
-    <img src="../../../juegos/JimarFactory/img/general12.jpg" alt="Música en Capital Queer">
-    <img src="../../../juegos/JimarFactory/img/general13.jpg" alt="Celebración en Capital Queer">
-    <img src="../../../juegos/JimarFactory/img/general14.jpg" alt="Cocteles en Capital Queer">
-    <img src="../../../juegos/JimarFactory/img/general15.jpg" alt="Encuentro entre amigas en Capital Queer">
-    <img src="../../../juegos/JimarFactory/img/general16.jpg" alt="Ambiente queer en Capital Queer">
-    <img src="../../../juegos/JimarFactory/img/general17.jpg" alt="Espacio seguro en Capital Queer">
+    <img
+      src="../../../juegos/JimarFactory/img/general.jpeg"
+      alt="Ambiente de Jimar Factory Chapinero"
+    >
 
+    <img
+      src="../../../juegos/JimarFactory/img/general1.jpeg"
+      alt="Mesas de billar en Jimar Factory Chapinero"
+    >
+
+    <img
+      src="../../../juegos/JimarFactory/img/general2.jpeg"
+      alt="Partida de billar a tres bandas en Jimar Factory Chapinero"
+    >
+
+    <img
+      src="../../../juegos/JimarFactory/img/general3.jpeg"
+      alt="Mesas de pool en Jimar Factory Chapinero"
+    >
+
+    <img
+      src="../../../juegos/JimarFactory/img/general4.jpeg"
+      alt="Jugadores disfrutando del billar en Chapinero"
+    >
+
+    <img
+      src="../../../juegos/JimarFactory/img/general5.jpeg"
+      alt="Zona social de Jimar Factory Chapinero"
+    >
+
+    <img
+      src="../../../juegos/JimarFactory/img/general6.jpeg"
+      alt="Interior de Jimar Factory Chapinero"
+    >
+
+    <img
+      src="../../../juegos/JimarFactory/img/general7.jpeg"
+      alt="Ambiente nocturno de Jimar Factory Chapinero"
+    >
+
+    <img
+      src="../../../juegos/JimarFactory/img/general8.jpeg"
+      alt="Zona de bebidas de Jimar Factory Chapinero"
+    >
+
+    <img
+      src="../../../juegos/JimarFactory/img/general9.jpeg"
+      alt="Mesa profesional de billar en Jimar Factory Chapinero"
+    >
+
+    <img
+      src="../../../juegos/JimarFactory/img/general10.jpeg"
+      alt="Experiencia de billar y entretenimiento en Chapinero"
+    >
+
+    <img
+      src="../../../juegos/JimarFactory/img/general11.jpeg"
+      alt="Encuentro entre amigos en Jimar Factory Chapinero"
+    >
+
+    <img
+      src="../../../juegos/JimarFactory/img/general12.jpeg"
+      alt="Servicio de billar pool en Jimar Factory Chapinero"
+    >
+
+    <img
+      src="../../../juegos/JimarFactory/img/general13.jpeg"
+      alt="Celebraciones en Jimar Factory Chapinero"
+    >
+
+    <img
+      src="../../../juegos/JimarFactory/img/general14.jpeg"
+      alt="Cócteles y bebidas en Jimar Factory Chapinero"
+    >
+
+    <img
+      src="../../../juegos/JimarFactory/img/general15.jpeg"
+      alt="Café y servicio de bebidas en Jimar Factory Chapinero"
+    >
+
+    <img
+      src="../../../juegos/JimarFactory/img/general16.jpeg"
+      alt="Materiales y accesorios para jugar billar"
+    >
+
+    <img
+      src="../../../juegos/JimarFactory/img/general17.jpeg"
+      alt="Jimar Factory Chapinero en la calle 58 número 13-93"
+    >
   </div>
-
 </section>
 
 <script defer src="../../../juegos/JimarFactory/galeria/galeria/galeria.js<?= $jsVer ? '?v=' . $jsVer : '' ?>"></script>

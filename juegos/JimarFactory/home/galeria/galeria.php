@@ -13,22 +13,38 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
 <section class="business-section business-gallery visible">
   <span class="section-label">Galería</span>
 
-  <h2>Conoce Garage Disco Bar</h2>
+  <h2>Conoce Jimar Factory Chapinero</h2>
 
   <p>
-    Un disco bar y gastrobar LGBTIQ+ en Chapinero, con música, luces, rumba,
-    comida, bebidas y un ambiente diverso para compartir con libertad, respeto y buena energía.
+    Disfruta del mejor ambiente de billar en Bogotá, con mesas de tres bandas y
+    pool, variedad de bebidas, cócteles, café y entretenimiento para mayores de
+    18 años. Estamos ubicados en la calle 58 #13-93 y atendemos todos los días,
+    de 9:00 a. m. a 12:00 a. m.
   </p>
 
   <div class="gallery-grid">
-    <img src="../../juegos/JimarFactory/img/general3.jpg" alt="Ambiente de Capital Queer">
-    <img src="../../juegos/JimarFactory/img/general17.jpg" alt="Bar de Capital Queer">
-    <img src="../../juegos/JimarFactory/img/general15.jpg" alt="Espacio social de Capital Queer" class="gallery-img-mobile-hide">
+    <img
+      src="../../juegos/JimarFactory/img/general3.jpeg"
+      alt="Mesas de billar en Jimar Factory Chapinero"
+    >
+
+    <img
+      src="../../juegos/JimarFactory/img/general17.jpeg"
+      alt="Ambiente de Jimar Factory Chapinero"
+    >
+
+    <img
+      src="../../juegos/JimarFactory/img/general15.jpeg"
+      alt="Zona social y de bebidas de Jimar Factory Chapinero"
+      class="gallery-img-mobile-hide"
+    >
   </div>
 
   <a href="../../juegos/JimarFactory/galeria/index.php">
     <div class="button_container">
-      <button class="btn btn30" type="button" name="button">Ver galería</button>
+      <button class="btn btn30" type="button" name="button">
+        Ver galería
+      </button>
     </div>
   </a>
 </section>

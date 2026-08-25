@@ -12,109 +12,124 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
   rel="stylesheet"
   href="../../juegos/JimarFactory/home/menu/menu.css<?= $cssVer ? '?v=' . $cssVer : '' ?>"
 >
+<a
+  href="../../juegos/JimarFactory/img/Jimar_Menu.pdf"
+  class="dowload"
+  target="_blank"
+  rel="noopener"
+  aria-label="Ver la carta de Jimar Factory Chapinero en formato PDF"
+>
+  <div class="button_container">
+    <span class="btn30">Ver carta de bebidas</span>
+  </div>
+</a>
+<section
+  class="business-section visible"
+  aria-labelledby="titulo-experiencias-jimar"
+>
 
+  <span class="section-label">Servicios y experiencias</span>
 
-<section class="business-section visible">
-
-  <span class="section-label">Experiencias</span>
-
-  <h2>Disfruta en Garage Disco bar </h2>
+  <h2 id="titulo-experiencias-jimar">
+    Vive el mejor billar en Jimar Factory Chapinero
+  </h2>
 
   <p>
-    Vive una experiencia completa con música, baile, comida, cócteles,
-    licores y espacios para celebrar tus momentos especiales en el corazón
-    de Chapinero.
+    Disfruta billar de tres bandas, pool, cócteles, café y una amplia
+    variedad de bebidas en la Calle 58 #13-93, Chapinero. Domingo a domingo, de 9:00 a. m. a 12:00 a. m.
   </p>
-  <a href="../../juegos/JimarFactory/img/Garage_Menu.pdf">
-    <div class="button_container">
-      <button class="btn btn30"type="button" name="button">Descargar menú</button>
-    </div>
-  </a>
+
+
+
   <div class="menu-grid">
 
-    <!-- TARJETA DE BAILE -->
+    <!-- TARJETA DE BILLAR DE TRES BANDAS -->
     <article class="menu-card">
 
       <img
         class="menu-card-img"
-        src="../../juegos/JimarFactory/img/general7.jpg"
-        alt="Personas bailando en Garage Disco bar Club"
+        src="../../juegos/JimarFactory/img/general7.jpeg"
+        alt="Mesa de billar de tres bandas en Jimar Factory Chapinero"
         loading="lazy"
+        decoding="async"
       >
 
       <div>
-        <h3>Baile y música</h3>
+        <h3>Billar de tres bandas</h3>
 
         <p class="descripcion-card">
-          Disfruta noches llenas de salsa, karaoke y diferentes ritmos
-          para bailar, cantar y compartir con tus amigos en un ambiente
-          alegre y lleno de energía.
+          Disfruta una experiencia de juego de alto nivel en nuestras
+          mesas de billar de tres bandas. Practica, compite y comparte
+          con otros apasionados de este deporte en Chapinero.
         </p>
       </div>
 
     </article>
 
-    <!-- TARJETA DE COMIDA -->
+    <!-- TARJETA DE POOL -->
     <article class="menu-card">
 
       <img
         class="menu-card-img"
-        src="../../juegos/JimarFactory/img/general14.jpg"
-        alt="Comida para compartir en Garage Disco bar Club"
+        src="../../juegos/JimarFactory/img/general14.jpeg"
+        alt="Mesa de pool en Jimar Factory Chapinero"
         loading="lazy"
+        decoding="async"
       >
 
       <div>
-        <h3>Comida para compartir</h3>
+        <h3>Pool y entretenimiento</h3>
 
         <p class="descripcion-card">
-          Acompaña tus bebidas con deliciosas opciones de comida,
-          preparadas para compartir mientras disfrutas de la música,
-          la rumba y el mejor ambiente.
+          Juega pool con tus amigos y disfruta un espacio pensado para
+          competir, divertirte y pasar un buen momento. Tenemos atención
+          los siete días de la semana.
         </p>
       </div>
 
     </article>
 
-    <!-- TARJETA DE EVENTOS -->
+    <!-- TARJETA DE BEBIDAS -->
     <article class="menu-card">
 
       <img
         class="menu-card-img"
-        src="../../juegos/JimarFactory/img/general4.jpg"
-        alt="Celebración de un evento en Garage Disco bar Club"
+        src="../../juegos/JimarFactory/img/general4.jpeg"
+        alt="Cócteles y bebidas en Jimar Factory Chapinero"
         loading="lazy"
+        decoding="async"
       >
 
       <div>
-        <h3>Eventos y celebraciones</h3>
+        <h3>Cócteles y bebidas</h3>
 
         <p class="descripcion-card">
-          Celebra cumpleaños, reuniones, encuentros empresariales
-          y ocasiones especiales. Reserva el espacio y organiza
-          una experiencia especial para tus invitados.
+          Acompaña cada partida con cócteles, cervezas, licores,
+          bebidas sin alcohol y diferentes opciones para compartir
+          mientras disfrutas del mejor ambiente.
         </p>
       </div>
 
     </article>
 
-    <!-- TARJETA DE CÓCTELES Y LICORES -->
+    <!-- TARJETA DE CAFÉ Y MATERIALES -->
     <article class="menu-card">
 
       <img
         class="menu-card-img"
-        src="../../juegos/JimarFactory/img/general5.jpg"
-        alt="Cócteles y licores de Garage Disco bar Club"
+        src="../../juegos/JimarFactory/img/general5.jpeg"
+        alt="Café y materiales de juego disponibles en Jimar Factory Chapinero"
         loading="lazy"
+        decoding="async"
       >
 
       <div>
-        <h3>Cócteles y licores</h3>
+        <h3>Café y materiales de juego</h3>
 
         <p class="descripcion-card">
-          Encuentra cócteles, cervezas, micheladas y una variedad
-          de licores para brindar, celebrar y acompañar cada momento
-          de tu noche en Garage Disco bar Club.
+          Disfruta nuestro servicio de café y encuentra materiales
+          y accesorios para tus partidas. Jimar Factory Chapinero es
+          un espacio de entretenimiento para mayores de 18 años.
         </p>
       </div>
 
@@ -122,21 +137,20 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
 
   </div>
 
-  <a
-    href="../../juegos/JimarFactory/actividades/index.php"
-    class="dowload"
-  >
-    <div class="button_container">
 
-      <button class="btn btn30" type="button">
-        Ver actividades y promociones
-      </button>
-
-    </div>
-  </a>
 
 </section>
-
+<a
+  href="../../juegos/JimarFactory/actividades/index.php"
+  class="dowload"
+  aria-label="Ver actividades y promociones de Jimar Factory Chapinero"
+>
+  <div class="button_container">
+    <span class="btn btn30">
+      Ver actividades y promociones
+    </span>
+  </div>
+</a>
 
 <script
   defer

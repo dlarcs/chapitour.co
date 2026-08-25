@@ -7,7 +7,7 @@ $jsFile  = $base . '/juegos/JimarFactory/home/ubicacion/ubicacion.js';
 $cssVer = is_file($cssFile) ? filemtime($cssFile) : '';
 $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
 
-$googleMapsLink = 'https://maps.app.goo.gl/EnKkPuRb64VNMnQ77';
+$googleMapsLink = 'https://www.google.com/maps/search/?api=1&query=Jimar+Factory+Chapinero+Calle+58+%2313-93+Bogota';
 ?>
 
 <link rel="stylesheet" href="../../juegos/JimarFactory/home/ubicacion/ubicacion.css<?= $cssVer ? '?v=' . $cssVer : '' ?>">
@@ -18,61 +18,67 @@ $googleMapsLink = 'https://maps.app.goo.gl/EnKkPuRb64VNMnQ77';
     <div class="business-location" id="ubicacion">
       <span class="section-label">Ubicación</span>
 
-      <h2>Encuéntranos en Chapinero</h2>
+      <h2>Encuentra Jimar Factory en Chapinero</h2>
 
       <p>
-        Estamos ubicados en una zona estratégica de Chapinero, ideal para disfrutar
-        un ambiente de gastrobar, seguro, diverso y divertido, con música, rumba,
-        comida, bebidas y buena energía.
+        Visítanos en Chapinero y disfruta de uno de los mejores ambientes de billar
+        en Bogotá. Contamos con servicio de billar a tres bandas y pool, bebidas,
+        cócteles, café y entretenimiento para mayores de 18 años.
       </p>
 
       <div class="location-info">
         <p>
           <strong>Dirección:</strong>
-          Calle 59 #9-39, Chapinero, Bogotá
+          Calle 58 #13-93, Chapinero, Bogotá
         </p>
 
         <p>
           <strong>Horario:</strong>
-            5:00 p.m. - 5:00 a.m.
+          Domingo a domingo, de 9:00 a. m. a 12:00 a. m.
         </p>
 
         <p>
-          <strong>WhatsApp:</strong>
-          <a href="https://wa.me/573156175056">3156175056</a>
+          <strong>Servicios:</strong>
+          Billar a tres bandas, pool, bebidas, cócteles, café y venta de materiales de juego.
         </p>
       </div>
 
-      <a class="location-button" href="<?= $googleMapsLink ?>" target="_blank" rel="noopener">
+      <a
+        class="location-button"
+        href="<?= htmlspecialchars($googleMapsLink, ENT_QUOTES, 'UTF-8') ?>"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
         Ver en Google Maps
       </a>
     </div>
 
     <div class="business-social" id="redes_sociales">
-      <span class="section-label">Redes sociales</span>
+      <span class="section-label">Jimar Factory</span>
 
-      <h2>Síguenos</h2>
+      <h2>Billar y entretenimiento en Chapinero</h2>
 
       <p>
-        Conoce nuestros eventos, promociones, actividades, noches especiales
-        y momentos destacados a través de nuestras redes sociales y página web.
+        Disfruta de mesas de tres bandas y pool, variedad de bebidas, cócteles,
+        café y una excelente atención los siete días de la semana. También
+        encontrarás materiales y accesorios para tus partidas de billar.
       </p>
 
       <div class="social-links">
-        <a href="https://www.instagram.com/garagediscobar_?igsh=MXI2YTFuZ2JlMXpsMA%3D%3D" class="social-card">
-          <span>Instagram</span>
-          <small>@Luis Rios</small>
-        </a>
+        <div class="social-card">
+          <span>Tres bandas</span>
+          <small>Mesas para disfrutar y competir</small>
+        </div>
 
-        <a href="https://www.facebook.com/GARAGECHAPINERO9.34?mibextid=wwXIfr&rdid=nNeIixoVCmRKpngW&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F191aEZi498%2F%3Fmibextid%3DwwXIfr" class="social-card">
-          <span>Facebook</span>
-          <small>Luis Rios</small>
-        </a>
+        <div class="social-card">
+          <span>Pool</span>
+          <small>Entretenimiento con amigos</small>
+        </div>
 
-        <a href="https://wa.me/573156175056" class="social-card" target="_blank">
-          <span>WhatsApp</span>
-          <small>Reservas y contacto</small>
-        </a>
+        <div class="social-card">
+          <span>Bebidas y cócteles</span>
+          <small>Servicio todos los días</small>
+        </div>
       </div>
     </div>
 

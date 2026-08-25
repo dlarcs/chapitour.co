@@ -1,4 +1,4 @@
-const whatsappNumber = "573156175056";
+const whatsappNumber = "573165180649";
 
 const promoCards = document.querySelectorAll(".promo-card");
 

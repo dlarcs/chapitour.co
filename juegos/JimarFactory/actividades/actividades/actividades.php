@@ -11,93 +11,155 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
 <link rel="stylesheet" href="../../../juegos/JimarFactory/actividades/actividades/actividades.css<?= $cssVer ? '?v=' . $cssVer : '' ?>">
 
 <section class="business-section visible">
-  <span class="section-label">Experiencias & Eventos</span>
+  <span class="section-label">Billar, bebidas & entretenimiento</span>
 
-  <h2>Aquí cada noche se convierte en una historia</h2>
+  <h2>Vive la experiencia de Jimar Factory Chapinero</h2>
 
   <p>
-    Canta, baila, celebra y disfruta experiencias llenas de música, sabor y diversión. En Garage Disco Bar siempre hay un plan esperando por ti.
+    Disfruta el mejor ambiente de billar en Bogotá con mesas de tres bandas y pool,
+    variedad de bebidas, cócteles, café y atención todos los días. Visítanos en la
+    Calle 58 #13-93, de domingo a domingo, de 9:00 a. m. a 12:00 a. m.
   </p>
 
   <!-- TARJETAS - HTML -->
   <section class="cards-section">
     <div class="cards-grid">
 
-      <article class="card promo-card" data-code="GARAGE-KARAOKE-001">
+      <article class="card promo-card" data-code="JIMAR-TRES-BANDAS-001">
         <div class="card-image">
-          <img src="../../../juegos/JimarFactory/img/general15.jpg" alt="Noche de karaoke en Garage Disco Bar">
-          <span class="card-badge">Karaoke</span>
+          <img
+            src="../../../juegos/JimarFactory/img/general15.jpeg"
+            alt="Mesa de billar tres bandas en Jimar Factory Chapinero"
+          >
+          <span class="card-badge">Tres bandas</span>
         </div>
 
         <div class="card-content">
-          <h3>¡El escenario es tuyo!</h3>
-          <p>Toma el micrófono, canta ese éxito que nunca falla y vive una noche llena de música, risas y momentos inolvidables.</p>
-          <span class="card-location"><span>&#127908;</span> Canta, disfruta y sorprende a todos</span>
+          <h3>Demuestra tu precisión</h3>
+
+          <p>
+            Disfruta partidas de billar a tres bandas en un espacio diseñado para
+            jugadores que buscan estrategia, concentración y una gran experiencia.
+          </p>
+
+          <span class="card-location">
+            <span>&#127921;</span> Billar de alto nivel en Chapinero
+          </span>
         </div>
       </article>
 
-      <article class="card promo-card" data-code="GARAGE-CROSSOVER-002">
+      <article class="card promo-card" data-code="JIMAR-POOL-002">
         <div class="card-image">
-          <img src="../../../juegos/JimarFactory/img/general13.jpg" alt="Fiesta crossover en Garage Disco Bar">
-          <span class="card-badge">Crossover</span>
+          <img
+            src="../../../juegos/JimarFactory/img/general13.jpeg"
+            alt="Servicio de pool en Jimar Factory Chapinero"
+          >
+          <span class="card-badge">Pool</span>
         </div>
 
         <div class="card-content">
-          <h3>Una noche, todos los ritmos</h3>
-          <p>Del reguetón a la salsa y de los clásicos a los éxitos del momento. Ven preparado para bailar sin parar.</p>
-          <span class="card-location"><span>&#127925;</span> Música para todos los gustos</span>
+          <h3>Arma tu partida de pool</h3>
+
+          <p>
+            Reúne a tus amigos, prepara tu mejor jugada y disfruta una partida de
+            pool en un ambiente cómodo, entretenido y lleno de buena energía.
+          </p>
+
+          <span class="card-location">
+            <span>&#127922;</span> Diversión para compartir con tu parche
+          </span>
         </div>
       </article>
 
-      <article class="card promo-card" data-code="GARAGE-SHOWS-003">
+      <article class="card promo-card" data-code="JIMAR-BEBIDAS-003">
         <div class="card-image">
-          <img src="../../../juegos/JimarFactory/img/general17.jpg" alt="Shows especiales en Garage Disco Bar">
-          <span class="card-badge">Shows en vivo</span>
+          <img
+            src="../../../juegos/JimarFactory/img/general17.jpeg"
+            alt="Bebidas y cócteles en Jimar Factory Chapinero"
+          >
+          <span class="card-badge">Bebidas y cócteles</span>
         </div>
 
         <div class="card-content">
-          <h3>Cada 15 días, algo nuevo</h3>
-          <p>Déjate sorprender por artistas invitados, presentaciones especiales y espectáculos que harán de tu noche una experiencia diferente.</p>
-          <span class="card-location"><span>&#127917;</span> Presentaciones para vivir y compartir</span>
+          <h3>La bebida perfecta para cada partida</h3>
+
+          <p>
+            Encuentra una amplia variedad de bebidas, licores y cócteles para
+            acompañar tus partidas y disfrutar cada momento en Jimar Factory.
+          </p>
+
+          <span class="card-location">
+            <span>&#127864;</span> Variedad, sabor y buena atención
+          </span>
         </div>
       </article>
 
-      <article class="card promo-card" data-code="GARAGE-GASTROBAR-004">
+      <article class="card promo-card" data-code="JIMAR-CAFE-004">
         <div class="card-image">
-          <img src="../../../juegos/JimarFactory/img/general6.jpg" alt="Comida y bebidas en Garage Disco Bar">
-          <span class="card-badge">Gastrobar</span>
+          <img
+            src="../../../juegos/JimarFactory/img/general6.jpeg"
+            alt="Servicio de café en Jimar Factory Chapinero"
+          >
+          <span class="card-badge">Café</span>
         </div>
 
         <div class="card-content">
-          <h3>El sabor también es parte de la fiesta</h3>
-          <p>Disfruta comida, cocteles y bebidas ideales para compartir mientras te preparas para una gran noche.</p>
-          <span class="card-location"><span>&#127828;</span> Sabores para acompañar cada momento</span>
+          <h3>Haz una pausa y disfruta</h3>
+
+          <p>
+            Acompaña tu visita con una buena taza de café mientras compartes,
+            conversas o esperas tu próxima partida.
+          </p>
+
+          <span class="card-location">
+            <span>&#9749;</span> Café y servicio durante toda la jornada
+          </span>
         </div>
       </article>
 
-      <article class="card promo-card" data-code="GARAGE-DISCOBAR-005">
+      <article class="card promo-card" data-code="JIMAR-MATERIALES-005">
         <div class="card-image">
-          <img src="../../../juegos/JimarFactory/img/general1.jpg" alt="Ambiente de fiesta en Garage Disco Bar">
-          <span class="card-badge">Disco Bar</span>
+          <img
+            src="../../../juegos/JimarFactory/img/general1.jpeg"
+            alt="Venta de materiales y accesorios de billar en Jimar Factory Chapinero"
+          >
+          <span class="card-badge">Materiales de juego</span>
         </div>
 
         <div class="card-content">
-          <h3>Enciende la noche</h3>
-          <p>Luces, música, bebidas y toda la energía que necesitas para celebrar cumpleaños, encuentros y noches especiales.</p>
-          <span class="card-location"><span>&#127926;</span> El punto de encuentro para celebrar</span>
+          <h3>Todo lo que necesitas para jugar</h3>
+
+          <p>
+            Encuentra materiales y accesorios para tus partidas de billar y pool.
+            Venta dirigida exclusivamente a personas mayores de 18 años.
+          </p>
+
+          <span class="card-location">
+            <span>&#10133;18</span> Productos y accesorios especializados
+          </span>
         </div>
       </article>
 
-      <article class="card promo-card" data-code="GARAGE-BAILE-006">
+      <article class="card promo-card" data-code="JIMAR-HORARIO-006">
         <div class="card-image">
-          <img src="../../../juegos/JimarFactory/img/general10.jpg" alt="Noche de baile en Garage Disco Bar">
-          <span class="card-badge">Baile</span>
+          <img
+            src="../../../juegos/JimarFactory/img/general10.jpeg"
+            alt="Entretenimiento todos los días en Jimar Factory Chapinero"
+          >
+          <span class="card-badge">Todos los días</span>
         </div>
 
         <div class="card-content">
-          <h3>Que nadie se quede sentado</h3>
-          <p>Reúne a tu parche, entra a la pista y déjate llevar por una noche cargada de ritmo, alegría y buena energía.</p>
-          <span class="card-location"><span>&#128131;</span> Ven a bailar y celebra con nosotros</span>
+          <h3>Tu plan de domingo a domingo</h3>
+
+          <p>
+            Visítanos todos los días, desde las 9:00 a. m. hasta las 12:00 a. m.,
+            y disfruta billar, pool, bebidas y entretenimiento en Chapinero.
+          </p>
+
+          <span class="card-location">
+            <span>&#128205;</span> Calle 58 #13-93, Chapinero
+          </span>
         </div>
       </article>
 
