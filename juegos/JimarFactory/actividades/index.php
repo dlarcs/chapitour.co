@@ -315,7 +315,7 @@
     aria-label="Contactar a Jimar Factory Chapinero por WhatsApp"
   >
     <img
-      src="/juegos/JimarFactory/global/img/img_whatsApp.png"
+      src="../../../juegos/JimarFactory/img/img_whatsApp.png"
       alt="Contactar a Jimar Factory Chapinero por WhatsApp"
       loading="lazy"
       decoding="async"
