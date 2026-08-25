@@ -70,7 +70,7 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
       </a>
 
 <!-- GARAGE GASTROBAR -->
-      <a href="gastrobar/GarageDiscoBar/index.php" class="category-card place-card" data-category="lgbtiq bares discoteca Crossover  cover">
+      <a href="gastrobar/GarageDiscoBar/index.php" class="category-card place-card" data-category="lgbtiq gastrobar bares discoteca Crossover  cover">
         <img src="gastrobar/GarageDiscoBar/img/general11.jpg" alt="Disco bar">
         <div class="category-card__overlay"></div>
 
