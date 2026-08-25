@@ -98,7 +98,7 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
       </a>
 
 <!-- JIMAR FACTORY CHAPINERO -->
-      <a href="juegos/JimarFactory/index.php" class="category-card place-card" data-category="lgbtiq bares juegos Crossover cover">
+      <a href="juegos/JimarFactory/index.php" class="category-card place-card" data-category=" bares juegos Crossover cover">
         <img src="juegos/JimarFactory/img/logo.jpeg" alt="Billar, pool, cafe, bar">
         <div class="category-card__overlay"></div>
 
