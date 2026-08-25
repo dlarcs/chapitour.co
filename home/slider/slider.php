@@ -36,7 +36,7 @@ $cssTime = filemtime('home/slider/slider.css');
   <section class="hero-gallery">
       <a href="#aliados" class="gallery-card img-1">
         <small>Sabores y Experiencias</small>
-        <img src="bar/CapitalQueer/img/general14.png"
+        <img src="juegos/JimarFactory/img/general9.jpeg"
         class="gallery-img"
         alt=""
         style="object-fit: cover; object-position: 60% 55%;">
@@ -68,7 +68,7 @@ $cssTime = filemtime('home/slider/slider.css');
 
     <a href="#aliados" class="gallery-card img-5">
       <small>Noches de chapinero</small>
-      <img src="bar/Gran&Chela_Club/img/general11.jpg"
+      <img src="juegos/JimarFactory/img/general38.jpeg"
       class="gallery-img"
       alt=""
       style="object-fit: cover; object-position: 60% 55%;">

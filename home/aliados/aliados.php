@@ -41,7 +41,7 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
     </ul>
 
     <div class="categories-grid">
-
+<!-- CAPITAL QUEER -->
       <a href="bar/CapitalQueer/index.php" class="category-card place-card" data-category="lgbtiq bares cover">
         <img src="bar/CapitalQueer/img/logoCapitalQueer.jpg" alt="Tipos de bares en Chapinero">
         <div class="category-card__overlay"></div>
@@ -55,7 +55,7 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
         <span class="category-card__arrow">→</span>
       </a>
 
-
+<!-- GRAN&CHELA -->
       <a href="https://granychelaclub.com" class="category-card place-card" data-category="lgbtiq bares discoteca Crossover cover">
         <img src="bar/Gran&Chela_Club/img/logo.jpg" alt="Bar, granizados">
         <div class="category-card__overlay"></div>
@@ -69,6 +69,7 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
         <span class="category-card__arrow">→</span>
       </a>
 
+<!-- GARAGE GASTROBAR -->
       <a href="gastrobar/GarageDiscoBar/index.php" class="category-card place-card" data-category="lgbtiq bares discoteca Crossover  cover">
         <img src="gastrobar/GarageDiscoBar/img/general11.jpg" alt="Disco bar">
         <div class="category-card__overlay"></div>
@@ -81,6 +82,8 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
 
         <span class="category-card__arrow">→</span>
       </a>
+
+<!-- PICTOGRAMAS -->
       <a href="bar/Pictograma/index.php" class="category-card place-card" data-category="lgbtiq bares discoteca Crossover  cover">
         <img src="bar/Pictograma/img/logo.jpeg" alt="Café, bar, granizado">
         <div class="category-card__overlay"></div>
@@ -93,12 +96,14 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
 
         <span class="category-card__arrow">→</span>
       </a>
+
+<!-- JIMAR FACTORY CHAPINERO -->
       <a href="bar/Pictograma/index.php" class="category-card place-card" data-category="lgbtiq bares juegos Crossover cover">
         <img src="juegos/JimarFactory/img/logo.jpeg" alt="Billar, pool, cafe, bar">
         <div class="category-card__overlay"></div>
 
         <div class="category-card__content">
-          <div class="category-card__icon">🍸</div>
+          <div class="category-card__icon">🎱</div>
           <h5>Jimar Factory Chapinero</h5>
           <small>Billar tres bandas y pool, bebidas, domingo a domingo </small>
         </div>
