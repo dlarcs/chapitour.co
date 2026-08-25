@@ -65,20 +65,20 @@ $googleMapsLink = 'https://www.google.com/maps/search/?api=1&query=Jimar+Factory
       </p>
 
       <div class="social-links">
-        <div class="social-card">
-          <span>Tres bandas</span>
-          <small>Mesas para disfrutar y competir</small>
-        </div>
+        <a href="https://www.instagram.com/jimar_factory_bogota/" class="social-card">
+          <span>Instagram</span>
+          <small>@jimar_factory_bogot</small>
+        </a>
 
-        <div class="social-card">
-          <span>Pool</span>
-          <small>Entretenimiento con amigos</small>
-        </div>
+        <a href="https://www.facebook.com/profile.php?id=61577261077969" class="social-card">
+          <span>Facebook</span>
+          <small>Jimar Factory Bogota</small>
+        </a>
 
-        <div class="social-card">
-          <span>Bebidas y cócteles</span>
-          <small>Servicio todos los días</small>
-        </div>
+        <a href="https://wa.me/573165180649" class="social-card" target="_blank">
+          <span>WhatsApp</span>
+          <small>Reservas y contacto</small>
+        </a>
       </div>
     </div>
 
