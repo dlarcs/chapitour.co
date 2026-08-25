@@ -60,7 +60,7 @@ $cssTime = filemtime('home/slider/slider.css');
 
     <a href="#aliados" class="gallery-card img-4">
       <small>Dulce Tradición</small>
-      <img src="bar/Gran&Chela_Club/img/general9.jpg"
+      <img src="bar/Gran&Chela_Club/img/general7.jpg"
       class="gallery-img"
       alt=""
       style="object-fit: cover; object-position: 60% 55%;">
