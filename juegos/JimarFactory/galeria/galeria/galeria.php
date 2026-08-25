@@ -43,26 +43,7 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
       alt="Mesas de pool en Jimar Factory Chapinero"
     >
 
-    <img
-      src="../../../juegos/JimarFactory/img/general4.jpeg"
-      alt="Jugadores disfrutando del billar en Chapinero"
-    >
-
-    <img
-      src="../../../juegos/JimarFactory/img/general5.jpeg"
-      alt="Zona social de Jimar Factory Chapinero"
-    >
-
-    <img
-      src="../../../juegos/JimarFactory/img/general6.jpeg"
-      alt="Interior de Jimar Factory Chapinero"
-    >
-
-    <img
-      src="../../../juegos/JimarFactory/img/general7.jpeg"
-      alt="Ambiente nocturno de Jimar Factory Chapinero"
-    >
-
+  
     <img
       src="../../../juegos/JimarFactory/img/general8.jpeg"
       alt="Zona de bebidas de Jimar Factory Chapinero"
@@ -111,6 +92,126 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
     <img
       src="../../../juegos/JimarFactory/img/general17.jpeg"
       alt="Jimar Factory Chapinero en la calle 58 número 13-93"
+    >
+
+    <img
+      src="../../../juegos/JimarFactory/img/general18.jpeg"
+      alt="Galería de Jimar Factory Chapinero imagen 18"
+    >
+
+    <img
+      src="../../../juegos/JimarFactory/img/general19.jpeg"
+      alt="Galería de Jimar Factory Chapinero imagen 19"
+    >
+
+    <img
+      src="../../../juegos/JimarFactory/img/general20.jpeg"
+      alt="Galería de Jimar Factory Chapinero imagen 20"
+    >
+
+    <img
+      src="../../../juegos/JimarFactory/img/general21.jpeg"
+      alt="Galería de Jimar Factory Chapinero imagen 21"
+    >
+
+    <img
+      src="../../../juegos/JimarFactory/img/general22.jpeg"
+      alt="Galería de Jimar Factory Chapinero imagen 22"
+    >
+
+    <img
+      src="../../../juegos/JimarFactory/img/general23.jpeg"
+      alt="Galería de Jimar Factory Chapinero imagen 23"
+    >
+
+    <img
+      src="../../../juegos/JimarFactory/img/general24.jpeg"
+      alt="Galería de Jimar Factory Chapinero imagen 24"
+    >
+
+    <img
+      src="../../../juegos/JimarFactory/img/general25.jpeg"
+      alt="Galería de Jimar Factory Chapinero imagen 25"
+    >
+
+    <img
+      src="../../../juegos/JimarFactory/img/general26.jpeg"
+      alt="Galería de Jimar Factory Chapinero imagen 26"
+    >
+
+    <img
+      src="../../../juegos/JimarFactory/img/general27.jpeg"
+      alt="Galería de Jimar Factory Chapinero imagen 27"
+    >
+
+    <img
+      src="../../../juegos/JimarFactory/img/general28.jpeg"
+      alt="Galería de Jimar Factory Chapinero imagen 28"
+    >
+
+    <img
+      src="../../../juegos/JimarFactory/img/general29.jpeg"
+      alt="Galería de Jimar Factory Chapinero imagen 29"
+    >
+
+    <img
+      src="../../../juegos/JimarFactory/img/general30.jpeg"
+      alt="Galería de Jimar Factory Chapinero imagen 30"
+    >
+
+    <img
+      src="../../../juegos/JimarFactory/img/general31.jpeg"
+      alt="Galería de Jimar Factory Chapinero imagen 31"
+    >
+
+    <img
+      src="../../../juegos/JimarFactory/img/general32.jpeg"
+      alt="Galería de Jimar Factory Chapinero imagen 32"
+    >
+
+    <img
+      src="../../../juegos/JimarFactory/img/general33.jpeg"
+      alt="Galería de Jimar Factory Chapinero imagen 33"
+    >
+
+    <img
+      src="../../../juegos/JimarFactory/img/general34.jpeg"
+      alt="Galería de Jimar Factory Chapinero imagen 34"
+    >
+
+    <img
+      src="../../../juegos/JimarFactory/img/general35.jpeg"
+      alt="Galería de Jimar Factory Chapinero imagen 35"
+    >
+
+    <img
+      src="../../../juegos/JimarFactory/img/general36.jpeg"
+      alt="Galería de Jimar Factory Chapinero imagen 36"
+    >
+
+    <img
+      src="../../../juegos/JimarFactory/img/general37.jpeg"
+      alt="Galería de Jimar Factory Chapinero imagen 37"
+    >
+
+    <img
+      src="../../../juegos/JimarFactory/img/general38.jpeg"
+      alt="Galería de Jimar Factory Chapinero imagen 38"
+    >
+
+    <img
+      src="../../../juegos/JimarFactory/img/general39.jpeg"
+      alt="Galería de Jimar Factory Chapinero imagen 39"
+    >
+
+    <img
+      src="../../../juegos/JimarFactory/img/general40.jpeg"
+      alt="Galería de Jimar Factory Chapinero imagen 40"
+    >
+
+    <img
+      src="../../../juegos/JimarFactory/img/general41.jpeg"
+      alt="Galería de Jimar Factory Chapinero imagen 41"
     >
   </div>
 </section>
