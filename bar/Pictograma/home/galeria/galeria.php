@@ -26,7 +26,7 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
     <img src="../../bar/Pictograma/img/general22.png" alt="Espacio para compartir en Pictogramas Cafe Bar" class="gallery-img-mobile-hide">
   </div>
 
-  <a href="../../bar/Pictograma/reservas/index.php">
+  <a href="../../bar/Pictograma/galeria/index.php">
     <div class="button_container">
       <button class="btn btn30" type="button" name="button">Ver galería</button>
     </div>
