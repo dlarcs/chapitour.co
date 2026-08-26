@@ -40,7 +40,7 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
     >
   </div>
 
-  <a href="../../juegos/JimarFactory/reservas/index.php">
+  <a href="../../juegos/JimarFactory/galeria/index.php">
     <div class="button_container">
       <button class="btn btn30" type="button" name="button">
         Ver galería
