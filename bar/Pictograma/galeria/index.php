@@ -172,9 +172,10 @@
 
   <div class="container_galeria">
     <?php include "../../../bar/Pictograma/galeria/galeria/galeria.php" ?>
+    <?php include "../../../bar/Pictograma/global/boton/boton.php" ?>
+
   </div>
 
-  <?php include "../../../bar/Pictograma/global/boton/boton.php" ?>
 
   <?php include "../../../bar/Pictograma/global/pag_footer/pag_footer.php" ?>
 
