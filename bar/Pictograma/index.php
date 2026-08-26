@@ -19,7 +19,7 @@
   <!-- SEO principal para Google -->
   <meta
     name="description"
-    content="Pictogramas Cafe Bar es un lugar en Chapinero para disfrutar cócteles, granizados, licores, micheladas, bolivianas, cervezas, café y divertidas partidas de bolirana."
+    content="Pictogramas Cafe Bar es un lugar en Chapinero para disfrutar cócteles, granizados, licores, cervezas, café y divertidas partidas de bolirana."
   >
 
   <meta
