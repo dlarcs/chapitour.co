@@ -60,12 +60,12 @@
 
   <meta
     property="og:image"
-    content="https://www.chapitour.co/bar/CapitalQueer/img/logoCapitalQueer.jpg"
+    content="https://www.chapitour.co/bar/Pictograma/img/logo.jpeg"
   >
 
   <meta
     property="og:image:secure_url"
-    content="https://www.chapitour.co/bar/CapitalQueer/img/logoCapitalQueer.jpg"
+    content="https://www.chapitour.co/bar/Pictograma/img/logo.jpeg"
   >
 
   <meta property="og:image:type" content="image/jpeg">
@@ -94,7 +94,7 @@
 
   <meta
     name="twitter:image"
-    content="https://www.chapitour.co/bar/CapitalQueer/img/logoCapitalQueer.jpg"
+    content="https://www.chapitour.co/bar/Pictograma/img/logo.jpeg"
   >
 
   <meta
@@ -106,12 +106,12 @@
   <link
     rel="icon"
     type="image/jpeg"
-    href="/bar/CapitalQueer/img/logoCapitalQueer.jpg"
+    href="/bar/Pictograma/img/logo.jpeg"
   >
 
   <link
     rel="apple-touch-icon"
-    href="/bar/CapitalQueer/img/logoCapitalQueer.jpg"
+    href="/bar/Pictograma/img/logo.jpg"
   >
 
   <!-- CSS -->
@@ -134,11 +134,11 @@
       },
       {
         "@type": "BarOrPub",
-        "@id": "https://www.chapitour.co/bar/CapitalQueer/index.php#bar",
+        "@id": "https://www.chapitour.co/bar/Pictograma/index.php#bar",
         "name": "Capital Queer",
         "description": "Capital Queer es un bar en Chapinero creado especialmente para mujeres y abierto a todas las personas. Ofrece actividades, promociones, descuentos, música y eventos en un ambiente diverso, seguro y respetuoso.",
-        "url": "https://www.chapitour.co/bar/CapitalQueer/index.php",
-        "image": "https://www.chapitour.co/bar/CapitalQueer/img/logoCapitalQueer.jpg",
+        "url": "https://www.chapitour.co/bar/Pictograma/index.php",
+        "image": "https://www.chapitour.co/bar/Pictograma/img/logo.jpeg",
         "address": {
           "@type": "PostalAddress",
           "addressLocality": "Chapinero",
@@ -157,7 +157,7 @@
           "@id": "https://www.chapitour.co/#website"
         },
         "about": {
-          "@id": "https://www.chapitour.co/bar/CapitalQueer/index.php#bar"
+          "@id": "https://www.chapitour.co/bar/Pictograma/index.php#bar"
         }
       }
     ]
@@ -168,15 +168,15 @@
 
 <body>
 
-  <?php include "../../../bar/CapitalQueer/global/pag_nav/pag_nav.php" ?>
+  <?php include "../../../bar/Pictograma/global/pag_nav/pag_nav.php" ?>
 
   <div class="container_galeria">
     <?php include "../../../bar/Pictograma/galeria/galeria/galeria.php" ?>
   </div>
 
-  <?php include "../../../bar/CapitalQueer/global/boton/boton.php" ?>
+  <?php include "../../../bar/Pictograma/global/boton/boton.php" ?>
 
-  <?php include "../../../bar/CapitalQueer/global/pag_footer/pag_footer.php" ?>
+  <?php include "../../../bar/Pictograma/global/pag_footer/pag_footer.php" ?>
 
   <a
     class="whatsapp-fab"

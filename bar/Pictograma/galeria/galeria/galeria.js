@@ -1,25 +1,33 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const visibleElements = document.querySelectorAll(".visible");
+  const pictogramasVisibleElements = document.querySelectorAll(
+    ".pictogramas-visible"
+  );
 
   if (!("IntersectionObserver" in window)) {
-    visibleElements.forEach((element) => {
-      element.classList.add("is-visible");
+    pictogramasVisibleElements.forEach((element) => {
+      element.classList.add("pictogramas-is-visible");
     });
+
     return;
   }
 
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("is-visible");
-        observer.unobserve(entry.target);
-      }
-    });
-  }, {
-    threshold: 0.1
-  });
+  const pictogramasObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) {
+          return;
+        }
 
-  visibleElements.forEach((element) => {
-    observer.observe(element);
+        entry.target.classList.add("pictogramas-is-visible");
+        pictogramasObserver.unobserve(entry.target);
+      });
+    },
+    {
+      threshold: 0.1
+    }
+  );
+
+  pictogramasVisibleElements.forEach((element) => {
+    pictogramasObserver.observe(element);
   });
 });

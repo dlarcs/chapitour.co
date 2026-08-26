@@ -43,7 +43,7 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
       alt="Mesas de pool en Jimar Factory Chapinero"
     >
 
-  
+
     <img
       src="../../../juegos/JimarFactory/img/general8.jpeg"
       alt="Zona de bebidas de Jimar Factory Chapinero"

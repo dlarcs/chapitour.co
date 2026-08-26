@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="content-language" content="es-CO">
 
-  <title>Jimar Factory Chapinero | Billar de tres bandas y pool</title>
+  <title>Galería | Jimar Factory Chapinero</title>
 
   <?php
   $base = rtrim($_SERVER['DOCUMENT_ROOT'], '/');
@@ -18,15 +18,8 @@
   <!-- SEO principal para Google -->
   <meta
     name="description"
-    content="Visita Jimar Factory Chapinero, el mejor billar de Bogotá. Disfruta billar de tres bandas, pool, cócteles, café y variedad de bebidas en la Calle 58 #13-93."
+    content="Conoce la galería de Jimar Factory Chapinero, un espacio para disfrutar pool, billar y tres bandas en Bogotá. Descubre su ambiente, mesas de juego, bebidas, licores, café y entretenimiento."
   >
-
-  <meta
-    name="keywords"
-    content="Jimar Factory Chapinero, billar en Chapinero, billar Bogotá, billar tres bandas, billar pool, cócteles Chapinero, café Chapinero, entretenimiento Bogotá, Calle 58 Chapinero"
-  >
-
-  <meta name="author" content="Jimar Factory Chapinero">
 
   <meta
     name="robots"
@@ -40,33 +33,28 @@
 
   <link
     rel="canonical"
-    href="https://www.chapitour.co/juegos/JimarFactory/galeria/"
+    href="https://www.chapitour.co/juegos/JimarFactory/galeria/index.php"
   >
 
   <meta name="theme-color" content="#005548">
 
-  <!-- Ubicación del negocio -->
-  <meta name="geo.region" content="CO-DC">
-  <meta name="geo.placename" content="Chapinero, Bogotá">
-
   <!-- Open Graph: WhatsApp / Facebook -->
-  <meta property="og:locale" content="es_CO">
   <meta property="og:type" content="website">
-  <meta property="og:site_name" content="Chapitour">
+  <meta property="og:site_name" content="Jimar Factory Chapinero">
 
   <meta
     property="og:title"
-    content="Jimar Factory Chapinero | Billar de tres bandas y pool"
+    content="Galería | Jimar Factory Chapinero"
   >
 
   <meta
     property="og:description"
-    content="Conoce Jimar Factory Chapinero, el mejor billar de Bogotá. Tres bandas, pool, bebidas, cócteles, café y entretenimiento todos los días."
+    content="Conoce Jimar Factory Chapinero y disfruta pool, billar, tres bandas, bebidas, licores, café y un excelente ambiente para compartir y jugar."
   >
 
   <meta
     property="og:url"
-    content="https://www.chapitour.co/juegos/JimarFactory/galeria/"
+    content="https://www.chapitour.co/juegos/JimarFactory/galeria/index.php"
   >
 
   <meta
@@ -80,25 +68,27 @@
   >
 
   <meta property="og:image:type" content="image/jpeg">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
+  <meta property="og:image:width" content="1024">
+  <meta property="og:image:height" content="1024">
 
   <meta
     property="og:image:alt"
-    content="Jimar Factory Chapinero, billar de tres bandas y pool en Bogotá"
+    content="Jimar Factory Chapinero, billar, pool y tres bandas en Bogotá"
   >
+
+  <meta property="og:locale" content="es_CO">
 
   <!-- Twitter / X -->
   <meta name="twitter:card" content="summary_large_image">
 
   <meta
     name="twitter:title"
-    content="Jimar Factory Chapinero | Billar en Bogotá"
+    content="Galería | Jimar Factory Chapinero"
   >
 
   <meta
     name="twitter:description"
-    content="Billar de tres bandas y pool, cócteles, café, bebidas y entretenimiento todos los días en la Calle 58 #13-93, Chapinero."
+    content="Descubre la galería de Jimar Factory Chapinero: pool, billar, tres bandas, bebidas, licores, café y entretenimiento."
   >
 
   <meta
@@ -108,32 +98,18 @@
 
   <meta
     name="twitter:image:alt"
-    content="Jimar Factory Chapinero, billar de tres bandas y pool"
+    content="Logo de Jimar Factory Chapinero"
   >
 
   <!-- Iconos -->
   <link
     rel="icon"
-    href="/juegos/JimarFactory/img/logo.jpeg"
-  >
-
-  <link
-    rel="icon"
     type="image/jpeg"
-    sizes="32x32"
-    href="/juegos/JimarFactory/img/logo.jpeg"
-  >
-
-  <link
-    rel="icon"
-    type="image/jpeg"
-    sizes="16x16"
     href="/juegos/JimarFactory/img/logo.jpeg"
   >
 
   <link
     rel="apple-touch-icon"
-    sizes="180x180"
     href="/juegos/JimarFactory/img/logo.jpeg"
   >
 
@@ -153,130 +129,35 @@
         "@id": "https://www.chapitour.co/#website",
         "name": "Chapitour",
         "url": "https://www.chapitour.co/",
-        "inLanguage": "es-CO",
-        "description": "Guía turística y comercial de negocios, lugares y experiencias en Chapinero, Bogotá."
+        "inLanguage": "es-CO"
       },
       {
-        "@type": "WebPage",
-        "@id": "https://www.chapitour.co/juegos/JimarFactory/galeria/#webpage",
-        "url": "https://www.chapitour.co/juegos/JimarFactory/galeria/",
-        "name": "Galería de Jimar Factory Chapinero",
-        "description": "Galería de Jimar Factory Chapinero, billar de tres bandas y pool ubicado en la Calle 58 #13-93, Bogotá.",
-        "inLanguage": "es-CO",
-        "isPartOf": {
-          "@id": "https://www.chapitour.co/#website"
-        },
-        "about": {
-          "@id": "https://www.chapitour.co/juegos/JimarFactory/#business"
-        },
-        "primaryImageOfPage": {
-          "@type": "ImageObject",
-          "url": "https://www.chapitour.co/juegos/JimarFactory/img/logo.jpeg",
-          "width": 1200,
-          "height": 630
-        }
-      },
-      {
-        "@type": [
-          "LocalBusiness",
-          "SportsActivityLocation",
-          "BarOrPub"
-        ],
-        "@id": "https://www.chapitour.co/juegos/JimarFactory/#business",
+        "@type": "BarOrPub",
+        "@id": "https://www.chapitour.co/juegos/JimarFactory/index.php#bar",
         "name": "Jimar Factory Chapinero",
-        "alternateName": "Jimar Factory",
-        "slogan": "El mejor billar de Bogotá",
-        "url": "https://www.chapitour.co/juegos/JimarFactory/",
-        "description": "Jimar Factory Chapinero es un espacio de entretenimiento con servicio de billar de tres bandas y pool, variedad de bebidas, cócteles, café, alcohol y venta de materiales de juego para mayores de 18 años. Atiende los siete días de la semana.",
-        "image": [
-          "https://www.chapitour.co/juegos/JimarFactory/img/logo.jpeg"
-        ],
-        "logo": {
-          "@type": "ImageObject",
-          "url": "https://www.chapitour.co/juegos/JimarFactory/img/logo.jpeg"
-        },
+        "description": "Jimar Factory Chapinero es un espacio de entretenimiento en Bogotá para disfrutar pool, billar y tres bandas. Cuenta con bebidas, licores, cócteles, café y un ambiente ideal para compartir y jugar.",
+        "url": "https://www.chapitour.co/juegos/JimarFactory/index.php",
+        "image": "https://www.chapitour.co/juegos/JimarFactory/img/logo.jpeg",
         "address": {
           "@type": "PostalAddress",
           "streetAddress": "Calle 58 #13-93",
           "addressLocality": "Chapinero",
           "addressRegion": "Bogotá D.C.",
           "addressCountry": "CO"
+        }
+      },
+      {
+        "@type": "CollectionPage",
+        "@id": "https://www.chapitour.co/juegos/JimarFactory/galeria/index.php#webpage",
+        "url": "https://www.chapitour.co/juegos/JimarFactory/galeria/index.php",
+        "name": "Galería | Jimar Factory Chapinero",
+        "description": "Galería de Jimar Factory Chapinero con imágenes de sus mesas de pool, billar, tres bandas, bebidas, licores, café y ambiente.",
+        "inLanguage": "es-CO",
+        "isPartOf": {
+          "@id": "https://www.chapitour.co/#website"
         },
-        "areaServed": {
-          "@type": "City",
-          "name": "Bogotá"
-        },
-        "audience": {
-          "@type": "PeopleAudience",
-          "suggestedMinAge": 18
-        },
-        "openingHoursSpecification": {
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": [
-            "https://schema.org/Monday",
-            "https://schema.org/Tuesday",
-            "https://schema.org/Wednesday",
-            "https://schema.org/Thursday",
-            "https://schema.org/Friday",
-            "https://schema.org/Saturday",
-            "https://schema.org/Sunday"
-          ],
-          "opens": "09:00",
-          "closes": "23:59"
-        },
-        "hasOfferCatalog": {
-          "@type": "OfferCatalog",
-          "name": "Servicios de Jimar Factory Chapinero",
-          "itemListElement": [
-            {
-              "@type": "Offer",
-              "itemOffered": {
-                "@type": "Service",
-                "name": "Billar de tres bandas",
-                "description": "Servicio de mesas de billar para jugar tres bandas."
-              }
-            },
-            {
-              "@type": "Offer",
-              "itemOffered": {
-                "@type": "Service",
-                "name": "Billar pool",
-                "description": "Servicio de mesas para jugar pool en Chapinero."
-              }
-            },
-            {
-              "@type": "Offer",
-              "itemOffered": {
-                "@type": "Service",
-                "name": "Entretenimiento",
-                "description": "Espacio de entretenimiento para disfrutar con amigos los siete días de la semana."
-              }
-            },
-            {
-              "@type": "Offer",
-              "itemOffered": {
-                "@type": "Service",
-                "name": "Cócteles y bebidas",
-                "description": "Variedad de cócteles, bebidas con alcohol y bebidas sin alcohol."
-              }
-            },
-            {
-              "@type": "Offer",
-              "itemOffered": {
-                "@type": "Service",
-                "name": "Servicio de café",
-                "description": "Café disponible durante el horario de atención."
-              }
-            },
-            {
-              "@type": "Offer",
-              "itemOffered": {
-                "@type": "Product",
-                "name": "Materiales de juego",
-                "description": "Venta de materiales y accesorios de juego para mayores de 18 años."
-              }
-            }
-          ]
+        "about": {
+          "@id": "https://www.chapitour.co/juegos/JimarFactory/index.php#bar"
         }
       }
     ]
@@ -289,11 +170,9 @@
 
   <?php include "../../../juegos/JimarFactory/global/pag_nav/pag_nav.php" ?>
 
-  <main class="container_galeria">
-
+  <div class="container_galeria">
     <?php include "../../../juegos/JimarFactory/galeria/galeria/galeria.php" ?>
-
-  </main>
+  </div>
 
   <?php include "../../../juegos/JimarFactory/global/boton/boton.php" ?>
 
@@ -301,13 +180,13 @@
 
   <a
     class="whatsapp-fab"
-    href="https://wa.me/573165180649?text=Hola%2C%20vengo%20desde%20la%20web%20de%20Jimar%20Factory%20Chapinero%20y%20quiero%20recibir%20más%20información."
+    href="https://wa.me/573007795016?text=Hola%2C%20vengo%20desde%20la%20galer%C3%ADa%20de%20Jimar%20Factory%20Chapinero%20y%20quiero%20recibir%20m%C3%A1s%20informaci%C3%B3n."
     target="_blank"
     rel="noopener noreferrer"
-    aria-label="Chatear con Jimar Factory Chapinero por WhatsApp"
+    aria-label="Contactar a Jimar Factory Chapinero por WhatsApp"
   >
     <img
-      src="../../../juegos/JimarFactory/img/img_whatsApp.png"
+      src="../../../global/img/img_whatsApp.png"
       alt="Contactar a Jimar Factory Chapinero por WhatsApp"
       decoding="async"
     >
