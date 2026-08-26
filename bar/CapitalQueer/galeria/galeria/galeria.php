@@ -13,7 +13,7 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
 <section class="business-section business-gallery visible">
   <span class="section-label">Galería</span>
 
-  <h2>Conoce el ambiente</h2>
+  <h2>Conoce el ambiente de Capital Queer</h2>
 
   <p>
     Un lugar con estilo moderno, luces cálidas, buena música y espacios pensados
