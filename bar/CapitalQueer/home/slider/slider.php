@@ -111,7 +111,7 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
   </button>
 
   <!-- Puntos -->
-  <div class="business-hero__controls" aria-label="Controles del slider">
+  <!-- <div class="business-hero__controls" aria-label="Controles del slider">
     <button
       class="hero-dot active"
       type="button"
@@ -132,7 +132,7 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
       aria-label="Slide 3"
       aria-current="false"
     ></button>
-  </div>
+  </div> -->
 
 </section>
 
