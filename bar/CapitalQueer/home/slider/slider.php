@@ -93,22 +93,7 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
   </article>
 
   <!-- Flecha izquierda -->
-  <button
-    class="business-hero__arrow business-hero__arrow--prev"
-    type="button"
-    aria-label="Slide anterior"
-  >
-    &#10094;
-  </button>
 
-  <!-- Flecha derecha -->
-  <button
-    class="business-hero__arrow business-hero__arrow--next"
-    type="button"
-    aria-label="Siguiente slide"
-  >
-    &#10095;
-  </button>
 
   <!-- Puntos -->
   <div class="business-hero__controls" aria-label="Controles del slider">
