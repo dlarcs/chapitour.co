@@ -1,6 +1,8 @@
 const whatsappNumber = "573007795016";
 
-const promoCards = document.querySelectorAll(".promo-card");
+const promoCards = document.querySelectorAll(
+  ".CapitalQueer-promo-card"
+);
 
 function generarCodigoPromo() {
   const fecha = new Date();
@@ -18,10 +20,25 @@ function generarCodigoPromo() {
 
 promoCards.forEach((card) => {
   card.addEventListener("click", () => {
-    const businessName = card.querySelector("h3").textContent.trim();
-    const description = card.querySelector("p").textContent.trim();
-    const date = card.querySelector(".card-location").textContent.trim();
-    const discount = card.querySelector(".card-badge").textContent.trim();
+    const businessName = card
+      .querySelector("h3")
+      .textContent
+      .trim();
+
+    const description = card
+      .querySelector("p")
+      .textContent
+      .trim();
+
+    const date = card
+      .querySelector(".CapitalQueer-card-location")
+      .textContent
+      .trim();
+
+    const discount = card
+      .querySelector(".CapitalQueer-card-badge")
+      .textContent
+      .trim();
 
     const code = generarCodigoPromo();
 

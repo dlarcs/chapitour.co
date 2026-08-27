@@ -139,7 +139,7 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
 >
   <div class="button_container">
     <span class="btn btn30">
-      Ver actividades y promociones
+      Ver actividades
     </span>
   </div>
 </a>

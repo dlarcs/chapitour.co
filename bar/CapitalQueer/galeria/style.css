@@ -22,17 +22,17 @@ body {
   font-family: inherit;
   background: #000;
   border-radius: 5px;
-  padding:0rem ;
+  padding: 0rem;
   width: 100%;
-
 }
-.container_galeria{
+
+.CapitalQueer-container_galeria {
   max-width: calc(100vw - 10%);
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  gap:2rem;
+  gap: 2rem;
   margin: auto;
 }
 
@@ -52,7 +52,6 @@ main {
   max-width: 100%;
   min-width: 0;
 }
-
 
 /* Scroll */
 body::-webkit-scrollbar {
@@ -78,7 +77,7 @@ body::-webkit-scrollbar-thumb:hover {
 }
 
 /* WhatsApp button */
-.whatsapp-fab {
+.CapitalQueer-whatsapp-fab {
   position: fixed;
   right: 16px;
   bottom: 16px;
@@ -99,11 +98,11 @@ body::-webkit-scrollbar-thumb:hover {
   transition: transform .2s ease;
 }
 
-.whatsapp-fab:hover {
+.CapitalQueer-whatsapp-fab:hover {
   transform: scale(1.06);
 }
 
-.whatsapp-fab img {
+.CapitalQueer-whatsapp-fab img {
   width: 75%;
   height: 75%;
   object-fit: contain;
@@ -117,117 +116,123 @@ body::-webkit-scrollbar-thumb:hover {
 }
 
 @keyframes zoomRotate {
-    0%{
-      transform: scale(0.3) rotateY(0deg);
-    }
-    100%{
-      transform:scale(1) rotateY(360deg);
-    }
+  0% {
+    transform: scale(0.3) rotateY(0deg);
   }
-  @keyframes colorize {
-    to{
-      color: #7dd3fc;
-      text-shadow: 0 0 2px #7dd3fc, 0 0 1px #7dd3fc;
-    }
-  }
-  @keyframes fadeOut{
-    to {
-      opacity: 0;
-    }
-  }
-  @media (max-width: 768px) {
-    .loader span {
-      font-size: 1.5em;
-      margin:  0 0.1em;
-    }
 
+  100% {
+    transform: scale(1) rotateY(360deg);
   }
-  .preloader-active{
-    overflow: hidden;
+}
+
+@keyframes colorize {
+  to {
+    color: #7dd3fc;
+    text-shadow: 0 0 2px #7dd3fc, 0 0 1px #7dd3fc;
   }
-  h1{
+}
+
+@keyframes fadeOut {
+  to {
+    opacity: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .CapitalQueer-loader span {
+    font-size: 1.5em;
+    margin: 0 0.1em;
+  }
+}
+
+.CapitalQueer-preloader-active {
+  overflow: hidden;
+}
+
+h1 {
   font-family: 'Porky Bold', cursive;
   font-size: clamp(2.5rem, 5vw, 4rem);
   font-weight: 700;
 }
 
-h2{
+h2 {
   font-family: 'Vito Bold', sans-serif;
   font-size: clamp(1.8rem, 4vw, 3.6rem);
   line-height: 1.1;
   font-weight: 700;
 }
 
-h3{
+h3 {
   font-family: 'Poppins', sans-serif;
   font-size: clamp(1.35rem, 2.8vw, 2.3rem);
   line-height: 1.2;
   font-weight: 700;
 }
 
-h4{
+h4 {
   font-family: 'Poppins', sans-serif;
   font-size: clamp(1.1rem, 2vw, 1.55rem);
   line-height: 1.25;
   font-weight: 600;
 }
 
-h5{
+h5 {
   font-family: 'Poppins', sans-serif;
   font-size: clamp(1rem, 1.6vw, 1.25rem);
   font-weight: 600;
 }
 
-p{
+p {
   font-family: 'Poppins', sans-serif;
   font-size: clamp(0.9rem, 1vw, 1rem);
   line-height: 1.6;
 }
 
-a{
+a {
   font-family: 'Poppins', sans-serif;
   text-decoration: none;
   color: #fafafa;
 }
 
-small{
+small {
   font-family: 'Poppins', sans-serif;
   font-size: clamp(0.75rem, 0.9vw, 0.85rem);
 }
 
-span{
+span {
   font-family: 'Poppins', sans-serif;
 }
 
-li{
+li {
   font-family: 'Poppins', sans-serif;
   font-size: clamp(0.9rem, 1vw, 1rem);
 }
 
-button{
+button {
   font-family: 'Poppins', sans-serif;
   font-size: clamp(0.9rem, 1vw, 1rem);
 }
 
 input,
-textarea{
+textarea {
   font-family: 'Poppins', sans-serif;
   font-size: clamp(0.9rem, 1vw, 1rem);
 }
-/* animacion suave al aparecer la seccion */
-.featured-places {
+
+/* Animación suave al aparecer la sección */
+.CapitalQueer-featured-places {
   opacity: 0;
   transform: translateY(24px);
   transition: opacity .7s ease, transform .7s ease;
 }
 
-.featured-places.is-visible {
+.CapitalQueer-featured-places.CapitalQueer-is-visible {
   opacity: 1;
   transform: translateY(0);
 }
-@media (max-width: 900px){
-  .container_bartin{
-    max-width: calc(100vw - 10%);
 
+@media (max-width: 900px) {
+  .CapitalQueer-container_galeria {
+    max-width: calc(100vw - 10%);
   }
 }

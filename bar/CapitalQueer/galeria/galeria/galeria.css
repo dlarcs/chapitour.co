@@ -2,31 +2,31 @@
   box-sizing: border-box;
 }
 
-.business-section {
+.CapitalQueer-business-section {
   text-align: center;
   margin-top: 2rem;
   padding: 2rem 0;
   opacity: 0;
   transform: translateY(24px);
-  transition: opacity .7s ease, transform .7s ease;
+  transition: opacity 0.7s ease, transform 0.7s ease;
 }
 
-.visible {
+.CapitalQueer-visible {
   opacity: 0;
   transform: translateY(30px);
   transition: opacity 0.7s ease, transform 0.7s ease;
 }
 
-.visible.is-visible {
+.CapitalQueer-visible.CapitalQueer-is-visible {
   opacity: 1;
   transform: translateY(0);
 }
 
-.business-gallery {
+.CapitalQueer-business-gallery {
   background: transparent;
 }
 
-.section-label {
+.CapitalQueer-section-label {
   display: inline-block;
   margin-bottom: 16px;
   color: #ff62ea;
@@ -36,7 +36,7 @@
   text-transform: uppercase;
 }
 
-.business-section h2 {
+.CapitalQueer-business-section h2 {
   max-width: 780px;
   margin: 0 auto;
   font-size: clamp(2.2rem, 5vw, 4.6rem);
@@ -44,7 +44,7 @@
   color: #fafafa;
 }
 
-.business-section > p {
+.CapitalQueer-business-section > p {
   max-width: 660px;
   margin: 22px auto 0;
   color: #f5f5f5;
@@ -52,7 +52,7 @@
   line-height: 1.7;
 }
 
-.gallery-grid {
+.CapitalQueer-gallery-grid {
   display: grid;
   grid-template-columns: 1.2fr 0.8fr;
   grid-auto-rows: 260px;
@@ -61,7 +61,7 @@
   margin: 46px auto 0;
 }
 
-.gallery-grid img {
+.CapitalQueer-gallery-grid img {
   width: 100%;
   height: 100%;
   border-radius: 26px;
@@ -70,53 +70,50 @@
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.gallery-grid img:hover {
+.CapitalQueer-gallery-grid img:hover {
   transform: scale(1.02);
   box-shadow: 0 0 24px rgba(255, 98, 234, 0.35);
 }
 
-.gallery-grid img:first-child {
+.CapitalQueer-gallery-grid img:first-child {
   grid-row: span 2;
 }
 
-.button-container {
+.CapitalQueer-button-container {
   margin-top: 2.5rem;
   text-align: center;
 }
 
-
 @media (max-width: 820px) {
-  .business-section {
+  .CapitalQueer-business-section {
     padding: 0 1rem 3rem;
   }
 
-  .gallery-grid {
+  .CapitalQueer-gallery-grid {
     grid-template-columns: 1fr;
     grid-auto-rows: 230px;
   }
 
-  .gallery-grid img:first-child {
+  .CapitalQueer-gallery-grid img:first-child {
     grid-row: auto;
   }
 }
 
 @media (max-width: 480px) {
-  .business-section h2 {
+  .CapitalQueer-business-section h2 {
     font-size: 2.2rem;
   }
 
-  .business-section > p {
+  .CapitalQueer-business-section > p {
     font-size: 0.95rem;
   }
 
-  .gallery-grid {
+  .CapitalQueer-gallery-grid {
     grid-auto-rows: 200px;
     gap: 14px;
   }
 
-  .gallery-grid img {
+  .CapitalQueer-gallery-grid img {
     border-radius: 20px;
   }
-
-
 }

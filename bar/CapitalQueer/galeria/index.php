@@ -1,6 +1,5 @@
-```php
 <!DOCTYPE html>
-<html class="html_home" lang="es-CO" dir="ltr">
+<html class="CapitalQueer-html_home" lang="es-CO" dir="ltr">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -170,7 +169,7 @@
 
   <?php include "../../../bar/CapitalQueer/global/pag_nav/pag_nav.php" ?>
 
-  <div class="container_galeria">
+  <div class="CapitalQueer-container_galeria">
     <?php include "../../../bar/CapitalQueer/galeria/galeria/galeria.php" ?>
   </div>
 
@@ -179,7 +178,7 @@
   <?php include "../../../bar/CapitalQueer/global/pag_footer/pag_footer.php" ?>
 
   <a
-    class="whatsapp-fab"
+    class="CapitalQueer-whatsapp-fab"
     href="https://wa.me/573007795016?text=Hola%2C%20vengo%20desde%20la%20galer%C3%ADa%20de%20Capital%20Queer%20y%20quiero%20recibir%20m%C3%A1s%20informaci%C3%B3n."
     target="_blank"
     rel="noopener noreferrer"
@@ -194,4 +193,3 @@
 
 </body>
 </html>
-```

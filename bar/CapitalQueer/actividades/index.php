@@ -1,6 +1,5 @@
-```php
 <!DOCTYPE html>
-<html class="html_home" lang="es-CO" dir="ltr">
+<html class="CapitalQueer-html_home" lang="es-CO" dir="ltr">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -170,7 +169,7 @@
 
   <?php include "../../../bar/CapitalQueer/global/pag_nav/pag_nav.php" ?>
 
-  <div class="container_reservas">
+  <div class="CapitalQueer-container_reservas">
     <?php include "../../../bar/CapitalQueer/actividades/actividades/actividades.php" ?>
   </div>
 
@@ -179,7 +178,7 @@
   <?php include "../../../bar/CapitalQueer/global/pag_footer/pag_footer.php" ?>
 
   <a
-    class="whatsapp-fab"
+    class="CapitalQueer-whatsapp-fab"
     href="https://wa.me/573007795016?text=Hola%2C%20vengo%20desde%20la%20p%C3%A1gina%20de%20actividades%20de%20Capital%20Queer%20y%20quiero%20conocer%20las%20promociones%20disponibles."
     target="_blank"
     rel="noopener noreferrer"
@@ -194,4 +193,3 @@
 
 </body>
 </html>
-```
