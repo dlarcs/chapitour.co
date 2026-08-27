@@ -133,7 +133,11 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
       aria-current="false"
     ></button>
   </div> -->
-
+  <div class="business-hero__controls" aria-label="Slider controls">
+    <button class="hero-dot" type="button" aria-label="Slide 1"></button>
+    <button class="hero-dot" type="button" aria-label="Slide 2"></button>
+    <button class="hero-dot" type="button" aria-label="Slide 3"></button>
+  </div>
 </section>
 
 <script defer src="../../bar/CapitalQueer/home/slider/slider.js<?= $jsVer ? '?v=' . $jsVer : '' ?>"></script>

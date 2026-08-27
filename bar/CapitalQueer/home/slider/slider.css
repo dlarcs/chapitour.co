@@ -67,6 +67,27 @@
 }
 
 
+.hero-dot {
+  width: 34px;
+  height: 6px;
+  border: 0;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.35);
+  cursor: pointer;
+  animation: dotSlider 12s infinite;
+}
+
+.hero-dot:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.hero-dot:nth-child(2) {
+  animation-delay: 4s;
+}
+
+.hero-dot:nth-child(3) {
+  animation-delay: 8s;
+}
 /* =========================================
    OVERLAY
 ========================================= */
