@@ -181,7 +181,7 @@
 
   <a
     class="whatsapp-fab"
-    href="https://wa.me/573007795016?text=Hola%2C%20vengo%20desde%20la%20galer%C3%ADa%20de%20Capital%20Queer%20y%20quiero%20recibir%20m%C3%A1s%20informaci%C3%B3n."
+    href="https://wa.me/573502835648?text=Hola%2C%20vengo%20desde%20la%20galer%C3%ADa%20de%20Capital%20Queer%20y%20quiero%20recibir%20m%C3%A1s%20informaci%C3%B3n."
     target="_blank"
     rel="noopener noreferrer"
     aria-label="Contactar a Capital Queer por WhatsApp"

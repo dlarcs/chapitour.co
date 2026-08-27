@@ -168,9 +168,9 @@
 
 <body>
 
-  <?php include "../../../juegos/JimarFactory/global/pag_nav/pag_nav.php" ?>
 
   <div class="container_galeria">
+    <?php include "../../../juegos/JimarFactory/global/pag_nav/pag_nav.php" ?>
     <?php include "../../../juegos/JimarFactory/galeria/galeria/galeria.php" ?>
   </div>
 
@@ -180,7 +180,7 @@
 
   <a
     class="whatsapp-fab"
-    href="https://wa.me/573007795016?text=Hola%2C%20vengo%20desde%20la%20galer%C3%ADa%20de%20Jimar%20Factory%20Chapinero%20y%20quiero%20recibir%20m%C3%A1s%20informaci%C3%B3n."
+    href="https://wa.me/573165180649?text=Hola%2C%20vengo%20desde%20la%20galer%C3%ADa%20de%20Jimar%20Factory%20Chapinero%20y%20quiero%20recibir%20m%C3%A1s%20informaci%C3%B3n."
     target="_blank"
     rel="noopener noreferrer"
     aria-label="Contactar a Jimar Factory Chapinero por WhatsApp"
