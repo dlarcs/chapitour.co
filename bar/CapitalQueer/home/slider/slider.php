@@ -14,7 +14,7 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
 
   <!-- Slide 1 -->
   <article
-    class="business-hero__slide business-hero__slide--1"
+    class="business-hero__slide business-hero__slide--1 active"
     style="background-image: url('../../bar/CapitalQueer/img/general3.png');"
   >
     <div class="business-hero__overlay"></div>
@@ -25,9 +25,8 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
       <h1>Capital Queer</h1>
 
       <p>
-        Creado especialmente para mujeres, donde también
-        cualquier persona puede entrar, compartir y disfrutar de un ambiente libre,
-        seguro y diverso.
+        Creado especialmente para mujeres, donde también cualquier persona puede
+        entrar, compartir y disfrutar de un ambiente libre, seguro y diverso.
       </p>
 
       <div class="business-stars">
@@ -49,7 +48,7 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
     <div class="business-hero__content">
       <span>Especialmente para mujeres</span>
 
-      <h1>Sientete sentirte libre</h1>
+      <h1>Siéntete libre</h1>
 
       <p>
         Capital Queer ofrece un ambiente pensado para que las mujeres puedan
@@ -93,11 +92,46 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
     </div>
   </article>
 
-  <!-- Controls -->
-  <div class="business-hero__controls" aria-label="Slider controls">
-    <button class="hero-dot" type="button" aria-label="Slide 1"></button>
-    <button class="hero-dot" type="button" aria-label="Slide 2"></button>
-    <button class="hero-dot" type="button" aria-label="Slide 3"></button>
+  <!-- Flecha izquierda -->
+  <button
+    class="business-hero__arrow business-hero__arrow--prev"
+    type="button"
+    aria-label="Slide anterior"
+  >
+    &#10094;
+  </button>
+
+  <!-- Flecha derecha -->
+  <button
+    class="business-hero__arrow business-hero__arrow--next"
+    type="button"
+    aria-label="Siguiente slide"
+  >
+    &#10095;
+  </button>
+
+  <!-- Puntos -->
+  <div class="business-hero__controls" aria-label="Controles del slider">
+    <button
+      class="hero-dot active"
+      type="button"
+      aria-label="Slide 1"
+      aria-current="true"
+    ></button>
+
+    <button
+      class="hero-dot"
+      type="button"
+      aria-label="Slide 2"
+      aria-current="false"
+    ></button>
+
+    <button
+      class="hero-dot"
+      type="button"
+      aria-label="Slide 3"
+      aria-current="false"
+    ></button>
   </div>
 
 </section>
