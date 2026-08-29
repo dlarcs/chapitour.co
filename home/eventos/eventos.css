@@ -1,0 +1,876 @@
+/* =========================================================
+   CHAPITOUR.CO
+   SLIDER DE EVENTOS
+========================================================= */
+
+.Chapitour-eventos-section {
+  width: 100%;
+  padding: 70px 20px;
+
+  background: #080808;
+
+  box-sizing: border-box;
+}
+
+
+/* =========================================================
+   TÍTULO
+========================================================= */
+
+.Chapitour-eventos-header {
+  width: 100%;
+  max-width: 1180px;
+
+  margin: 0 auto 35px;
+
+  text-align: center;
+}
+
+
+.Chapitour-eventos-eyebrow {
+  display: block;
+
+  margin-bottom: 8px;
+
+  color: #ffd400;
+
+  font-size: 12px;
+  font-weight: 800;
+
+  letter-spacing: 3px;
+}
+
+
+.Chapitour-eventos-header h2 {
+  margin: 0 0 10px;
+
+  color: #fff;
+
+  font-size: clamp(32px, 5vw, 50px);
+  font-weight: 900;
+
+  line-height: 1;
+}
+
+
+.Chapitour-eventos-header p {
+  max-width: 600px;
+
+  margin: 0 auto;
+
+  color: #999;
+
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+
+/* =========================================================
+   SLIDER
+========================================================= */
+
+.Chapitour-eventos-slider {
+  position: relative;
+
+  width: 100%;
+  max-width: 1180px;
+
+  margin: 0 auto;
+
+  overflow: hidden;
+
+  border-radius: 24px;
+
+  background: #111;
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
+
+  box-shadow:
+    0 25px 70px rgba(0, 0, 0, 0.45);
+}
+
+
+/* TRACK */
+
+.Chapitour-eventos-track {
+  display: flex;
+
+  width: 100%;
+
+  transition: transform 0.65s cubic-bezier(.22, .61, .36, 1);
+
+  will-change: transform;
+}
+
+
+/* SLIDE */
+
+.Chapitour-eventos-slide {
+  flex: 0 0 100%;
+
+  min-width: 0;
+
+  display: grid;
+
+  grid-template-columns:
+    minmax(320px, 470px)
+    minmax(0, 1fr);
+}
+
+
+/* =========================================================
+   IMAGEN
+========================================================= */
+
+.Chapitour-eventos-imagen {
+  position: relative;
+
+  width: 100%;
+  min-height: 690px;
+
+  overflow: hidden;
+
+  background: #000;
+}
+
+
+.Chapitour-eventos-imagen img {
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  object-fit: cover;
+  object-position: top center;
+}
+
+
+.Chapitour-eventos-imagen::after {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  pointer-events: none;
+
+  background:
+    linear-gradient(
+      to top,
+      rgba(0, 0, 0, 0.65),
+      transparent 35%
+    );
+}
+
+
+/* FECHA */
+
+.Chapitour-eventos-fecha {
+  position: absolute;
+
+  top: 22px;
+  left: 22px;
+
+  z-index: 3;
+
+  width: 72px;
+  height: 78px;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  background: rgba(0, 0, 0, 0.85);
+
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+  border:
+    1px solid rgba(255, 255, 255, 0.2);
+
+  border-radius: 14px;
+
+  color: #fff;
+}
+
+
+.Chapitour-eventos-fecha span {
+  font-size: 31px;
+  font-weight: 900;
+  line-height: 1;
+}
+
+
+.Chapitour-eventos-fecha small {
+  margin-top: 5px;
+
+  color: #ffd400;
+
+  font-size: 11px;
+  font-weight: 800;
+
+  letter-spacing: 2px;
+}
+
+
+/* =========================================================
+   INFORMACIÓN
+========================================================= */
+
+.Chapitour-eventos-info {
+  display: flex;
+  flex-direction: column;
+
+  justify-content: center;
+
+  padding: 45px 50px;
+
+  color: #fff;
+
+  box-sizing: border-box;
+}
+
+
+/* SUPERIOR */
+
+.Chapitour-eventos-superior {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  flex-wrap: wrap;
+
+  gap: 10px;
+
+  margin-bottom: 17px;
+}
+
+
+.Chapitour-eventos-destacado {
+  display: inline-flex;
+
+  padding: 8px 13px;
+
+  border-radius: 100px;
+
+  background:
+    rgba(255, 212, 0, 0.1);
+
+  border:
+    1px solid rgba(255, 212, 0, 0.25);
+
+  color: #ffd400;
+
+  font-size: 11px;
+  font-weight: 800;
+
+  letter-spacing: 1.3px;
+}
+
+
+.Chapitour-eventos-negocio {
+  color: #777;
+
+  font-size: 11px;
+  font-weight: 800;
+
+  letter-spacing: 2px;
+}
+
+
+/* TÍTULO */
+
+.Chapitour-eventos-info h3 {
+  margin: 0 0 18px;
+
+  color: #fff;
+
+  font-size:
+    clamp(36px, 5vw, 58px);
+
+  line-height: 0.98;
+
+  font-weight: 900;
+
+  letter-spacing: -2px;
+}
+
+
+/* DESCRIPCIÓN */
+
+.Chapitour-eventos-descripcion {
+  margin: 0 0 25px;
+
+  color: #b8b8b8;
+
+  font-size: 16px;
+
+  line-height: 1.7;
+}
+
+
+.Chapitour-eventos-descripcion strong {
+  color: #fff;
+}
+
+
+/* =========================================================
+   SEMÁFORO
+========================================================= */
+
+.Chapitour-eventos-semaforo {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, 1fr);
+
+  gap: 9px;
+
+  margin-bottom: 26px;
+}
+
+
+.Chapitour-eventos-color {
+  display: flex;
+  align-items: center;
+
+  gap: 8px;
+
+  padding: 11px;
+
+  background: #191919;
+
+  border:
+    1px solid rgba(255, 255, 255, 0.07);
+
+  border-radius: 11px;
+}
+
+
+.Chapitour-eventos-corazon {
+  font-size: 28px;
+
+  line-height: 1;
+}
+
+
+.Chapitour-eventos-corazon.rojo {
+  color: #ff2736;
+}
+
+
+.Chapitour-eventos-corazon.amarillo {
+  color: #ffd400;
+}
+
+
+.Chapitour-eventos-corazon.verde {
+  color: #1fdb5b;
+}
+
+
+.Chapitour-eventos-color strong {
+  display: block;
+
+  margin-bottom: 2px;
+
+  color: #fff;
+
+  font-size: 12px;
+}
+
+
+.Chapitour-eventos-color small {
+  display: block;
+
+  color: #777;
+
+  font-size: 9px;
+
+  text-transform: uppercase;
+}
+
+
+/* =========================================================
+   BENEFICIOS EVENTO 2
+========================================================= */
+
+.Chapitour-eventos-beneficios {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, 1fr);
+
+  gap: 9px;
+
+  margin-bottom: 25px;
+}
+
+
+.Chapitour-eventos-beneficios > div {
+  display: flex;
+  align-items: center;
+
+  gap: 10px;
+
+  padding: 12px;
+
+  background: #191919;
+
+  border:
+    1px solid rgba(255, 255, 255, 0.07);
+
+  border-radius: 11px;
+}
+
+
+.Chapitour-eventos-beneficios > div > span {
+  font-size: 23px;
+}
+
+
+.Chapitour-eventos-beneficios p {
+  display: flex;
+  flex-direction: column;
+
+  margin: 0;
+}
+
+
+.Chapitour-eventos-beneficios strong {
+  color: #fff;
+
+  font-size: 12px;
+}
+
+
+.Chapitour-eventos-beneficios small {
+  margin-top: 2px;
+
+  color: #777;
+
+  font-size: 9px;
+}
+
+
+/* =========================================================
+   DATOS
+========================================================= */
+
+.Chapitour-eventos-datos {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 9px;
+
+  margin-bottom: 25px;
+}
+
+
+.Chapitour-eventos-dato {
+  display: flex;
+  align-items: center;
+
+  gap: 11px;
+
+  min-width: 0;
+
+  padding: 12px;
+
+  background: #191919;
+
+  border:
+    1px solid rgba(255, 255, 255, 0.07);
+
+  border-radius: 11px;
+}
+
+
+.Chapitour-eventos-dato > span {
+  flex-shrink: 0;
+
+  width: 37px;
+  height: 37px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  background: #222;
+
+  border-radius: 50%;
+
+  font-size: 17px;
+}
+
+
+.Chapitour-eventos-dato > div {
+  display: flex;
+  flex-direction: column;
+
+  min-width: 0;
+}
+
+
+.Chapitour-eventos-dato small {
+  margin-bottom: 2px;
+
+  color: #777;
+
+  font-size: 9px;
+  font-weight: 700;
+
+  letter-spacing: 1px;
+}
+
+
+.Chapitour-eventos-dato strong {
+  overflow-wrap: break-word;
+
+  color: #fff;
+
+  font-size: 12px;
+
+  line-height: 1.4;
+}
+
+
+/* =========================================================
+   FINAL
+========================================================= */
+
+.Chapitour-eventos-llamado {
+  padding-top: 22px;
+
+  border-top:
+    1px solid rgba(255, 255, 255, 0.08);
+}
+
+
+.Chapitour-eventos-llamado p {
+  margin: 0 0 18px;
+
+  color: #cfcfcf;
+
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+
+/* BOTÓN */
+
+.Chapitour-eventos-boton {
+  display: inline-flex;
+
+  min-height: 49px;
+
+  align-items: center;
+  justify-content: center;
+
+  padding: 0 27px;
+
+  background: #ffd400;
+
+  border-radius: 10px;
+
+  color: #080808;
+
+  text-decoration: none;
+
+  font-size: 13px;
+  font-weight: 900;
+
+  transition:
+    transform 0.25s ease,
+    background 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+
+.Chapitour-eventos-boton:hover {
+  transform: translateY(-2px);
+
+  background: #ffe04b;
+
+  box-shadow:
+    0 10px 25px rgba(255, 212, 0, 0.18);
+}
+
+
+/* =========================================================
+   FLECHAS
+========================================================= */
+
+.Chapitour-eventos-flecha {
+  position: absolute;
+
+  top: 50%;
+
+  z-index: 10;
+
+  width: 48px;
+  height: 48px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  transform: translateY(-50%);
+
+  padding: 0;
+
+  border:
+    1px solid rgba(255, 255, 255, 0.18);
+
+  border-radius: 50%;
+
+  background:
+    rgba(0, 0, 0, 0.72);
+
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+
+  color: #fff;
+
+  font-family: Arial, sans-serif;
+
+  font-size: 38px;
+  font-weight: 300;
+
+  line-height: 1;
+
+  cursor: pointer;
+
+  transition:
+    background 0.25s ease,
+    transform 0.25s ease;
+}
+
+
+.Chapitour-eventos-anterior {
+  left: 15px;
+}
+
+
+.Chapitour-eventos-siguiente {
+  right: 15px;
+}
+
+
+.Chapitour-eventos-flecha:hover {
+  background: #ffd400;
+
+  color: #000;
+
+  transform:
+    translateY(-50%)
+    scale(1.06);
+}
+
+
+/* =========================================================
+   INDICADORES
+========================================================= */
+
+.Chapitour-eventos-indicadores {
+  position: absolute;
+
+  z-index: 10;
+
+  bottom: 17px;
+  left: 50%;
+
+  transform: translateX(-50%);
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+  padding: 7px 10px;
+
+  background:
+    rgba(0, 0, 0, 0.68);
+
+  border-radius: 100px;
+
+  backdrop-filter: blur(7px);
+  -webkit-backdrop-filter: blur(7px);
+}
+
+
+.Chapitour-eventos-punto {
+  width: 9px;
+  height: 9px;
+
+  padding: 0;
+
+  border: 0;
+
+  border-radius: 50%;
+
+  background:
+    rgba(255, 255, 255, 0.35);
+
+  cursor: pointer;
+
+  transition:
+    width 0.3s ease,
+    border-radius 0.3s ease,
+    background 0.3s ease;
+}
+
+
+.Chapitour-eventos-punto-activo {
+  width: 27px;
+
+  border-radius: 20px;
+
+  background: #ffd400;
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 900px) {
+
+  .Chapitour-eventos-slider {
+    max-width: 650px;
+  }
+
+
+  .Chapitour-eventos-slide {
+    grid-template-columns: 1fr;
+  }
+
+
+  .Chapitour-eventos-imagen {
+    min-height: auto;
+  }
+
+
+  .Chapitour-eventos-imagen img {
+    width: 100%;
+    height: auto;
+
+    object-fit: contain;
+  }
+
+
+  .Chapitour-eventos-info {
+    padding:
+      38px 35px 65px;
+  }
+
+
+  .Chapitour-eventos-flecha {
+    top: 35%;
+  }
+
+}
+
+
+/* =========================================================
+   MÓVIL
+========================================================= */
+
+@media (max-width: 600px) {
+
+  .Chapitour-eventos-section {
+    padding: 45px 12px;
+  }
+
+
+  .Chapitour-eventos-header {
+    margin-bottom: 25px;
+  }
+
+
+  .Chapitour-eventos-header h2 {
+    font-size: 35px;
+  }
+
+
+  .Chapitour-eventos-slider {
+    border-radius: 17px;
+  }
+
+
+  .Chapitour-eventos-info {
+    padding:
+      28px 19px 65px;
+  }
+
+
+  .Chapitour-eventos-info h3 {
+    font-size: 37px;
+
+    letter-spacing: -1px;
+  }
+
+
+  .Chapitour-eventos-descripcion {
+    font-size: 14px;
+  }
+
+
+  .Chapitour-eventos-semaforo,
+  .Chapitour-eventos-beneficios {
+    grid-template-columns: 1fr;
+  }
+
+
+  .Chapitour-eventos-datos {
+    grid-template-columns: 1fr;
+  }
+
+
+  .Chapitour-eventos-boton {
+    width: 100%;
+
+    box-sizing: border-box;
+  }
+
+
+  .Chapitour-eventos-fecha {
+    top: 12px;
+    left: 12px;
+
+    width: 58px;
+    height: 64px;
+  }
+
+
+  .Chapitour-eventos-fecha span {
+    font-size: 25px;
+  }
+
+
+  .Chapitour-eventos-flecha {
+    top: 22%;
+
+    width: 42px;
+    height: 42px;
+
+    font-size: 31px;
+  }
+
+
+  .Chapitour-eventos-anterior {
+    left: 9px;
+  }
+
+
+  .Chapitour-eventos-siguiente {
+    right: 9px;
+  }
+
+}

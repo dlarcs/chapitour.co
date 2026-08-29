@@ -92,8 +92,6 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
     </div>
   </article>
 
-  <!-- Flecha izquierda -->
-
 
   <!-- Puntos -->
   <div class="business-hero__controls" aria-label="Controles del slider">

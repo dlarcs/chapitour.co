@@ -8,13 +8,19 @@ $cssVer = is_file($cssFile) ? filemtime($cssFile) : '';
 $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
 ?>
 
-<link rel="stylesheet" href="../../bar/Gran&Chela_Club/home/slider/slider.css<?= $cssVer ? '?v=' . $cssVer : '' ?>">
+<link
+  rel="stylesheet"
+  href="../../bar/Gran&Chela_Club/home/slider/slider.css<?= $cssVer ? '?v=' . $cssVer : '' ?>"
+>
 
-<section class="business-hero visible" aria-label="Gran&Chela Club slider">
+<section
+  class="business-hero visible"
+  aria-label="Gran&Chela Club slider"
+>
 
   <!-- Slide 1 -->
   <article
-    class="business-hero__slide business-hero__slide--1"
+    class="business-hero__slide active"
     style="background-image: url('../../bar/Gran&Chela_Club/img/general2.jpg');"
   >
     <div class="business-hero__overlay"></div>
@@ -22,7 +28,7 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
     <div class="business-hero__content">
       <span>Bar · Discoteca · Buena rumba</span>
 
-      <h1>Gran&Chela Club</h1>
+      <h1>Gran&amp;Chela Club</h1>
 
       <p>
         Un lugar para disfrutar la noche con buena música, licores, cervezas,
@@ -40,7 +46,7 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
 
   <!-- Slide 2 -->
   <article
-    class="business-hero__slide business-hero__slide--2"
+    class="business-hero__slide"
     style="background-image: url('../../bar/Gran&Chela_Club/img/general12.jpg');"
   >
     <div class="business-hero__overlay"></div>
@@ -66,7 +72,7 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
 
   <!-- Slide 3 -->
   <article
-    class="business-hero__slide business-hero__slide--3"
+    class="business-hero__slide"
     style="background-image: url('../../bar/Gran&Chela_Club/img/general11.jpg');"
   >
     <div class="business-hero__overlay"></div>
@@ -77,7 +83,7 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
       <h1>Alquila el espacio para tu evento</h1>
 
       <p>
-        En Gran&Chela Club también prestamos el espacio para cumpleaños,
+        En Gran&amp;Chela Club también prestamos el espacio para cumpleaños,
         reuniones, celebraciones privadas y eventos especiales con reserva previa.
       </p>
 
@@ -90,13 +96,36 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
     </div>
   </article>
 
-  <!-- Controls -->
-  <div class="business-hero__controls" aria-label="Slider controls">
-    <button class="hero-dot" type="button" aria-label="Slide 1"></button>
-    <button class="hero-dot" type="button" aria-label="Slide 2"></button>
-    <button class="hero-dot" type="button" aria-label="Slide 3"></button>
+  <!-- Puntos del slider -->
+  <div
+    class="business-hero__controls"
+    aria-label="Slider controls"
+  >
+    <button
+      class="hero-dot active"
+      type="button"
+      aria-label="Slide 1"
+      aria-current="true"
+    ></button>
+
+    <button
+      class="hero-dot"
+      type="button"
+      aria-label="Slide 2"
+      aria-current="false"
+    ></button>
+
+    <button
+      class="hero-dot"
+      type="button"
+      aria-label="Slide 3"
+      aria-current="false"
+    ></button>
   </div>
 
 </section>
 
-<script defer src="../../bar/Gran&Chela_Club/home/slider/slider.js<?= $jsVer ? '?v=' . $jsVer : '' ?>"></script>
+<script
+  defer
+  src="../../bar/Gran&Chela_Club/home/slider/slider.js<?= $jsVer ? '?v=' . $jsVer : '' ?>"
+></script>

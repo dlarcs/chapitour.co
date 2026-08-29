@@ -1,40 +1,26 @@
 document.addEventListener("DOMContentLoaded", () => {
-
   /* =========================================
-     ANIMACIÓN AL ENTRAR EN PANTALLA
+     ANIMACIÓN DE ENTRADA
   ========================================= */
 
-  const sections = document.querySelectorAll(".visible");
+  const visibleElements = document.querySelectorAll(".visible");
 
-  if (sections.length > 0) {
-
+  if (visibleElements.length) {
     const observer = new IntersectionObserver(
       (entries) => {
-
         entries.forEach((entry) => {
-
           if (entry.isIntersecting) {
-
             entry.target.classList.add("is-visible");
-
             observer.unobserve(entry.target);
-
           }
-
         });
-
       },
       {
         threshold: 0.3
       }
     );
 
-    sections.forEach((section) => {
-
-      observer.observe(section);
-
-    });
-
+    visibleElements.forEach((element) => observer.observe(element));
   }
 
 
@@ -46,29 +32,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (!slider) return;
 
-
   const slides = slider.querySelectorAll(".business-hero__slide");
-
   const dots = slider.querySelectorAll(".hero-dot");
 
-  const prevButton = slider.querySelector(
-    ".business-hero__arrow--prev"
-  );
-
-  const nextButton = slider.querySelector(
-    ".business-hero__arrow--next"
-  );
-
-
-  if (slides.length === 0) return;
-
+  if (!slides.length) return;
 
   let currentSlide = 0;
+  let autoplayInterval;
 
-  let autoplayInterval = null;
-
-
-  /* Cada cuánto cambia automáticamente */
   const autoplayTime = 4000;
 
 
@@ -77,82 +48,44 @@ document.addEventListener("DOMContentLoaded", () => {
   ========================================= */
 
   function showSlide(index) {
-
     if (index >= slides.length) {
-
       index = 0;
-
     }
 
     if (index < 0) {
-
       index = slides.length - 1;
-
     }
 
-
     slides.forEach((slide) => {
-
       slide.classList.remove("active");
-
     });
-
 
     dots.forEach((dot) => {
-
       dot.classList.remove("active");
-
-      dot.setAttribute(
-        "aria-current",
-        "false"
-      );
-
+      dot.setAttribute("aria-current", "false");
     });
-
 
     slides[index].classList.add("active");
 
-
     if (dots[index]) {
-
       dots[index].classList.add("active");
-
-      dots[index].setAttribute(
-        "aria-current",
-        "true"
-      );
-
+      dots[index].setAttribute("aria-current", "true");
     }
 
-
     currentSlide = index;
-
   }
 
 
   /* =========================================
-     SIGUIENTE SLIDE
+     SIGUIENTE / ANTERIOR
   ========================================= */
 
   function nextSlide() {
-
-    showSlide(
-      currentSlide + 1
-    );
-
+    showSlide(currentSlide + 1);
   }
 
-
-  /* =========================================
-     SLIDE ANTERIOR
-  ========================================= */
-
   function previousSlide() {
-
-    showSlide(
-      currentSlide - 1
-    );
-
+    showSlide(currentSlide - 1);
   }
 
 
@@ -161,82 +94,15 @@ document.addEventListener("DOMContentLoaded", () => {
   ========================================= */
 
   function startAutoplay() {
+    clearInterval(autoplayInterval);
 
-    stopAutoplay();
-
-    autoplayInterval = setInterval(
-      () => {
-
-        nextSlide();
-
-      },
-      autoplayTime
-    );
-
+    autoplayInterval = setInterval(() => {
+      nextSlide();
+    }, autoplayTime);
   }
-
-
-  function stopAutoplay() {
-
-    if (autoplayInterval) {
-
-      clearInterval(
-        autoplayInterval
-      );
-
-      autoplayInterval = null;
-
-    }
-
-  }
-
 
   function restartAutoplay() {
-
-    stopAutoplay();
-
     startAutoplay();
-
-  }
-
-
-  /* =========================================
-     FLECHA DERECHA
-  ========================================= */
-
-  if (nextButton) {
-
-    nextButton.addEventListener(
-      "click",
-      () => {
-
-        nextSlide();
-
-        restartAutoplay();
-
-      }
-    );
-
-  }
-
-
-  /* =========================================
-     FLECHA IZQUIERDA
-  ========================================= */
-
-  if (prevButton) {
-
-    prevButton.addEventListener(
-      "click",
-      () => {
-
-        previousSlide();
-
-        restartAutoplay();
-
-      }
-    );
-
   }
 
 
@@ -244,182 +110,91 @@ document.addEventListener("DOMContentLoaded", () => {
      PUNTOS
   ========================================= */
 
-  dots.forEach(
-    (dot, index) => {
-
-      dot.addEventListener(
-        "click",
-        () => {
-
-          showSlide(index);
-
-          restartAutoplay();
-
-        }
-      );
-
-    }
-  );
+  dots.forEach((dot, index) => {
+    dot.addEventListener("click", () => {
+      showSlide(index);
+      restartAutoplay();
+    });
+  });
 
 
   /* =========================================
-     SWIPE CON EL DEDO
+     SWIPE EN CELULAR
   ========================================= */
 
   let touchStartX = 0;
-
   let touchStartY = 0;
-
-  let touchEndX = 0;
-
-  let touchEndY = 0;
-
 
   slider.addEventListener(
     "touchstart",
     (event) => {
-
-      touchStartX =
-        event.changedTouches[0].clientX;
-
-      touchStartY =
-        event.changedTouches[0].clientY;
-
-
-      stopAutoplay();
-
+      touchStartX = event.changedTouches[0].clientX;
+      touchStartY = event.changedTouches[0].clientY;
     },
     {
       passive: true
     }
   );
-
 
   slider.addEventListener(
     "touchend",
     (event) => {
+      const touchEndX = event.changedTouches[0].clientX;
+      const touchEndY = event.changedTouches[0].clientY;
 
-      touchEndX =
-        event.changedTouches[0].clientX;
+      const distanceX = touchStartX - touchEndX;
+      const distanceY = touchStartY - touchEndY;
 
-      touchEndY =
-        event.changedTouches[0].clientY;
+      const minimumDistance = 50;
 
+      // Si el movimiento es más vertical que horizontal,
+      // dejamos que la página haga scroll normalmente.
+      if (Math.abs(distanceY) > Math.abs(distanceX)) {
+        return;
+      }
 
-      handleSwipe();
+      // Ignorar movimientos demasiado pequeños.
+      if (Math.abs(distanceX) < minimumDistance) {
+        return;
+      }
 
+      // Deslizar hacia la izquierda = siguiente.
+      if (distanceX > 0) {
+        nextSlide();
+      } else {
+        // Deslizar hacia la derecha = anterior.
+        previousSlide();
+      }
 
-      startAutoplay();
-
+      restartAutoplay();
     },
     {
       passive: true
     }
   );
-
-
-  function handleSwipe() {
-
-    const distanceX =
-      touchStartX - touchEndX;
-
-    const distanceY =
-      touchStartY - touchEndY;
-
-
-    const minimumDistance = 50;
-
-
-    /* Si el movimiento fue más vertical
-       que horizontal, no cambiamos slide */
-
-    if (
-      Math.abs(distanceY) >
-      Math.abs(distanceX)
-    ) {
-
-      return;
-
-    }
-
-
-    /* Movimiento demasiado pequeño */
-
-    if (
-      Math.abs(distanceX) <
-      minimumDistance
-    ) {
-
-      return;
-
-    }
-
-
-    /* =====================================
-       DESLIZA EL DEDO HACIA LA IZQUIERDA
-       -> siguiente
-    ===================================== */
-
-    if (distanceX > 0) {
-
-      nextSlide();
-
-    }
-
-
-    /* =====================================
-       DESLIZA EL DEDO HACIA LA DERECHA
-       -> anterior
-    ===================================== */
-
-    else {
-
-      previousSlide();
-
-    }
-
-  }
 
 
   /* =========================================
      TECLADO
   ========================================= */
 
-  document.addEventListener(
-    "keydown",
-    (event) => {
-
-      if (
-        event.key === "ArrowRight"
-      ) {
-
-        nextSlide();
-
-        restartAutoplay();
-
-      }
-
-
-      if (
-        event.key === "ArrowLeft"
-      ) {
-
-        previousSlide();
-
-        restartAutoplay();
-
-      }
-
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "ArrowRight") {
+      nextSlide();
+      restartAutoplay();
     }
-  );
+
+    if (event.key === "ArrowLeft") {
+      previousSlide();
+      restartAutoplay();
+    }
+  });
 
 
   /* =========================================
-     INICIAR
+     INICIAR SLIDER
   ========================================= */
 
   showSlide(0);
-
   startAutoplay();
-
 });
