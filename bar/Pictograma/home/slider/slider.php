@@ -8,18 +8,25 @@ $cssVer = is_file($cssFile) ? filemtime($cssFile) : '';
 $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
 ?>
 
-<link rel="stylesheet" href="../../bar/Pictograma/home/slider/slider.css<?= $cssVer ? '?v=' . $cssVer : '' ?>">
+<link
+  rel="stylesheet"
+  href="../../bar/Pictograma/home/slider/slider.css<?= $cssVer ? '?v=' . $cssVer : '' ?>"
+>
 
-<section class="business-hero visible" aria-label="Presentación de Pictogramas Cafe Bar">
+<section
+  class="Pictogramas-business-hero Pictogramas-visible"
+  aria-label="Presentación de Pictogramas Cafe Bar"
+>
 
   <!-- Slide 1 -->
   <article
-    class="business-hero__slide business-hero__slide--1"
+    class="Pictogramas-business-hero__slide Pictogramas-business-hero__slide--1 Pictogramas-is-active"
     style="background-image: url('../../bar/Pictograma/img/general3.png');"
+    aria-hidden="false"
   >
-    <div class="business-hero__overlay"></div>
+    <div class="Pictogramas-business-hero__overlay"></div>
 
-    <div class="business-hero__content">
+    <div class="Pictogramas-business-hero__content">
       <span>Café · Bar · Diversión</span>
 
       <h1>Pictogramas Cafe Bar</h1>
@@ -29,12 +36,14 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
         y pasar un momento diferente en un ambiente agradable y lleno de buena energía.
       </p>
 
-      <div class="business-stars">
+      <div class="Pictogramas-business-stars">
         <strong>★★★★★</strong>
         <small>4.8 / 5</small>
       </div>
 
-      <a href="https://wa.me/573138846378?text=Hola%2C%20vengo%20desde%20Chapitour%20y%20quiero%20conocer%20m%C3%A1s%20sobre%20Pictogramas%20Cafe%20Bar.">
+      <a
+        href="https://wa.me/573138846378?text=Hola%2C%20vengo%20desde%20Chapitour%20y%20quiero%20conocer%20m%C3%A1s%20sobre%20Pictogramas%20Cafe%20Bar."
+      >
         Reservar o contactar
       </a>
     </div>
@@ -42,12 +51,13 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
 
   <!-- Slide 2 -->
   <article
-    class="business-hero__slide business-hero__slide--2"
+    class="Pictogramas-business-hero__slide Pictogramas-business-hero__slide--2"
     style="background-image: url('../../bar/Pictograma/img/general.png');"
+    aria-hidden="true"
   >
-    <div class="business-hero__overlay"></div>
+    <div class="Pictogramas-business-hero__overlay"></div>
 
-    <div class="business-hero__content">
+    <div class="Pictogramas-business-hero__content">
       <span>Cócteles · Micheladas · Cervezas</span>
 
       <h1>Bebidas para disfrutar</h1>
@@ -57,23 +67,26 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
         cervezas y café para acompañar tus mejores momentos.
       </p>
 
-      <div class="business-stars">
+      <div class="Pictogramas-business-stars">
         <strong>★★★★★</strong>
         <small>4.8 / 5</small>
       </div>
 
-      <a href="../../bar/Pictograma/actividades/index.php">Conocer bebidas y promociones</a>
+      <a href="../../bar/Pictograma/actividades/index.php">
+        Conocer bebidas y promociones
+      </a>
     </div>
   </article>
 
   <!-- Slide 3 -->
   <article
-    class="business-hero__slide business-hero__slide--3"
+    class="Pictogramas-business-hero__slide Pictogramas-business-hero__slide--3"
     style="background-image: url('../../bar/Pictograma/img/general15.png');"
+    aria-hidden="true"
   >
-    <div class="business-hero__overlay"></div>
+    <div class="Pictogramas-business-hero__overlay"></div>
 
-    <div class="business-hero__content">
+    <div class="Pictogramas-business-hero__content">
       <span>Bolirana · Amigos · Buena energía</span>
 
       <h1>Juega, comparte y diviértete</h1>
@@ -83,24 +96,49 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
         mientras compartes tus bebidas favoritas en Pictogramas Cafe Bar.
       </p>
 
-      <div class="business-stars">
+      <div class="Pictogramas-business-stars">
         <strong>★★★★★</strong>
         <small>4.8 / 5</small>
       </div>
 
-      <a href="https://wa.me/573138846378?text=Hola%2C%20vengo%20desde%20Chapitour%20y%20quiero%20informaci%C3%B3n%20sobre%20la%20bolirana%20de%20Pictogramas%20Cafe%20Bar.">
+      <a
+        href="https://wa.me/573138846378?text=Hola%2C%20vengo%20desde%20Chapitour%20y%20quiero%20informaci%C3%B3n%20sobre%20la%20bolirana%20de%20Pictogramas%20Cafe%20Bar."
+      >
         Consultar por WhatsApp
       </a>
     </div>
   </article>
 
-  <!-- Controls -->
-  <div class="business-hero__controls" aria-label="Controles del carrusel">
-    <button class="hero-dot" type="button" aria-label="Mostrar diapositiva 1"></button>
-    <button class="hero-dot" type="button" aria-label="Mostrar diapositiva 2"></button>
-    <button class="hero-dot" type="button" aria-label="Mostrar diapositiva 3"></button>
+  <!-- Puntos inferiores -->
+  <div
+    class="Pictogramas-business-hero__controls"
+    aria-label="Controles del carrusel"
+  >
+    <button
+      class="Pictogramas-hero-dot Pictogramas-is-active"
+      type="button"
+      aria-label="Mostrar diapositiva 1"
+      aria-current="true"
+    ></button>
+
+    <button
+      class="Pictogramas-hero-dot"
+      type="button"
+      aria-label="Mostrar diapositiva 2"
+      aria-current="false"
+    ></button>
+
+    <button
+      class="Pictogramas-hero-dot"
+      type="button"
+      aria-label="Mostrar diapositiva 3"
+      aria-current="false"
+    ></button>
   </div>
 
 </section>
 
-<script defer src="../../bar/Pictograma/home/slider/slider.js<?= $jsVer ? '?v=' . $jsVer : '' ?>"></script>
+<script
+  defer
+  src="../../bar/Pictograma/home/slider/slider.js<?= $jsVer ? '?v=' . $jsVer : '' ?>"
+></script>

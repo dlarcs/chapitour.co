@@ -8,21 +8,25 @@ $cssVer = is_file($cssFile) ? filemtime($cssFile) : '';
 $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
 ?>
 
-<link rel="stylesheet" href="../../juegos/JimarFactory/home/slider/slider.css<?= $cssVer ? '?v=' . $cssVer : '' ?>">
+<link
+  rel="stylesheet"
+  href="../../juegos/JimarFactory/home/slider/slider.css<?= $cssVer ? '?v=' . $cssVer : '' ?>"
+>
 
 <section
-  class="business-hero visible"
+  class="JimarFactory-business-hero JimarFactory-visible"
   aria-label="Carrusel principal de Jimar Factory Chapinero"
 >
 
   <!-- Slide 1: Billar -->
   <article
-    class="business-hero__slide business-hero__slide--2"
+    class="JimarFactory-business-hero__slide JimarFactory-business-hero__slide--1 JimarFactory-is-active"
     style="background-image: url('../../juegos/JimarFactory/img/general39.jpeg');"
+    aria-hidden="false"
   >
-    <div class="business-hero__overlay"></div>
+    <div class="JimarFactory-business-hero__overlay"></div>
 
-    <div class="business-hero__content">
+    <div class="JimarFactory-business-hero__content">
       <span>Billar · Tres bandas · Pool</span>
 
       <h2>Vive el mejor ambiente de billar</h2>
@@ -33,7 +37,7 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
         con amigos.
       </p>
 
-      <div class="business-stars">
+      <div class="JimarFactory-business-stars">
         <strong>Domingo a domingo</strong>
         <small>9:00 a. m. a 12:00 a. m.</small>
       </div>
@@ -51,12 +55,13 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
 
   <!-- Slide 2: Bebidas -->
   <article
-    class="business-hero__slide business-hero__slide--3"
+    class="JimarFactory-business-hero__slide JimarFactory-business-hero__slide--2"
     style="background-image: url('../../juegos/JimarFactory/img/general16.jpeg');"
+    aria-hidden="true"
   >
-    <div class="business-hero__overlay"></div>
+    <div class="JimarFactory-business-hero__overlay"></div>
 
-    <div class="business-hero__content">
+    <div class="JimarFactory-business-hero__content">
       <span>Bebidas · Cócteles · Café</span>
 
       <h2>Acompaña cada partida</h2>
@@ -67,7 +72,7 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
         días de la semana.
       </p>
 
-      <div class="business-stars">
+      <div class="JimarFactory-business-stars">
         <strong>Variedad y servicio</strong>
         <small>Todo en un mismo lugar</small>
       </div>
@@ -85,12 +90,13 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
 
   <!-- Slide 3: Materiales y ubicación -->
   <article
-    class="business-hero__slide business-hero__slide--4"
+    class="JimarFactory-business-hero__slide JimarFactory-business-hero__slide--3"
     style="background-image: url('../../juegos/JimarFactory/img/general23.jpeg');"
+    aria-hidden="true"
   >
-    <div class="business-hero__overlay"></div>
+    <div class="JimarFactory-business-hero__overlay"></div>
 
-    <div class="business-hero__content">
+    <div class="JimarFactory-business-hero__content">
       <span>Materiales de juego · Servicio · Entretenimiento</span>
 
       <h2>Todo para disfrutar el billar</h2>
@@ -101,7 +107,7 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
         de Chapinero.
       </p>
 
-      <div class="business-stars">
+      <div class="JimarFactory-business-stars">
         <strong>Calle 58 #13-93</strong>
         <small>Chapinero, Bogotá</small>
       </div>
@@ -119,28 +125,34 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
 
   <!-- Controles -->
   <div
-    class="business-hero__controls"
+    class="JimarFactory-business-hero__controls"
     aria-label="Controles del carrusel"
   >
     <button
-      class="hero-dot"
+      class="JimarFactory-hero-dot JimarFactory-is-active"
       type="button"
       aria-label="Mostrar información sobre billar tres bandas y pool"
+      aria-current="true"
     ></button>
 
     <button
-      class="hero-dot"
+      class="JimarFactory-hero-dot"
       type="button"
       aria-label="Mostrar información sobre bebidas, cócteles y café"
+      aria-current="false"
     ></button>
 
     <button
-      class="hero-dot"
+      class="JimarFactory-hero-dot"
       type="button"
       aria-label="Mostrar información sobre materiales de juego y ubicación"
+      aria-current="false"
     ></button>
   </div>
 
 </section>
 
-<script defer src="../../juegos/JimarFactory/home/slider/slider.js<?= $jsVer ? '?v=' . $jsVer : '' ?>"></script>
+<script
+  defer
+  src="../../juegos/JimarFactory/home/slider/slider.js<?= $jsVer ? '?v=' . $jsVer : '' ?>"
+></script>

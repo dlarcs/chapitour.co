@@ -51,7 +51,7 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
       <article class="card promo-card" data-code="JIMAR-POOL-002">
         <div class="card-image">
           <img
-            src="../../../juegos/JimarFactory/img/general13.jpeg"
+            src="../../../juegos/JimarFactory/img/general3.jpeg"
             alt="Servicio de pool en Jimar Factory Chapinero"
           >
           <span class="card-badge">Pool</span>
@@ -74,7 +74,7 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
       <article class="card promo-card" data-code="JIMAR-BEBIDAS-003">
         <div class="card-image">
           <img
-            src="../../../juegos/JimarFactory/img/general17.jpeg"
+            src="../../../juegos/JimarFactory/img/general26.jpeg"
             alt="Bebidas y cócteles en Jimar Factory Chapinero"
           >
           <span class="card-badge">Bebidas y cócteles</span>
@@ -94,33 +94,12 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
         </div>
       </article>
 
-      <article class="card promo-card" data-code="JIMAR-CAFE-004">
-        <div class="card-image">
-          <img
-            src="../../../juegos/JimarFactory/img/general6.jpeg"
-            alt="Servicio de café en Jimar Factory Chapinero"
-          >
-          <span class="card-badge">Café</span>
-        </div>
 
-        <div class="card-content">
-          <h3>Haz una pausa y disfruta</h3>
-
-          <p>
-            Acompaña tu visita con una buena taza de café mientras compartes,
-            conversas o esperas tu próxima partida.
-          </p>
-
-          <span class="card-location">
-            <span>&#9749;</span> Café y servicio durante toda la jornada
-          </span>
-        </div>
-      </article>
 
       <article class="card promo-card" data-code="JIMAR-MATERIALES-005">
         <div class="card-image">
           <img
-            src="../../../juegos/JimarFactory/img/general1.jpeg"
+            src="../../../juegos/JimarFactory/img/general23.jpeg"
             alt="Venta de materiales y accesorios de billar en Jimar Factory Chapinero"
           >
           <span class="card-badge">Materiales de juego</span>
@@ -143,7 +122,7 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
       <article class="card promo-card" data-code="JIMAR-HORARIO-006">
         <div class="card-image">
           <img
-            src="../../../juegos/JimarFactory/img/general10.jpeg"
+            src="../../../juegos/JimarFactory/img/general41.jpeg"
             alt="Entretenimiento todos los días en Jimar Factory Chapinero"
           >
           <span class="card-badge">Todos los días</span>
