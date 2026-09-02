@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="content-language" content="es-CO">
 
-  <title>Galería | Capital Queer</title>
+  <title>Galería | Pictogramas</title>
 
   <?php
   $base = rtrim($_SERVER['DOCUMENT_ROOT'], '/');
@@ -19,7 +19,7 @@
   <!-- SEO principal para Google -->
   <meta
     name="description"
-    content="Conoce la galería de Capital Queer, un bar en Chapinero creado especialmente para mujeres y abierto a todas las personas. Descubre su ambiente, actividades, promociones, eventos y momentos especiales."
+    content="Conoce la galería de Pictogramas, un bar en Chapinero donde puedes disfrutar granizados, café, boliranas y un ambiente ideal para compartir con amigos."
   >
 
   <meta
@@ -41,16 +41,16 @@
 
   <!-- Open Graph: WhatsApp / Facebook -->
   <meta property="og:type" content="website">
-  <meta property="og:site_name" content="Capital Queer">
+  <meta property="og:site_name" content="Pictogramas">
 
   <meta
     property="og:title"
-    content="Galería | Capital Queer en Chapinero"
+    content="Galería | Pictogramas en Chapinero"
   >
 
   <meta
     property="og:description"
-    content="Conoce el ambiente de Capital Queer, un espacio creado especialmente para mujeres y abierto a todas las personas. Descubre actividades, promociones, eventos, música y momentos especiales."
+    content="Descubre la galería de Pictogramas y conoce su ambiente, granizados, café, boliranas y diferentes momentos para compartir en Chapinero."
   >
 
   <meta
@@ -74,7 +74,7 @@
 
   <meta
     property="og:image:alt"
-    content="Logo de Capital Queer, bar en Chapinero creado especialmente para mujeres"
+    content="Logo de Pictogramas, bar en Chapinero"
   >
 
   <meta property="og:locale" content="es_CO">
@@ -84,12 +84,12 @@
 
   <meta
     name="twitter:title"
-    content="Galería | Capital Queer en Chapinero"
+    content="Galería | Pictogramas en Chapinero"
   >
 
   <meta
     name="twitter:description"
-    content="Conoce la galería de Capital Queer y descubre su ambiente, actividades, promociones, eventos y momentos especiales."
+    content="Conoce la galería de Pictogramas y descubre su ambiente, granizados, café, boliranas y momentos especiales."
   >
 
   <meta
@@ -99,7 +99,7 @@
 
   <meta
     name="twitter:image:alt"
-    content="Logo de Capital Queer"
+    content="Logo de Pictogramas"
   >
 
   <!-- Iconos -->
@@ -111,7 +111,7 @@
 
   <link
     rel="apple-touch-icon"
-    href="/bar/Pictograma/img/logo.jpg"
+    href="/bar/Pictograma/img/logo.jpeg"
   >
 
   <!-- CSS -->
@@ -135,8 +135,8 @@
       {
         "@type": "BarOrPub",
         "@id": "https://www.chapitour.co/bar/Pictograma/index.php#bar",
-        "name": "Capital Queer",
-        "description": "Capital Queer es un bar en Chapinero creado especialmente para mujeres y abierto a todas las personas. Ofrece actividades, promociones, descuentos, música y eventos en un ambiente diverso, seguro y respetuoso.",
+        "name": "Pictogramas",
+        "description": "Pictogramas es un bar en Chapinero donde puedes disfrutar granizados, café, boliranas y diferentes bebidas en un ambiente ideal para compartir, conversar y pasar un buen momento con amigos.",
         "url": "https://www.chapitour.co/bar/Pictograma/index.php",
         "image": "https://www.chapitour.co/bar/Pictograma/img/logo.jpeg",
         "address": {
@@ -150,8 +150,8 @@
         "@type": "CollectionPage",
         "@id": "https://www.chapitour.co/bar/Pictograma/galeria/index.php#webpage",
         "url": "https://www.chapitour.co/bar/Pictograma/galeria/index.php",
-        "name": "Galería | Capital Queer",
-        "description": "Galería de Capital Queer con imágenes de su ambiente, actividades, promociones, eventos y momentos especiales.",
+        "name": "Galería | Pictogramas",
+        "description": "Galería de Pictogramas con imágenes de su ambiente, granizados, café, boliranas, bebidas y momentos para compartir en Chapinero.",
         "inLanguage": "es-CO",
         "isPartOf": {
           "@id": "https://www.chapitour.co/#website"
@@ -173,22 +173,20 @@
   <div class="container_galeria">
     <?php include "../../../bar/Pictograma/galeria/galeria/galeria.php" ?>
     <?php include "../../../bar/Pictograma/global/boton/boton.php" ?>
-
   </div>
-
 
   <?php include "../../../bar/Pictograma/global/pag_footer/pag_footer.php" ?>
 
   <a
     class="whatsapp-fab"
-    href="https://wa.me/573502835648?text=Hola%2C%20vengo%20desde%20la%20galer%C3%ADa%20de%20Capital%20Queer%20y%20quiero%20recibir%20m%C3%A1s%20informaci%C3%B3n."
+    href="https://wa.me/573502835648?text=Hola%2C%20vengo%20desde%20la%20galer%C3%ADa%20de%20Pictogramas%20y%20quiero%20recibir%20m%C3%A1s%20informaci%C3%B3n."
     target="_blank"
     rel="noopener noreferrer"
-    aria-label="Contactar a Capital Queer por WhatsApp"
+    aria-label="Contactar a Pictogramas por WhatsApp"
   >
     <img
       src="../../../global/img/img_whatsApp.png"
-      alt="Contactar a Capital Queer por WhatsApp"
+      alt="Contactar a Pictogramas por WhatsApp"
       decoding="async"
     >
   </a>
