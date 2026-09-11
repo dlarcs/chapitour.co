@@ -110,6 +110,20 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
 
         <span class="category-card__arrow">→</span>
       </a>
+
+<!-- STREET GRILL -->
+      <a href="gastronomia/streetgrill/index.php" class="category-card place-card" data-category=" bares juegos Crossover cover">
+        <img src="gastronomia/streetgrill/img/logo.jpeg" alt="Billar, pool, cafe, bar">
+        <div class="category-card__overlay"></div>
+
+        <div class="category-card__content">
+          <div class="category-card__icon">🎱</div>
+          <h5>Ahumados streetgrill</h5>
+          <small>Especialidad carne ahumada, hamburguesas, chirizos y más</small>
+        </div>
+
+        <span class="category-card__arrow">→</span>
+      </a>
     </div>
   </div>
 </section>

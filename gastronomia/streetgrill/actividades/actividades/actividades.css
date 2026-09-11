@@ -1,0 +1,193 @@
+/* ==========================================
+   STREET GRILL — ESPECIALIDADES
+========================================== */
+
+#StreetGrill-actividades,
+#StreetGrill-actividades * {
+  box-sizing: border-box;
+}
+
+#StreetGrill-actividades {
+  text-align: center;
+  margin-top: 2rem;
+  padding: 5rem 0;
+}
+
+#StreetGrill-actividades .section-label {
+  display: inline-block;
+  margin-bottom: 16px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #ff62ea;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+#StreetGrill-actividades h2 {
+  max-width: 780px;
+  margin: 0 auto;
+  font-size: clamp(2.2rem, 5vw, 4.6rem);
+  line-height: 1.05;
+  color: #fafafa;
+}
+
+#StreetGrill-actividades > p {
+  max-width: 660px;
+  margin: 22px auto 0;
+  color: #f5f5f5;
+  font-size: 1.05rem;
+  line-height: 1.7;
+}
+
+/* ==========================================
+   CONTENEDOR DE TARJETAS
+========================================== */
+
+#StreetGrill-actividades .cards-section {
+  width: min(1200px, 92%);
+  margin: 0 auto;
+  padding: 60px 0;
+}
+
+#StreetGrill-actividades .cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 22px;
+}
+
+/* ==========================================
+   TARJETAS
+========================================== */
+
+#StreetGrill-actividades .card {
+  min-width: 0;
+  background: #0f1722;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 22px;
+  overflow: hidden;
+  cursor: pointer;
+
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease,
+    border-color 0.3s ease;
+}
+
+#StreetGrill-actividades .card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.25);
+  border-color: rgba(255, 179, 71, 0.45);
+}
+
+#StreetGrill-actividades .card:focus-visible {
+  outline: 3px solid #ffb347;
+  outline-offset: 4px;
+}
+
+/* ==========================================
+   IMÁGENES
+========================================== */
+
+#StreetGrill-actividades .card-image {
+  position: relative;
+  width: 100%;
+  height: 220px;
+  overflow: hidden;
+}
+
+#StreetGrill-actividades .card-image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+#StreetGrill-actividades .card:hover .card-image img {
+  transform: scale(1.05);
+}
+
+/* ==========================================
+   ETIQUETAS
+========================================== */
+
+#StreetGrill-actividades .card-badge {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  max-width: calc(100% - 28px);
+  background: #ffb347;
+  color: #111;
+  font-size: 0.85rem;
+  font-weight: 700;
+  line-height: 1.35;
+  padding: 8px 14px;
+  border-radius: 999px;
+}
+
+/* ==========================================
+   CONTENIDO
+========================================== */
+
+#StreetGrill-actividades .card-content {
+  padding: 20px;
+}
+
+#StreetGrill-actividades .card-content h3 {
+  margin: 0 0 10px;
+  font-size: 1.3rem;
+  color: #ffffff;
+}
+
+#StreetGrill-actividades .card-content p {
+  margin: 0 0 14px;
+  color: #cfd6df;
+  line-height: 1.5;
+  font-size: 0.98rem;
+}
+
+#StreetGrill-actividades .card-location {
+  display: inline-block;
+  color: #ffb347;
+  font-size: 0.92rem;
+  font-weight: 500;
+}
+
+/* ==========================================
+   MÓVIL
+========================================== */
+
+@media (max-width: 599px) {
+  #StreetGrill-actividades {
+    padding: 3rem 0;
+  }
+
+  #StreetGrill-actividades h2,
+  #StreetGrill-actividades > p {
+    width: 92%;
+  }
+
+  #StreetGrill-actividades .cards-grid {
+    grid-template-columns: 1fr;
+  }
+
+  #StreetGrill-actividades .card-image {
+    height: 230px;
+  }
+}
+
+/* ==========================================
+   MOVIMIENTO REDUCIDO
+========================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  #StreetGrill-actividades .card,
+  #StreetGrill-actividades .card-image img {
+    transition: none;
+  }
+
+  #StreetGrill-actividades .card:hover,
+  #StreetGrill-actividades .card:hover .card-image img {
+    transform: none;
+  }
+}

@@ -14,7 +14,7 @@ $jsTime = filemtime('home/eventos/eventos.js');   // ejemplo: '../Home/5.Video/v
   </div>
 
 
-  <div class="Chapitour-eventos-slider" id="Chapitour-eventos-slider">
+  <div class="Chapitour-eventos-slider" id="eventos">
 
     <!-- ================================
          CONTENEDOR DE SLIDES

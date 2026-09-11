@@ -6,12 +6,12 @@ $cssTime = filemtime('home/slider/slider.css');
 <div class="hero-showcase">
   <section class="hero-chapitour">
     <div class="hero-card">
-      <span class="hero-tag">Gastronomía · Bares · Experiencias</span>
+      <span class="hero-tag">Gastronomía · Bares · Billares · Tatto </span>
 
       <h1>
         Descubre<br>
-        sabores, planes<br>
-        y rincones<br>
+        lugares,<br>
+        eventos<br>
         <em>con estilo</em>
       </h1>
 
@@ -25,9 +25,9 @@ $cssTime = filemtime('home/slider/slider.css');
           Explorar lugares <span>→</span>
         </a>
 
-        <a href="#aliados" class="btn-video">
+        <a href="#eventos" class="btn-video">
           <span class="play">▶</span>
-          Ver experiencias
+          Ver eventos
         </a>
       </div>
     </div>
