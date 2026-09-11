@@ -117,7 +117,7 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
         <div class="category-card__overlay"></div>
 
         <div class="category-card__content">
-          <div class="category-card__icon">🎱</div>
+          <div class="category-card__icon">🍖</div>
           <h5>Ahumados streetgrill</h5>
           <small>Especialidad carne ahumada, hamburguesas, chirizos y más</small>
         </div>
