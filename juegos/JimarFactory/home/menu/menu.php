@@ -143,7 +143,7 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
     </span>
   </div>
 </a>
-<a
+<!-- <a
   href="../../juegos/JimarFactory/img/Jimar_Menu.pdf"
   class="dowload"
   target="_blank"
@@ -153,7 +153,7 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
   <div class="button_container">
     <span class="btn30">Ver carta de bebidas</span>
   </div>
-</a>
+</a> -->
 
 <script
   defer
