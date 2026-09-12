@@ -36,7 +36,7 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
         <small>4.8 / 5</small>
       </div>
 
-      <a href="https://wa.me/573007795016?text=Hola%20quiero%20conocer%20Street%20Grill">Conocer más</a>
+      <a href="https://wa.me/573143580355?text=Hola%20quiero%20conocer%20Street%20Grill">Conocer más</a>
     </div>
   </article>
 
@@ -62,7 +62,7 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
         <small>4.8 / 5</small>
       </div>
 
-      <a href="https://wa.me/573007795016?text=Hola%20quiero%20información%20sobre%20Street%20Grill">Contactar</a>
+      <a href="https://wa.me/573143580355?text=Hola%20quiero%20información%20sobre%20Street%20Grill">Contactar</a>
     </div>
   </article>
 
@@ -88,7 +88,7 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
         <small>4.8 / 5</small>
       </div>
 
-      <a href="https://wa.me/573007795016?text=Hola%20quiero%20conocer%20el%20menú%20de%20Street%20Grill">Ver menú</a>
+      <a href="../../gastronomia/streetgrill/img/menu.jpeg">Ver menú</a>
     </div>
   </article>
 
