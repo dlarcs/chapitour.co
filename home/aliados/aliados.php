@@ -30,10 +30,12 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
       <li data-filter="all" class="active">Todos</li>
       <li data-filter="bares">Bar</li>
       <li data-filter="gastrobar">gastrobar</li>
+      <li data-filter="gastro">Gastronomía</li>
       <li data-filter="discoteca">Discoteca</li>
       <li data-filter="Crossover">Crossover</li>
       <li data-filter="juegos">Juegos</li>
       <li data-filter="cover">No cover</li>
+
 
       <li data-filter="lgbtiq">LGBTIQ+</li>
 
@@ -70,7 +72,7 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
       </a>
 
 <!-- GARAGE GASTROBAR -->
-      <a href="gastrobar/GarageDiscoBar/index.php" class="category-card place-card" data-category="lgbtiq gastrobar bares discoteca Crossover  cover">
+      <a href="gastrobar/GarageDiscoBar/index.php" class="category-card place-card" data-category="lgbtiq gastro gastrobar bares discoteca Crossover  cover">
         <img src="gastrobar/GarageDiscoBar/img/general11.jpg" alt="Disco bar">
         <div class="category-card__overlay"></div>
 
@@ -112,7 +114,7 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
       </a>
 
 <!-- STREET GRILL -->
-      <a href="gastronomia/streetgrill/index.php" class="category-card place-card" data-category=" bares juegos Crossover cover">
+      <a href="gastronomia/streetgrill/index.php" class="category-card place-card" data-category=" bares gastro ">
         <img src="gastronomia/streetgrill/img/logo.jpeg" alt="Billar, pool, cafe, bar">
         <div class="category-card__overlay"></div>
 
