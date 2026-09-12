@@ -119,7 +119,7 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
 
 
   <a
-    href="../../gastronomia/streetgrill/menu/index.php"
+    href="../../gastronomia/streetgrill/img/menu.jpeg"
     class="street-dowload"
   >
 
