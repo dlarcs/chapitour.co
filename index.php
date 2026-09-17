@@ -164,6 +164,8 @@ Chapinero business directory
 
   <!-- CSS -->
   <link rel="stylesheet" href="style.css<?= $cssVer ? '?v=' . $cssVer : '' ?>">
+  <link rel="stylesheet" href="home/promocion/promocion.css?v=<?= filemtime(__DIR__ . '/home/promocion/promocion.css') ?>">
+  <script type="module" src="home/promocion/promocion.js?v=<?= filemtime(__DIR__ . '/home/promocion/promocion.js') ?>"></script>
 
   <!-- Datos estructurados para Google -->
   <script type="application/ld+json">
@@ -210,5 +212,6 @@ Chapinero business directory
     <?php include "home/interes/interes.php" ?>
   </div>
   <?php include "home/footer/footer.php" ?>
+  <?php include __DIR__ . "/home/promocion/promocion.php"; ?>
 </body>
 </html>
