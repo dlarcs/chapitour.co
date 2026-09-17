@@ -1,0 +1,32 @@
+{
+    "archivos": {
+        "home/promocion/promocion.control.js": "8da85578358c6b9be50c57ab1fc99c866175d160c3ad4dbeb1af5b25bfb1d0f0",
+        "home/promocion/promocion.css": "9569375a8958525b662f8c4d4c7ecab321bb0b88f2b31298f4816bc8204c4441",
+        "home/promocion/promocion.js": "2a842c4a9b71ee21ef5b0c174f92459f982ea5ea58bfcd0fe5748f21f175a2a1",
+        "home/promocion/promocion.php": "59825f3d335c7f6282a9d9c940bef82857153f6725a12df333c4bdabdba48065",
+        "home/promocion/promocion.ui.js": "9153e9fb190ec54475b0052eb02b9ceab5567960707a63b3cc4d3ff67dcb464d",
+        "home/promocion/ruleta.js": "c261948458aef6561d5a13373f1c7eb65e0ebc3d9ca81e8503ee6939720cb59c",
+        "index.php": "dcba72e2825bfb8c380c1964fc1759529bb686cec93f9d4f46f15bc1ebc1b4cd",
+        "promos/api/index.php": "17cb33cb6b95105f7a1edfb539a0a8d16f88cea3e1d4e27975b19718174aefa8",
+        "promos/assets/makeAjaxRequest.js": "b998530aa0a9cc5af2beb4e718c4f626825e00a1d327cbe972630c9b619914e4",
+        "promos/assets/panel.css": "0ea63681f8ab72d5813c83036210f13d1ede2d1069c859720526aa61a25a290e",
+        "promos/assets/panel.js": "a87c53ae161e2a1ce2e7286de4666342b44804a79db9ef8858212a3f6587cc5b",
+        "promos/bin/.htaccess": "fa28d421a28ed9b6f4b997d5119c2b8adbacff6e2dd119a179b71230f9664934",
+        "promos/bin/accounts.php": "f9ffa4544d97cbadbb27e89081819bf7970a01ecc7cc7d99703a8a8a7a9f0603",
+        "promos/bin/maintenance.php": "716312ca8bd041119e30dd2af311b5e83cc04668b353a7ddc196d70590948fe9",
+        "promos/config/.htaccess": "fa28d421a28ed9b6f4b997d5119c2b8adbacff6e2dd119a179b71230f9664934",
+        "promos/config/local.php": "b65c81cf7dc613b8e4b9c09d4c444a1ae19aaf990e11b59897d32f5ab99c4496",
+        "promos/config/reglas.php": "1876865092d9070132439e80ac60b7d8cf5ff47ebe7daf4b573f9082b1fb9329",
+        "promos/panel/index.php": "71f27e8f54dc0f5d3a47ebf38ea6f5a32ee64cc5a39348d479eac915558a6170",
+        "promos/src/.htaccess": "fa28d421a28ed9b6f4b997d5119c2b8adbacff6e2dd119a179b71230f9664934",
+        "promos/src/ChapiController.php": "70b2d291503c687a7714eb2209231d43b4ab47437d9fc7405bd67b4224b8e88f",
+        "promos/src/ChapiError.php": "ceffac00a115ee72ee2ee13716da9ef957c2ab1e7e4a9d6daf3803ea3574dd2d",
+        "promos/src/ChapiModel.php": "7cbeb69c0848a1502db33efb5702c50d4e422361e458516b94948254aa963a3e",
+        "promos/src/ChapiPanelModel.php": "8eb7484ace6224b4aeb14508d3210ee84d4c0955af34f7a00a25bffc7fc4f410",
+        "promos/src/ChapiPromocionModel.php": "909d936d9b332ff5fca3fc7d9a02b3faaa5aab8f8dddeecba1b0f6b8b534bc7c",
+        "promos/src/ChapiSecurity.php": "00d21c7a8b0bd7ead72e2f521fb079f2ec753ffad6b275c957cfcfe5bf785365",
+        "promos/src/bootstrap.php": "602f3b2b4bb100b1cb66e6da8c1900b925a98ceb6c290f8adc50b257f37e8d42",
+        "promos/storage/.gitkeep": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+        "promos/storage/.htaccess": "fa28d421a28ed9b6f4b997d5119c2b8adbacff6e2dd119a179b71230f9664934"
+    }
+}

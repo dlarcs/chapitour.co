@@ -11,6 +11,34 @@ Implementación integrada en la página existente. No usa Node.js, npm ni un ser
 - **Las seis promociones están desactivadas hasta completar el beneficio y las condiciones reales.** No hay descuentos de demostración en esta base. Desde administración, entra a “Negocios y promociones”, edita cada oferta y actívala.
 - Cuando no hay ofertas disponibles, la ruleta no aparece automáticamente ni consume oportunidades. El botón flotante explica el estado.
 
+## Base creada en Hostinger
+
+El 17 de septiembre de 2026 se creó e importó la base del sitio `chapitour.co`:
+
+- Base: `u348170507_chapi_promos`.
+- Usuario MySQL: `u348170507_chapi_app`.
+- Importación: `database/hostinger_inicial.sql`; phpMyAdmin confirmó 20 consultas ejecutadas correctamente.
+- Contenido inicial: 13 tablas, una campaña, seis negocios y seis promociones desactivadas.
+- La contraseña MySQL fue definida por el propietario directamente en Hostinger y no está en este repositorio.
+
+Esta importación no desplegó el código PHP ni cambió la conexión local. Las siete cuentas descritas en la sección anterior pertenecen a la instalación local; no se copiaron a Hostinger.
+
+### Entrega local preparada para subir
+
+La carpeta `entrega-hostinger/`, en la raíz del proyecto, contiene una entrega independiente:
+
+- `public_html/`: portada y módulo PHP/JS, con los nombres de base y usuario de Hostinger, URL pública, cookies seguras y una clave privada nueva.
+- `privado/004_cuentas_panel.sql`: siete cuentas nuevas, listas para importar una vez en la base de Hostinger. Cada cuenta tiene una clave temporal distinta y cambio obligatorio en el primer acceso.
+- `privado/ACCESOS-PANELES.md`: las claves temporales, solo para uso privado y entrega individual a cada negocio.
+- `chapitour-promociones.zip`: solo los archivos destinados al sitio; excluye las claves de los paneles, pruebas y SQL.
+- `LEEME.md`: instrucciones de subida y activación.
+
+**Pendiente:** completar `db_password` en `entrega-hostinger/public_html/promos/config/local.php` con la contraseña MySQL que se definió en Hostinger. Luego regenerar el ZIP con `php promos/bin/zip-hostinger.php` antes de subirlo. Este paquete actualiza un sitio existente; no incluye todas sus imágenes ni las demás secciones.
+
+Las cuentas preparadas no se han importado todavía en Hostinger. Para activarlas, importar `privado/004_cuentas_panel.sql` en `u348170507_chapi_promos`. Como alternativa para otras instalaciones, se pueden crear cuentas con `promos/bin/accounts.php`, pero no deben ejecutarse los dos procedimientos para los mismos usuarios.
+
+La entrega está excluida de Git y bloqueada por HTTP. `php promos/bin/prepare-hostinger.php` prepara una entrega solo si la carpeta aún no existe: no reemplaza las contraseñas de una entrega existente. `php tests/promos_hostinger_package.php` verifica hashes, permisos, correspondencia de negocios, importación de cuentas en una base en memoria y contenido del ZIP, sin conectar a Hostinger.
+
 ## Recorrido del código
 
 `evento del navegador → promocion.control.js → makeAjaxRequest → promos/api/index.php → ChapiSecurity → ChapiController → ChapiPromocionModel/ChapiPanelModel → PDO → MySQL → JSON → makeAjaxRequest → función del control → promocion.ui.js / ruleta.js`.
@@ -104,6 +132,10 @@ Desde la raíz del proyecto, usando PHP de XAMPP:
 El instalador crea una base dedicada, un usuario PDO con permisos limitados y siete cuentas con claves aleatorias. No sobrescribe una instalación existente. Requiere una cuenta MySQL con permisos de crear base y usuario. Para credenciales administrativas distintas usa las variables de entorno `CHAPI_INSTALL_DSN`, `CHAPI_INSTALL_USER`, `CHAPI_INSTALL_PASSWORD` (sin escribir secretos en Git).
 
 ## Instalar manualmente / phpMyAdmin
+
+**Hostinger:** crea primero una base dedicada desde hPanel, selecciona esa base en phpMyAdmin e importa `database/hostinger_inicial.sql`. Ese archivo reúne las 13 tablas y los seis negocios; no incluye `CREATE DATABASE`, usuarios MySQL, credenciales ni datos de visitantes locales. Úsalo solamente en una base vacía. Sustituye el nombre y usuario de conexión por los nombres completos que muestre Hostinger, incluido su prefijo. Después sigue desde el paso 4 de esta sección para configurar PDO y crear los accesos del panel.
+
+Guías oficiales: [crear la base en Hostinger](https://www.hostinger.com/support/1583542-how-to-create-a-new-mysql-database-in-hostinger/) e [importar con phpMyAdmin](https://www.hostinger.com/support/1884149-how-to-import-a-database-with-phpmyadmin-in-hostinger/).
 
 1. Importa `database/000_database.sql`, o crea una base dedicada con UTF-8 si el alojamiento impone otro nombre.
 2. Selecciona esa base e importa `database/001_schema.sql` y después `database/002_negocios.sql`.
