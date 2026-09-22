@@ -23,11 +23,11 @@ $cssVer = is_file($cssFile) ? filemtime($cssFile) : '';
 
   <a href="https://arbelaez.com.co" blank>
     <article class="interest-card">
-      <img src="home/img/arbelaez.jpg" alt="Prisma Lounge">
+      <img src="home/img/piscina.jpeg" alt="Prisma Lounge">
 
       <div class="interest-card__content">
         <h3>Arbelaez.com.co</h3>
-        <p>Alojamiento · Gastronomía · Artesanías</p>
+        <p>Alojamiento · Gastronomía · Artesanías · Zonas de agua · Puentes</p>
 
         <div class="interest-card__rating">
           <span>★</span>
