@@ -27,7 +27,7 @@ export class PromocionControl {
     try {
       const query = new URL(location.href).searchParams;
       const state = await this.request('iniciar', { ref: query.get('ref') || '' }); this.apply(state); this.selectScreen();
-      if (state.abrir_automaticamente) { this.ui.open(); await this.markShown(); }
+      if (state.abrir_automaticamente && !document.getElementById('chapi-promo-demo')?.open) { this.ui.open(); await this.markShown(); }
       if (state.referido_pendiente) { const banner = document.getElementById('chapi-referral-banner'); banner.hidden = false; let wait = state.referido_espera; const button = document.getElementById('chapi-confirm-referral'); const update = () => { button.disabled = wait > 0; button.textContent = wait > 0 ? `Confirmar mi visita (${wait}s)` : 'Confirmar mi visita'; wait--; }; update(); const timer = setInterval(() => { update(); if (wait < 0) clearInterval(timer); }, 1000); }
     } catch (error) { this.ui.launcher.hidden = false; this.ui.show('unavailable'); this.ui.error(error.message); }
   }

@@ -1,5 +1,6 @@
 /* All promotion styles are scoped to avoid changing the existing home page. */
 html.chapi-promo-open { overflow: hidden; }
+html.chapi-promo-demo-open { overflow: hidden; }
 .chapi-promo {
   --promo-bg: #131119;
   --promo-muted: #b1aabf;
@@ -86,6 +87,10 @@ html.chapi-promo-open { overflow: hidden; }
 .chapi-promo__footer > span { color: #a49aae; font-size: 8px; letter-spacing: 1px; }
 .chapi-promo-launcher { position: fixed; bottom: 22px; left: 22px; z-index: 50; display: flex; align-items: center; gap: 9px; padding: 12px 19px; border: 1px solid #ff78b94d; border-radius: 999px; background: #231528; color: #fff; box-shadow: 0 4px 25px #0007; cursor: pointer; font: 600 12px/1.5 "Geist", Arial, sans-serif; }
 .chapi-promo-launcher > span { color: #ff459e; font-size: 23px; line-height: 1; }
+.chapi-promo-launcher--demo { bottom: 84px; background: #ff459e; color: #211126; border-color: #ff86bf; }
+.chapi-promo-launcher--demo > span { color: inherit; }
+.chapi-promo-launcher--demo small { padding: 2px 6px; border: 1px solid #21112645; border-radius: 4px; font-size: 8px; letter-spacing: 1px; }
+.chapi-promo-launcher--demo:hover { background: #ff78b9; }
 .chapi-promo__result { position: relative; display: grid; grid-template-columns: 1fr 1fr; gap: 30px; padding-top: 32px; }
 .chapi-promo__result h2 { font-size: 62px; margin-top: 20px; }
 .chapi-promo__venue { display: flex; align-items: center; gap: 13px; margin: 26px 0; }
@@ -230,6 +235,7 @@ html.chapi-promo-open { overflow: hidden; }
   .chapi-promo__message-screen h2 { font-size: 33px; }
   .chapi-promo__message { padding: 16px; }
   .chapi-promo-launcher { left: 12px; bottom: 12px; font-size: 11px; padding: 10px 15px; }
+  .chapi-promo-launcher--demo { bottom: 68px; }
 }
 @media (max-width: 360px) {
   .chapi-promo__header { padding-inline: 15px; }
