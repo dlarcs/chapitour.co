@@ -8,7 +8,7 @@ $cssVer = is_file($cssFile) ? filemtime($cssFile) : '';
 
 <link rel="stylesheet" href="home/siguenos/siguenos.css<?= $cssVer ? '?v=' . $cssVer : '' ?>">
 
-    <main class="page">
+    <main class="page" id="siguenos">
 
         <section class="follow-section">
 
@@ -158,7 +158,7 @@ $cssVer = is_file($cssFile) ? filemtime($cssFile) : '';
 
             </div>
 
-    
+
 
         </section>
 
