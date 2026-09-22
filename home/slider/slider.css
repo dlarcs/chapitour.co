@@ -1,347 +1,65 @@
-/* ===============================
-   HERO SHOWCASE
-================================ */
+/* =========================================
+   GALERÍA INTERACTIVA
+   Añadir AL FINAL de slider.css.
+   NO eliminar los @keyframes floatUp.
+========================================= */
 
-.hero-showcase {
-  min-height: 80vh;
-  display: grid;
-  grid-template-columns: 30% 70%;
-  overflow: hidden;
-  position: relative;
-  box-sizing: border-box;
-  color: #fafafa;
-  background:
-    radial-gradient(circle at center, rgba(118, 70, 143, .28), transparent 38%),
-    #050008;
+.hero-gallery.is-interactive {
+  cursor: grab;
+
+  /* El gesto vertical controla la galería.
+     Conserva el desplazamiento horizontal y el zoom. */
+  touch-action: pan-x pinch-zoom;
+
+  user-select: none;
+  -webkit-user-select: none;
 }
 
-/* ===============================
-   LEFT CONTENT
-================================ */
-
-.hero-chapitour {
-  position: relative;
-  z-index: 5;
-  display: grid;
-  place-items: center;
-  padding:  0;
-  box-sizing: border-box;
+.hero-gallery.is-interactive .gallery-card {
+  cursor: grab;
+  -webkit-user-drag: none;
 }
 
-.hero-card {
-  width: min(100%, 390px);
-  padding: 33% 1.8rem;
-  border-radius: 24px;
+.hero-gallery.is-dragging,
+.hero-gallery.is-dragging .gallery-card {
+  cursor: grabbing;
 }
 
-.hero-tag {
-  display: inline-block;
-  margin-bottom: 1.8rem;
-  padding: .45rem 1rem;
-  border-radius: 999px;
-  border: 1px solid rgba(180, 90, 255, .5);
-  color: #dcb7ff;
-  font-size: .72rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: .12em;
+/* Evita arrastrar el archivo de imagen.
+   El enlace de la tarjeta sigue siendo clicable. */
+.hero-gallery.is-interactive .gallery-img {
+  pointer-events: none;
+  -webkit-user-drag: none;
 }
 
-.hero-card h1 {
-  margin: 0;
-  font-size: clamp(1.35rem, 2.8vw, 2.3rem);
-  line-height: 1.15;
-  font-weight: 800;
+/* Indicador al navegar con el teclado. */
+.hero-gallery:focus-visible {
+  outline: 2px solid #dcb7ff;
+  outline-offset: -4px;
 }
 
-.hero-card h1 em {
-  font-weight: 400;
-  background: linear-gradient(90deg, #ff6a00, #00e676, #00b8ff);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
-
-.hero-card p {
-  max-width: 320px;
-  margin: 1.4rem 0 1.8rem;
-  color: rgba(255, 255, 255, .72);
-  font-size: 1rem;
-  line-height: 1.5;
-}
-
-.hero-actions {
-  display: grid;
-  gap: 1rem;
-}
-
-.btn-primary,
-.btn-video {
-  display: inline-flex;
-  align-items: center;
-  text-decoration: none;
-  color: #fff;
-  font-weight: 700;
-}
-
-.btn-primary {
-  width: fit-content;
-  min-width: 250px;
-  justify-content: space-between;
-  padding: 1rem 1.3rem;
-  border-radius: 22px;
-  background: linear-gradient(90deg, #ff6a35, #5718c9);
-  box-shadow: 0 0 22px rgba(140, 50, 255, .65);
-}
-
-.btn-primary span {
-  font-size: 2rem;
-  line-height: 1;
-}
-
-.btn-video {
-  gap: .8rem;
-  color: rgba(255, 255, 255, .85);
-}
-
-.play {
-  width: 42px;
-  height: 42px;
-  display: grid;
-  place-items: center;
-  border-radius: 50%;
-  border: 1px solid rgba(255, 255, 255, .55);
-}
-
-/* ===============================
-   RIGHT GALLERY
-================================ */
-
-.hero-gallery {
-  position: relative;
-  overflow: hidden;
-  min-height: 80vh;
-
-}
-
-.gallery-card {
-  position: absolute;
-  width: clamp(240px, 30vw, 400px);
-  height: clamp(115px, 22vw, 170px);
-  text-decoration: none;
-  animation: floatUp 25s linear infinite;
-}
-
-.gallery-card small {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  z-index: 3;
-  display: inline-block;
-  padding: .35rem .7rem;
-  border-radius: 999px;
-  font-size: clamp(0.55rem, 2vw, 0.7rem);
-  font-weight: 700;
-  color: #fafafa;
-  background: rgba(0, 0, 0, .45);
-  border: 1px solid rgba(255, 255, 255, .22);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-}
-
-.gallery-img {
+/* Mostrar también la novena imagen. */
+.hero-gallery .img-9 {
   display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 10px;
-  border: 1px solid rgba(255, 255, 255, .22);
-  box-shadow: 0 24px 60px rgba(0, 0, 0, .65);
 }
 
-/* ===============================
-   IMAGE POSITIONS - DESKTOP
-================================ */
-
-.img-1 { left: 5%;  animation-delay: 0s; }
-.img-2 { left: 36%; animation-delay: -3s; }
-.img-3 { left: 50%; animation-delay: -6s; }
-
-.img-4 { left: 5%;  animation-delay: -9s; }
-.img-5 { left: 36%; animation-delay: -12s; }
-.img-6 { left: 50%; animation-delay: -15s; }
-
-.img-7 { left: 5%;  animation-delay: -18s; }
-.img-8 { left: 36%; animation-delay: -21s; }
-.img-9 { left: 50%; animation-delay: -24s; }
-
-@keyframes floatUp {
-  from {
-    top: 110%;
-  }
-
-  to {
-    top: -110%;
-  }
-}
-/* ===============================
-   TABLET
-================================ */
-
-@media (max-width: 1024px) {
-  .hero-showcase {
-    grid-template-columns: 38% 62%;
-    min-height: 75vh;
-  }
-
-  .hero-card {
-    width: min(100%, 360px);
-    padding: 25% 1.5rem;
-  }
-
-  .hero-card h1 {
-    font-size: clamp(1.4rem, 3.5vw, 2rem);
-  }
-
-  .hero-card p {
-    font-size: .95rem;
-  }
-
-  .btn-primary {
-    min-width: 220px;
-  }
-
-  .hero-gallery {
-    min-height: 75vh;
-  }
-
-  .gallery-card {
-    width: clamp(190px, 26vw, 280px);
-    height: clamp(105px, 17vw, 145px);
-    animation-duration: 32s;
-  }
-
-  /* 2 columnas en tablet */
-  .img-1 { left: 8%;  animation-delay: 0s; }
-  .img-2 { left: 52%; animation-delay: -4s; }
-  .img-3 { left: 8%;  animation-delay: -8s; }
-
-  .img-4 { left: 52%; animation-delay: -12s; }
-  .img-5 { left: 8%;  animation-delay: -16s; }
-  .img-6 { left: 52%; animation-delay: -20s; }
-
-  .img-7 { left: 8%;  animation-delay: -24s; }
-  .img-8 { left: 52%; animation-delay: -28s; }
-  .img-9 { display: none; }
-}
-
-
-/* ===============================
-   MOBILE
-================================ */
-
-@media (max-width: 600px) {
-  .hero-showcase {
-    min-height: auto;
-    grid-template-columns: 1fr;
-    width: 100%;
-  }
-
-  .hero-chapitour {
-    padding: 1.2rem;
-  }
-
-  .hero-card {
-    width: min(100%, 430px);
-    padding: 3rem 1rem 2rem;
-  }
-
-  .hero-card h1 {
-    font-size: clamp(2rem, 10vw, 3rem);
-  }
-
-  .hero-card p {
-    max-width: 100%;
-    font-size: .95rem;
-  }
-
-  .btn-primary {
-    width: 100%;
-    min-width: 0;
-  }
-
-  .hero-gallery {
-    min-height: 65vh;
-  }
-
-  .gallery-card {
-    width: clamp(145px, 42vw, 210px);
-    height: clamp(90px, 27vw, 125px);
+/* Ajustar el ciclo de tablet para las nueve tarjetas.
+   Este bloque no modifica las posiciones de celular. */
+@media (min-width: 601px) and (max-width: 1024px) {
+  .hero-gallery .gallery-card {
     animation-duration: 36s;
   }
 
-  .gallery-card small {
-    font-size: .55rem;
-    padding: .3rem .55rem;
-  }
-
-  /* 2 columnas suaves en móvil */
-  .img-1 { left: 5%;  animation-delay: 0s; }
-  .img-2 { left: 53%; animation-delay: -4s; }
-  .img-3 { left: 5%;  animation-delay: -8s; display: block; }
-
-  .img-4 { left: 53%; animation-delay: -12s; }
-  .img-5 { left: 5%;  animation-delay: -16s; }
-  .img-6 { left: 53%; animation-delay: -20s; }
-
-  .img-7 { left: 5%;  animation-delay: -24s; }
-  .img-8 { left: 53%; animation-delay: -28s; }
-  .img-9 { left: 29%; animation-delay: -32s; }
-
-  @keyframes floatUp {
-    from {
-      top: 90%;
-    }
-
-    to {
-      top: -90%;
-    }
+  .hero-gallery .img-9 {
+    left: 8%;
+    animation-delay: -32s;
   }
 }
 
-
-/* ===============================
-   SMALL MOBILE
-================================ */
-
-@media (max-width: 390px) {
-  .gallery-card {
-    width: clamp(130px, 47vw, 200px);
-    height: clamp(82px, 25vw, 110px);
-    background-color: black
-    ;
-      animation-duration: 34s;
-  }
-
-  .img-1 { left: 15%; }
-  .img-2 { left: 45%; }
-  .img-3 { left: 15%; }
-
-  .img-4 { left: 45%; }
-  .img-5 { left: 15%; }
-  .img-6 { left: 45%; }
-
-  .img-7 { left: 15%; }
-  .img-8 { left: 45%; }
-  .img-9 { left: 15%; }
-
-  @keyframes floatUp {
-    from {
-      top: 90%;
-    }
-
-    to {
-      top: -90%;
-    }
+/* Respetar la preferencia de movimiento reducido.
+   El desplazamiento manual continúa disponible. */
+@media (prefers-reduced-motion: reduce) {
+  .hero-gallery .gallery-card {
+    animation-play-state: paused;
   }
 }

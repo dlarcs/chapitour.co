@@ -52,7 +52,7 @@ $cssTime = filemtime('home/slider/slider.css');
 
     <a href="#aliados" class="gallery-card img-3">
       <small>Rápidos y Sabrosos</small>
-      <img src="bar/Gran&Chela_Club/img/general.jpg"
+      <img src="gastronomia/streetgrill/img/general3.jpeg"
       class="gallery-img"
       alt=""
       style="object-fit: cover; object-position: 60% 55%;">
