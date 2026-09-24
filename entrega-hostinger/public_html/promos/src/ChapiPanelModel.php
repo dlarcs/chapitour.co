@@ -37,7 +37,7 @@ final class ChapiPanelModel extends ChapiModel
         $base=$alias==='p' ? $alias.'.campana_id=?' : '1=1';
         $params=$alias==='p' ? [$this->campaign] : [];
         if ($user['rol']==='admin') return [$base,$params];
-        if (!$user['negocio_id']) throw new ChapiError('No tienes un negocio asignado.',403);
+        if ($user['rol']!=='aliado' || !$user['negocio_id']) throw new ChapiError('No tienes un negocio asignado.',403);
         return [$base.' AND '.$alias.'.negocio_id=?',array_merge($params,[(int)$user['negocio_id']])];
     }
 
@@ -67,10 +67,12 @@ final class ChapiPanelModel extends ChapiModel
         $page=max(1,min(10000,(int)($filter['pagina']??1)));
         $count=(int)$this->query('SELECT COUNT(*) FROM cp_premios p WHERE '.$where,$args)->fetchColumn();
         $prizes=array_map(fn($p)=>$this->prizeData($p),$this->query($this->prizeSelect().'WHERE '.$where.' ORDER BY p.id DESC LIMIT 25 OFFSET '.(($page-1)*25),$args)->fetchAll());
-        [$businessScope,$businessArgs]=$this->scope($user,'pr');
-        $businesses=$this->query('SELECT n.*,pr.id AS promocion_id,pr.titulo,pr.descripcion,pr.condiciones,pr.porcentaje,pr.cupo_total,pr.entregados,pr.activa AS promocion_activa FROM cp_negocios n JOIN cp_promociones pr ON pr.negocio_id=n.id WHERE '.$businessScope.' ORDER BY n.id',$businessArgs)->fetchAll();
+        $businessArgs=$user['rol']==='admin' ? [] : [(int)$user['negocio_id']];
+        $businesses=$this->query('SELECT n.* FROM cp_negocios n'.($businessArgs ? ' WHERE n.id=?' : '').' ORDER BY n.nombre',$businessArgs)->fetchAll();
+        [$promotionScope,$promotionArgs]=$this->scope($user,'pr');
+        $promotions=$this->query('SELECT pr.*,n.nombre AS negocio,n.activo AS negocio_activo FROM cp_promociones pr JOIN cp_negocios n ON n.id=pr.negocio_id WHERE '.$promotionScope.' ORDER BY pr.id DESC',$promotionArgs)->fetchAll();
         $distribution=$this->query('SELECT n.nombre,COUNT(*) AS emitidos,COALESCE(SUM(p.redimido_at IS NOT NULL),0) AS redimidos FROM cp_premios p JOIN cp_negocios n ON n.id=p.negocio_id WHERE '.$scope.' AND p.creado_at>=? AND p.creado_at<? GROUP BY n.id,n.nombre ORDER BY emitidos DESC',array_merge($params,[$start,$end]))->fetchAll();
-        $result=['usuario'=>$user,'resumen'=>$stats,'premios'=>$prizes,'total'=>$count,'pagina'=>$page,'paginas'=>max(1,(int)ceil($count/25)),'negocios'=>$businesses,'distribucion'=>$distribution,'desde'=>$from,'hasta'=>$to];
+        $result=['usuario'=>$user,'resumen'=>$stats,'premios'=>$prizes,'total'=>$count,'pagina'=>$page,'paginas'=>max(1,(int)ceil($count/25)),'negocios'=>$businesses,'promociones'=>$promotions,'distribucion'=>$distribution,'desde'=>$from,'hasta'=>$to];
         if ($user['rol']==='admin') {
             $result['usuarios']=$this->query('SELECT u.id,u.usuario,u.rol,u.activo,n.nombre AS negocio FROM cp_usuarios u LEFT JOIN cp_negocios n ON n.id=u.negocio_id ORDER BY u.id')->fetchAll();
             $result['eventos']=$this->query('SELECT tipo,COUNT(*) AS total FROM cp_eventos WHERE creado_at>=? AND creado_at<? GROUP BY tipo ORDER BY total DESC',[$start,$end])->fetchAll();
@@ -106,17 +108,40 @@ final class ChapiPanelModel extends ChapiModel
         });
     }
 
-    public function saveBusiness(array $user,array $data): void
+    public function saveBusiness(array $user,array $data): array
     {
-        if ($user['rol']!=='admin') throw new ChapiError('Solo administración puede editar las promociones.',403);
-        $id=ChapiSecurity::integer($data,'id');
+        if ($user['rol']!=='admin') throw new ChapiError('Solo el superadministrador puede gestionar negocios.',403);
+        $id=empty($data['id']) ? null : ChapiSecurity::integer($data,'id');
         $name=ChapiSecurity::text($data,'nombre',120);
+        $category=ChapiSecurity::text($data,'categoria',80);
         $phone=ChapiSecurity::text($data,'whatsapp',20,false);
         if ($phone!=='' && !preg_match('/^[1-9][0-9]{7,14}$/D',$phone)) throw new ChapiError('WhatsApp debe incluir indicativo de país, sin + ni espacios.');
+        $address=ChapiSecurity::text($data,'direccion',200,false);
+        $active=($data['activo']??false)===true;
+        return $this->transaction(function () use ($user,$id,$name,$category,$phone,$address,$active) {
+            if ($id) {
+                if (!$this->one('SELECT id FROM cp_negocios WHERE id=? FOR UPDATE',[$id])) throw new ChapiError('Negocio no encontrado.',404);
+                if ($phone==='' && $this->one('SELECT id FROM cp_promociones WHERE negocio_id=? AND activa=1 LIMIT 1',[$id])) throw new ChapiError('Conserva el WhatsApp mientras haya promociones activas.');
+                $this->query('UPDATE cp_negocios SET nombre=?,categoria=?,whatsapp=?,direccion=?,activo=? WHERE id=?',[$name,$category,$phone,$address,$active?1:0,$id]);
+                $action='negocio_actualizado';
+            } else {
+                $this->query('INSERT INTO cp_negocios(slug,nombre,categoria,whatsapp,direccion,activo) VALUES (?,?,?,?,?,?)',['negocio-'.bin2hex(random_bytes(8)),$name,$category,$phone,$address,$active?1:0]);
+                $id=(int)$this->db->lastInsertId(); $action='negocio_creado';
+            }
+            $this->audit((int)$user['id'],$action,$id);
+            return ['id'=>$id];
+        });
+    }
+
+    public function savePromotion(array $user,array $data): array
+    {
+        $this->scope($user,'pr');
+        $id=empty($data['id']) ? null : ChapiSecurity::integer($data,'id');
+        $business=ChapiSecurity::integer($data,'negocio_id');
+        if ($user['rol']!=='admin' && $business!==(int)$user['negocio_id']) throw new ChapiError('Solo puedes gestionar las promociones de tu negocio.',403,'FORBIDDEN');
         $title=ChapiSecurity::text($data,'titulo',160);
         $description=ChapiSecurity::text($data,'descripcion',500,false);
         $terms=ChapiSecurity::text($data,'condiciones',1000);
-        $address=ChapiSecurity::text($data,'direccion',200,false);
         $percent=$data['porcentaje']??null;
         if ($percent!==null && $percent!=='') {
             if (!is_numeric($percent) || (float)$percent<=0 || (float)$percent>100) throw new ChapiError('El porcentaje debe estar entre 0 y 100.');
@@ -125,14 +150,54 @@ final class ChapiPanelModel extends ChapiModel
         $cap=$data['cupo_total']??null;
         if ($cap!==null && $cap!=='') { $cap=filter_var($cap,FILTER_VALIDATE_INT); if ($cap===false || $cap<1) throw new ChapiError('Cupo inválido.'); } else $cap=null;
         $active=($data['activa']??false)===true;
-        if ($active && ($phone==='' || $title==='Beneficio por configurar')) throw new ChapiError('Configura el beneficio y WhatsApp antes de activar.');
-        $this->transaction(function () use ($user,$id,$name,$phone,$address,$title,$description,$terms,$percent,$cap,$active) {
-            $existing=$this->one('SELECT * FROM cp_promociones WHERE negocio_id=? FOR UPDATE',[$id]);
-            if (!$existing) throw new ChapiError('Negocio no encontrado.',404);
-            if ($cap!==null && $cap<(int)$existing['entregados']) throw new ChapiError('El cupo no puede ser menor que los premios ya emitidos.');
-            $this->query('UPDATE cp_negocios SET nombre=?,whatsapp=?,direccion=? WHERE id=?',[$name,$phone,$address,$id]);
-            $this->query('UPDATE cp_promociones SET titulo=?,descripcion=?,condiciones=?,porcentaje=?,cupo_total=?,activa=?,actualizada_at=UTC_TIMESTAMP() WHERE negocio_id=?',[$title,$description,$terms,$percent,$cap,$active?1:0,$id]);
-            $this->audit((int)$user['id'],'promocion_actualizada',$id,['activa'=>$active,'titulo'=>$title,'condiciones'=>$terms,'porcentaje'=>$percent,'cupo_total'=>$cap]);
+        return $this->transaction(function () use ($user,$id,$business,$title,$description,$terms,$percent,$cap,$active) {
+            $venue=$this->one('SELECT id,whatsapp,activo FROM cp_negocios WHERE id=? FOR UPDATE',[$business]);
+            if (!$venue) throw new ChapiError('Negocio no encontrado.',404);
+            if ($active && (!$venue['activo'] || $venue['whatsapp']==='' || $title==='Beneficio por configurar')) throw new ChapiError('Para activar, el negocio debe estar habilitado y tener WhatsApp y un beneficio configurados.');
+            if ($id) {
+                $existing=$this->one('SELECT * FROM cp_promociones WHERE id=? AND negocio_id=? FOR UPDATE',[$id,$business]);
+                if (!$existing) throw new ChapiError('Promoción no encontrada para este negocio.',404,'PROMOTION_NOT_FOUND');
+                if ($cap!==null && $cap<(int)$existing['entregados']) throw new ChapiError('El cupo no puede ser menor que los premios ya emitidos.');
+                $this->query('UPDATE cp_promociones SET titulo=?,descripcion=?,condiciones=?,porcentaje=?,cupo_total=?,activa=?,actualizada_at=UTC_TIMESTAMP() WHERE id=?',[$title,$description,$terms,$percent,$cap,$active?1:0,$id]);
+                $action='promocion_actualizada';
+            } else {
+                $this->query('INSERT INTO cp_promociones(negocio_id,titulo,descripcion,condiciones,porcentaje,cupo_total,activa) VALUES (?,?,?,?,?,?,?)',[$business,$title,$description,$terms,$percent,$cap,$active?1:0]);
+                $id=(int)$this->db->lastInsertId(); $action='promocion_creada';
+            }
+            $this->audit((int)$user['id'],$action,$id,['negocio_id'=>$business,'activa'=>$active,'titulo'=>$title,'condiciones'=>$terms,'porcentaje'=>$percent,'cupo_total'=>$cap]);
+            return ['id'=>$id];
+        });
+    }
+
+    public function createOwner(array $user,array $data): array
+    {
+        if ($user['rol']!=='admin') throw new ChapiError('Solo el superadministrador puede crear dueños.',403,'FORBIDDEN');
+        $name=ChapiSecurity::text($data,'usuario',100);
+        if (!preg_match('/^[a-zA-Z0-9._-]{3,100}$/D',$name)) throw new ChapiError('El usuario debe tener entre 3 y 100 letras, números, puntos, guiones o guiones bajos.');
+        $business=ChapiSecurity::integer($data,'negocio_id');
+        return $this->transaction(function () use ($user,$name,$business) {
+            if (!$this->one('SELECT id FROM cp_negocios WHERE id=? AND activo=1 FOR UPDATE',[$business])) throw new ChapiError('Selecciona un negocio habilitado.',404);
+            if ($this->one('SELECT id FROM cp_usuarios WHERE usuario=?',[$name])) throw new ChapiError('Ese nombre de usuario ya existe.',409,'USER_EXISTS');
+            $password=bin2hex(random_bytes(10));
+            // El rol viene del servidor; nunca se acepta un rol enviado por el navegador.
+            $this->query("INSERT INTO cp_usuarios(negocio_id,usuario,password_hash,rol,cambiar_password) VALUES (?,?,?,'aliado',1)",[$business,$name,password_hash($password,PASSWORD_DEFAULT)]);
+            $id=(int)$this->db->lastInsertId();
+            $this->audit((int)$user['id'],'dueno_creado',$id,['negocio_id'=>$business]);
+            return ['id'=>$id,'usuario'=>$name,'password_temporal'=>$password];
+        });
+    }
+
+    public function setOwnerActive(array $user,array $data): void
+    {
+        if ($user['rol']!=='admin') throw new ChapiError('Acceso restringido.',403,'FORBIDDEN');
+        $id=ChapiSecurity::integer($data,'id');
+        if (!isset($data['activo']) || !is_bool($data['activo'])) throw new ChapiError('Estado inválido.');
+        $this->transaction(function () use ($user,$data,$id) {
+            $owner=$this->one("SELECT id,activo FROM cp_usuarios WHERE id=? AND rol='aliado' FOR UPDATE",[$id]);
+            if (!$owner) throw new ChapiError('Dueño no encontrado.',404);
+            if ((bool)$owner['activo']===$data['activo']) return;
+            $this->query('UPDATE cp_usuarios SET activo=?,version_sesion=version_sesion+1 WHERE id=?',[$data['activo']?1:0,$id]);
+            $this->audit((int)$user['id'],$data['activo']?'dueno_activado':'dueno_desactivado',$id);
         });
     }
 

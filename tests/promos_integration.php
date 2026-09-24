@@ -15,7 +15,7 @@ function rejects(callable $fn,string $code,string $name): void { try { $fn(); } 
 function requestId(): string { return substr(bin2hex(random_bytes(18)),0,36); }
 try {
     foreach (['001_schema.sql','002_negocios.sql'] as $file) foreach (explode(';',file_get_contents($root.'/promos/database/'.$file)) as $sql) if(trim($sql)!=='') $admin->exec($sql);
-    $config=chapi_config(); $config['dsn']='mysql:host=127.0.0.1;dbname='.$schema.';charset=utf8mb4'; $config['db_user']='root'; $config['db_password']=''; $config['base_url']='http://127.0.0.1:8774';
+    $config=chapi_config(); $config['dsn']=(getenv('CHAPI_TEST_ADMIN_DSN')?:'mysql:host=127.0.0.1;charset=utf8mb4').';dbname='.$schema; $config['db_user']=getenv('CHAPI_TEST_ADMIN_USER')?:'root'; $config['db_password']=getenv('CHAPI_TEST_ADMIN_PASSWORD')?:''; $config['base_url']='http://127.0.0.1:8774';
     $config['reglas']['max_bienvenidas_por_ip_dia']=100;
     $model=new ChapiPromocionModel($admin,$config); $panel=new ChapiPanelModel($admin,$config);
     $admin->exec("UPDATE cp_promociones SET titulo='10 % de descuento (PRUEBA)',descripcion='Oferta exclusiva de la base de pruebas',condiciones='Prueba automática. No válida en establecimientos reales.',porcentaje=10,activa=1");

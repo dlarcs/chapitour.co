@@ -39,7 +39,8 @@ export class PromocionUI {
   }
   renderPrize(p) {
     this.prize = p; this.text('#chapi-promo-business', p.negocio); this.text('#chapi-promo-category', `${p.categoria} · CHAPINERO`); this.text('#chapi-promo-description', p.descripcion || p.direccion);
-    this.$('#chapi-promo-logo').src = new URL(`../../${p.logo}`, import.meta.url);
+    const logo = this.$('#chapi-promo-logo'); logo.hidden = !p.logo;
+    if (p.logo) logo.src = new URL(`../../${p.logo}`, import.meta.url); else logo.removeAttribute('src');
     this.$('#chapi-promo-code').value = p.codigo; this.text('#chapi-promo-prize-status', p.estado); this.text('#chapi-promo-conditions', p.condiciones);
     this.text('#chapi-promo-benefit-title', p.titulo); const benefit = this.$('#chapi-promo-benefit'); benefit.replaceChildren();
     if (p.porcentaje) benefit.append(document.createTextNode(String(Number(p.porcentaje))), Object.assign(document.createElement('span'), { textContent: '%' }));

@@ -269,3 +269,5 @@ html.chapi-promo-demo-open { overflow: hidden; }
 .chapi-referral-banner button:disabled { opacity: .6; }
 #chapi-dismiss-referral { position: absolute; top: 8px; right: 9px; background: transparent; color: #fff; font-size: 23px; padding: 4px; }
 #chapi-referral-feedback { margin-top: 12px; margin-bottom: 0; }
+
+.chapi-promo__message-preview{margin-top:18px;border:1px solid #ffffff20;border-radius:10px;padding:14px}.chapi-promo__message-preview summary{cursor:pointer;font-size:12px;font-weight:700;color:#dcffc5}.chapi-promo__message-preview p{white-space:pre-wrap;overflow-wrap:anywhere;font-size:11px;line-height:1.6;margin-top:12px}.chapi-promo__timeline{padding-left:18px;margin-top:14px;font-size:10px;color:#cabfdb}.chapi-promo__timeline li{margin:8px 0}#chapi-promo-address{margin-top:9px;color:#ddf7bd}#chapi-promo-code{font-size:clamp(10px,2.7vw,17px)}

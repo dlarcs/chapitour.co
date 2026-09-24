@@ -28,7 +28,7 @@ CREATE TABLE cp_negocios (
 
 CREATE TABLE cp_promociones (
  id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
- negocio_id INT UNSIGNED NOT NULL UNIQUE,
+ negocio_id INT UNSIGNED NOT NULL,
  titulo VARCHAR(160) NOT NULL,
  descripcion VARCHAR(500) NOT NULL DEFAULT '',
  condiciones VARCHAR(1000) NOT NULL DEFAULT '',
@@ -37,6 +37,7 @@ CREATE TABLE cp_promociones (
  entregados INT UNSIGNED NOT NULL DEFAULT 0,
  activa TINYINT(1) NOT NULL DEFAULT 0,
  actualizada_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+ KEY cp_promociones_negocio (negocio_id),
  FOREIGN KEY (negocio_id) REFERENCES cp_negocios(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 

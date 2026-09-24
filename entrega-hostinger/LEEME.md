@@ -2,6 +2,15 @@
 
 Archivos preparados localmente. No se han subido ni se han creado las cuentas del panel en Hostinger todavía.
 
+## Actualización del dashboard
+
+Antes de subir este nuevo panel a una base existente, importar
+`privado/005_dashboard_promociones.sql` en `u348170507_chapi_promos`.
+Permite varias promociones por negocio y conserva el historial.
+El rol `admin` actual es el superadministrador: crea negocios y dueños desde
+el panel. Los dueños pueden gestionar sus propias promociones.
+Consultar `DASHBOARD-HOSTINGER.md` para el procedimiento completo.
+
 ## Contenido
 
 - `public_html/`: actualización de la portada y del módulo de promociones. Copiar su contenido dentro del `public_html` existente de **chapitour.co**.

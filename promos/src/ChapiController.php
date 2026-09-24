@@ -27,7 +27,7 @@ final class ChapiController
             return ['usuario'=>$this->panel->user((int)$user['id'])];
         }
         if ($action==='logout') { unset($_SESSION['panel']); session_regenerate_id(true); return []; }
-        if (in_array($action,['panel','consultar_codigo','redimir','guardar_negocio','password','reset_password'],true)) {
+        if (in_array($action,['panel','consultar_codigo','redimir','guardar_negocio','guardar_promocion','crear_dueno','estado_dueno','password','reset_password'],true)) {
             $user=$this->requireUser();
             if ($action==='password') {
                 $this->panel->changePassword($user,ChapiSecurity::text($data,'actual',72),ChapiSecurity::text($data,'nueva',72));
@@ -42,7 +42,10 @@ final class ChapiController
                 case 'redimir':
                     if (($data['confirmado']??false)!==true) throw new ChapiError('Confirma que el cliente está presente y utilizó la promoción.');
                     return $this->panel->redeem($user,ChapiSecurity::text($data,'codigo',40));
-                case 'guardar_negocio': $this->panel->saveBusiness($user,$data); return [];
+                case 'guardar_negocio': return $this->panel->saveBusiness($user,$data);
+                case 'guardar_promocion': return $this->panel->savePromotion($user,$data);
+                case 'crear_dueno': return $this->panel->createOwner($user,$data);
+                case 'estado_dueno': $this->panel->setOwnerActive($user,$data); return [];
                 case 'reset_password': return $this->panel->resetPassword($user,ChapiSecurity::integer($data,'id'));
             }
         }

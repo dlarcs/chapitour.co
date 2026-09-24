@@ -27,14 +27,24 @@ export class PromocionControl {
     try {
       const query = new URL(location.href).searchParams;
       const state = await this.request('iniciar', { ref: query.get('ref') || '' }); this.apply(state); this.selectScreen();
-      if (state.abrir_automaticamente && !document.getElementById('chapi-promo-demo')?.open) { this.ui.open(); await this.markShown(); }
+      if (state.abrir_automaticamente && !this.testing) { this.ui.open(); await this.markShown(); }
       if (state.referido_pendiente) { const banner = document.getElementById('chapi-referral-banner'); banner.hidden = false; let wait = state.referido_espera; const button = document.getElementById('chapi-confirm-referral'); const update = () => { button.disabled = wait > 0; button.textContent = wait > 0 ? `Confirmar mi visita (${wait}s)` : 'Confirmar mi visita'; wait--; }; update(); const timer = setInterval(() => { update(); if (wait < 0) clearInterval(timer); }, 1000); }
     } catch (error) { this.ui.launcher.hidden = false; this.ui.show('unavailable'); this.ui.error(error.message); }
+  }
+  async probar() {
+    if (this.testing || this.spinning) return;
+    this.testing = true; const button = document.getElementById('chapi-promo-demo-launcher'); button.disabled = true;
+    try {
+      this.previewId ||= crypto.randomUUID();
+      const state = await this.request('probar', { solicitud_id: this.previewId });
+      this.previewId = null; this.apply(state); this.selectScreen(); this.ui.error(); this.ui.open(); await this.markShown();
+    } catch (error) { this.ui.error(error.message); this.ui.open(); }
+    finally { this.testing = false; button.disabled = false; }
   }
   selectScreen() { this.ui.show(this.state.oportunidades && this.state.negocios.length ? 'wheel' : this.state.premios.length ? 'result' : 'unavailable'); }
   async markShown() { if (!this.state?.oportunidad_mostrar || this.ui.screen !== 'wheel') return; try { await this.request('mostrado', { oportunidad_id: this.state.oportunidad_mostrar }); this.state.oportunidad_mostrar = null; } catch { /* The unconsumed opportunity can be shown again on a later visit. */ } }
   async refresh(select = false) {
-    if (this.spinning || this.refreshing) return; this.refreshing = true;
+    if (this.spinning || this.refreshing || this.testing) return; this.refreshing = true;
     try { const state = await this.request(this.state ? 'estado' : 'iniciar'); this.apply(state); this.ui.error(); if (select) this.selectScreen(); }
     catch (error) { this.ui.error(error.message); } finally { this.refreshing = false; }
   }

@@ -48,7 +48,7 @@ final class ChapiPromocionModel extends ChapiModel
 
     public function businesses(): array
     {
-        return $this->query('SELECT n.id,n.nombre,n.slug,n.categoria,n.logo,n.pagina FROM cp_negocios n JOIN cp_promociones p ON p.negocio_id=n.id JOIN cp_campanas c ON c.id=? WHERE c.activa=1 AND n.activo=1 AND p.activa=1 AND (p.cupo_total IS NULL OR p.entregados<p.cupo_total) ORDER BY n.id',[$this->campaign])->fetchAll();
+        return $this->query('SELECT DISTINCT n.id,n.nombre,n.slug,n.categoria,n.logo,n.pagina FROM cp_negocios n JOIN cp_promociones p ON p.negocio_id=n.id JOIN cp_campanas c ON c.id=? WHERE c.activa=1 AND n.activo=1 AND p.activa=1 AND (p.cupo_total IS NULL OR p.entregados<p.cupo_total) ORDER BY n.id',[$this->campaign])->fetchAll();
     }
 
     public function state(int $id): array
@@ -88,7 +88,11 @@ final class ChapiPromocionModel extends ChapiModel
             $counts=$this->query('SELECT negocio_id,COUNT(*) AS total FROM cp_premios WHERE campana_id=? GROUP BY negocio_id',[$this->campaign])->fetchAll(PDO::FETCH_KEY_PAIR);
             $min=min(array_map(fn($p)=>(int)($counts[$p['negocio_id']]??0),$options));
             $balanced=array_values(array_filter($options,fn($p)=>(int)($counts[$p['negocio_id']]??0)===$min));
-            $promo=$balanced[random_int(0,count($balanced)-1)];
+            // Un negocio con más ofertas no obtiene más probabilidades en la ruleta.
+            $businessIds=array_values(array_unique(array_column($balanced,'negocio_id')));
+            $businessId=$businessIds[random_int(0,count($businessIds)-1)];
+            $offers=array_values(array_filter($balanced,fn($p)=>(int)$p['negocio_id']===(int)$businessId));
+            $promo=$offers[random_int(0,count($offers)-1)];
             $code='CHAPI-'.str_pad((string)$promo['negocio_id'],2,'0',STR_PAD_LEFT).'-'.strtoupper(bin2hex(random_bytes(6)));
             $now=gmdate('Y-m-d H:i:s');
             $expires=gmdate('Y-m-d H:i:s',time()+max(1,(int)$this->config['reglas']['vigencia_horas'])*3600);

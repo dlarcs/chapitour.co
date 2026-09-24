@@ -30,11 +30,17 @@ try {
     $ally=req(['action'=>'login','usuario'=>'aliado1.test','password'=>$fixture['password']]); verify($ally['status']===200,'acceso independiente de aliado');
     $scoped=req(['action'=>'panel']); verify(count($scoped['json']['data']['negocios'])===1 && (int)$scoped['json']['data']['negocios'][0]['id']===1,'alcance de negocio aplicado en servidor');
     verify(req(['action'=>'guardar_negocio','id'=>1])['status']===403,'aliado no puede editar por llamada manual');
+    verify(req(['action'=>'crear_dueno','usuario'=>'intruso','negocio_id'=>1])['status']===403,'aliado no crea accesos por HTTP');
+    $offer=['action'=>'guardar_promocion','negocio_id'=>1,'titulo'=>'Oferta HTTP de prueba','condiciones'=>'Solo pruebas automatizadas.','activa'=>false];
+    $created=req($offer); verify($created['status']===200 && $created['json']['data']['id']>0,'dueño crea promoción por Ajax');
+    verify(req(array_merge($offer,['negocio_id'=>2]))['status']===403,'dueño no crea promociones ajenas por HTTP');
+    verify(req(array_merge($offer,['id'=>2]))['status']===404,'ID ajeno no permite editar promociones por HTTP');
+    verify(req(['action'=>'estado_dueno','id'=>1,'activo'=>false])['status']===403,'dueño no modifica accesos por HTTP');
     verify(req(['action'=>'no_existe'])['status']===404,'acciones no permitidas rechazadas');
     $state=req(['action'=>'iniciar']); verify($state['status']===200 && $state['json']['data']['amigos_requeridos']===5,'estado público real y meta de cinco');
     verify(req(['action'=>'confirmar_referido'])['status']===409,'no se confirman invitaciones inexistentes');
     foreach(['config/local.php','storage/accesos-iniciales.php','database/001_schema.sql','src/ChapiSecurity.php','bin/install.php'] as $path) {
-        $c=curl_init('http://localhost/ChapiTour/promos/'.$path);curl_setopt($c,CURLOPT_RETURNTRANSFER,true);curl_exec($c);$status=curl_getinfo($c,CURLINFO_HTTP_CODE);curl_close($c);verify(in_array($status,[403,404],true),'archivo privado bloqueado: '.$path);
+        $c=curl_init('http://127.0.0.1:8774/promos/'.$path);curl_setopt($c,CURLOPT_RETURNTRANSFER,true);curl_exec($c);$status=curl_getinfo($c,CURLINFO_HTTP_CODE);curl_close($c);verify(in_array($status,[403,404],true),'archivo privado bloqueado: '.$path);
     }
     echo "RESULTADO HTTP: $checks comprobaciones correctas.\n";
 } finally { unlink($jar); }

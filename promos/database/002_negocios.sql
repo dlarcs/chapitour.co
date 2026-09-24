@@ -9,4 +9,5 @@ INSERT IGNORE INTO cp_negocios (id,slug,nombre,categoria,direccion,whatsapp,logo
 (6,'gran-chela','Gran&Chela Club','Bar y discoteca','Calle 59 #10-24','573224680419','bar/Gran&Chela_Club/img/logo.jpg','bar/Gran&Chela_Club/index.php');
 -- No se activan descuentos sin conocer la oferta y condiciones aprobadas por cada aliado.
 INSERT IGNORE INTO cp_promociones (negocio_id,titulo,condiciones,activa)
-SELECT id,'Beneficio por configurar','Completar y aprobar las condiciones antes de activar.',0 FROM cp_negocios;
+SELECT n.id,'Beneficio por configurar','Completar y aprobar las condiciones antes de activar.',0 FROM cp_negocios n
+WHERE NOT EXISTS (SELECT 1 FROM cp_promociones p WHERE p.negocio_id=n.id);

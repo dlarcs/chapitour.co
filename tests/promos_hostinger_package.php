@@ -40,6 +40,7 @@ $config = require $delivery . '/public_html/promos/config/local.php';
 $localConfig = require $root . '/promos/config/local.php';
 verifyPackage($config['db_user'] === 'u348170507_chapi_app' && $config['dsn'] === 'mysql:host=localhost;dbname=u348170507_chapi_promos;charset=utf8mb4' && $config['base_url'] === 'https://chapitour.co' && $config['secure_cookies'] === true, 'configuración de producción y HTTPS');
 verifyPackage(strlen($config['app_key']) === 64 && $config['app_key'] !== $localConfig['app_key'], 'clave privada independiente de XAMPP');
+verifyPackage(hash_file('sha256',$private.'/005_dashboard_promociones.sql') === hash_file('sha256',$root.'/promos/database/005_dashboard_promociones.sql'), 'migración del dashboard preparada para la base existente');
 $manifest = json_decode(file_get_contents($delivery . '/MANIFIESTO.json'), true, 512, JSON_THROW_ON_ERROR)['archivos'];
 $zip = new ZipArchive();
 verifyPackage($zip->open($delivery . '/chapitour-promociones.zip') === true, 'ZIP válido');
@@ -48,6 +49,8 @@ for ($i=0; $i<$zip->numFiles; $i++) {
     $name = $zip->getNameIndex($i);
     $contents = $zip->getFromIndex($i);
     if (!isset($manifest[$name]) || hash('sha256', $contents) !== $manifest[$name] || hash_file('sha256', $delivery . '/public_html/' . $name) !== $manifest[$name]) throw new RuntimeException('Archivo desactualizado: ' . $name);
+    if ($name!=='promos/config/local.php' && is_file($root.'/'.$name) && hash_file('sha256',$root.'/'.$name)!==$manifest[$name]) throw new RuntimeException('El paquete no contiene el código actual: '.$name);
+    if (str_contains($name,'promocion.demo') || str_contains($contents,'chapi-promo-demo-launcher')) throw new RuntimeException('La demo debe permanecer solo en pruebas.');
     if (preg_match('~(^|/)(privado|tests|database)/|accesos-iniciales|cuentas\.php|\.sql$~', $name)) throw new RuntimeException('Archivo privado en ZIP: ' . $name);
     foreach ($credentials as $credential) {
         if (str_contains($contents, $credential['password_temporal'])) throw new RuntimeException('Clave de panel en ZIP.');

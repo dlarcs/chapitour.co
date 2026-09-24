@@ -27,7 +27,7 @@ final class ChapiController
             return ['usuario'=>$this->panel->user((int)$user['id'])];
         }
         if ($action==='logout') { unset($_SESSION['panel']); session_regenerate_id(true); return []; }
-        if (in_array($action,['panel','consultar_codigo','redimir','guardar_negocio','password','reset_password'],true)) {
+        if (in_array($action,['panel','consultar_codigo','redimir','guardar_negocio','guardar_promocion','crear_dueno','estado_dueno','password','reset_password'],true)) {
             $user=$this->requireUser();
             if ($action==='password') {
                 $this->panel->changePassword($user,ChapiSecurity::text($data,'actual',72),ChapiSecurity::text($data,'nueva',72));
@@ -42,14 +42,45 @@ final class ChapiController
                 case 'redimir':
                     if (($data['confirmado']??false)!==true) throw new ChapiError('Confirma que el cliente está presente y utilizó la promoción.');
                     return $this->panel->redeem($user,ChapiSecurity::text($data,'codigo',40));
-                case 'guardar_negocio': $this->panel->saveBusiness($user,$data); return [];
+                case 'guardar_negocio': return $this->panel->saveBusiness($user,$data);
+                case 'guardar_promocion': return $this->panel->savePromotion($user,$data);
+                case 'crear_dueno': return $this->panel->createOwner($user,$data);
+                case 'estado_dueno': $this->panel->setOwnerActive($user,$data); return [];
                 case 'reset_password': return $this->panel->resetPassword($user,ChapiSecurity::integer($data,'id'));
             }
         }
-        if (!in_array($action,['iniciar','estado','girar','mostrado','evento','confirmar_referido'],true)) throw new ChapiError('Acción desconocida.',404);
+        if (!in_array($action,['iniciar','estado','girar','mostrado','evento','confirmar_referido','probar','cliente_panel','cliente_registro','cliente_login','cliente_salir'],true)) throw new ChapiError('Acción desconocida.',404);
+        if ($action==='cliente_salir') {
+            unset($_SESSION['cliente'],$_SESSION['referido'],$_COOKIE['chapi_pruebas_visitante']);
+            if (session_status()===PHP_SESSION_ACTIVE) session_regenerate_id(true);
+            ChapiSecurity::identity($this->config);
+            return [];
+        }
+        $customers=new ChapiCustomerModel($this->db,$this->config);
+        $customer=$customers->current();
         $visitor=$this->promos->visitor(ChapiSecurity::identity($this->config),$ip);
-        $id=(int)$visitor['id'];
+        if (!$customer && $customers->linked((int)$visitor['id'])) {
+            // Una cuenta requiere sesión. Una cookie antigua no abre su historial.
+            unset($_COOKIE['chapi_pruebas_visitante']);
+            $visitor=$this->promos->visitor(ChapiSecurity::identity($this->config),$ip);
+        }
+        if (in_array($action,['cliente_registro','cliente_login'],true)) {
+            ChapiSecurity::limit($this->db,$this->config,'cliente-acceso-ip:'.$ip,20,900);
+            $email=mb_strtolower(ChapiSecurity::text($data,'email',190));
+            ChapiSecurity::limit($this->db,$this->config,'cliente-acceso-email:'.$email,12,900);
+            $result=$action==='cliente_registro' ? $customers->register((int)$visitor['id'],$data) : $customers->login((int)$visitor['id'],$data);
+            return ['cliente'=>$result];
+        }
+        $ids=$customer ? $customers->visitorIds((int)$customer['id']) : [(int)$visitor['id']];
+        if (!$ids) throw new ChapiError('El historial de la cuenta no está disponible.',409);
+        $id=$ids[0]; $scoped=$this->config; $scoped['_visitantes']=$ids;
+        $this->promos=new ChapiPromocionModel($this->db,$scoped);
+        if ($action==='cliente_panel') return (new ChapiCustomerModel($this->db,$scoped))->dashboard($id,$data,$customer);
         switch ($action) {
+            case 'probar':
+                $key=ChapiSecurity::text($data,'solicitud_id',36);
+                if (!preg_match('/^[a-f0-9-]{36}$/D',$key)) throw new ChapiError('Solicitud de prueba inválida.');
+                return $this->promos->preview($id,$key);
             case 'iniciar':
                 $ref=ChapiSecurity::text($data,'ref',32,false);
                 if ($ref!=='' && preg_match('/^[a-f0-9]{32}$/D',$ref) && (!isset($_SESSION['referido']) || $_SESSION['referido']['token']!==$ref)) $_SESSION['referido']=['token'=>$ref,'inicio'=>time()];

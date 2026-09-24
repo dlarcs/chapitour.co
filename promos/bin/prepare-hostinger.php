@@ -82,6 +82,9 @@ file_put_contents($private . '/ACCESOS-PANELES.md', $accessDocument);
 file_put_contents($private . '/cuentas.php', "<?php\nif (PHP_SAPI !== 'cli') { http_response_code(404); exit; }\nreturn " . var_export($credentials, true) . ";\n");
 copyRuntime($root . '/promos/database/hostinger_inicial.sql', $private . '/hostinger_inicial.sql');
 chmod($private . '/hostinger_inicial.sql', 0600);
+copyRuntime($root . '/promos/database/005_dashboard_promociones.sql', $private . '/005_dashboard_promociones.sql');
+chmod($private . '/005_dashboard_promociones.sql', 0600);
+copyRuntime($root . '/promos/DASHBOARD-HOSTINGER.md', $output . '/DASHBOARD-HOSTINGER.md');
 
 $instructions = <<<'MD'
 # Entrega de promociones para Hostinger

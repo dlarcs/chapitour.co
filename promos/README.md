@@ -5,7 +5,7 @@ Implementación integrada en la página existente. No usa Node.js, npm ni un ser
 ## Estado de esta instalación local
 
 - Base: `chapitour_promos`. Usuario de conexión: `chapitour_app`, limitado a SELECT/INSERT/UPDATE/DELETE en esa base.
-- Panel: `http://localhost/ChapiTour/promos/panel/`.
+- Panel: `http://localhost/chapitour.co/promos/panel/`.
 - Accesos independientes: `admin`, `street-grill`, `capital-queer`, `jimar-factory`, `garage-disco-bar`, `pictogramas`, `gran-chela`.
 - Contraseñas aleatorias: `promos/storage/accesos-iniciales.php`. Archivo privado, ignorado por Git y bloqueado por HTTP. Ábrelo con el editor. El panel exige cambiar la contraseña inicial.
 - **Las seis promociones están desactivadas hasta completar el beneficio y las condiciones reales.** No hay descuentos de demostración en esta base. Desde administración, entra a “Negocios y promociones”, edita cada oferta y actívala.
@@ -117,7 +117,9 @@ El código no se puede reutilizar. Un doble clic o dos peticiones simultáneas s
 
 El mismo panel muestra exclusivamente los datos del negocio asociado a la cuenta. El servidor aplica ese filtro a métricas, consulta y redención; no depende de un ID enviado por el navegador.
 
-Administración puede ver todos los aliados de la campaña, modificar WhatsApp, dirección, beneficio, condiciones, porcentaje opcional, cupos y activación. También ve cuentas, registros y auditoría. Puede restablecer claves temporales; la clave se muestra una sola vez y las sesiones anteriores se invalidan. Los aliados pueden validar, redimir, revisar su rendimiento y cambiar su contraseña.
+El superadministrador (rol `admin`) puede crear negocios y accesos de dueños, modificar sus datos y gestionar todas las promociones. Cada dueño (rol `aliado`) puede crear, editar y pausar varias promociones de su propio negocio, validar códigos, redimirlos y revisar sus resultados. El superadministrador también puede desactivar accesos y restablecer claves temporales; se muestran una sola vez y las sesiones anteriores se invalidan. Todos pueden cambiar su propia contraseña.
+
+Para actualizar la base existente de Hostinger, aplicar primero `database/005_dashboard_promociones.sql`. Consulta [la guía del dashboard y despliegue](DASHBOARD-HOSTINGER.md).
 
 Las métricas filtran por **fecha de emisión del premio** usando días de Bogotá: emitidos, activos, vencidos, redimidos, aperturas de WhatsApp y tasa de redención. Las aperturas son eventos de navegación y pueden repetirse; no significan mensaje enviado ni visita al negocio. La redención confirmada por el aliado sí proviene del servidor.
 

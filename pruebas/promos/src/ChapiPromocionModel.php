@@ -19,7 +19,8 @@ final class ChapiPromocionModel extends ChapiModel
             $visits=(int)$p['visitas']+1;
             $this->query('UPDATE cp_participaciones SET visitas=?,ultima_visita_at=UTC_TIMESTAMP() WHERE visitante_id=? AND campana_id=?',[$visits,$id,$this->campaign]);
             $this->event($id,'visita',null,['numero'=>$visits]);
-            if ($visits===1) {
+            $totals=$this->visitTotals($id);
+            if ((int)$totals['visitas']===1) {
                 $this->query('INSERT IGNORE INTO cp_bienvenidas_ip(campana_id,ip_hash,dia,cantidad) VALUES (?,?,UTC_DATE(),0)',[$this->campaign,$ip]);
                 $daily=$this->one('SELECT cantidad FROM cp_bienvenidas_ip WHERE campana_id=? AND ip_hash=? AND dia=UTC_DATE() FOR UPDATE',[$this->campaign,$ip]);
                 if ((int)$daily['cantidad'] < (int)$rules['max_bienvenidas_por_ip_dia']) {
@@ -30,32 +31,53 @@ final class ChapiPromocionModel extends ChapiModel
                 return;
             }
             $mode=$rules['frecuencia'];
-            $last=$p['ultima_programada_at'];
-            $byVisits=$mode==='cada_visitas' && $visits-(int)$p['ultima_programada_visita'] >= max(1,(int)$rules['cada_visitas']);
+            $last=$totals['ultima_programada_at'];
+            $byVisits=$mode==='cada_visitas' && (int)$totals['visitas']-(int)$totals['programadas'] >= max(1,(int)$rules['cada_visitas']);
             $byDays=$mode==='cada_dias' && (!$last || time()-strtotime($last.' UTC') >= max(1,(int)$rules['cada_dias'])*86400);
             if ($byVisits || $byDays) {
-                $this->grant($id,'frecuencia','frecuencia:'.$visits);
+                $this->grant($id,'frecuencia','frecuencia:'.$totals['visitas']);
                 $this->programmed($id,$visits);
             }
         });
         return $this->state($id);
     }
 
+    private function visitTotals(int $id): array
+    {
+        [$scope,$args]=$this->visitorScope($id,'p');
+        return $this->one('SELECT COALESCE(SUM(visitas),0) AS visitas,COALESCE(SUM(ultima_programada_visita),0) AS programadas,MAX(ultima_programada_at) AS ultima_programada_at FROM cp_participaciones p WHERE '.$scope.' AND p.campana_id=?',array_merge($args,[$this->campaign]));
+    }
+
     private function programmed(int $id,int $visits): void
     {
-        $this->query('UPDATE cp_participaciones SET ultima_programada_at=UTC_TIMESTAMP(),ultima_programada_visita=? WHERE visitante_id=? AND campana_id=?',[$visits,$id,$this->campaign]);
+        [$scope,$args]=$this->visitorScope($id,'cp_participaciones');
+        $this->query('UPDATE cp_participaciones SET ultima_programada_at=UTC_TIMESTAMP(),ultima_programada_visita=visitas WHERE '.$scope.' AND campana_id=?',array_merge($args,[$this->campaign]));
+    }
+
+    public function preview(int $id,string $key): array
+    {
+        if (empty($this->config['reglas']['modo_pruebas'])) throw new ChapiError('Solo disponible en pruebas.',404);
+        $this->transaction(function () use ($id,$key) {
+            [$scope,$args]=$this->visitorScope($id,'o');
+            if (!$this->one('SELECT id FROM cp_oportunidades o WHERE '.$scope.' AND campana_id=? AND consumida_at IS NULL LIMIT 1',array_merge($args,[$this->campaign]))) {
+                $this->grant($id,'prueba','prueba:'.$key);
+            }
+        });
+        return $this->state($id);
     }
 
     public function businesses(): array
     {
-        return $this->query('SELECT n.id,n.nombre,n.slug,n.categoria,n.logo,n.pagina FROM cp_negocios n JOIN cp_promociones p ON p.negocio_id=n.id JOIN cp_campanas c ON c.id=? WHERE c.activa=1 AND n.activo=1 AND p.activa=1 AND (p.cupo_total IS NULL OR p.entregados<p.cupo_total) ORDER BY n.id',[$this->campaign])->fetchAll();
+        return $this->query('SELECT DISTINCT n.id,n.nombre,n.slug,n.categoria,n.logo,n.pagina FROM cp_negocios n JOIN cp_promociones p ON p.negocio_id=n.id JOIN cp_campanas c ON c.id=? WHERE c.activa=1 AND n.activo=1 AND p.activa=1 AND (p.cupo_total IS NULL OR p.entregados<p.cupo_total) ORDER BY n.id',[$this->campaign])->fetchAll();
     }
 
     public function state(int $id): array
     {
         $visitor=$this->one('SELECT referido_token FROM cp_visitantes WHERE id=?',[$id]);
-        $available=$this->query('SELECT id,mostrada_at,origen FROM cp_oportunidades WHERE visitante_id=? AND campana_id=? AND consumida_at IS NULL ORDER BY id',[$id,$this->campaign])->fetchAll();
-        $prizes=array_map(fn($row)=>$this->prizeData($row),$this->query($this->prizeSelect().'WHERE p.visitante_id=? AND p.campana_id=? ORDER BY p.id DESC LIMIT 50',[$id,$this->campaign])->fetchAll());
+        [$scope,$args]=$this->visitorScope($id,'p');
+        $totals=$this->visitTotals($id);
+        $available=$this->query('SELECT id,mostrada_at,origen FROM cp_oportunidades p WHERE '.$scope.' AND campana_id=? AND consumida_at IS NULL ORDER BY id',array_merge($args,[$this->campaign]))->fetchAll();
+        $prizes=array_map(fn($row)=>$this->prizeData($row),$this->query($this->prizeSelect().'WHERE '.$scope.' AND p.campana_id=? ORDER BY p.id DESC LIMIT 50',array_merge($args,[$this->campaign]))->fetchAll());
         $total=(int)$this->query('SELECT COUNT(*) FROM cp_referidos WHERE propietario_id=? AND campana_id=?',[$id,$this->campaign])->fetchColumn();
         $target=max(1,(int)$this->config['reglas']['amigos_requeridos']);
         $businesses=$this->businesses();
@@ -65,38 +87,52 @@ final class ChapiPromocionModel extends ChapiModel
             'invitacion_url'=>$this->config['base_url'].'/?ref='.$visitor['referido_token'],
             'referidos_total'=>$total,'referidos_progreso'=>$total % $target,'amigos_requeridos'=>$target,
             'referidos_habilitados'=>(bool)$this->config['reglas']['referidos_habilitados'],
+            'visitas'=>(int)$totals['visitas'],'cada_visitas'=>(int)$this->config['reglas']['cada_visitas'],
+            'visitas_para_proxima'=>max(0,(int)$this->config['reglas']['cada_visitas']-((int)$totals['visitas']-(int)$totals['programadas'])),
+            'modo_pruebas'=>(bool)$this->config['reglas']['modo_pruebas'],
             'vigencia_horas'=>(int)$this->config['reglas']['vigencia_horas'],'ahora'=>gmdate('c')];
     }
 
     public function shown(int $id,int $opportunity): void
     {
-        $q=$this->query('UPDATE cp_oportunidades SET mostrada_at=COALESCE(mostrada_at,UTC_TIMESTAMP()) WHERE id=? AND visitante_id=? AND campana_id=? AND consumida_at IS NULL',[$opportunity,$id,$this->campaign]);
+        [$scope,$args]=$this->visitorScope($id,'cp_oportunidades');
+        $q=$this->query('UPDATE cp_oportunidades SET mostrada_at=COALESCE(mostrada_at,UTC_TIMESTAMP()) WHERE id=? AND '.$scope.' AND campana_id=? AND consumida_at IS NULL',array_merge([$opportunity],$args,[$this->campaign]));
         if ($q->rowCount()) $this->event($id,'modal_abierto');
     }
 
     public function spin(int $id,string $request): array
     {
         return $this->transaction(function () use ($id,$request) {
-            $old=$this->one($this->prizeSelect().'WHERE p.visitante_id=? AND p.solicitud_id=?',[$id,$request]);
+            [$scope,$args]=$this->visitorScope($id,'p');
+            $old=$this->one($this->prizeSelect().'WHERE '.$scope.' AND p.solicitud_id=?',array_merge($args,[$request]));
             if ($old) return $this->prizeData($old);
             $campaign=$this->one('SELECT activa FROM cp_campanas WHERE id=?',[$this->campaign]);
             if (!$campaign || !$campaign['activa']) throw new ChapiError('La campaña está pausada.',409,'CAMPAIGN_PAUSED');
-            $op=$this->one('SELECT id FROM cp_oportunidades WHERE visitante_id=? AND campana_id=? AND consumida_at IS NULL ORDER BY id LIMIT 1 FOR UPDATE',[$id,$this->campaign]);
+            $op=$this->one('SELECT id,visitante_id FROM cp_oportunidades p WHERE '.$scope.' AND campana_id=? AND consumida_at IS NULL ORDER BY id LIMIT 1 FOR UPDATE',array_merge($args,[$this->campaign]));
             if (!$op) throw new ChapiError('No tienes giros disponibles. Invita amigos o visita el negocio para que validen tu premio.',409,'NO_OPPORTUNITY');
-            $options=$this->query('SELECT p.*,n.nombre FROM cp_promociones p JOIN cp_negocios n ON n.id=p.negocio_id WHERE p.activa=1 AND n.activo=1 AND (p.cupo_total IS NULL OR p.entregados<p.cupo_total) ORDER BY p.negocio_id FOR UPDATE')->fetchAll();
+            $options=$this->query('SELECT p.*,n.nombre,n.direccion,n.whatsapp FROM cp_promociones p JOIN cp_negocios n ON n.id=p.negocio_id WHERE p.activa=1 AND n.activo=1 AND (p.cupo_total IS NULL OR p.entregados<p.cupo_total) ORDER BY p.negocio_id FOR UPDATE')->fetchAll();
             if (!$options) throw new ChapiError('Los aliados están preparando sus promociones. Conservamos tu oportunidad.',409,'NO_PROMOTIONS');
             $counts=$this->query('SELECT negocio_id,COUNT(*) AS total FROM cp_premios WHERE campana_id=? GROUP BY negocio_id',[$this->campaign])->fetchAll(PDO::FETCH_KEY_PAIR);
             $min=min(array_map(fn($p)=>(int)($counts[$p['negocio_id']]??0),$options));
             $balanced=array_values(array_filter($options,fn($p)=>(int)($counts[$p['negocio_id']]??0)===$min));
-            $promo=$balanced[random_int(0,count($balanced)-1)];
-            $code='CHAPI-'.str_pad((string)$promo['negocio_id'],2,'0',STR_PAD_LEFT).'-'.strtoupper(bin2hex(random_bytes(6)));
+            // Un negocio con más ofertas no obtiene más probabilidades en la ruleta.
+            $businessIds=array_values(array_unique(array_column($balanced,'negocio_id')));
+            $businessId=$businessIds[random_int(0,count($businessIds)-1)];
+            $offers=array_values(array_filter($balanced,fn($p)=>(int)$p['negocio_id']===(int)$businessId));
+            $promo=$offers[random_int(0,count($offers)-1)];
+            $code='PENDING-'.bin2hex(random_bytes(12));
             $now=gmdate('Y-m-d H:i:s');
             $expires=gmdate('Y-m-d H:i:s',time()+max(1,(int)$this->config['reglas']['vigencia_horas'])*3600);
-            $this->query('INSERT INTO cp_premios(oportunidad_id,visitante_id,campana_id,negocio_id,promocion_id,codigo,solicitud_id,titulo,descripcion,condiciones,porcentaje,creado_at,vence_at) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)',[$op['id'],$id,$this->campaign,$promo['negocio_id'],$promo['id'],$code,$request,$promo['titulo'],$promo['descripcion'],$promo['condiciones'],$promo['porcentaje'],$now,$expires]);
+            $this->query('INSERT INTO cp_premios(oportunidad_id,visitante_id,campana_id,negocio_id,promocion_id,codigo,solicitud_id,titulo,descripcion,condiciones,porcentaje,creado_at,vence_at) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)',[$op['id'],$op['visitante_id'],$this->campaign,$promo['negocio_id'],$promo['id'],$code,$request,$promo['titulo'],$promo['descripcion'],$promo['condiciones'],$promo['porcentaje'],$now,$expires]);
             $prizeId=(int)$this->db->lastInsertId();
+            $words=preg_split('/[^A-Z0-9]+/',strtoupper(iconv('UTF-8','ASCII//TRANSLIT//IGNORE',$promo['nombre'])), -1, PREG_SPLIT_NO_EMPTY);
+            $initials=count($words)>1 ? implode('',array_map(fn($word)=>substr($word,0,1),$words)) : substr($words[0]??'NEG',0,3);
+            $code='CHAPI-'.substr($initials,0,6).'-'.str_pad((string)$prizeId,9,'0',STR_PAD_LEFT);
+            $this->query('UPDATE cp_premios SET codigo=? WHERE id=?',[$code,$prizeId]);
+            $this->query('INSERT INTO cp_premio_detalles(premio_id,negocio,direccion,whatsapp) VALUES (?,?,?,?)',[$prizeId,$promo['nombre'],$promo['direccion'],$promo['whatsapp']]);
             $this->query('UPDATE cp_oportunidades SET consumida_at=UTC_TIMESTAMP() WHERE id=?',[$op['id']]);
             $this->query('UPDATE cp_promociones SET entregados=entregados+1 WHERE id=?',[$promo['id']]);
-            $this->event($id,'premio_emitido',$prizeId);
+            $this->event((int)$op['visitante_id'],'premio_emitido',$prizeId);
             return $this->prizeData($this->one($this->prizeSelect().'WHERE p.id=?',[$prizeId]));
         });
     }
@@ -128,7 +164,8 @@ final class ChapiPromocionModel extends ChapiModel
         if (!in_array($type,$allowed,true)) throw new ChapiError('Evento inválido.');
         $prize=null;
         if ($prizeId) {
-            $row=$this->one($this->prizeSelect().'WHERE p.id=? AND p.visitante_id=?',[$prizeId,$id]);
+            [$scope,$args]=$this->visitorScope($id,'p');
+            $row=$this->one($this->prizeSelect().'WHERE p.id=? AND '.$scope,array_merge([$prizeId],$args));
             if (!$row) throw new ChapiError('Premio no encontrado.',404);
             $prize=$this->prizeData($row);
         }
@@ -138,8 +175,7 @@ final class ChapiPromocionModel extends ChapiModel
         }
         $this->event($id,$type,$prizeId);
         if ($type==='reclamar_whatsapp') {
-            $text='Hola, vengo de Chapitour.co. Mi promoción en '.$prize['negocio'].' es: '.$prize['titulo'].'. Código: '.$prize['codigo'].'. Vence: '.$prize['vence_at'].'.';
-            return ['url'=>'https://wa.me/'.$prize['whatsapp'].'?text='.rawurlencode($text)];
+            return ['url'=>$prize['url_whatsapp'],'mensaje'=>$prize['mensaje_whatsapp']];
         }
         return [];
     }

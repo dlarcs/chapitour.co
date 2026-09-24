@@ -12,7 +12,7 @@ final class ChapiSecurity
         if (session_status() !== PHP_SESSION_ACTIVE) {
             ini_set('session.use_strict_mode', '1');
             ini_set('session.use_only_cookies', '1');
-            session_name('chapi_promos_session');
+            session_name('chapi_pruebas_session');
             session_set_cookie_params(['lifetime'=>0, 'path'=>self::cookiePath($config), 'httponly'=>true, 'secure'=>(bool)$config['secure_cookies'], 'samesite'=>'Lax']);
             session_start();
         }
@@ -34,11 +34,11 @@ final class ChapiSecurity
 
     public static function identity(array $config): string
     {
-        $token = $_COOKIE['chapi_visitante'] ?? '';
+        $token = $_COOKIE['chapi_pruebas_visitante'] ?? '';
         if (!is_string($token) || !preg_match('/^[a-f0-9]{64}$/D', $token)) {
             $token = bin2hex(random_bytes(32));
-            setcookie('chapi_visitante', $token, ['expires'=>time() + (int)$config['reglas']['cookie_dias'] * 86400, 'path'=>self::cookiePath($config), 'httponly'=>true, 'secure'=>(bool)$config['secure_cookies'], 'samesite'=>'Lax']);
-            $_COOKIE['chapi_visitante'] = $token;
+            setcookie('chapi_pruebas_visitante', $token, ['expires'=>time() + (int)$config['reglas']['cookie_dias'] * 86400, 'path'=>self::cookiePath($config), 'httponly'=>true, 'secure'=>(bool)$config['secure_cookies'], 'samesite'=>'Lax']);
+            $_COOKIE['chapi_pruebas_visitante'] = $token;
         }
         return $config['reglas']['identificacion'] === 'ip'
             ? hash_hmac('sha256', 'identity:' . self::ipHash($config), $config['app_key'])

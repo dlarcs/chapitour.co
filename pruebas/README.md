@@ -30,3 +30,10 @@ Las reglas actuales del módulo son:
 
 Las reglas se configuran en `promos/config/reglas.php` dentro de esta carpeta.
 La guía técnica completa está en `promos/README.md`.
+
+## Dashboard de negocios y dueños
+
+Disponible en `promos/panel/` dentro de esta carpeta. El superadministrador puede
+crear negocios y dueños; los dueños crean y editan las promociones de su negocio.
+La guía de configuración y actualización de Hostinger está en
+[promos/DASHBOARD-HOSTINGER.md](promos/DASHBOARD-HOSTINGER.md).
