@@ -1,6 +1,6 @@
 <!-- PHP asigna el premio antes de animar la ruleta. -->
 <button class="chapi-promo-launcher chapi-promo-launcher--demo" id="chapi-promo-demo-launcher" type="button" aria-haspopup="dialog" aria-controls="chapi-promo-demo" hidden>
-  <span aria-hidden="true">✳</span> Probar ruleta <small>DEMO</small>
+  <span aria-hidden="true">✳</span> Ver promoción otra vez <small>DEMO</small>
 </button>
 <button class="chapi-promo-launcher" id="chapi-promo-launcher" type="button" aria-haspopup="dialog" aria-controls="chapi-promo" hidden>
   <span aria-hidden="true">✳</span> Chapinero te premia
