@@ -78,7 +78,7 @@ final class ChapiPromocionModel extends ChapiModel
         $totals=$this->visitTotals($id);
         $available=$this->query('SELECT id,mostrada_at,origen FROM cp_oportunidades p WHERE '.$scope.' AND campana_id=? AND consumida_at IS NULL ORDER BY id',array_merge($args,[$this->campaign]))->fetchAll();
         $prizes=array_map(fn($row)=>$this->prizeData($row),$this->query($this->prizeSelect().'WHERE '.$scope.' AND p.campana_id=? ORDER BY p.id DESC LIMIT 50',array_merge($args,[$this->campaign]))->fetchAll());
-        $total=(int)$this->query('SELECT COUNT(*) FROM cp_referidos WHERE propietario_id=? AND campana_id=?',[$id,$this->campaign])->fetchColumn();
+        $total=(int)$this->query('SELECT COUNT(*) FROM cp_referidos WHERE propietario_id IN ('.implode(',',array_fill(0,count($args),'?')).') AND campana_id=?',array_merge($args,[$this->campaign]))->fetchColumn();
         $target=max(1,(int)$this->config['reglas']['amigos_requeridos']);
         $businesses=$this->businesses();
         $unseen=array_values(array_filter($available,fn($o)=>$o['mostrada_at']===null));
@@ -125,7 +125,8 @@ final class ChapiPromocionModel extends ChapiModel
             $expires=gmdate('Y-m-d H:i:s',time()+max(1,(int)$this->config['reglas']['vigencia_horas'])*3600);
             $this->query('INSERT INTO cp_premios(oportunidad_id,visitante_id,campana_id,negocio_id,promocion_id,codigo,solicitud_id,titulo,descripcion,condiciones,porcentaje,creado_at,vence_at) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)',[$op['id'],$op['visitante_id'],$this->campaign,$promo['negocio_id'],$promo['id'],$code,$request,$promo['titulo'],$promo['descripcion'],$promo['condiciones'],$promo['porcentaje'],$now,$expires]);
             $prizeId=(int)$this->db->lastInsertId();
-            $words=preg_split('/[^A-Z0-9]+/',strtoupper(iconv('UTF-8','ASCII//TRANSLIT//IGNORE',$promo['nombre'])), -1, PREG_SPLIT_NO_EMPTY);
+            $name=strtr(mb_strtoupper($promo['nombre'],'UTF-8'),['Á'=>'A','É'=>'E','Í'=>'I','Ó'=>'O','Ú'=>'U','Ü'=>'U','Ñ'=>'N']);
+            $words=preg_split('/[^A-Z0-9]+/',$name,-1,PREG_SPLIT_NO_EMPTY);
             $initials=count($words)>1 ? implode('',array_map(fn($word)=>substr($word,0,1),$words)) : substr($words[0]??'NEG',0,3);
             $code='CHAPI-'.substr($initials,0,6).'-'.str_pad((string)$prizeId,9,'0',STR_PAD_LEFT);
             $this->query('UPDATE cp_premios SET codigo=? WHERE id=?',[$code,$prizeId]);
@@ -142,20 +143,36 @@ final class ChapiPromocionModel extends ChapiModel
         if (!$this->config['reglas']['referidos_habilitados']) throw new ChapiError('Las invitaciones están pausadas.',409);
         return $this->transaction(function () use ($id,$ip,$token) {
             $owner=$this->one('SELECT id,ip_hash FROM cp_visitantes WHERE referido_token=?',[$token]);
-            if (!$owner || (int)$owner['id']===$id) throw new ChapiError('No puedes confirmar tu propio enlace.',409,'SELF_REFERRAL');
+            $ownIds=$this->config['_visitantes']??[$id];
+            if (!$owner || in_array((int)$owner['id'],$ownIds,true)) throw new ChapiError('No puedes confirmar tu propio enlace.',409,'SELF_REFERRAL');
+            $ownerIds=array_map('intval',$this->query('SELECT v.visitante_id FROM cp_cliente_visitantes v JOIN cp_cliente_visitantes source ON source.cliente_id=v.cliente_id WHERE source.visitante_id=? ORDER BY v.visitante_id',[$owner['id']])->fetchAll(PDO::FETCH_COLUMN));
+            if (!$ownerIds) $ownerIds=[(int)$owner['id']];
+            $ownerId=$ownerIds[0];
+            $ownerSlots=implode(',',array_fill(0,count($ownerIds),'?'));
             if ($this->config['reglas']['referidos_ip_distinta']) {
-                $sameIp=$this->one('SELECT id FROM cp_referidos WHERE campana_id=? AND propietario_id=? AND ip_hash=?',[$this->campaign,$owner['id'],$ip]);
-                if ($owner['ip_hash']===$ip || $sameIp) throw new ChapiError('Esta red ya participa en la invitación. Una misma conexión no suma varias visitas.',409,'REFERRAL_NETWORK');
+                $sameIp=$this->one('SELECT id FROM cp_referidos WHERE campana_id=? AND propietario_id IN ('.$ownerSlots.') AND ip_hash=?',array_merge([$this->campaign],$ownerIds,[$ip]));
+                $ownerNetwork=$this->one('SELECT id FROM cp_visitantes WHERE id IN ('.$ownerSlots.') AND ip_hash=? LIMIT 1',array_merge($ownerIds,[$ip]));
+                if ($ownerNetwork || $sameIp) throw new ChapiError('Esta red ya participa en la invitación. Una misma conexión no suma varias visitas.',409,'REFERRAL_NETWORK');
             }
-            $exists=$this->one('SELECT id FROM cp_referidos WHERE campana_id=? AND visitante_id=?',[$this->campaign,$id]);
+            $exists=$this->one('SELECT id FROM cp_referidos WHERE campana_id=? AND visitante_id IN ('.implode(',',array_fill(0,count($ownIds),'?')).')',array_merge([$this->campaign],$ownIds));
             if ($exists) throw new ChapiError('Tu visita ya fue contabilizada en esta campaña.',409,'REFERRAL_DUPLICATE');
-            $this->query('INSERT INTO cp_referidos(campana_id,propietario_id,visitante_id,ip_hash) VALUES (?,?,?,?)',[$this->campaign,$owner['id'],$id,$ip]);
-            $count=(int)$this->query('SELECT COUNT(*) FROM cp_referidos WHERE campana_id=? AND propietario_id=?',[$this->campaign,$owner['id']])->fetchColumn();
-            $target=max(1,(int)$this->config['reglas']['amigos_requeridos']);
-            if ($count % $target===0) $this->grant((int)$owner['id'],'referidos','referidos:'.$count);
-            $this->event($id,'referido_confirmado',null,['propietario_id'=>(int)$owner['id']]);
+            $this->query('INSERT INTO cp_referidos(campana_id,propietario_id,visitante_id,ip_hash) VALUES (?,?,?,?)',[$this->campaign,$ownerId,$id,$ip]);
+            $this->reconcileReferralRewards($ownerIds);
+            $this->event($id,'referido_confirmado',null,['propietario_id'=>$ownerId]);
             return ['message'=>'¡Gracias! Tu visita fue confirmada.'];
         });
+    }
+
+    // Se invoca dentro de la transacción de invitación o de vinculación de cuenta.
+    public function reconcileReferralRewards(array $ids): void
+    {
+        if (!$ids || !$this->config['reglas']['referidos_habilitados']) return;
+        sort($ids); $slots=implode(',',array_fill(0,count($ids),'?'));
+        $args=array_merge([$this->campaign],$ids);
+        $count=(int)$this->query('SELECT COUNT(*) FROM cp_referidos WHERE campana_id=? AND propietario_id IN ('.$slots.')',$args)->fetchColumn();
+        $granted=(int)$this->query("SELECT COUNT(*) FROM cp_oportunidades WHERE campana_id=? AND visitante_id IN ($slots) AND origen='referidos'",$args)->fetchColumn();
+        $target=max(1,(int)$this->config['reglas']['amigos_requeridos']);
+        for ($n=$granted+1;$n<=intdiv($count,$target);$n++) $this->grant((int)$ids[0],'referidos','referidos:'.($n*$target));
     }
 
     public function track(int $id,string $type,?int $prizeId): array

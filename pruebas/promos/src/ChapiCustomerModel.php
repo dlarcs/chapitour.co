@@ -30,7 +30,10 @@ final class ChapiCustomerModel extends ChapiModel
         // La cookie acredita el navegador, nunca se vinculan historiales solo por IP.
         $link=$this->one('SELECT cliente_id FROM cp_cliente_visitantes WHERE visitante_id=? FOR UPDATE',[$visitor]);
         if ($link && (int)$link['cliente_id']!==$customer) throw new ChapiError('Este historial ya pertenece a otra cuenta.',409,'HISTORY_CLAIMED');
-        if (!$link) $this->query('INSERT INTO cp_cliente_visitantes(cliente_id,visitante_id) VALUES (?,?)',[$customer,$visitor]);
+        if (!$link) {
+            $this->query('INSERT INTO cp_cliente_visitantes(cliente_id,visitante_id) VALUES (?,?)',[$customer,$visitor]);
+            (new ChapiPromocionModel($this->db,$this->config))->reconcileReferralRewards($this->visitorIds($customer));
+        }
     }
 
     private function beginSession(array $user): array

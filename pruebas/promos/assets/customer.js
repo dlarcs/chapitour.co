@@ -2,14 +2,14 @@ import { createAjaxClient } from './makeAjaxRequest.js';
 import { prizeCard } from './prize-card.js';
 const request = createAjaxClient(new URL('../api/index.php', import.meta.url));
 const $ = selector => document.querySelector(selector);
-let state, status = '', page = 1, authMode = 'register', loading = false, expiryTimer;
+let state, status = '', page = 1, authMode = 'register', loading = false, expiryTimer, pendingRefresh = false;
 const notice = (message, error = false) => { const n = $('#customer-notice'); n.textContent = message; n.hidden = !message; n.classList.toggle('error', error); };
 async function refresh() {
-  if (loading) return;
+  if (loading) { pendingRefresh = true; return; }
   loading = true; $('#customer-refresh').disabled = true;
   try { const data = await request('cliente_panel', { estado: status, pagina: page }); state = data; page = data.pagina; render(data); }
   catch (error) { notice(error.message, true); }
-  finally { loading = false; $('#customer-refresh').disabled = false; }
+  finally { loading = false; $('#customer-refresh').disabled = false; if (pendingRefresh) { pendingRefresh = false; await refresh(); } }
 }
 function render(data) {
   const account = data.cliente;
@@ -18,11 +18,11 @@ function render(data) {
   $('#account-description').textContent = account ? `Conectado como ${account.email}. Tus promociones te acompañan cuando inicias sesión en otro dispositivo.` : 'Guardamos tus promociones en este navegador. Crea una cuenta para conservarlas y consultarlas desde otros dispositivos.';
   $('#register-open').hidden = Boolean(account); $('#login-open').hidden = Boolean(account); $('#customer-logout').hidden = !account;
   for (const name of ['total', 'activos', 'redimidos', 'vencidos']) $(`#count-${name}`).textContent = data.resumen[name];
-  $('#customer-total').textContent = `${data.resumen.total} códigos en tu historial`;
+  $('#customer-total').textContent = `${data.resumen.total} ${Number(data.resumen.total) === 1 ? 'código' : 'códigos'} en tu historial`;
   $('#customer-level').textContent = data.nivel.nombre;
   $('#level-description').textContent = data.siguiente_nivel ? `${data.resumen.redimidos} promociones redimidas. Te faltan ${data.redenciones_para_siguiente} para llegar a ${data.siguiente_nivel.nombre}.` : `${data.resumen.redimidos} promociones redimidas. Completaste las metas de esta ruta de prueba.`;
   $('#level-track').replaceChildren(...data.niveles.map(level => { const step = document.createElement('div'); step.className = `level-step${Number(data.resumen.redimidos) >= level.redenciones ? ' is-reached' : ''}`; const title = document.createElement('strong'); title.textContent = level.nombre; const target = document.createElement('small'); target.textContent = `${level.redenciones} promociones redimidas`; step.append(title, target); return step; }));
-  $('#visit-progress').textContent = `${data.visitas} visitas registradas. ${data.visitas === 0 ? 'Entra a la ruleta para recibir tu primera oportunidad.' : `Faltan ${data.visitas_para_proxima} visitas para la siguiente oportunidad por visitas.`}`;
+  $('#visit-progress').textContent = `${data.visitas} ${data.visitas === 1 ? 'visita registrada' : 'visitas registradas'}. ${data.visitas === 0 ? 'Entra a la ruleta para recibir tu primera oportunidad.' : `Faltan ${data.visitas_para_proxima} visitas para la siguiente oportunidad por visitas.`}`;
   $('#available-spins').textContent = `${data.oportunidades} ${data.oportunidades === 1 ? 'giro disponible' : 'giros disponibles'}`;
   $('#referral-title').textContent = `Invita a ${data.amigos_requeridos} personas`;
   $('#referral-progress').textContent = `${data.referidos_progreso} de ${data.amigos_requeridos} visitas confirmadas para tu próximo giro extra. ${data.referidos_total} en total.`;

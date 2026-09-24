@@ -2,7 +2,13 @@
 
 Implementación integrada en la página existente. No usa Node.js, npm ni un servidor adicional en producción. Compatible con PHP 8.0+ y MySQL 8 / MariaDB 10.4+ con InnoDB, PDO MySQL, mbstring, sesiones y HTTPS en producción.
 
-## Estado de esta instalación local
+> Esta es la copia de **pruebas**. El flujo de clientes, códigos y ocho invitados
+> está descrito en [la guía actual](../README.md). Las referencias históricas de
+> instalación y entrega de abajo corresponden al módulo original; esta actualización
+> no modifica ni publica esa entrega. Para esta copia existente importa también
+> `database/006_clientes_seguimiento.sql` después de la migración 005.
+
+## Estado de la instalación original
 
 - Base: `chapitour_promos`. Usuario de conexión: `chapitour_app`, limitado a SELECT/INSERT/UPDATE/DELETE en esa base.
 - Panel: `http://localhost/chapitour.co/promos/panel/`.
@@ -61,12 +67,12 @@ La entrega está excluida de Git y bloqueada por HTTP. `php promos/bin/prepare-h
 Edita únicamente `promos/config/reglas.php`. Los cambios se leen en la siguiente solicitud.
 
 ```php
-'frecuencia' => 'primera_vez',
+'frecuencia' => 'cada_visitas',
 'cada_visitas' => 5,
 'cada_dias' => 7,
-'min_segundos_entre_visitas' => 1800,
+'min_segundos_entre_visitas' => 0,
 'vigencia_horas' => 72,
-'amigos_requeridos' => 5,
+'amigos_requeridos' => 8,
 'premiar_redencion' => true,
 'identificacion' => 'anonimo',
 ```
@@ -76,7 +82,7 @@ Edita únicamente `promos/config/reglas.php`. Los cambios se leen en la siguient
 - **Cada 10 visitas adicionales:** cambia solo `cada_visitas` a `10`.
 - **Cada 7 días:** `frecuencia = cada_dias`, `cada_dias = 7`. Se concede al regresar después del plazo, sin cron.
 - **Otro plazo:** cambia `cada_dias` o `vigencia_horas` según corresponda. La vigencia nueva se aplica a los premios futuros; los códigos existentes conservan su vencimiento.
-- Una visita cuenta cuando han pasado 1800 segundos desde la anterior. Recargar repetidamente no incrementa el contador. Puedes ajustar ese número.
+- En pruebas cada carga del inicio cuenta como visita (`min_segundos_entre_visitas = 0`). Puedes aumentar ese intervalo al preparar producción.
 - El modal se abre automáticamente una vez por oportunidad pendiente, cuando hay ofertas disponibles. Cerrarlo no consume el giro. El botón flotante permite regresar.
 - El cambio de una regla no borra los premios ni revoca giros ya concedidos.
 
@@ -90,7 +96,7 @@ El modo recomendado y predeterminado es `anonimo`: una cookie aleatoria HttpOnly
 
 Sin registro, borrar cookies o cambiar de navegador pierde el acceso al historial. Este mecanismo reduce duplicados, pero no garantiza identificar personas únicas frente a cambios de dispositivos o redes.
 
-## Cinco visitas referidas válidas por WhatsApp
+## Ocho visitas referidas válidas por WhatsApp
 
 La regla confirmada es contar visitas referidas, **no mensajes enviados**. El botón de WhatsApp prepara el mensaje con un enlace propio del visitante. El usuario decide enviarlo.
 
@@ -98,7 +104,7 @@ El amigo debe abrir el enlace, permanecer al menos 10 segundos y pulsar “Confi
 
 Con `referidos_ip_distinta = true`, la red del propietario no suma y una misma IP solo suma una vez para ese propietario. Amigos en una misma Wi-Fi pueden no contar; se puede desactivar esa comprobación manteniendo la identidad anónima. No se consultan contactos ni se automatiza el envío de mensajes.
 
-Al alcanzar 5, 10, 15… visitas válidas se concede una oportunidad por cada meta. El progreso se obtiene de la base. No existe un botón de simulación. Se refresca al volver a la pestaña, manualmente y cada 30 segundos mientras el modal esté abierto.
+Al alcanzar 8, 16, 24… visitas válidas se concede una oportunidad por cada meta. El progreso se obtiene de la base. El botón de pruebas permite repetir el flujo sin simular invitaciones. Se refresca al volver a la pestaña, manualmente y cada 30 segundos mientras el modal esté abierto.
 
 Referencia: [clic para chatear de WhatsApp](https://faq.whatsapp.com/5913398998672934/?locale=es_LA).
 
@@ -135,7 +141,7 @@ El instalador crea una base dedicada, un usuario PDO con permisos limitados y si
 
 ## Instalar manualmente / phpMyAdmin
 
-**Hostinger:** crea primero una base dedicada desde hPanel, selecciona esa base en phpMyAdmin e importa `database/hostinger_inicial.sql`. Ese archivo reúne las 13 tablas y los seis negocios; no incluye `CREATE DATABASE`, usuarios MySQL, credenciales ni datos de visitantes locales. Úsalo solamente en una base vacía. Sustituye el nombre y usuario de conexión por los nombres completos que muestre Hostinger, incluido su prefijo. Después sigue desde el paso 4 de esta sección para configurar PDO y crear los accesos del panel.
+**Hostinger:** crea primero una base dedicada desde hPanel, selecciona esa base en phpMyAdmin e importa `database/hostinger_inicial.sql`. Ese archivo reúne las 16 tablas de esta copia y los seis negocios; no incluye `CREATE DATABASE`, usuarios MySQL, credenciales ni datos de visitantes locales. Úsalo solamente en una base vacía. Sustituye el nombre y usuario de conexión por los nombres completos que muestre Hostinger, incluido su prefijo. Después sigue desde el paso 4 de esta sección para configurar PDO y crear los accesos del panel.
 
 Guías oficiales: [crear la base en Hostinger](https://www.hostinger.com/support/1583542-how-to-create-a-new-mysql-database-in-hostinger/) e [importar con phpMyAdmin](https://www.hostinger.com/support/1884149-how-to-import-a-database-with-phpmyadmin-in-hostinger/).
 
