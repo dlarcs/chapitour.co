@@ -234,8 +234,12 @@ html.chapi-promo-demo-open { overflow: hidden; }
   .chapi-promo__message-screen { padding-bottom: 24px; }
   .chapi-promo__message-screen h2 { font-size: 33px; }
   .chapi-promo__message { padding: 16px; }
-  .chapi-promo-launcher { left: 12px; bottom: 12px; font-size: 11px; padding: 10px 15px; }
-  .chapi-promo-launcher--demo { bottom: 68px; }
+  .chapi-promo-launcher { left: 12px; bottom: calc(12px + env(safe-area-inset-bottom, 0px)); font-size: 11px; padding: 10px 15px; min-height: 44px; }
+  .chapi-promo-launcher--demo {
+    left: 12px; right: 12px; bottom: calc(72px + env(safe-area-inset-bottom, 0px));
+    width: calc(100% - 24px); max-width: 420px; min-height: 48px;
+    justify-content: center; font-size: 13px; padding: 12px; z-index: 1050;
+  }
 }
 @media (max-width: 360px) {
   .chapi-promo__header { padding-inline: 15px; }

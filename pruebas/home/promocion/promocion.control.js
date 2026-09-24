@@ -1,5 +1,6 @@
 import { createAjaxClient } from '../../promos/assets/makeAjaxRequest.js';
 import { PromocionUI } from './promocion.ui.js';
+import { nuevaSolicitud } from './solicitud.js';
 export class PromocionControl {
   constructor(dialog) {
     this.ui = new PromocionUI(dialog); this.request = createAjaxClient(new URL('../../promos/api/index.php', import.meta.url)); this.spinning = false; this.requestId = null; this.refreshing = false;
@@ -35,7 +36,7 @@ export class PromocionControl {
     if (this.testing || this.spinning) return;
     this.testing = true; const button = document.getElementById('chapi-promo-demo-launcher'); button.disabled = true;
     try {
-      this.previewId ||= crypto.randomUUID();
+      this.previewId ||= nuevaSolicitud();
       const state = await this.request('probar', { solicitud_id: this.previewId });
       this.previewId = null; this.apply(state); this.selectScreen(); this.ui.error(); this.ui.open(); await this.markShown();
     } catch (error) { this.ui.error(error.message); this.ui.open(); }
@@ -51,7 +52,7 @@ export class PromocionControl {
   async girar() {
     if (this.spinning || !this.state?.oportunidades) return;
     this.spinning = true; this.ui.busy(true); this.ui.error();
-    this.requestId ||= crypto.randomUUID ? crypto.randomUUID() : ([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g, c => (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16));
+    this.requestId ||= nuevaSolicitud();
     try {
       const result = await this.request('girar', { solicitud_id: this.requestId });
       result.estado.receivedAt = Date.now();

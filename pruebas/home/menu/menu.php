@@ -33,6 +33,7 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
 
   <nav id="chapitour-menu" class="chapitour-menu" aria-label="Menú principal">
     <div class="menu-inner">
+      <a href="#chapi-promo-demo-launcher" data-promo-test>Ver promoción otra vez · PRUEBAS</a>
       <a href="promos/cliente/">Mis promociones y mi progreso</a>
       <a href="categorias/1.tipo_bares/index.php">Bares</a>
       <a href="categorias/2.planes_bares/index.php">Gastrobares</a>
