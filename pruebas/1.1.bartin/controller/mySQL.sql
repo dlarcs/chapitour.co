@@ -1,5 +1,0 @@
-CREATE TABLE registro_clicks_whatsapp (
-    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    direccion_pagina VARCHAR(255) NOT NULL,
-    fecha_hora DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
-);

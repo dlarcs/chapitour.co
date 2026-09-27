@@ -31,15 +31,15 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
             src="../../../juegos/JimarFactory/img/general15.jpeg"
             alt="Mesa de billar tres bandas en Jimar Factory Chapinero"
           >
-          <span class="card-badge">Domingos</span>
+          <span class="card-badge">Tres bandas</span>
         </div>
 
         <div class="card-content">
-          <h3>Domingos de rebaja</h3>
+          <h3>Demuestra tu precisión</h3>
 
           <p>
-            Ven los domingos y disfruta de precios mas economicos,
-            ven con tus amigos y disfruta de buenas partidas de pool, billar y tres bandas
+            Disfruta partidas de billar a tres bandas en un espacio diseñado para
+            jugadores que buscan estrategia, concentración y una gran experiencia.
           </p>
 
           <span class="card-location">

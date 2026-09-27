@@ -70,11 +70,12 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
       >
 
       <div>
-        <h3>Domingos economicos</h3>
+        <h3>Pool y entretenimiento</h3>
 
         <p class="descripcion-card">
-          Ven los domingos, juega pool, billar y tres bandas con tus amigos y disfruta un espacio pensado para
-          competir, encuntra mas economica la hora.
+          Juega pool con tus amigos y disfruta un espacio pensado para
+          competir, divertirte y pasar un buen momento. Tenemos atención
+          los siete días de la semana.
         </p>
       </div>
 
