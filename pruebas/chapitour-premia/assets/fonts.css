@@ -1,0 +1,2 @@
+/* System fonts keep this isolated preview independent of third-party services. */
+@font-face{font-family:Inter;src:local('Inter');font-display:swap}
