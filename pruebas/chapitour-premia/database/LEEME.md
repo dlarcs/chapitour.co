@@ -1,5 +1,10 @@
 # SQL inicial · Chapitour te premia
 
+> **Integración actual:** los paneles ya usan la base existente con tablas `cp_`. Ver [README de los paneles](../README.md). Este documento describe la propuesta SQL anterior sin prefijo; no se debe importar sobre la base `u348170507_chapi_promos`. Para los paneles actuales solo se añaden las cuatro tablas de `database/paneles_cp.sql`, automáticamente en el primer acceso de un administrador.
+
+
+**Para Hostinger con hPanel:** usar `chapitour_premia_hostinger.sql` y seguir [HOSTINGER.md](HOSTINGER.md). Esa variante carga estructura y datos sin las guardas adicionales mediante triggers de la versión local. Esas validaciones deben implementarse y probarse en el backend antes de operar. Las verificaciones de guardas descritas abajo corresponden únicamente al archivo local original.
+
 Archivo: `chapitour_premia_pruebas.sql`.
 
 Base independiente: **chapitour_premia_pruebas**. Instalación inicial para una base vacía, validada con **MariaDB 10.4.28 de XAMPP**. No se debe reimportar sobre datos existentes; no es una migración incremental.

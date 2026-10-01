@@ -14,3 +14,14 @@ body.modal-open{overflow:hidden}dialog{background:radial-gradient(ellipse at 50%
 /* Keep transactional details readable, including on small screens. */
 .data-table{font-size:12px}.data-table th{font-size:11px}.data-table .code-copy{font-size:10px}.expiry,.table-foot{font-size:10px}.modal-note{font-size:11px}.prize-detail dd>small{font-size:10px}.wheel-disclaimer{font-size:10px}.wheel-modal .modal-note{font-size:10px}.modal-security{font-size:11px}.whatsapp-pending{font-size:10px}.demo-badge{font-size:10px}.progress-label>span,.verification-note{font-size:10px}.challenge p{font-size:12px}.card-link{font-size:11px}
 @media(max-width:760px){.demo-badge{font-size:9px}.section-heading.compact{flex-wrap:wrap}.challenge p{font-size:12px}.challenge h3{font-size:16px}.progress-label{flex-wrap:wrap;gap:3px}.progress-label>span{font-size:9px}.verification-note{font-size:9px}.card-link{font-size:10px}.data-table td{font-size:12px}.data-table td:before,.data-table .code-copy{font-size:10px}.expiry{font-size:10px}.pending-notice p{font-size:11px}.pending-notice .pending-detail{font-size:10px}.publication{font-size:10px}.prize-card p{font-size:12px}.prize-meta small{font-size:10px}.prize-meta>div>span{font-size:11px}.modal-security{font-size:10px}.wheel-disclaimer,.wheel-modal .modal-note{font-size:10px}.prize-modal .modal-note{font-size:11px}.prize-detail dd>small{font-size:10px}.data-table .btn{min-height:40px}}
+
+/* Access with a temporary password stays outside the dashboards until changed. */
+.password-page { min-height: 85vh; display: grid; place-items: center; padding: 28px 18px; }
+.password-page > .panel { width: min(100%, 520px); padding: clamp(24px, 5vw, 42px); }
+.password-page h1 { font-size: clamp(1.7rem, 5vw, 2.2rem); line-height: 1.15; margin-bottom: 16px; }
+.password-page form { margin-top: 24px; }
+.password-page label { display: grid; gap: 8px; margin-bottom: 18px; }
+@media (max-width: 600px) {
+  .challenge .progress-label { flex-wrap: wrap; gap: 4px; }
+  .challenge .progress-label > span { width: 100%; }
+}

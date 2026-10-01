@@ -1,5 +1,8 @@
 # Modelo relacional propuesto · Chapitour te premia
 
+> **Integración actual:** los paneles ya usan la base existente con tablas `cp_`. Ver [README de los paneles](../README.md). Este documento describe la propuesta SQL anterior sin prefijo; no se debe importar sobre la base `u348170507_chapi_promos`. Para los paneles actuales solo se añaden las cuatro tablas de `database/paneles_cp.sql`, automáticamente en el primer acceso de un administrador.
+
+
 Propuesta para una futura base de datos de pruebas MySQL/MariaDB. Este documento no crea tablas, no conecta la aplicación y no modifica la base de datos principal. El prototipo continúa usando sesiones PHP.
 
 **PK**: identifica un registro. **FK**: referencia a otra tabla. **UK**: valor que no puede repetirse. Las relaciones 1:N permiten varios registros hijos; 1:0..1 permite como máximo uno.
