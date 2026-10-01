@@ -3,12 +3,18 @@ declare(strict_types=1);
 if (realpath($_SERVER['SCRIPT_FILENAME'] ?? '') === __FILE__) { http_response_code(404); exit; }
 
 class PanelError extends RuntimeException {}
+require_once __DIR__.'/Rewards.php';
 
 final class ChapitourPanel
 {
     private $db;
     private $schema;
+    private $rewards;
     public function __construct(PDO $db) { $this->db = $db; }
+    private function rewards(): ChapitourRewards {
+        if (!$this->rewards) { $this->rewards=new ChapitourRewards($this->db); }
+        return $this->rewards;
+    }
     private function query(string $sql, array $args = []): PDOStatement {
         $s = $this->db->prepare($sql); $s->execute($args); return $s;
     }
@@ -139,7 +145,7 @@ final class ChapitourPanel
         if ($staff && $staff['rol']==='aliado' && !$this->row('SELECT id FROM cp_negocios WHERE id=? AND activo=1', [$staff['negocio_id']])) {
             $this->error('Correo o usuario y contraseña incorrectos.', 401);
         }
-        if ($staff && $staff['rol']==='admin') { $this->installSchema(); }
+        if ($staff && $staff['rol']==='admin') { $this->installSchema(); $this->rewards()->install(); }
         $this->signIn($staff ? 'staff' : 'client', $row);
         $this->audit($this->actor(), 'inicio_sesion');
     }
@@ -337,8 +343,10 @@ final class ChapitourPanel
     }
     public function state(): array {
         $a=$this->actor(); $ready=$this->schemaReady();
+        // An already authenticated administrator can apply this additive update without signing out.
+        if ($ready && $a && $a['role']==='admin' && !$a['must_change_password']) { $this->rewards()->install(); }
         $base=['csrf'=>$_SESSION['csrf'],'user'=>null,'businesses'=>[],'promotions'=>[],'codes'=>[],'challenges'=>[],
-            'storage'=>'mysql','setup_required'=>!$ready,'server_time'=>time(),'campaign'=>['enabled'=>false,'visits_per_reward'=>null,'new_visit_after'=>null,'replaces_previous_rule'=>null,'monthly_visit_reset'=>null]];
+            'storage'=>'mysql','setup_required'=>!$ready,'server_time'=>time(),'campaign'=>$this->rewards()->status($a)];
         if ($a) { $base['user']=$a; unset($base['user']['db_id'],$base['user']['kind'],$base['user']['version'],$base['user']['password_hash']); }
         if ($a && $a['must_change_password']) { return $base; }
         $args=[]; $where='WHERE n.activo=1';
@@ -387,9 +395,15 @@ final class ChapitourPanel
             case 'delete_promotion': $this->deletePromotion($input); break;
             case 'redeem': $this->redeem($input); break;
             case 'whatsapp': return array_merge($this->state(),$this->whatsapp($input));
-            case 'prepare_spin': case 'spin':
-                $this->requireActor(['client']);
-                $this->error('La entrega de premios sigue pendiente de confirmar las reglas de visitas y las ofertas.'); break;
+            case 'visit': $this->rewards()->visit($this->requireActor(['client'])); break;
+            case 'prepare_spin':
+                $a=$this->requireActor(['client']);
+                if (!$this->rewards()->status($a)['can_spin']) { $this->error('Aún no hay un giro disponible con promociones aprobadas.'); }
+                break;
+            case 'spin':
+                $a=$this->requireActor(['client']);
+                $code=$this->rewards()->spin($a,$this->text($input,'ticket_id',20));
+                return array_merge($this->state(),['won_code'=>$code]);
             default: $this->error('Acción no disponible.',404);
         }
         return $this->state();

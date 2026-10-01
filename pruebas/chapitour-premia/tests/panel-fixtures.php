@@ -35,7 +35,7 @@ if (($argv[1]??'')==='setup') {
     echo "PASS esquema original cp_ importado; fixtures sintéticos aislados.\n";
 } elseif (($argv[1]??'')==='verify') {
     $db->exec('USE chapitour_panels_qa');
-    if ((int)$db->query("SELECT COUNT(*) FROM information_schema.tables WHERE table_schema=DATABASE() AND table_name LIKE 'cp_panel_%'")->fetchColumn()!==4) { throw new RuntimeException('Faltan extensiones'); }
+    if ((int)$db->query("SELECT COUNT(*) FROM information_schema.tables WHERE table_schema=DATABASE() AND table_name LIKE 'cp_panel_%'")->fetchColumn()!==7) { throw new RuntimeException('Faltan extensiones'); }
     if ((int)$db->query("SELECT COUNT(*) FROM cp_premios WHERE codigo LIKE 'DEMO-%'")->fetchColumn()!==0) { throw new RuntimeException('Se generaron premios ficticios'); }
     if ($db->query("SELECT descripcion FROM cp_premios WHERE codigo='QA-ACTIVE'")->fetchColumn()!=='Oferta fixture QA, sin valor comercial') { throw new RuntimeException('Se cambió el snapshot'); }
     if ((int)$db->query("SELECT COUNT(*) FROM cp_auditoria WHERE accion='premio_redimido' AND entidad_id=104")->fetchColumn()!==1) { throw new RuntimeException('Carrera duplicó redención'); }

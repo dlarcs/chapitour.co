@@ -25,3 +25,5 @@ body.modal-open{overflow:hidden}dialog{background:radial-gradient(ellipse at 50%
   .challenge .progress-label { flex-wrap: wrap; gap: 4px; }
   .challenge .progress-label > span { width: 100%; }
 }
+
+.reward-ready{margin-top:24px;border-color:#b4a231;background:linear-gradient(110deg,#30251780,#181626)}.reward-ready>div{flex:1}.reward-ready p{margin:6px 0 0}.reward-ready>.btn{margin-left:auto}.wheel-modal[aria-busy="true"] .modal-close{visibility:hidden}

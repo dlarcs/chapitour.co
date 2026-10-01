@@ -33,13 +33,30 @@ try {
 } catch (PanelError $e) {
     http_response_code($e->getCode()?:422);
     echo json_encode(['error'=>$e->getMessage()],JSON_UNESCAPED_UNICODE);
+} catch (ChapitourDatabaseConfigurationError $e) {
+    http_response_code(503);
+    error_log('Chapitour configuration error: '.$e->getMessage());
+    echo json_encode(['error'=>'La conexión de Chapitour aún no está configurada en el servidor. Contacta al administrador.', 'code'=>'DATABASE_CONFIGURATION'],JSON_UNESCAPED_UNICODE);
 } catch (PDOException $e) {
     // Do not expose connection credentials, SQL or server paths to the browser.
-    $duplicate=($e->errorInfo[1]??null)===1062;
+    $driverCode=(int)($e->errorInfo[1]??0);
+    $duplicate=$driverCode===1062;
     http_response_code($duplicate?409:503);
-    error_log('Chapitour database error: '.(string)$e->getCode());
-    echo json_encode(['error'=>$duplicate?'Los datos ya existen. Actualiza la página e intenta de nuevo.':'No se pudo acceder a la base de datos. Revisa la configuración MySQL y los permisos del usuario en el servidor.'],JSON_UNESCAPED_UNICODE);
+    error_log('Chapitour database error: '.(string)$e->getCode().' / '.$driverCode);
+    $databaseErrors=[
+        1044=>['DATABASE_ACCESS_DENIED','MySQL rechazó el acceso a la base de datos. Revisa los permisos del usuario en Hostinger.'],
+        1045=>['DATABASE_LOGIN_FAILED','MySQL rechazó las credenciales de conexión. Revisa el usuario y la contraseña MySQL en Hostinger.'],
+        1049=>['DATABASE_NOT_FOUND','La base de datos configurada no existe en este servidor. Revisa su nombre en Hostinger.'],
+        1146=>['DATABASE_SCHEMA_MISSING','Faltan tablas necesarias para Chapitour. Revisa la instalación de la base de datos.'],
+        1054=>['DATABASE_SCHEMA_MISMATCH','La estructura de la base de datos no coincide con esta versión de Chapitour.'],
+        2002=>['DATABASE_UNREACHABLE','No se pudo contactar al servidor MySQL. Revisa el servidor de la conexión.'],
+        2003=>['DATABASE_UNREACHABLE','No se pudo contactar al servidor MySQL. Revisa el servidor de la conexión.'],
+    ];
+    [$errorCode,$message]=$databaseErrors[$driverCode]??['DATABASE_ERROR',$duplicate?'Los datos ya existen. Actualiza la página e intenta de nuevo.':'No se pudo acceder a la base de datos. Revisa la configuración MySQL y los permisos del usuario en el servidor.'];
+    echo json_encode(['error'=>$message,'code'=>$errorCode],JSON_UNESCAPED_UNICODE);
 } catch (Throwable $e) {
-    http_response_code(500); error_log('Chapitour error: '.get_class($e));
+    http_response_code(500);
+    // Record location for the hosting error log, without request data or credentials.
+    error_log('Chapitour error: '.get_class($e).' in '.basename($e->getFile()).':'.$e->getLine());
     echo json_encode(['error'=>'No se pudo completar la solicitud. Intenta de nuevo.'],JSON_UNESCAPED_UNICODE);
 }

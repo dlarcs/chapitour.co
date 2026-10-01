@@ -45,6 +45,7 @@
   const btn = (label, action, cls='', extra='') => `<button type="button" class="btn ${cls}" data-action="${action}" ${extra}>${label}</button>`;
   let publicationFilter = '';
   let state, currentView, busy = false, spinBusy = false, lastFocus, toastTimer;
+  let wheelParts = [], wheelTicket = null, visitTask = null;
   const dialog = $('#modal');
   const business = id => state.businesses.find(b => b.id === id);
   const status = c => c.redeemed_at ? 'Redimido' : (c.expires_at * 1000 <= Date.now() + (state.server_time * 1000 - receivedAt) ? 'Vencido' : 'Activo');
@@ -71,7 +72,7 @@
   dialog.addEventListener('click',e=>{if(e.target===dialog){const r=dialog.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)closeModal();}});
   const navItem = (id, label, i) => `<a href="#${id}" class="nav-item ${currentView===id?'active':''}" ${currentView===id?'aria-current="page"':''}>${icon(i)}<span>${label}</span>${currentView===id?'<i class="nav-dot"></i>':''}</a>`;
   function sandboxBar() {
-    return `<div class="sandbox-bar"><span><i></i> CHAPITOUR TE PREMIA <span class="sandbox-note">· Paneles de pruebas con datos guardados</span></span><span>Entrega de premios pendiente</span></div>`;
+    return `<div class="sandbox-bar"><span><i></i> CHAPITOUR TE PREMIA <span class="sandbox-note">· Paneles de pruebas con datos guardados</span></span><span>${state.campaign.enabled?'Promociones disponibles':state.campaign.setup_required?'Configurando la ruleta':'Promociones por aprobar'}</span></div>`;
   }
   function shell(content) {
     const u=state.user, role=u.role;
@@ -90,7 +91,7 @@
   }
   function clientPage() {
     const month=new Intl.DateTimeFormat('es-CO',{month:'long',year:'numeric',timeZone:'America/Bogota'}).format(new Date());
-    return `<section class="client-hero"><div><span class="eyebrow">UN BARRIO ENTERO POR DESCUBRIR</span><h1>Mis retos <span>del mes</span><span class="title-spark">✦</span></h1><p>Descubre Chapinero y completa tus metas.</p><div class="month-row"><span class="month">${icon('calendar')}${month}</span><span>${icon('repeat')} Tus metas se renuevan mensualmente.</span></div></div><div class="hero-sticker">EXPLORA<br>DESCUBRE<br><em>REPITE.</em>${icon('crown')}</div></section><div class="section-heading compact"><h2>Un nuevo plan, un nuevo reto</h2></div>${challenges()}<div class="client-bottom"><section class="panel"><div class="section-heading"><div class="heading-with-icon">${icon('tag')}<div><h2>Mis promociones</h2><p>Tu próximo buen momento empieza aquí.</p></div></div><a href="#mis-promociones" class="subtle-link">Ver todas ${icon('arrow')}</a></div>${promotionsPreview()}</section><aside class="profile-preview panel"><div class="avatar large">${esc(state.user.name.slice(0,2).toUpperCase())}</div><h3>Tu Chapitour,<br>a tu manera.</h3><p>Tu información y tus próximos planes, en un solo lugar.</p><a class="btn outline" href="#perfil">Mi perfil ${icon('arrow')}</a></aside></div>`;
+    return `<section class="client-hero"><div><span class="eyebrow">UN BARRIO ENTERO POR DESCUBRIR</span><h1>Mis retos <span>del mes</span><span class="title-spark">✦</span></h1><p>Descubre Chapinero y completa tus metas.</p><div class="month-row"><span class="month">${icon('calendar')}${month}</span><span>${icon('repeat')} Tus metas se renuevan mensualmente.</span></div></div><div class="hero-sticker">EXPLORA<br>DESCUBRE<br><em>REPITE.</em>${icon('crown')}</div></section><div class="section-heading compact"><h2>Un nuevo plan, un nuevo reto</h2></div>${challenges()}${rewardNotice()}<div class="client-bottom"><section class="panel"><div class="section-heading"><div class="heading-with-icon">${icon('tag')}<div><h2>Mis promociones</h2><p>Tu próximo buen momento empieza aquí.</p></div></div><a href="#mis-promociones" class="subtle-link">Ver todas ${icon('arrow')}</a></div>${promotionsPreview()}</section><aside class="profile-preview panel"><div class="avatar large">${esc(state.user.name.slice(0,2).toUpperCase())}</div><h3>Tu Chapitour,<br>a tu manera.</h3><p>Tu información y tus próximos planes, en un solo lugar.</p><a class="btn outline" href="#perfil">Mi perfil ${icon('arrow')}</a></aside></div>`;
   }
   function emptyPromotions() { return `<div class="empty-state">${icon('gift')}<h3>Lo mejor está por venir</h3><p>Aquí aparecerán las promociones que ganes.</p><a href="#retos" class="subtle-link">Explorar mis retos ${icon('arrow')}</a></div>`; }
   function promotionsPreview() { const c=state.codes.find(c=>status(c)==='Activo'); return c?prizeCard(c):emptyPromotions(); }
@@ -115,10 +116,11 @@
     return `<div class="page-heading"><span class="eyebrow">MÁS BARRIO, MÁS CONEXIONES</span><h1>Panel <span>del aliado</span></h1><p>Consulta y valida los códigos de tus promociones.</p></div><section class="ally-banner"><span class="business-avatar">${icon(b.icon)}</span><div><span class="eyebrow">TU NEGOCIO EN CHAPITOUR</span><h2>${esc(b.name)}</h2><p>${esc(b.category)}</p></div><div class="ally-banner-tag">Buenos lugares.<br><strong>Mejores historias.</strong>${icon('crown')}</div></section><div class="section-heading compact"><h2>Así van tus promociones</h2></div>${stats()}${codesPanel(false)}<div class="info-strip">${icon('info')} Abrir WhatsApp o enviar un mensaje no redime un código. Confirma la redención cuando apliques la promoción.</div>`;
   }
   function pendingNotice() {
+    if (!state.promotions.some(p=>p.publication==='draft')) return '';
     return `<section class="pending-notice">${icon('warning')}<div><h3>Promociones pendientes de confirmar</h3><p>Antes de activar la campaña, reemplaza las promociones de ejemplo de Pictogramas y Jimar Factory por las ofertas aprobadas por cada negocio.</p><p class="pending-detail">Confirma el beneficio, los productos o servicios incluidos, los horarios, las restricciones y el número de WhatsApp.</p></div>${btn(`Revisar promociones pendientes ${icon('arrow')}`,'pending','yellow small')}</section>`;
   }
   function adminPage() {
-    return `<div class="page-heading"><span class="eyebrow">EL BARRIO CRECE CONTIGO</span><h1>Administración de <span>Chapitour</span></h1><p>Gestiona aliados, promociones y códigos para conectar más experiencias.</p></div><div class="admin-metrics"><span>${icon('users')}<strong>${state.businesses.length}</strong> Aliados</span><span>${icon('tag')}<strong>${state.promotions.length}</strong> Promociones</span><span>${icon('ticket')}<strong>${state.codes.filter(c=>status(c)==='Activo').length}</strong> Códigos activos</span></div>${pendingNotice()}<nav class="admin-tabs" aria-label="Secciones de administración">${navItem('aliados','Aliados','users')}${navItem('promociones','Promociones','tag')}${navItem('codigos','Códigos y estados','ticket')}</nav>${currentView==='aliados'?alliesPanel():currentView==='promociones'?adminPromotions():codesPanel(true)}<details class="rules-panel"><summary>${icon('info')} Configuración pendiente de la campaña <span>Campaña desactivada</span></summary><p>El documento menciona un premio cada 10 y cada 8 visitas. Falta confirmar el umbral, el tiempo entre visitas válidas, si reemplaza la ruleta anterior de cada 5 visitas y si el contador se reinicia al cambiar de mes.</p><p>La renovación mensual de retos es independiente de las 72 horas de vigencia de cada premio. Las recargas no generan premios en este entorno.</p></details>`;
+    return `<div class="page-heading"><span class="eyebrow">EL BARRIO CRECE CONTIGO</span><h1>Administración de <span>Chapitour</span></h1><p>Gestiona aliados, promociones y códigos para conectar más experiencias.</p></div><div class="admin-metrics"><span>${icon('users')}<strong>${state.businesses.length}</strong> Aliados</span><span>${icon('tag')}<strong>${state.promotions.length}</strong> Promociones</span><span>${icon('ticket')}<strong>${state.codes.filter(c=>status(c)==='Activo').length}</strong> Códigos activos</span></div>${pendingNotice()}<nav class="admin-tabs" aria-label="Secciones de administración">${navItem('aliados','Aliados','users')}${navItem('promociones','Promociones','tag')}${navItem('codigos','Códigos y estados','ticket')}</nav>${currentView==='aliados'?alliesPanel():currentView==='promociones'?adminPromotions():codesPanel(true)}<details class="rules-panel"><summary>${icon('info')} Reglas de la ruleta <span>${state.campaign.enabled?'Lista para clientes elegibles':'Sin promociones disponibles'}</span></summary><p>Un solo beneficio: un giro cada 8 visitas válidas por cuenta. Se cuenta como máximo una visita cada 24 horas, aunque se recargue la página o se use otro dispositivo.</p><p>Las visitas acumuladas vuelven a cero al comenzar cada mes, según la hora de Bogotá. Los giros ya ganados se conservan. Cada código vence 72 horas después de generarse y solo puede redimirse una vez.</p><p>${state.campaign.eligible_promotions} promociones aprobadas y disponibles para entregar. Guardar un borrador no lo incluye en la ruleta.</p></details>`;
   }
   function alliesPanel() { return `<section class="panel"><div class="section-heading"><div><h2>Aliados de Chapitour</h2><p>Administra las cuentas de los negocios.</p></div>${btn(`${icon('plus')} Crear cuenta de aliado`,'new-business','primary')}</div><div class="allies-grid">${state.businesses.map(b=>`<article class="ally-account"><div class="business-avatar ${b.color}">${icon(b.icon)}</div><h3>${esc(b.name)}</h3><p>${esc(b.email||'Sin cuenta de acceso')}</p><span class="muted">${state.promotions.filter(p=>p.business_id===b.id).length} promociones</span><div class="account-danger">${b.email?btn(`${icon('trash')} Eliminar cuenta`,'delete-business','danger text-btn small',`data-id="${b.id}"`):btn('Crear acceso','new-business','outline small',`data-id="${b.id}"`)}</div></article>`).join('')}</div></section>`; }
   function adminPromotions() { return `<section class="panel"><div class="section-heading"><div><h2>Gestión de promociones</h2><p>Editar una oferta no cambia los códigos ya emitidos.</p></div>${btn(`${icon('plus')} Crear promoción`,'new-promotion','primary')}</div><div class="filters"><label class="search-field">${icon('search')}<input id="promotion-search" placeholder="Buscar negocio o promoción" aria-label="Buscar negocio o promoción"></label><select id="publication-filter" aria-label="Filtrar publicación"><option value="">Todas las publicaciones</option><option value="draft" ${publicationFilter==='draft'?'selected':''}>Borrador · Por confirmar</option><option value="approved">Aprobadas</option></select></div><div id="promotion-results">${promotionTable('',publicationFilter)}</div></section>`; }
@@ -152,12 +154,56 @@
     const choices=state.businesses.filter(b=>!b.email);
     openModal(`<span class="eyebrow">CRECE LA COMUNIDAD</span><h2 id="modal-title">Crear cuenta de aliado</h2><form data-form="business"><label>Negocio<select name="business_id"><option value="">Registrar un negocio nuevo</option>${choices.map(b=>`<option value="${b.id}" ${b.id===id?'selected':''}>${esc(b.name)}</option>`).join('')}</select></label><label>Nombre si el negocio es nuevo<input name="name" maxlength="80" placeholder="Nombre del aliado"></label><label>Correo electrónico<input name="email" type="email" required maxlength="100" autocomplete="off"></label><label>Contraseña temporal<input name="password" type="password" minlength="8" maxlength="72" required autocomplete="new-password"></label><p class="modal-note">El aliado deberá cambiar su contraseña al entrar. Solo tendrá acceso a los datos de su negocio.</p><div class="modal-actions">${btn('Cancelar','close','outline')}<button type="submit" class="btn primary">Crear aliado ${icon('plus')}</button></div></form>`);
   }
-  function wheelSVG() {
-    const parts=[['capital','Capital','Queer','#fa079a'],['gran','Gran&Chela','','#ffe43b'],['garage','Garage','Gastrobar','#7435f5'],['pictogramas','Pictogramas','Por confirmar','#20d7e2'],['street','Street','Grill','#a827f0'],['jimar','Jimar','Por confirmar','#22c7a7']];
-    return `<svg id="wheel-disc" viewBox="0 0 400 400" role="img" aria-label="Ruleta con Capital Queer, Gran&Chela, Garage Gastrobar, Pictogramas, Street Grill y Jimar Factory"><circle cx="200" cy="200" r="196" fill="#161326"/>${parts.map(([id,a,b,color],i)=>{if(id==='jimar')a='Jimar Factory';if(['jimar','pictogramas'].includes(id)&&state.promotions.some(p=>p.publication==='approved'&&business(p.business_id)?.slug===(id==='jimar'?'jimar-factory':id)))b='';const angle=(i*60-90)*Math.PI/180,end=(i*60-30)*Math.PI/180,mid=(i*60-60)*Math.PI/180;const x1=200+187*Math.cos(angle),y1=200+187*Math.sin(angle),x2=200+187*Math.cos(end),y2=200+187*Math.sin(end),tx=200+122*Math.cos(mid),ty=200+122*Math.sin(mid);return `<g><path d="M200 200L${x1} ${y1}A187 187 0 0 1 ${x2} ${y2}Z" fill="${color}" stroke="#12121e" stroke-width="2"/><text x="${tx}" y="${ty-3}" text-anchor="middle" fill="${['gran','pictogramas','jimar'].includes(id)?'#071017':'white'}" font-family="Arial,sans-serif" font-weight="700" font-size="${a.length>10?12:14}"><tspan x="${tx}">${a}</tspan><tspan x="${tx}" dy="19" font-size="${b==='Por confirmar'?9:14}">${b}</tspan></text></g>`;}).join('')}<circle cx="200" cy="200" r="193" fill="none" stroke="#ff66da" stroke-width="3"/>${Array.from({length:12},(_,i)=>{const a=i*Math.PI/6;return `<circle cx="${200+192*Math.cos(a)}" cy="${200+192*Math.sin(a)}" r="3" fill="#fff3ad"/>`;}).join('')}</svg>`;
+  function wheelSVG(parts) {
+    const colors=['#fa079a','#ffe43b','#7435f5','#20d7e2','#a827f0','#22c7a7'];
+    const n=parts.length,step=360/Math.max(n,1);
+    return `<svg id="wheel-disc" viewBox="0 0 400 400" role="img" aria-label="Ruleta de aliados: ${esc(parts.map(b=>b.name).join(', '))}"><circle cx="200" cy="200" r="196" fill="#161326"/>${parts.map((b,i)=>{
+      const start=(i*step-90)*Math.PI/180,end=((i+1)*step-90)*Math.PI/180,mid=(i+.5)*step*Math.PI/180-Math.PI/2;
+      const tx=200+121*Math.cos(mid),ty=200+121*Math.sin(mid);
+      const words=b.name.split(' '),lines=[''];for(const word of words){const k=lines.length-1;if(lines[k].length+word.length>13&&lines[k])lines.push(word);else lines[k]+=(lines[k]?' ':'')+word;}
+      const shape=n===1?'<circle cx="200" cy="200" r="187"/>':`<path d="M200 200L${200+187*Math.cos(start)} ${200+187*Math.sin(start)}A187 187 0 ${step>180?1:0} 1 ${200+187*Math.cos(end)} ${200+187*Math.sin(end)}Z"/>`;
+      return `<g fill="${colors[i%colors.length]}" stroke="#12121e" stroke-width="2">${shape}</g><text x="${tx}" y="${ty-(lines.length-1)*8}" text-anchor="middle" fill="${[1,3,5].includes(i%6)?'#071017':'white'}" font-family="Arial,sans-serif" font-weight="700" font-size="${n>7?10:13}">${lines.map((line,j)=>`<tspan x="${tx}" dy="${j?17:0}">${esc(line)}</tspan>`).join('')}</text>`;
+    }).join('')}<circle cx="200" cy="200" r="193" fill="none" stroke="#ff66da" stroke-width="3"/></svg>`;
+  }
+  function rewardNotice() {
+    if (!state.campaign.can_spin) return '';
+    return `<section class="info-strip reward-ready">${icon('gift')}<div><strong>¡Tu próxima sorpresa ya está aquí!</strong><p>Tienes un giro disponible para descubrir una promoción.</p></div>${btn('Girar la ruleta','preview-wheel','yellow')}</section>`;
+  }
+  async function recordVisit() {
+    if (state.user?.role!=='client') return;
+    if (visitTask) return visitTask;
+    visitTask=api('visit').finally(()=>{visitTask=null;});
+    return visitTask;
   }
   async function previewWheel() {
-    openModal(`<div class="modal-brand">${brand()}</div><h2 id="modal-title" class="wheel-title">¡Gira <span>la ruleta!</span></h2><p class="modal-lead">Descubre una promoción especial de nuestros aliados</p><div class="wheel-wrap"><div class="wheel-pointer"></div>${wheelSVG()}<div class="wheel-hub">${icon('crown')}</div></div>${btn(`Girar ${icon('arrow')}`,'spin','yellow spin-button','disabled')}<p class="modal-note">Esta oportunidad depende de tu dinámica de visitas a Chapitour.</p><p class="wheel-disclaimer">La entrega de premios está pendiente de confirmar las reglas de visitas y las ofertas. Todavía no se generan códigos nuevos.</p>`,'wheel-modal');
+    await api('state');
+    const c=state.campaign;
+    wheelParts=state.businesses.filter(b=>c.wheel_business_ids.includes(b.id));
+    const preview=!wheelParts.length;
+    if(preview)wheelParts=state.businesses;
+    wheelTicket=c.ticket_id;
+    const notes={configuration_pending:'Un administrador debe terminar de preparar la ruleta.',login_required:'Inicia sesión con tu cuenta de cliente para participar.',client_required:'La entrega de premios está disponible para cuentas de clientes.',promotions_pending:'Todavía no hay promociones aprobadas disponibles. Los giros que hayas ganado se conservan.',visits_pending:'Sigue explorando Chapitour. Tu giro se habilitará al completar tus visitas válidas.',ready:'Tu giro está listo. Descubre la promoción que te espera.'};
+    openModal(`<div class="modal-brand">${brand()}</div><h2 id="modal-title" class="wheel-title">¡Gira <span>la ruleta!</span></h2><p class="modal-lead">Descubre una promoción especial de nuestros aliados</p><div class="wheel-wrap"><div class="wheel-pointer"></div>${wheelSVG(wheelParts)}<div class="wheel-hub">${icon('crown')}</div></div>${btn(`Girar ${icon('arrow')}`,'spin','yellow spin-button',c.can_spin?'':'disabled')}<p class="modal-note" role="status">${notes[c.reason]||notes.configuration_pending}</p>${!state.user?btn('Iniciar sesión','login','text-btn'):''}<p class="wheel-disclaimer">${preview?'Vista previa de aliados. Todavía no hay ofertas disponibles para entregar.':'Solo participan promociones aprobadas y disponibles.'} Esta oportunidad depende de tu dinámica de visitas a Chapitour.</p>`,'wheel-modal');
+  }
+  async function spinWheel() {
+    if(spinBusy||!wheelTicket)return;
+    spinBusy=true;const button=$('[data-action="spin"]',dialog);button.disabled=true;button.textContent='Girando…';dialog.setAttribute('aria-busy','true');
+    try {
+      const result=await api('spin',{ticket_id:wheelTicket});
+      const won=result.codes.find(c=>c.code===result.won_code);
+      if(!won)throw new Error('Consulta Mis promociones para ver tu premio.');
+      if(!wheelParts.some(b=>b.id===won.business_id)) {wheelParts.push({id:won.business_id,name:won.business_name});$('#wheel-disc').outerHTML=wheelSVG(wheelParts);}
+      const index=wheelParts.findIndex(b=>b.id===won.business_id),angle=360*5-((index+.5)*360/wheelParts.length);
+      const disc=$('#wheel-disc');
+      if(!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        const animation=disc.animate([{transform:'rotate(0deg)'},{transform:`rotate(${angle}deg)`}],{duration:3800,easing:'cubic-bezier(.13,.66,.08,1)',fill:'forwards'});
+        await animation.finished;
+      }
+      render();prizeModal(won,true);
+    } finally {
+      spinBusy=false;dialog.removeAttribute('aria-busy');
+      if(button.isConnected){button.disabled=false;button.innerHTML=`Girar ${icon('arrow')}`;}
+    }
   }
   function prizeModal(c,won=false) {
     const b=business(c.business_id);
@@ -184,6 +230,7 @@
       case 'login':authModal(false);break;
       case 'logout':await api('logout');location.hash='inicio';render();break;
       case 'preview-wheel':await previewWheel();break;
+      case 'spin':await spinWheel();break;
       case 'prize':prizeModal(state.codes.find(c=>c.code===code));break;
       case 'copy':await copyText(code);toast('Código copiado');break;
       case 'share': { const share={title:'Descubre Chapinero con Chapitour',text:'Encuentra lugares, planes y experiencias en Chapinero.',url:'https://chapitour.co/'};if(navigator.share){try{await navigator.share(share);toast('Tu progreso no cambia al abrir la opción de compartir.');}catch(e){if(e.name!=='AbortError')throw e;}}else{await copyText(share.url);toast('Enlace copiado. Compartirlo no confirma las entregas.');}break; }
@@ -205,7 +252,7 @@
   document.addEventListener('click',async e=>{const el=e.target.closest('[data-action]');if(!el||el.disabled||busy)return;busy=true;try{await dispatch(el);}catch(error){if(dialog.open)$('#modal-error').textContent=error.message;else toast(error.message);}finally{busy=false;}});
   document.addEventListener('submit',async e=>{
     const form=e.target.closest('[data-form]');if(!form)return;e.preventDefault();if(busy)return;busy=true;const submit=$('[type="submit"]',form);submit.disabled=true;
-    try{const fields=Object.fromEntries(new FormData(form));const type=form.dataset.form;if(type==='promotion')fields.confirmed=!!form.elements.confirmed.checked;await api(({promotion:'save_promotion',business:'save_business'})[type]||type,fields);closeModal();if(['register','login','change_password'].includes(type))location.hash=homeView();render();toast(type==='register'?'Tu cuenta está lista. ¡Empieza a explorar!':'Cambios guardados.');}
+    try{const fields=Object.fromEntries(new FormData(form));const type=form.dataset.form;if(type==='promotion')fields.confirmed=!!form.elements.confirmed.checked;await api(({promotion:'save_promotion',business:'save_business'})[type]||type,fields);if(['login','register'].includes(type))await recordVisit();closeModal();if(['register','login','change_password'].includes(type))location.hash=homeView();render();toast(type==='register'?'Tu cuenta está lista. ¡Empieza a explorar!':'Cambios guardados.');}
     catch(error){const target=dialog.open?$('#modal-error'):$('.form-error',form);target.textContent=error.message;target.scrollIntoView({block:'nearest'});}finally{submit.disabled=false;busy=false;}
   });
   function filters(e){if(['code-search','status-filter','business-filter'].includes(e.target.id))$('#code-results').innerHTML=codeTable($('#code-search').value,$('#status-filter').value,$('#business-filter')?.value||'');if(['promotion-search','publication-filter'].includes(e.target.id)){publicationFilter=$('#publication-filter').value;$('#promotion-results').innerHTML=promotionTable($('#promotion-search').value,publicationFilter);}}
@@ -213,5 +260,5 @@
   window.addEventListener('hashchange',()=>{render();if(!['explorar','como-funciona','crear-cuenta'].includes(location.hash.slice(1)))window.scrollTo(0,0);});
   // Expired codes cannot remain actionable in a panel left open past their deadline.
   setInterval(()=>{if(!state||dialog.open||busy)return;const changed=state.codes.some(c=>c.status!==status(c));if(changed){state.codes.forEach(c=>c.status=status(c));render();}},30000);
-  api('state').then(render).catch(error=>{$('#app').innerHTML=`<main id="main" class="loading"><h1>No pudimos abrir Chapitour</h1><p>${esc(error.message)}</p><a class="btn primary" href="">Volver a intentar</a></main>`;});
+  api('state').then(async()=>{await recordVisit();render();}).catch(error=>{$('#app').innerHTML=`<main id="main" class="loading"><h1>No pudimos abrir Chapitour</h1><p>${esc(error.message)}</p><a class="btn primary" href="">Volver a intentar</a></main>`;});
 })();
