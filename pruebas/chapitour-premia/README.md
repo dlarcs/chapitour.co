@@ -42,7 +42,7 @@ Las pruebas de integración se ejecutaron con PHP 8.0.28 y MariaDB 10.4.28 sobre
 
 El esquema original permite una promoción por negocio mediante un índice único. Se conserva esa regla técnica: si ya existe, se utiliza Editar. Eliminar una promoción la archiva y permite crear su sustituta para ese negocio sin borrar premios históricos.
 
-Eliminar una cuenta de aliado revoca sus sesiones y desactiva sus promociones; conserva negocio e historial. Eliminar una cuenta de cliente anonimiza nombre y correo, elimina ciudad y progreso y revoca el acceso; conserva las referencias de premios/redenciones. El diálogo informa de ese alcance antes de confirmar.
+Administración → Aliados muestra «Eliminar aliado» en cada tarjeta, tenga o no una cuenta de acceso. Tras confirmar, el negocio se desactiva y deja de aparecer en el listado y en el catálogo; se revocan sus sesiones y sus promociones pasan a borrador, fuera de la ruleta. Se conservan el registro del negocio y el historial de códigos y redenciones. Solo un administrador puede realizar esta acción. Eliminar una cuenta de cliente anonimiza nombre y correo, elimina ciudad y progreso y revoca el acceso; conserva las referencias de premios/redenciones. El diálogo informa de ese alcance antes de confirmar.
 
 ## Códigos y redenciones
 
@@ -66,7 +66,7 @@ La elección de la promoción ocurre en el servidor. Solo se incluyen negocios a
 
 Despliegue verificado el 1 de octubre: actualización instalada en la ruta de pruebas de Hostinger, migración completada desde la sesión administradora, API HTTP 200 con regla 8 / 86400 segundos / reinicio mensual, y JavaScript remoto idéntico al probado. En esa revisión las siete promociones seguían en borrador, por lo que no había ofertas disponibles para entregar. No se alteraron sus condiciones ni se generaron premios en Hostinger para probar.
 
-Para poner una oferta en la ruleta: **Administración → Promociones → Editar**, completar los datos aprobados por el negocio, elegir **Aprobada**, marcar la confirmación y guardar. Guardar como borrador no la habilita. La rueda muestra únicamente los negocios con ofertas disponibles; si no hay ninguna, muestra una vista previa sin entregar premios. No se aprueban automáticamente Pictogramas, Jimar Factory ni otras ofertas.
+Para poner una oferta en la ruleta: **Administración → Promociones → Editar**, completar los datos aprobados por el negocio, marcar la casilla de confirmación y pulsar **Confirmar promoción**. Ese botón guarda la publicación como **Confirmada**; **Guardar borrador** es una acción separada. Los campos pendientes se indican junto a cada dato y no se realizan escrituras parciales. Guardar como borrador no la habilita. La rueda muestra únicamente los negocios con ofertas disponibles; si no hay ninguna, muestra una vista previa sin entregar premios. No se aprueban automáticamente Pictogramas, Jimar Factory ni otras ofertas.
 
 Siguen pendientes los mecanismos de verificación de visitas a negocios, entregas al compartir y fotografías/etiquetas. No se inventa progreso para esos retos.
 
@@ -83,3 +83,5 @@ Comprobado: acceso real, cambio obligatorio de clave, CSRF, permisos por cuenta/
 `php tests/configuration.php` comprueba configuración ausente o inválida, conexión mediante variables de entorno y clasificación de errores MySQL sin revelar secretos. No se conecta a ninguna base de datos real.
 
 Después de `tests/acceptance.cjs`, ejecutar `node tests/rewards.cjs SOCKET_QA` con las mismas dependencias. Cubre las 24 horas exactas, ocho visitas, frontera mensual de Bogotá, concurrencia, cupos, borradores, reintentos tras perder una respuesta, el giro animado y el premio en escritorio/móvil. Solo acepta una base QA temporal y usa ofertas sintéticas sin valor comercial.
+
+Corrección de confirmación publicada el 1 de octubre: se reemplazó el selector independiente de publicación por dos botones explícitos, **Confirmar promoción** y **Guardar borrador**. Se verificó el cambio persistente a Confirmada desde móvil y tras recargar en escritorio, y la salida del filtro de borradores para que la oferta confirmada siga visible. La prueba aislada `tests/promotion-publication.php SOCKET_QA` pasó 20 comprobaciones de permisos, validación, estados MySQL, elegibilidad e historial. Se publicaron y revisaron los controles en Hostinger, sin confirmar ofertas reales para probar.

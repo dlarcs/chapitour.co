@@ -12,8 +12,8 @@ header("Content-Security-Policy: default-src 'self'; script-src 'self'; style-sr
   <meta name="robots" content="noindex, nofollow">
   <title>Chapitour te premia · Pruebas</title>
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="assets/app.css?v=3">
-  <script defer src="assets/app.js?v=3"></script>
+  <link rel="stylesheet" href="assets/app.css?v=6">
+  <script defer src="assets/app.js?v=6"></script>
 </head>
 <body>
   <a class="skip-link" href="#main">Saltar al contenido</a>

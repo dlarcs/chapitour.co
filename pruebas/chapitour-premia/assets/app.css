@@ -27,3 +27,15 @@ body.modal-open{overflow:hidden}dialog{background:radial-gradient(ellipse at 50%
 }
 
 .reward-ready{margin-top:24px;border-color:#b4a231;background:linear-gradient(110deg,#30251780,#181626)}.reward-ready>div{flex:1}.reward-ready p{margin:6px 0 0}.reward-ready>.btn{margin-left:auto}.wheel-modal[aria-busy="true"] .modal-close{visibility:hidden}
+
+/* Promotion approval: explain requirements and keep errors beside each field. */
+.approval-help{margin:0 0 20px;padding:14px 16px;border:1px solid #65551a;border-radius:12px;background:#ffe4460a;color:#eee2a9;font-size:13px;line-height:1.6}
+.field-help{display:block;color:var(--muted);font-size:11px;line-height:1.5;margin-top:6px;font-weight:400}
+.field-error{display:block;color:#ffacc7;font-size:12px;line-height:1.5;margin-top:6px;font-weight:400}
+.field-error:empty{display:none}
+[data-form="promotion"] [aria-invalid="true"]{border-color:#ff6f9f;outline:1px solid #ff6f9f}
+.validation-summary{padding:12px 15px;color:#ffacc7;border:1px solid #994760;border-radius:10px;font-size:13px;line-height:1.6}
+
+.ally-actions{display:flex;flex-direction:column;align-items:stretch;gap:10px}.ally-actions .btn{min-height:44px;white-space:normal}
+
+.promotion-actions{flex-wrap:wrap}.promotion-actions .btn{min-height:44px}.promotion-actions .primary{flex:1 1 220px}.promotion-actions .outline{flex:1 1 170px}

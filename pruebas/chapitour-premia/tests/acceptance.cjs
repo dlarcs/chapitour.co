@@ -125,7 +125,7 @@ fs.mkdirSync(output,{recursive:true});
     await login('laurazoro@gmail.com','Qa-admin-new-456!');await page.getByRole('heading',{name:'Administración de Chapitour'}).waitFor();
     await capture('admin-desktop');
     await page.locator('[data-action="pending"]').click();await page.locator('#publication-filter').waitFor();
-    await page.locator('[data-action="edit-promotion"]').first().click();assert.equal(await page.locator('select[name="publication"]').inputValue(),'draft');await page.keyboard.press('Escape');
+    await page.locator('[data-action="edit-promotion"]').first().click();assert(await page.getByRole('button',{name:'Confirmar promoción'}).isVisible());assert(await page.getByRole('button',{name:'Guardar borrador'}).isVisible());await page.keyboard.press('Escape');
     await page.setViewportSize({width:390,height:844});for(const view of ['aliados','promociones','codigos']){await page.goto(base+'#'+view);await page.locator('.app-shell').waitFor();await overflow();await capture('admin-'+view+'-mobile');}
     await page.locator('[data-action="logout"]').click();await page.getByRole('button',{name:'Crear mi cuenta',exact:true}).waitFor();
     await login('garage@example.invalid','Qa-ally-456!');await page.getByRole('heading',{name:'Panel del aliado'}).waitFor();

@@ -237,10 +237,11 @@ final class ChapitourPanel
     }
     private function deleteBusiness(array $input): void {
         $a = $this->requireActor(['admin']); $id = $this->id($input,'id');
-        if ((string)($input['confirm'] ?? '') !== (string)$id) { $this->error('Confirma la cuenta del aliado.'); }
+        if ((string)($input['confirm'] ?? '') !== (string)$id) { $this->error('Confirma el aliado que quieres eliminar.'); }
         $this->transaction(function () use ($a,$id) {
             $this->requireActor(['admin'],true);
             if (!$this->row('SELECT id FROM cp_negocios WHERE id=? FOR UPDATE', [$id])) { $this->error('Negocio no encontrado.',404); }
+            $this->query('UPDATE cp_negocios SET activo=0 WHERE id=?', [$id]);
             $this->query("UPDATE cp_usuarios SET activo=0,version_sesion=version_sesion+1 WHERE negocio_id=? AND rol='aliado'", [$id]);
             $this->query('UPDATE cp_promociones SET activa=0 WHERE negocio_id=?', [$id]);
             $this->query("UPDATE cp_panel_promociones m JOIN cp_promociones p ON p.id=m.promocion_id SET m.publicacion='draft',m.aprobada_por=NULL,m.aprobada_at=NULL WHERE p.negocio_id=? AND m.publicacion<>'archived'", [$id]);
@@ -256,8 +257,13 @@ final class ChapitourPanel
         $included = $this->text($input,'included',350,false); $hours = $this->text($input,'hours',250,false); $restrictions = $this->text($input,'restrictions',350,false);
         $phone = preg_replace('/[\s+()-]/','',$this->text($input,'whatsapp',25,false));
         if ($phone!=='' && !preg_match('/^[1-9][0-9]{7,14}$/',$phone)) { $this->error('Revisa el WhatsApp e incluye el indicativo del país.'); }
-        if ($publication==='approved' && (!$phone || !$included || !$hours || !$restrictions || ($input['confirmed'] ?? false)!==true)) {
-            $this->error('Confirma el beneficio, incluidos, horarios, restricciones y WhatsApp con el negocio.');
+        if ($publication==='approved') {
+            $missing=[];
+            foreach (['WhatsApp del negocio'=>$phone,'Productos o servicios incluidos'=>$included,'Horarios'=>$hours,'Restricciones'=>$restrictions] as $label=>$value) {
+                if ($value==='') { $missing[]=$label; }
+            }
+            if (($input['confirmed'] ?? false)!==true) { $missing[]='marcar la confirmación con el negocio'; }
+            if ($missing) { $this->error('Para aprobar esta promoción falta: '.implode('; ',$missing).'.'); }
         }
         $conditions = 'Productos o servicios: '.$included."\nHorarios: ".$hours."\nRestricciones: ".$restrictions;
         if (mb_strlen($conditions)>1000) { $this->error('Las condiciones completas no pueden superar 1000 caracteres.'); }
