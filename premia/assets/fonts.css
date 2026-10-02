@@ -1,0 +1,2 @@
+/* Prefer the installed Inter font, with a system fallback. */
+@font-face{font-family:Inter;src:local('Inter');font-display:swap}
