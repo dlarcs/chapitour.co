@@ -21,6 +21,7 @@ if (($argv[1]??'')==='setup') {
     run($db,"INSERT INTO cp_usuarios(id,negocio_id,usuario,password_hash,rol,activo,cambiar_password) VALUES (101,1,'street@example.invalid',?,'aliado',1,0),(102,4,'garage@example.invalid',?,'aliado',1,0)",[$hash,$hash]);
     $hash=password_hash('Qa-client-456!',PASSWORD_BCRYPT);
     run($db,"INSERT INTO cp_clientes(id,nombre,email,password_hash) VALUES (100,'Cliente QA','cliente@example.invalid',?),(101,'Otro cliente QA','otro@example.invalid',?)",[$hash,$hash]);
+    run($db,"INSERT INTO cp_clientes(id,nombre,email,password_hash) VALUES (102,'Cliente existente QA','nuevo-cliente@example.invalid',?)",[password_hash('Qa-new-client-456!',PASSWORD_BCRYPT)]);
     $db->exec("INSERT INTO cp_campanas(id,nombre,activa) VALUES (1,'Campaña QA desactivada',0)");
     foreach ([100,101] as $id) {
         run($db,'INSERT INTO cp_visitantes(id,identidad_hash,ip_hash,referido_token) VALUES (?,?,?,?)',[$id,hash('sha256','qa-'.$id),hash('sha256','ip-'.$id),md5('qa-'.$id)]);
@@ -35,7 +36,7 @@ if (($argv[1]??'')==='setup') {
     echo "PASS esquema original cp_ importado; fixtures sintéticos aislados.\n";
 } elseif (($argv[1]??'')==='verify') {
     $db->exec('USE chapitour_panels_qa');
-    if ((int)$db->query("SELECT COUNT(*) FROM information_schema.tables WHERE table_schema=DATABASE() AND table_name LIKE 'cp_panel_%'")->fetchColumn()!==7) { throw new RuntimeException('Faltan extensiones'); }
+    if ((int)$db->query("SELECT COUNT(*) FROM information_schema.tables WHERE table_schema=DATABASE() AND table_name LIKE 'cp_panel_%'")->fetchColumn()!==10) { throw new RuntimeException('Faltan extensiones'); }
     if ((int)$db->query("SELECT COUNT(*) FROM cp_premios WHERE codigo LIKE 'DEMO-%'")->fetchColumn()!==0) { throw new RuntimeException('Se generaron premios ficticios'); }
     if ($db->query("SELECT descripcion FROM cp_premios WHERE codigo='QA-ACTIVE'")->fetchColumn()!=='Oferta fixture QA, sin valor comercial') { throw new RuntimeException('Se cambió el snapshot'); }
     if ((int)$db->query("SELECT COUNT(*) FROM cp_auditoria WHERE accion='premio_redimido' AND entidad_id=104")->fetchColumn()!==1) { throw new RuntimeException('Carrera duplicó redención'); }

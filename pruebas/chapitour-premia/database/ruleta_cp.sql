@@ -1,4 +1,5 @@
 -- Extension aditiva: visitas por cuenta y un giro por cada ciclo de ocho.
+-- En cp_panel_giros, el ciclo 0 identifica el único giro de bienvenida.
 CREATE TABLE IF NOT EXISTS cp_panel_campana (
   id TINYINT UNSIGNED NOT NULL PRIMARY KEY,
   campana_id INT UNSIGNED NOT NULL,

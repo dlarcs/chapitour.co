@@ -26,7 +26,7 @@ Las pruebas de integración se ejecutaron con PHP 8.0.28 y MariaDB 10.4.28 sobre
 
 ## Datos y permisos
 
-- Cliente: autenticación en `cp_clientes`, perfil persistente, retos del mes y premios propios vinculados mediante `cp_cliente_visitantes`. Registrar una cuenta no concede premios. La interfaz registra la primera visita válida de la cuenta mediante una solicitud protegida por CSRF.
+- Cliente: autenticación en `cp_clientes`, perfil persistente, retos del mes y premios propios vinculados mediante `cp_cliente_visitantes`. Registrar una cuenta concede un único giro de bienvenida; el código solo se emite al girar con una oferta disponible. La interfaz registra las visitas posteriores mediante una solicitud protegida por CSRF.
 - Aliado: autenticación en `cp_usuarios`, rol `aliado`, negocio tomado de la sesión validada. La API filtra tanto consultas como acciones por ese negocio. No puede editar promociones ni cuentas.
 - Administrador: rol `admin` en `cp_usuarios`, gestión de cuentas de aliados, promociones y consulta/redención de códigos.
 - Se quitó el selector de cuentas demo y la acción `demo_login`. La sesión `CHAPITOUR_PREMIA_DB` solo guarda la identidad autenticada, su versión y CSRF; el catálogo, los perfiles, promociones, avances y premios se leen de MySQL.
@@ -52,11 +52,19 @@ La redención usa transacción, bloqueo y actualización condicional contra la h
 
 WhatsApp prepara un mensaje con negocio, beneficio y código; el cliente debe pulsar Enviar. Prepararlo o enviarlo no registra una redención. Editar o archivar una promoción conserva las condiciones de los premios ya emitidos.
 
+Los premios nuevos usan `CHAPI-MES-` seguido de 3 a 6 números, sin ceros iniciales (`100` a `999999`); por ejemplo, `CHAPI-OCT-4123`. El mes de emisión se calcula con la hora de Bogotá a partir del mismo instante UTC de MySQL que se guarda en el premio. Abreviaturas: `ENE`, `FEB`, `MAR`, `ABR`, `MAY`, `JUN`, `JUL`, `AGO`, `SEP`, `OCT`, `NOV`, `DIC`. Las 72 horas se cuentan desde ese instante, independientemente del cambio de mes.
+
+Se elige un número aleatorio y el índice único de MySQL impide reutilizar cualquier código completo, incluso redimido, vencido o emitido en un año anterior. Tras varias colisiones se busca un hueco real para el mismo prefijo mensual; solo si todos sus números están ocupados se amplía a 7 cifras, después a 8, y así sucesivamente. Si no puede completarse la asignación, la transacción conserva el giro y los cupos. Los códigos emitidos anteriormente mantienen su valor y vigencia; un reintento devuelve su código original aunque haya cambiado el mes.
+
+`php tests/reward-codes.php SOCKET_QA` pasó 55 comprobaciones de formato, los doce meses, medianoche de Bogotá al cambiar de mes/año, colisiones reales de MySQL, huecos al principio/interior/final, agotamiento de un rango pequeño, ampliación a 7 y 8 cifras, idempotencia, conservación de códigos anteriores, 72 horas y rollback. El agotamiento de los rangos grandes se simula únicamente en el PDO de la prueba CLI; el buscador de huecos sí se ejecuta contra MariaDB. No se generan premios reales para verificar este cambio.
+
+Desplegado el 1 de octubre de 2026: se reemplazó únicamente `lib/Rewards.php` en Hostinger y se verificó en el administrador de archivos el formato `CHAPI-MES-NÚMERO`, las doce abreviaturas y el cálculo con hora de Bogotá. La API de pruebas siguió respondiendo HTTP 200, con Google activo y la regla de ocho visitas cada cuatro horas. No se modificaron códigos ya emitidos ni el esquema de la base de datos.
+
 ## Ruleta: regla confirmada el 1 de octubre de 2026
 
-Hay un único beneficio: un giro por cada **8 visitas válidas** de la misma cuenta de cliente. Se cuenta como máximo una visita cada **24 horas transcurridas**, usando la hora UTC de MySQL. Las recargas, pestañas y dispositivos comparten el mismo contador. Las cuentas de aliados y administradores no acumulan visitas ni generan premios.
+Cada cuenta de cliente nueva recibe **un giro de bienvenida al registrarse**. Después recibe un giro por cada **8 visitas válidas posteriores** de la misma cuenta. La visita del registro inicia el plazo de 4 horas y no se suma a esas ocho visitas de regreso. Se cuenta como máximo una visita cada **4 horas transcurridas**, usando la hora UTC de MySQL. Las recargas, pestañas y dispositivos comparten el mismo contador. Las cuentas de aliados y administradores no acumulan visitas ni generan premios.
 
-Las visitas incompletas **vuelven a cero al cambiar de mes en Bogotá**. Ese cambio no concede una nueva visita antes de cumplir las 24 horas. Cada ciclo de ocho habilita un giro y comienza otro ciclo. Los giros ya ganados se conservan; las 72 horas de vigencia del código empiezan al girar. El contador interno no aparece en la tarjeta del cliente. La renovación de los otros retos no modifica premios emitidos.
+Las visitas incompletas **vuelven a cero al cambiar de mes en Bogotá**. Ese cambio no concede una nueva visita antes de cumplir las 4 horas. Cada ciclo de ocho habilita un giro y comienza otro ciclo. Los giros ya ganados se conservan; las 72 horas de vigencia del código empiezan al girar. El contador interno no aparece en la tarjeta del cliente. La renovación de los otros retos no modifica premios emitidos.
 
 Al abrir la versión de pruebas o iniciar sesión/registrarse, el navegador envía `visit` con CSRF. Consultar `state`, abrir la ruleta, editar perfiles o enviar datos de un supuesto contador no incrementa visitas. La integración sigue limitada a `pruebas/chapitour-premia/`; la web principal no se ha migrado.
 
@@ -64,11 +72,11 @@ Al abrir la versión de pruebas o iniciar sesión/registrarse, el navegador env�
 
 La elección de la promoción ocurre en el servidor. Solo se incluyen negocios activos con ofertas aprobadas, condiciones completas, WhatsApp confirmado y cupo disponible. Los borradores y ofertas agotadas no pueden generar premios. Si no quedan ofertas, el giro se conserva. Un doble clic, dos dispositivos o una respuesta perdida devuelven el mismo código para el mismo giro, sin descontar otro cupo. El premio conserva una instantánea del beneficio, condiciones, negocio y WhatsApp.
 
-Despliegue verificado el 1 de octubre: actualización instalada en la ruta de pruebas de Hostinger, migración completada desde la sesión administradora, API HTTP 200 con regla 8 / 86400 segundos / reinicio mensual, y JavaScript remoto idéntico al probado. En esa revisión las siete promociones seguían en borrador, por lo que no había ofertas disponibles para entregar. No se alteraron sus condiciones ni se generaron premios en Hostinger para probar.
+Verificación de la versión anterior del 1 de octubre: se instaló la regla de ocho visitas con intervalo de 24 horas, posteriormente reemplazada por la regla de cuatro horas y bienvenida descrita arriba. En aquella revisión las siete promociones seguían en borrador. No se alteraron sus condiciones ni se generaron premios en Hostinger para probar.
 
 Para poner una oferta en la ruleta: **Administración → Promociones → Editar**, completar los datos aprobados por el negocio, marcar la casilla de confirmación y pulsar **Confirmar promoción**. Ese botón guarda la publicación como **Confirmada**; **Guardar borrador** es una acción separada. Los campos pendientes se indican junto a cada dato y no se realizan escrituras parciales. Guardar como borrador no la habilita. La rueda muestra únicamente los negocios con ofertas disponibles; si no hay ninguna, muestra una vista previa sin entregar premios. No se aprueban automáticamente Pictogramas, Jimar Factory ni otras ofertas.
 
-Siguen pendientes los mecanismos de verificación de visitas a negocios, entregas al compartir y fotografías/etiquetas. No se inventa progreso para esos retos.
+La verificación de las 20 entregas al compartir sigue pendiente. Las nuevas metas de fotografías y preguntas se describen abajo; sus registros no verifican visitas presenciales.
 
 ## Pruebas
 
@@ -82,6 +90,49 @@ Comprobado: acceso real, cambio obligatorio de clave, CSRF, permisos por cuenta/
 
 `php tests/configuration.php` comprueba configuración ausente o inválida, conexión mediante variables de entorno y clasificación de errores MySQL sin revelar secretos. No se conecta a ninguna base de datos real.
 
-Después de `tests/acceptance.cjs`, ejecutar `node tests/rewards.cjs SOCKET_QA` con las mismas dependencias. Cubre las 24 horas exactas, ocho visitas, frontera mensual de Bogotá, concurrencia, cupos, borradores, reintentos tras perder una respuesta, el giro animado y el premio en escritorio/móvil. Solo acepta una base QA temporal y usa ofertas sintéticas sin valor comercial.
+Después de `tests/acceptance.cjs`, ejecutar `node tests/rewards.cjs SOCKET_QA` con las mismas dependencias. Cubre las 4 horas exactas, ocho visitas, frontera mensual de Bogotá, concurrencia, cupos, borradores, reintentos tras perder una respuesta, el giro animado y el premio en escritorio/móvil. Solo acepta una base QA temporal y usa ofertas sintéticas sin valor comercial.
 
 Corrección de confirmación publicada el 1 de octubre: se reemplazó el selector independiente de publicación por dos botones explícitos, **Confirmar promoción** y **Guardar borrador**. Se verificó el cambio persistente a Confirmada desde móvil y tras recargar en escritorio, y la salida del filtro de borradores para que la oferta confirmada siga visible. La prueba aislada `tests/promotion-publication.php SOCKET_QA` pasó 20 comprobaciones de permisos, validación, estados MySQL, elegibilidad e historial. Se publicaron y revisaron los controles en Hostinger, sin confirmar ofertas reales para probar.
+
+## Giro de prueba del administrador
+
+El panel incluye **Probar ruleta**. En la sesión administradora, el botón **Girar** ejecuta una animación local y muestra **Giro de prueba completado**, identificado como **Modo de prueba · Sin premio real**. No llama a la acción `spin`, no genera códigos ni consume cupos, visitas o giros. Se muestran los negocios con ofertas disponibles; si no hay ofertas, se usa el catálogo como vista previa, sin presentar borradores como premios. No cambia la elegibilidad de clientes o aliados.
+
+En un giro real, la rueda comienza a moverse mientras el servidor determina el premio. Después se detiene en el negocio devuelto por la API. Ante un fallo de red se detiene la animación y el botón permite reintentar el mismo giro; la API conserva su idempotencia. Se respeta la preferencia de movimiento reducido.
+
+`tests/wheel-interaction.cjs SOCKET_QA` prueba la animación de administrador sin escrituras, repetición, móvil, movimiento reducido, restricciones de clientes sin giro, respuesta demorada, recuperación tras perder la respuesta y conservación de un único código de 72 horas. Solo usa localhost y el socket de una base QA temporal.
+
+El giro de bienvenida se crea en la misma transacción que el registro, como ciclo 0 de `cp_panel_giros`; el índice único de cuenta/ciclo evita duplicarlo. Reintentar un giro, iniciar sesión o recargar no concede otra bienvenida. Si no hay ofertas disponibles, se conserva el giro. Los ciclos 1 en adelante corresponden a cada ocho visitas posteriores. Esta regla se aplica a cuentas nuevas desde esta actualización, sin conceder retroactivamente giros a cuentas existentes ni alterar sus visitas o premios.
+
+## Acceso de clientes con Google
+
+El registro público se realiza mediante Google Identity Services. La API rechaza el registro manual por correo/contraseña. Administradores, aliados y clientes que ya tenían contraseña conservan su acceso. Una cuenta existente solo puede vincular Google desde Mi perfil después de entrar con su contraseña y elegir el mismo correo; no se vinculan cuentas por mera coincidencia del correo.
+
+Configurar un cliente OAuth de tipo **Aplicación web** en Google Cloud, con origen JavaScript autorizado **https://chapitour.co**. Copiar `config/google.example.php` como `config/google.local.php` y colocar su `client_id`; también se acepta `CHAPITOUR_GOOGLE_CLIENT_ID`. El flujo usa una ventana emergente y callback JavaScript, por lo que no necesita secreto de cliente ni URL de redirección. El ID de cliente es público; nunca pegar una API key o un secreto en su lugar. Mientras falte este dato, la interfaz informa que Google está pendiente de configuración y no simula un inicio de sesión.
+
+Desplegar `lib/GoogleAuth.php`, `database/google_cp.sql`, `vendor/` (generado por `composer install --no-dev --optimize-autoloader`) y `var/.htaccess`, además de Panel.php, Rewards.php y los archivos de interfaz. El directorio var guarda únicamente la caché de claves públicas de Google y debe ser escribible por PHP. Abrir una sesión administradora instala de forma aditiva `cp_panel_google`; no cambia contraseñas ni elimina datos.
+
+La validación utiliza firebase/php-jwt: firma RSA con las claves oficiales de Google, audiencia del cliente OAuth, emisor, expiración, correo verificado y nonce de sesión. El POST también exige el CSRF de la aplicación. La identidad se vincula mediante hash del identificador estable de Google (sub), con unicidad por cliente. No se almacenan tokens Google, contraseñas Google ni accesos a Gmail. Los correos vinculados a Google no pueden cambiarse desde el formulario de perfil.
+
+`tests/google-welcome.php SOCKET_QA` comprueba firma y claims, repetición, colisiones con cuentas administradoras, vinculación autenticada, baja de cuentas, bienvenida única, cuatro horas exactas, ocho regresos y conservación de giros al cambiar de mes. Las firmas de prueba solo se inyectan en una instancia PHP CLI; no existe un endpoint ni una opción del navegador que omita la validación de Google.
+
+Actualización desplegada y verificada el 1 de octubre de 2026 en `pruebas/chapitour-premia/`: API HTTP 200, `welcome_on_registration=true`, ocho visitas, `new_visit_after=14400`, reinicio mensual y dos promociones elegibles. El JavaScript remoto coincide byte a byte con el local. En Chrome, el panel administrador completó **Probar ruleta → Girar** y mostró el resultado de demostración sin generar premios. No se cambiaron ofertas, contactos ni credenciales MySQL.
+
+Pasaron las 28 comprobaciones de `google-welcome.php`, `wheel-interaction.cjs`, `configuration.php`, la validación de sintaxis PHP/JavaScript y la revisión de espacios del diff. En ese primer despliegue faltaba configurar el ID de cliente OAuth (`google_auth.enabled=false`). Las pruebas de identidad usaron tokens firmados sintéticos en la base QA, no un inicio de sesión real con Google.
+
+Activación posterior del 1 de octubre de 2026: se guardó el ID OAuth web proporcionado por la usuaria en `config/google.local.php`, tanto localmente como en Hostinger. Ese archivo está excluido de Git y su acceso HTTP devuelve 403. La API respondió HTTP 200 con `google_auth.enabled=true` y el ID esperado. Desde Chrome en una sesión de visitante, **Crear mi cuenta → Continuar con Google** cargó la pantalla oficial de Google para iniciar sesión en `chapitour.co`. Queda pendiente que la usuaria complete un registro real con una cuenta de cliente; no se introdujeron credenciales ni se crearon cuentas o premios reales durante esta verificación. El correo del administrador conserva su acceso por contraseña y no se utiliza para crear un cliente con Google.
+
+
+## Metas independientes: actualización local del 1 de octubre de 2026
+
+El panel muestra, en este orden: compartir con 20 amigos, fotografías y etiquetas de Instagram, y preguntas sobre los negocios. La última instrucción cambió la meta fotográfica de 6/6 a **3/3**. El incentivo por visitas conserva su funcionamiento y aparece fuera de estas tres tarjetas.
+
+Instagram suma un punto por negocio distinto registrado por el cliente, con un máximo de tres por mes en Bogotá. El formulario solo pide seleccionar el negocio: no solicita fotos, enlaces, códigos ni confirmación de terceros. Se recuerda etiquetar a @chapitour.co y al negocio. Las cuentas enlazadas en las páginas se muestran como ayuda; Pictogramas mantiene su cuenta pendiente, sin inventarla. La pista del retrato forma parte de esta meta. El servidor deduplica por cuenta, mes y negocio, limita a tres incluso con solicitudes simultáneas y rechaza formularios de otro mes.
+
+Las cinco preguntas se presentan sin el nombre del negocio: público del lugar, pasillo y bebidas, nombre del cóctel, tres banderas y especialidad gastronómica. El cliente selecciona dónde lo descubrió y escribe su respuesta. Se guarda el texto como **respuesta registrada**, sin afirmar que es correcta ni verificar presencia; no se inventa una carta de cócteles ni se aplica la antigua validación por palabras clave. Las tres respuestas de países deben ser distintas. La interfaz muestra el avance de preguntas separado del 3/3. No se conceden giros ni premios al completar fotografías o preguntas.
+
+Compartir conserva su acción anterior: abre la opción del dispositivo o copia la página; el clic no incrementa un contador ni entrega un giro. Se muestra el objetivo de compartir con 20 amigos para ganar otro giro, pero la comprobación de las entregas y su concesión siguen pendientes de definición. No se convirtió el reto en un programa de registros referidos ni se modificaron sus datos existentes.
+
+Archivos de la actualización: `lib/Challenges.php`, `database/metas_cp.sql`, `lib/Panel.php`, `assets/app.js`, `assets/app.css` e `index.php`. Las dos tablas nuevas se instalan de forma aditiva al abrir una sesión administradora. No se borra progreso del esquema anterior. Los nuevos registros se eliminan cuando el cliente elimina su cuenta. Esta actualización está implementada **localmente en pruebas**, todavía sin publicar en Hostinger.
+
+Verificación: `tests/monthly-goals.php SOCKET_QA` pasó 31 comprobaciones de roles, aislamiento, deduplicación, límite 3/3, persistencia, respuestas abiertas, cambio de mes y conservación de premios/giros. `tests/monthly-goals.cjs SOCKET_QA` pasó en Chrome de escritorio y en tamaños móviles de 390 y 320 px, incluyendo concurrencia desde dos sesiones, registro sin archivos, preguntas anónimas y ausencia de desbordes. La sintaxis PHP/JavaScript y `git diff --check` pasaron. Solo se usó MariaDB temporal con cuentas ficticias.

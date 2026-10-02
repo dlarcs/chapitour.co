@@ -59,6 +59,16 @@ final class ChapitourRewards
             $result=$fn(); $this->db->commit(); return $result;
         } catch (Throwable $e) { if ($this->db->inTransaction()) { $this->db->rollBack(); } throw $e; }
     }
+    public function welcome(int $clientId): void {
+        // Called inside registration's transaction: an account and its welcome ticket are created together.
+        if (!$this->db->inTransaction()) { throw new LogicException('La bienvenida requiere una transacción.'); }
+        if (!$this->ready()) { throw new PanelError('Un administrador debe terminar de preparar la ruleta.',503); }
+        $now=$this->query('SELECT UTC_TIMESTAMP()')->fetchColumn();
+        $month=(new DateTimeImmutable($now,new DateTimeZone('UTC')))->setTimezone(new DateTimeZone('America/Bogota'))->format('Y-m');
+        // Registration is the starting point, not the first of the next eight return visits.
+        $this->query('INSERT INTO cp_panel_visitas(cliente_id,ultima_visita_at,mes) VALUES (?,?,?) ON DUPLICATE KEY UPDATE cliente_id=VALUES(cliente_id)',[$clientId,$now,$month]);
+        $this->query('INSERT INTO cp_panel_giros(cliente_id,ciclo,creado_at) VALUES (?,0,?) ON DUPLICATE KEY UPDATE cliente_id=VALUES(cliente_id)',[$clientId,$now]);
+    }
     public function visit(array $a): void {
         if (!$this->ready()) { return; }
         $this->clientTransaction($a,function () use ($a) {
@@ -72,8 +82,8 @@ final class ChapitourRewards
                 $this->query('UPDATE cp_panel_visitas SET visitas_ciclo=0,mes=? WHERE cliente_id=?',[$month,$a['db_id']]);
                 $v['visitas_ciclo']=0;
             }
-            // UTC elapsed time: midnight, refreshes, devices and parallel requests cannot bypass 24 hours.
-            if ($v['ultima_visita_at']!==null && strtotime($now.' UTC')-strtotime($v['ultima_visita_at'].' UTC')<86400) { return; }
+            // UTC elapsed time: midnight, refreshes, devices and parallel requests cannot bypass 4 hours.
+            if ($v['ultima_visita_at']!==null && strtotime($now.' UTC')-strtotime($v['ultima_visita_at'].' UTC')<14400) { return; }
             $count=(int)$v['visitas_ciclo']+1;
             $cycle=(int)$v['ciclos'];
             if ($count===8) {
@@ -88,13 +98,25 @@ final class ChapitourRewards
         $offers=$this->ready()?$this->offers():[];
         $ticket=null;
         if ($configured && $a && $a['role']==='client') {
-            $ticket=$this->query('SELECT id FROM cp_panel_giros WHERE cliente_id=? AND premio_id IS NULL ORDER BY id LIMIT 1',[$a['db_id']])->fetchColumn() ?: null;
+            $ticket=$this->query('SELECT id,ciclo FROM cp_panel_giros WHERE cliente_id=? AND premio_id IS NULL ORDER BY id LIMIT 1',[$a['db_id']])->fetch(PDO::FETCH_ASSOC) ?: null;
         }
         $reason=!$configured?'configuration_pending':(!$a?'login_required':($a['role']!=='client'?'client_required':(!$offers?'promotions_pending':(!$ticket?'visits_pending':'ready'))));
-        return ['enabled'=>(bool)($configured && $offers),'visits_per_reward'=>8,'new_visit_after'=>86400,'replaces_previous_rule'=>true,
+        return ['enabled'=>(bool)($configured && $offers),'welcome_on_registration'=>true,'visits_per_reward'=>8,'new_visit_after'=>14400,'replaces_previous_rule'=>true,
             'monthly_visit_reset'=>$configured?(bool)$p['reinicio_mensual']:null,'setup_required'=>!$this->ready(),
             'eligible_promotions'=>count($offers),'wheel_business_ids'=>array_map(static function($o){return (string)$o['negocio_id'];},$offers),
-            'can_spin'=>$reason==='ready','reason'=>$reason,'ticket_id'=>$ticket?(string)$ticket:null];
+            'can_spin'=>$reason==='ready','reason'=>$reason,'ticket_id'=>$ticket?(string)$ticket['id']:null,
+            'ticket_kind'=>$ticket?((int)$ticket['ciclo']===0?'welcome':'visits'):null];
+    }
+    private function availableCode(string $prefix,int $minimum,int $maximum): ?string {
+        // Find a gap, including the beginning of the range. Random collisions alone do not mean exhaustion.
+        $number=$this->query("SELECT ? AS numero WHERE NOT EXISTS (SELECT 1 FROM cp_premios WHERE codigo=?)
+            UNION ALL
+            SELECT CAST(SUBSTRING_INDEX(p.codigo,'-',-1) AS UNSIGNED)+1 AS numero FROM cp_premios p
+            WHERE p.codigo REGEXP ?
+            AND CAST(SUBSTRING_INDEX(p.codigo,'-',-1) AS UNSIGNED)>=? AND CAST(SUBSTRING_INDEX(p.codigo,'-',-1) AS UNSIGNED)<?
+            AND NOT EXISTS (SELECT 1 FROM cp_premios usado WHERE usado.codigo=CONCAT(?,CAST(SUBSTRING_INDEX(p.codigo,'-',-1) AS UNSIGNED)+1))
+            LIMIT 1",[$minimum,$prefix.$minimum,'^'.$prefix.'[1-9][0-9]{2,17}$',$minimum,$maximum,$prefix])->fetchColumn();
+        return $number===false?null:$prefix.$number;
     }
     public function spin(array $a, string $ticket): string {
         if (!$this->ready()) { throw new PanelError('La ruleta todavía no está configurada.',503); }
@@ -115,12 +137,37 @@ final class ChapitourRewards
                 $visitor=$this->db->lastInsertId();
                 $this->query('INSERT INTO cp_cliente_visitantes(cliente_id,visitante_id) VALUES (?,?)',[$a['db_id'],$visitor]);
             }
-            $this->query("INSERT INTO cp_oportunidades(visitante_id,campana_id,origen,origen_clave,mostrada_at,consumida_at) VALUES (?,?,'panel_8_visitas',?,UTC_TIMESTAMP(),UTC_TIMESTAMP())",[$visitor,$p['campana_id'],'cuenta:'.$a['db_id'].':ciclo:'.$g['ciclo']]);
+            $origin=(int)$g['ciclo']===0?'panel_bienvenida':'panel_8_visitas';
+            $this->query('INSERT INTO cp_oportunidades(visitante_id,campana_id,origen,origen_clave,mostrada_at,consumida_at) VALUES (?,?,?,?,UTC_TIMESTAMP(),UTC_TIMESTAMP())',[$visitor,$p['campana_id'],$origin,'cuenta:'.$a['db_id'].':ciclo:'.$g['ciclo']]);
             $opportunity=$this->db->lastInsertId();
-            $code='CHAPI-'.strtoupper(bin2hex(random_bytes(10)));
-            $this->query('INSERT INTO cp_premios(oportunidad_id,visitante_id,campana_id,negocio_id,promocion_id,codigo,solicitud_id,titulo,descripcion,condiciones,porcentaje,creado_at,vence_at) VALUES (?,?,?,?,?,?,?,?,?,?,?,UTC_TIMESTAMP(),DATE_ADD(UTC_TIMESTAMP(),INTERVAL 72 HOUR))',
-                [$opportunity,$visitor,$p['campana_id'],$offer['negocio_id'],$offer['id'],$code,'panel-giro-'.$g['id'],$offer['titulo'],$offer['descripcion'],$offer['condiciones'],$offer['porcentaje']]);
-            $prize=$this->db->lastInsertId();
+            $createdAt=(string)$this->query('SELECT UTC_TIMESTAMP()')->fetchColumn();
+            $month=(int)(new DateTimeImmutable($createdAt,new DateTimeZone('UTC')))->setTimezone(new DateTimeZone('America/Bogota'))->format('n');
+            $months=['ENE','FEB','MAR','ABR','MAY','JUN','JUL','AGO','SEP','OCT','NOV','DIC'];
+            $prefix='CHAPI-'.$months[$month-1].'-';
+            $prize=null; $minimum=100; $maximum=999999; $attempt=0;
+            while ($prize===null) {
+                if ($attempt<30) { $code=$prefix.random_int($minimum,$maximum); }
+                else {
+                    $code=$this->availableCode($prefix,$minimum,$maximum);
+                    if ($code===null) {
+                        if ($maximum>intdiv(PHP_INT_MAX-9,10)) { throw new PanelError('No pudimos asignar un código disponible. Tu giro se conserva; intenta de nuevo.',503); }
+                        $minimum=$maximum+1; $maximum=$maximum*10+9; $attempt=0;
+                        continue;
+                    }
+                }
+                try {
+                    $this->query('INSERT INTO cp_premios(oportunidad_id,visitante_id,campana_id,negocio_id,promocion_id,codigo,solicitud_id,titulo,descripcion,condiciones,porcentaje,creado_at,vence_at) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,DATE_ADD(?,INTERVAL 72 HOUR))',
+                        [$opportunity,$visitor,$p['campana_id'],$offer['negocio_id'],$offer['id'],$code,'panel-giro-'.$g['id'],$offer['titulo'],$offer['descripcion'],$offer['condiciones'],$offer['porcentaje'],$createdAt,$createdAt]);
+                    $prize=$this->db->lastInsertId();
+                    break;
+                } catch (PDOException $e) {
+                    // The unique index protects every issued code, including expired or redeemed ones.
+                    // Retry only a code collision; other database errors must roll back the whole spin.
+                    if ((int)($e->errorInfo[1]??0)!==1062 || !preg_match('/for key [\'`](?:[^\'`]+\.)?codigo[\'`]/i',(string)($e->errorInfo[2]??''))) { throw $e; }
+                    $attempt++;
+                    if ($attempt>=60) { throw new PanelError('No pudimos asignar un código disponible. Tu giro se conserva; intenta de nuevo.',503); }
+                }
+            }
             $this->query('INSERT INTO cp_premio_detalles(premio_id,negocio,direccion,whatsapp) VALUES (?,?,?,?)',[$prize,$offer['nombre'],$offer['direccion'],$offer['whatsapp_confirmado']]);
             $this->query('UPDATE cp_panel_giros SET premio_id=? WHERE id=?',[$prize,$g['id']]);
             $this->query('UPDATE cp_promociones SET entregados=entregados+1 WHERE id=?',[$offer['id']]);

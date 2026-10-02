@@ -28,7 +28,7 @@ const fixture=mode=>process.stdout.write(execFileSync('/Applications/XAMPP/xampp
   await admin.call('save_promotion',{...p,description:'Oferta de prueba aislada',publication:'approved',whatsapp:'10000000',included:'Servicio QA',hours:'Horario QA',restrictions:'Solo QA',confirmed:true});
   await client.refresh();assert.equal(client.state.campaign.can_spin,true);
   assert.deepEqual(client.state.campaign.wheel_business_ids,['1']);
-  assert.equal(client.state.campaign.visits_per_reward,8);assert.equal(client.state.campaign.new_visit_after,86400);assert.equal(client.state.campaign.monthly_visit_reset,true);
+  assert.equal(client.state.campaign.visits_per_reward,8);assert.equal(client.state.campaign.new_visit_after,14400);assert.equal(client.state.campaign.monthly_visit_reset,true);
   const browser=await chromium.launch({headless:true,executablePath:'/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',args:['--no-sandbox']});
   let lostCode;
   try {
@@ -36,7 +36,7 @@ const fixture=mode=>process.stdout.write(execFileSync('/Applications/XAMPP/xampp
     await page.goto(base);await page.getByRole('button',{name:'Iniciar sesión',exact:true}).first().click();
     await page.locator('input[name="email"]').fill('ruleta-400@example.invalid');await page.locator('input[name="password"]').fill('Qa-ruleta-456!');
     await page.locator('dialog button[type="submit"]').click();await page.locator('.reward-ready').waitFor();
-    assert(!/8|24|7 de/.test(await page.locator('.return-card').innerText()));
+    assert(!/8|4|7 de/.test(await page.locator('.return-card').innerText()));
     await page.locator('.reward-ready [data-action="preview-wheel"]').click();
     assert(!(await page.locator('[data-action="spin"]').isDisabled()));
     let lose=true;

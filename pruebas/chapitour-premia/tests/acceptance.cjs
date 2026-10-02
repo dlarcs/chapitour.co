@@ -43,7 +43,7 @@ fs.mkdirSync(output,{recursive:true});
   assert.equal(client.state.codes.length,4);assert.equal(other.state.codes.length,1);
   assert(ally.state.codes.every(c=>c.business_id==='1'));assert.equal(ally.state.businesses.length,1);
   assert(garage.state.codes.every(c=>c.business_id==='4'));assert(ally.state.promotions.every(p=>p.business_id==='1'));
-  assert.equal(client.state.challenges.length,3);assert(client.state.challenges.every(c=>c.progress===null));
+  assert.equal(client.state.challenges.length,3);assert.equal(client.state.challenges.find(c=>c.type==='compartir').progress,null);assert(client.state.challenges.filter(c=>c.type!=='compartir').every(c=>c.progress===0));
   await client.call('prepare_spin',{},422);await client.call('spin',{token:'anything'},422);
   await client.call('redeem',{code:'QA-ACTIVE',confirm:'QA-ACTIVE'},403);
   await client.call('save_promotion',{},403);await ally.call('save_promotion',{},403);await ally.call('save_business',{},403);
@@ -94,8 +94,9 @@ fs.mkdirSync(output,{recursive:true});
   console.log('PASS persistent admin CRUD, existing business access, approval validation, archive and session revocation');
 
   const fresh=await actor();
-  await fresh.call('register',{name:'Duplicada',email:'laurazoro@gmail.com',password:'Qa-new-client-456!',city:''},409);
-  await fresh.call('register',{name:'Cliente nuevo QA',email:'nuevo-cliente@example.invalid',password:'Qa-new-client-456!',city:'Bogotá',role:'admin'});
+  await fresh.call('register',{name:'Duplicada',email:'laurazoro@gmail.com',password:'Qa-new-client-456!',city:''},422);
+  await fresh.call('register',{name:'Cliente nuevo QA',email:'nuevo-cliente@example.invalid',password:'Qa-new-client-456!',city:'Bogotá',role:'admin'},422);
+  await fresh.call('login',{email:'nuevo-cliente@example.invalid',password:'Qa-new-client-456!'});
   assert.equal(fresh.state.user.role,'client');assert.equal(fresh.state.codes.length,0);
   await fresh.call('profile',{name:'Nombre guardado QA',email:'nuevo-cliente@example.invalid',city:'Bogotá D.C.'});
   const second=await actor();await second.call('login',{email:'nuevo-cliente@example.invalid',password:'Qa-new-client-456!'});
@@ -105,7 +106,7 @@ fs.mkdirSync(output,{recursive:true});
   await fresh.call('delete_account',{confirm:fresh.state.user.id});assert.equal(fresh.state.user,null);
   await second.refresh();assert.equal(second.state.user,null);
   await second.call('login',{email:'nuevo-cliente@example.invalid',password:'Qa-new-client-456!'},401);
-  console.log('PASS registration without role escalation, cross-browser persistence, profile, deletion and global session revocation');
+  console.log('PASS manual registration disabled, existing login without role escalation, cross-browser persistence, profile, deletion and global session revocation');
 
   const browser=await chromium.launch({headless:true,executablePath:process.env.CHROME_PATH||'/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',args:['--no-sandbox']});
   try{

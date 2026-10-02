@@ -3,7 +3,7 @@ declare(strict_types=1);
 if (PHP_SAPI !== 'cli') { http_response_code(404); exit; }
 $root='/private/tmp/chapitour-config-qa-'.bin2hex(random_bytes(6));
 mkdir($root,0700,true);
-foreach (['api.php','lib/Panel.php','lib/Rewards.php','config/database.php'] as $name) {
+foreach (['api.php','lib/Panel.php','lib/Rewards.php','lib/GoogleAuth.php','config/database.php'] as $name) {
     $target=$root.'/'.$name;
     if (!is_dir(dirname($target))) { mkdir(dirname($target),0700,true); }
     copy(__DIR__.'/../'.$name,$target);

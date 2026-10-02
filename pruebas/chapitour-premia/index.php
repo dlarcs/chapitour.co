@@ -1,7 +1,8 @@
 <?php
 header('X-Robots-Tag: noindex, nofollow');
 header('Cache-Control: no-store');
-header("Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self'; base-uri 'self'; form-action 'self'; frame-ancestors 'self'");
+header('Cross-Origin-Opener-Policy: same-origin-allow-popups');
+header("Content-Security-Policy: default-src 'self'; script-src 'self' https://accounts.google.com/gsi/client; style-src 'self' 'unsafe-inline' https://accounts.google.com/gsi/style; img-src 'self' data:; connect-src 'self' https://accounts.google.com/gsi/; frame-src https://accounts.google.com/gsi/; base-uri 'self'; form-action 'self'; frame-ancestors 'self'");
 ?>
 <!doctype html>
 <html lang="es-CO">
@@ -12,8 +13,8 @@ header("Content-Security-Policy: default-src 'self'; script-src 'self'; style-sr
   <meta name="robots" content="noindex, nofollow">
   <title>Chapitour te premia · Pruebas</title>
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="assets/app.css?v=6">
-  <script defer src="assets/app.js?v=6"></script>
+  <link rel="stylesheet" href="assets/app.css?v=9">
+  <script defer src="assets/app.js?v=9"></script>
 </head>
 <body>
   <a class="skip-link" href="#main">Saltar al contenido</a>

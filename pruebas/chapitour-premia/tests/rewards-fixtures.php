@@ -17,8 +17,8 @@ if (($argv[1]??'')==='clock') {
     $a=client(300);clockAt('2026-09-23 18:00:00');
     $rewards->visit($a);$rewards->visit($a);
     check((int)sql('SELECT visitas_ciclo FROM cp_panel_visitas WHERE cliente_id=300')->fetchColumn(),1,'Recargas');
-    clockAt('2026-09-24 17:59:59');$rewards->visit($a);
-    check((int)sql('SELECT visitas_ciclo FROM cp_panel_visitas WHERE cliente_id=300')->fetchColumn(),1,'Antes de 24h');
+    clockAt('2026-09-23 21:59:59');$rewards->visit($a);
+    check((int)sql('SELECT visitas_ciclo FROM cp_panel_visitas WHERE cliente_id=300')->fetchColumn(),1,'Antes de 4h');
     for($day=24;$day<=30;$day++){clockAt('2026-09-'.$day.' 18:00:00');$rewards->visit($a);}
     check((int)sql('SELECT COUNT(*) FROM cp_panel_giros WHERE cliente_id=300')->fetchColumn(),1,'Un giro cada ocho');
     check((int)sql('SELECT visitas_ciclo FROM cp_panel_visitas WHERE cliente_id=300')->fetchColumn(),0,'Nuevo ciclo');
@@ -34,11 +34,11 @@ if (($argv[1]??'')==='clock') {
     $rewards->visit($a);
     check((int)sql('SELECT COUNT(*) FROM cp_panel_giros WHERE cliente_id=300 AND premio_id IS NULL')->fetchColumn(),1,'El giro ganado se conserva');
     check((int)sql('SELECT COUNT(*) FROM cp_premios WHERE codigo LIKE \'CHAPI-%\'')->fetchColumn(),0,'No hay premios de borradores');
-    echo "PASS 24h exactas, ocho visitas, recargas, frontera mensual en Bogota, conservacion de giros y borradores excluidos.\n";
+    echo "PASS 4h exactas, ocho visitas, recargas, frontera mensual en Bogota, conservacion de giros y borradores excluidos.\n";
 } elseif (($argv[1]??'')==='seed') {
     foreach([400,401,402] as $id) {
         client($id);
-        sql("INSERT INTO cp_panel_visitas(cliente_id,mes,visitas_ciclo,ultima_visita_at) VALUES (?,DATE_FORMAT(DATE_SUB(UTC_TIMESTAMP(),INTERVAL 5 HOUR),'%Y-%m'),7,DATE_SUB(UTC_TIMESTAMP(),INTERVAL 24 HOUR))",[$id]);
+        sql("INSERT INTO cp_panel_visitas(cliente_id,mes,visitas_ciclo,ultima_visita_at) VALUES (?,DATE_FORMAT(DATE_SUB(UTC_TIMESTAMP(),INTERVAL 5 HOUR),'%Y-%m'),7,DATE_SUB(UTC_TIMESTAMP(),INTERVAL 4 HOUR))",[$id]);
     }
     echo "PASS tres cuentas QA preparadas con siete visitas.\n";
 } elseif (($argv[1]??'')==='cap') {

@@ -4,16 +4,33 @@ if (realpath($_SERVER['SCRIPT_FILENAME'] ?? '') === __FILE__) { http_response_co
 
 class PanelError extends RuntimeException {}
 require_once __DIR__.'/Rewards.php';
+require_once __DIR__.'/GoogleAuth.php';
+require_once __DIR__.'/Challenges.php';
 
 final class ChapitourPanel
 {
     private $db;
     private $schema;
     private $rewards;
-    public function __construct(PDO $db) { $this->db = $db; }
+    private $googleAuth;
+    private $googleSchema;
+    private $monthlyChallenges;
+    public function __construct(PDO $db, ?ChapitourGoogleAuth $googleAuth=null) { $this->db = $db; $this->googleAuth=$googleAuth??new ChapitourGoogleAuth(); }
+    private function googleSchemaReady(): bool {
+        if ($this->googleSchema===null) { $this->googleSchema=(bool)$this->query("SELECT COUNT(*) FROM information_schema.tables WHERE table_schema=DATABASE() AND table_name='cp_panel_google'")->fetchColumn(); }
+        return $this->googleSchema;
+    }
+    private function installGoogleSchema(): void {
+        if ($this->googleSchemaReady()) { return; }
+        $this->db->exec(file_get_contents(__DIR__.'/../database/google_cp.sql'));$this->googleSchema=true;
+    }
     private function rewards(): ChapitourRewards {
         if (!$this->rewards) { $this->rewards=new ChapitourRewards($this->db); }
         return $this->rewards;
+    }
+    private function monthlyChallenges(): ChapitourChallenges {
+        if (!$this->monthlyChallenges) { $this->monthlyChallenges=new ChapitourChallenges($this->db); }
+        return $this->monthlyChallenges;
     }
     private function query(string $sql, array $args = []): PDOStatement {
         $s = $this->db->prepare($sql); $s->execute($args); return $s;
@@ -145,30 +162,54 @@ final class ChapitourPanel
         if ($staff && $staff['rol']==='aliado' && !$this->row('SELECT id FROM cp_negocios WHERE id=? AND activo=1', [$staff['negocio_id']])) {
             $this->error('Correo o usuario y contraseña incorrectos.', 401);
         }
-        if ($staff && $staff['rol']==='admin') { $this->installSchema(); $this->rewards()->install(); }
+        if ($staff && $staff['rol']==='admin') { $this->installSchema(); $this->rewards()->install(); $this->installGoogleSchema(); $this->monthlyChallenges()->install(); }
         $this->signIn($staff ? 'staff' : 'client', $row);
         $this->audit($this->actor(), 'inicio_sesion');
     }
-    private function register(array $input): void {
-        $this->limit('register:'.($_SERVER['REMOTE_ADDR'] ?? 'local'), 10, 60);
-        $email = mb_strtolower($this->text($input, 'email', 150));
-        $name = $this->text($input, 'name', 80);
-        $city = $this->text($input, 'city', 80, false);
-        $hash = password_hash($this->password($input), PASSWORD_BCRYPT);
-        $row = $this->accountLock(function () use ($email, $name, $city, $hash) {
-            return $this->transaction(function () use ($email, $name, $city, $hash) {
-                $this->uniqueEmail($email);
-                $this->query('INSERT INTO cp_clientes(nombre,email,password_hash) VALUES (?,?,?)', [$name,$email,$hash]);
-                $id = (int)$this->db->lastInsertId();
-                $this->query('INSERT INTO cp_panel_clientes(cliente_id,ciudad) VALUES (?,?)', [$id,$city]);
-                // An account-owned visitor supports the existing cp_ relationships without importing anonymous cookies.
-                $this->query('INSERT INTO cp_visitantes(identidad_hash,ip_hash,referido_token) VALUES (?,?,?)', [hash('sha256',random_bytes(32)),hash('sha256',random_bytes(32)),bin2hex(random_bytes(16))]);
-                $visitor = (int)$this->db->lastInsertId();
-                $this->query('INSERT INTO cp_cliente_visitantes(cliente_id,visitante_id) VALUES (?,?)', [$id,$visitor]);
-                return ['id'=>$id,'version_sesion'=>1];
+    private function createClient(string $email, string $name): array {
+        $this->uniqueEmail($email);
+        // Google-only accounts have no user-known password; existing password accounts remain supported.
+        $hash=password_hash(bin2hex(random_bytes(32)),PASSWORD_BCRYPT);
+        $this->query('INSERT INTO cp_clientes(nombre,email,password_hash) VALUES (?,?,?)',[$name,$email,$hash]);
+        $id=(int)$this->db->lastInsertId();
+        $this->query("INSERT INTO cp_panel_clientes(cliente_id,ciudad) VALUES (?,'')",[$id]);
+        $this->query('INSERT INTO cp_visitantes(identidad_hash,ip_hash,referido_token) VALUES (?,?,?)',[hash('sha256',random_bytes(32)),hash('sha256',random_bytes(32)),bin2hex(random_bytes(16))]);
+        $visitor=(int)$this->db->lastInsertId();
+        $this->query('INSERT INTO cp_cliente_visitantes(cliente_id,visitante_id) VALUES (?,?)',[$id,$visitor]);
+        $this->rewards()->welcome($id);
+        return ['id'=>$id,'version_sesion'=>1];
+    }
+    private function googleLogin(array $input): void {
+        if (!$this->googleSchemaReady()) { $this->error('Un administrador debe terminar de configurar el acceso con Google.',503); }
+        $this->limit('google-ip:'.($_SERVER['REMOTE_ADDR']??'local'),30,10);
+        $identity=$this->googleAuth->verify($this->text($input,'credential',12000));
+        $current=$this->actor();
+        if ($current && $current['role']!=='client') { $this->error('Cierra la sesión de administrador o aliado antes de entrar como cliente.',403); }
+        $row=$this->accountLock(function () use ($identity,$current) {
+            return $this->transaction(function () use ($identity,$current) {
+                $linked=$this->row('SELECT c.* FROM cp_clientes c JOIN cp_panel_google g ON g.cliente_id=c.id WHERE g.subject_hash=? FOR UPDATE',[$identity['subject_hash']]);
+                if ($linked) {
+                    if (!(int)$linked['activo']) { $this->error('Esta cuenta está desactivada.',403); }
+                    if ($current && $current['db_id']!==(int)$linked['id']) { $this->error('La cuenta de Google corresponde a otro cliente.',409); }
+                    return $linked;
+                }
+                if ($this->row('SELECT id FROM cp_usuarios WHERE usuario=?',[$identity['email']])) { $this->error('Este correo corresponde a un administrador o aliado. Ingresa con tu contraseña.',409); }
+                $existing=$this->row('SELECT * FROM cp_clientes WHERE email=? FOR UPDATE',[$identity['email']]);
+                if ($existing) {
+                    if (!$current || $current['db_id']!==(int)$existing['id']) { $this->error('Ya tienes una cuenta con este correo. Ingresa con tu contraseña y vincula Google desde Mi perfil.',409); }
+                    $this->requireActor(['client'],true);
+                    if ($this->row('SELECT cliente_id FROM cp_panel_google WHERE cliente_id=?',[$current['db_id']])) { $this->error('Esta cuenta ya está vinculada a otra identidad de Google.',409); }
+                    $row=$existing;
+                } else {
+                    if ($current) { $this->error('Selecciona la cuenta de Google con el mismo correo de tu perfil.',409); }
+                    $row=$this->createClient($identity['email'],$identity['name']);
+                }
+                $this->query('INSERT INTO cp_panel_google(cliente_id,subject_hash) VALUES (?,?)',[$row['id'],$identity['subject_hash']]);
+                return $row;
             });
         });
-        $this->signIn('client', $row);
+        $this->signIn('client',$row);
+        $this->audit($this->actor(),'inicio_sesion_google');
     }
     private function changePassword(array $input): void {
         $a = $this->requireActor(['client','ally','admin'], false, true);
@@ -194,6 +235,7 @@ final class ChapitourPanel
         $this->accountLock(function () use ($a, $email, $name, $city) {
             $this->transaction(function () use ($a, $email, $name, $city) {
                 $this->requireActor(['client'], true); $this->uniqueEmail($email, $a['db_id']);
+                if ($email!==$a['email'] && $this->googleSchemaReady() && $this->row('SELECT cliente_id FROM cp_panel_google WHERE cliente_id=?',[$a['db_id']])) { $this->error('El correo de esta cuenta está vinculado a Google. Puedes actualizar tu nombre y ciudad.'); }
                 $this->query('UPDATE cp_clientes SET nombre=?,email=? WHERE id=?', [$name,$email,$a['db_id']]);
                 $this->query('INSERT INTO cp_panel_clientes(cliente_id,ciudad) VALUES (?,?) ON DUPLICATE KEY UPDATE ciudad=VALUES(ciudad)', [$a['db_id'],$city]);
             });
@@ -208,6 +250,7 @@ final class ChapitourPanel
             $this->query("UPDATE cp_clientes SET nombre='Cuenta eliminada',email=?,password_hash=?,activo=0,version_sesion=version_sesion+1 WHERE id=?", ['eliminada-'.$a['db_id'].'-'.bin2hex(random_bytes(8)).'@deleted.invalid',password_hash(bin2hex(random_bytes(24)),PASSWORD_BCRYPT),$a['db_id']]);
             $this->query('DELETE FROM cp_panel_clientes WHERE cliente_id=?', [$a['db_id']]);
             $this->query('DELETE FROM cp_panel_progreso WHERE cliente_id=?', [$a['db_id']]);
+            $this->monthlyChallenges()->deleteProgress($a['db_id']);
             $this->audit($a, 'cuenta_eliminada', $a['db_id']);
         });
         $this->logout();
@@ -342,18 +385,28 @@ final class ChapitourPanel
         return $path;
     }
     private function challenges(array $a): array {
-        $month=(new DateTimeImmutable('now',new DateTimeZone('America/Bogota')))->format('Y-m-01');
-        $seeds=[['visitar','Visita 3 negocios',3],['compartir','Envía esta página a 20 personas',20],['fotografia','Tómate una foto en 2 lugares y etiquétanos',2]];
-        foreach ($seeds as $seed) { $this->query('INSERT IGNORE INTO cp_panel_retos(mes,tipo,titulo,objetivo) VALUES (?,?,?,?)',array_merge([$month],$seed)); }
-        return $this->query('SELECT r.tipo AS type,r.titulo AS title,r.objetivo AS target,r.mes AS month,CASE WHEN r.criterio_verificacion IS NOT NULL AND TRIM(r.criterio_verificacion)<>\'\' AND p.cantidad_verificada<=r.objetivo THEN p.cantidad_verificada ELSE NULL END AS progress FROM cp_panel_retos r LEFT JOIN cp_panel_progreso p ON p.reto_id=r.id AND p.cliente_id=? WHERE r.mes=? ORDER BY r.id',[$a['db_id'],$month])->fetchAll(PDO::FETCH_ASSOC);
+        $month=$this->monthlyChallenges()->month();
+        $this->query('INSERT IGNORE INTO cp_panel_retos(mes,tipo,titulo,objetivo) VALUES (?,?,?,?)',[$month,'compartir','Envía esta página a 20 personas',20]);
+        $share=$this->query('SELECT r.tipo AS type,r.titulo AS title,r.objetivo AS target,r.mes AS month,CASE WHEN r.criterio_verificacion IS NOT NULL AND TRIM(r.criterio_verificacion)<>\'\' AND p.cantidad_verificada<=r.objetivo THEN p.cantidad_verificada ELSE NULL END AS progress FROM cp_panel_retos r LEFT JOIN cp_panel_progreso p ON p.reto_id=r.id AND p.cliente_id=? WHERE r.mes=? AND r.tipo=\'compartir\'',[$a['db_id'],$month])->fetchAll(PDO::FETCH_ASSOC);
+        return array_merge($share,$this->monthlyChallenges()->state($a['db_id']));
+    }
+    private function completeChallenge(string $action,array $input): void {
+        $this->requireActor(['client']);
+        $this->transaction(function () use ($action,$input) {
+            $a=$this->requireActor(['client'],true);
+            $changed=$action==='record_photo' ? $this->monthlyChallenges()->recordPhoto($a['db_id'],$input) : $this->monthlyChallenges()->answer($a['db_id'],$input);
+            if ($changed) { $this->audit($a,$action==='record_photo'?'meta_foto_declarada':'meta_preguntas_completada'); }
+        });
     }
     public function state(): array {
         $a=$this->actor(); $ready=$this->schemaReady();
         // An already authenticated administrator can apply this additive update without signing out.
-        if ($ready && $a && $a['role']==='admin' && !$a['must_change_password']) { $this->rewards()->install(); }
+        if ($ready && $a && $a['role']==='admin' && !$a['must_change_password']) { $this->rewards()->install(); $this->installGoogleSchema(); $this->monthlyChallenges()->install(); }
         $base=['csrf'=>$_SESSION['csrf'],'user'=>null,'businesses'=>[],'promotions'=>[],'codes'=>[],'challenges'=>[],
-            'storage'=>'mysql','setup_required'=>!$ready,'server_time'=>time(),'campaign'=>$this->rewards()->status($a)];
+            'storage'=>'mysql','setup_required'=>!$ready,'server_time'=>time(),'campaign'=>$this->rewards()->status($a),'google_auth'=>$this->googleAuth->settings()];
+        if (!$this->googleSchemaReady()) { $base['google_auth']['enabled']=false; }
         if ($a) { $base['user']=$a; unset($base['user']['db_id'],$base['user']['kind'],$base['user']['version'],$base['user']['password_hash']); }
+        if ($a && $a['role']==='client') { $base['user']['google_linked']=$this->googleSchemaReady() && (bool)$this->row('SELECT cliente_id FROM cp_panel_google WHERE cliente_id=?',[$a['db_id']]); }
         if ($a && $a['must_change_password']) { return $base; }
         $args=[]; $where='WHERE n.activo=1';
         if ($a && $a['role']==='ally') { $where.=' AND n.id=?'; $args[]=$a['business_id']; }
@@ -391,7 +444,8 @@ final class ChapitourPanel
             case 'state': break;
             case 'login': $this->login($input); break;
             case 'logout': $this->logout(); break;
-            case 'register': $this->register($input); break;
+            case 'register': $this->error('Crea tu cuenta con Google para verificar tu correo.',422); break;
+            case 'google_login': $this->googleLogin($input); break;
             case 'change_password': $this->changePassword($input); break;
             case 'profile': $this->profile($input); break;
             case 'delete_account': $this->deleteAccount($input); break;
@@ -402,6 +456,8 @@ final class ChapitourPanel
             case 'redeem': $this->redeem($input); break;
             case 'whatsapp': return array_merge($this->state(),$this->whatsapp($input));
             case 'visit': $this->rewards()->visit($this->requireActor(['client'])); break;
+            case 'record_photo':
+            case 'answer_questions': $this->completeChallenge($action,$input); break;
             case 'prepare_spin':
                 $a=$this->requireActor(['client']);
                 if (!$this->rewards()->status($a)['can_spin']) { $this->error('Aún no hay un giro disponible con promociones aprobadas.'); }
