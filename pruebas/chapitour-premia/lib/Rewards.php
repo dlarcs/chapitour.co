@@ -1,6 +1,7 @@
 <?php
 declare(strict_types=1);
 if (realpath($_SERVER['SCRIPT_FILENAME'] ?? '') === __FILE__) { http_response_code(404); exit; }
+require_once __DIR__.'/Community.php';
 
 /** Server-owned visits, eligibility and award issuance. No browser counters or clock. */
 final class ChapitourRewards
@@ -91,6 +92,7 @@ final class ChapitourRewards
                 $this->query('INSERT INTO cp_panel_giros(cliente_id,ciclo,creado_at) VALUES (?,?,?)',[$a['db_id'],$cycle,$now]);
             }
             $this->query('UPDATE cp_panel_visitas SET ultima_visita_at=?,mes=?,visitas_ciclo=?,ciclos=? WHERE cliente_id=?',[$now,$month,$count,$cycle,$a['db_id']]);
+            (new ChapitourCommunity($this->db))->recordValidVisit($a['db_id'],$month);
         });
     }
     public function status(?array $a): array {

@@ -15,6 +15,7 @@ final class ChapitourPanel
     private $googleAuth;
     private $googleSchema;
     private $monthlyChallenges;
+    private $community;
     public function __construct(PDO $db, ?ChapitourGoogleAuth $googleAuth=null) { $this->db = $db; $this->googleAuth=$googleAuth??new ChapitourGoogleAuth(); }
     private function googleSchemaReady(): bool {
         if ($this->googleSchema===null) { $this->googleSchema=(bool)$this->query("SELECT COUNT(*) FROM information_schema.tables WHERE table_schema=DATABASE() AND table_name='cp_panel_google'")->fetchColumn(); }
@@ -31,6 +32,10 @@ final class ChapitourPanel
     private function monthlyChallenges(): ChapitourChallenges {
         if (!$this->monthlyChallenges) { $this->monthlyChallenges=new ChapitourChallenges($this->db); }
         return $this->monthlyChallenges;
+    }
+    private function community(): ChapitourCommunity {
+        if (!$this->community) { $this->community=new ChapitourCommunity($this->db); }
+        return $this->community;
     }
     private function query(string $sql, array $args = []): PDOStatement {
         $s = $this->db->prepare($sql); $s->execute($args); return $s;
@@ -162,7 +167,7 @@ final class ChapitourPanel
         if ($staff && $staff['rol']==='aliado' && !$this->row('SELECT id FROM cp_negocios WHERE id=? AND activo=1', [$staff['negocio_id']])) {
             $this->error('Correo o usuario y contraseña incorrectos.', 401);
         }
-        if ($staff && $staff['rol']==='admin') { $this->installSchema(); $this->rewards()->install(); $this->installGoogleSchema(); $this->monthlyChallenges()->install(); }
+        if ($staff && $staff['rol']==='admin') { $this->installSchema(); $this->rewards()->install(); $this->installGoogleSchema(); $this->monthlyChallenges()->install(); $this->community()->install(); }
         $this->signIn($staff ? 'staff' : 'client', $row);
         $this->audit($this->actor(), 'inicio_sesion');
     }
@@ -232,13 +237,28 @@ final class ChapitourPanel
         $a = $this->requireActor(['client']);
         $email = mb_strtolower($this->text($input, 'email', 150));
         $name = $this->text($input, 'name', 80); $city = $this->text($input, 'city', 80, false);
-        $this->accountLock(function () use ($a, $email, $name, $city) {
-            $this->transaction(function () use ($a, $email, $name, $city) {
+        $preferences=array_key_exists('public_name',$input)||array_key_exists('ranking_visible',$input);
+        $alias=$preferences?$this->text($input,'public_name',40,false):'';
+        $visible=$input['ranking_visible']??'0';
+        if ($preferences && !in_array($visible,['0','1'],true)) { $this->error('Revisa tu preferencia para aparecer en el ranking.'); }
+        $this->accountLock(function () use ($a, $email, $name, $city, $preferences, $alias, $visible) {
+            $this->transaction(function () use ($a, $email, $name, $city, $preferences, $alias, $visible) {
                 $this->requireActor(['client'], true); $this->uniqueEmail($email, $a['db_id']);
                 if ($email!==$a['email'] && $this->googleSchemaReady() && $this->row('SELECT cliente_id FROM cp_panel_google WHERE cliente_id=?',[$a['db_id']])) { $this->error('El correo de esta cuenta está vinculado a Google. Puedes actualizar tu nombre y ciudad.'); }
                 $this->query('UPDATE cp_clientes SET nombre=?,email=? WHERE id=?', [$name,$email,$a['db_id']]);
                 $this->query('INSERT INTO cp_panel_clientes(cliente_id,ciudad) VALUES (?,?) ON DUPLICATE KEY UPDATE ciudad=VALUES(ciudad)', [$a['db_id'],$city]);
+                if ($preferences) { $this->community()->savePreferences($a['db_id'],$alias,$visible==='1'); }
             });
+        });
+    }
+    private function profilePhoto(bool $remove): void {
+        $a=$this->requireActor(['client']);
+        $this->limit('photo-client:'.$a['db_id'],20,10);
+        $photo=$remove?null:$this->community()->prepareUpload(is_array($_FILES['avatar']??null)?$_FILES['avatar']:[]);
+        $this->transaction(function () use ($a,$photo) {
+            $this->requireActor(['client'],true);
+            $this->community()->savePhoto($a['db_id'],$photo);
+            $this->audit($a,$photo===null?'foto_perfil_eliminada':'foto_perfil_actualizada');
         });
     }
     private function deleteAccount(array $input): void {
@@ -251,6 +271,7 @@ final class ChapitourPanel
             $this->query('DELETE FROM cp_panel_clientes WHERE cliente_id=?', [$a['db_id']]);
             $this->query('DELETE FROM cp_panel_progreso WHERE cliente_id=?', [$a['db_id']]);
             $this->monthlyChallenges()->deleteProgress($a['db_id']);
+            $this->community()->delete($a['db_id']);
             $this->audit($a, 'cuenta_eliminada', $a['db_id']);
         });
         $this->logout();
@@ -401,13 +422,18 @@ final class ChapitourPanel
     public function state(): array {
         $a=$this->actor(); $ready=$this->schemaReady();
         // An already authenticated administrator can apply this additive update without signing out.
-        if ($ready && $a && $a['role']==='admin' && !$a['must_change_password']) { $this->rewards()->install(); $this->installGoogleSchema(); $this->monthlyChallenges()->install(); }
+        if ($ready && $a && $a['role']==='admin' && !$a['must_change_password']) { $this->rewards()->install(); $this->installGoogleSchema(); $this->monthlyChallenges()->install(); $this->community()->install(); }
         $base=['csrf'=>$_SESSION['csrf'],'user'=>null,'businesses'=>[],'promotions'=>[],'codes'=>[],'challenges'=>[],
             'storage'=>'mysql','setup_required'=>!$ready,'server_time'=>time(),'campaign'=>$this->rewards()->status($a),'google_auth'=>$this->googleAuth->settings()];
         if (!$this->googleSchemaReady()) { $base['google_auth']['enabled']=false; }
         if ($a) { $base['user']=$a; unset($base['user']['db_id'],$base['user']['kind'],$base['user']['version'],$base['user']['password_hash']); }
         if ($a && $a['role']==='client') { $base['user']['google_linked']=$this->googleSchemaReady() && (bool)$this->row('SELECT cliente_id FROM cp_panel_google WHERE cliente_id=?',[$a['db_id']]); }
         if ($a && $a['must_change_password']) { return $base; }
+        $base['leaderboard']=$this->community()->leaderboard();
+        if ($a && $a['role']==='client') {
+            $base['user']['community']=$this->community()->member($a['db_id']);
+            $base['user']['photo_url']=$base['user']['community']['photo_url'];
+        }
         $args=[]; $where='WHERE n.activo=1';
         if ($a && $a['role']==='ally') { $where.=' AND n.id=?'; $args[]=$a['business_id']; }
         $rows=$this->query('SELECT n.* FROM cp_negocios n '.$where.' ORDER BY n.id',$args)->fetchAll(PDO::FETCH_ASSOC);
@@ -448,6 +474,12 @@ final class ChapitourPanel
             case 'google_login': $this->googleLogin($input); break;
             case 'change_password': $this->changePassword($input); break;
             case 'profile': $this->profile($input); break;
+            case 'upload_avatar': $this->profilePhoto(false); break;
+            case 'remove_avatar': $this->profilePhoto(true); break;
+            case 'leaderboard':
+                $page=$this->id($input,'page');
+                if ($page>10000) { $this->error('Esta página no está disponible.'); }
+                return array_merge($this->state(),['ranking_page'=>$this->community()->leaderboard($page,20)]);
             case 'delete_account': $this->deleteAccount($input); break;
             case 'save_business': $this->saveBusiness($input); break;
             case 'delete_business': $this->deleteBusiness($input); break;

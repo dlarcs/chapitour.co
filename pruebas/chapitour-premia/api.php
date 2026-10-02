@@ -5,25 +5,26 @@ header('Content-Type: application/json; charset=utf-8');
 header('Cache-Control: no-store');
 header('X-Content-Type-Options: nosniff');
 header('X-Robots-Tag: noindex, nofollow');
-date_default_timezone_set('America/Bogota');
-ini_set('session.use_strict_mode','1');
-ini_set('session.use_only_cookies','1');
-session_name('CHAPITOUR_PREMIA_DB');
-session_set_cookie_params(['lifetime'=>0,'path'=>rtrim(dirname($_SERVER['SCRIPT_NAME']),'/').'/',
-    'httponly'=>true,'samesite'=>'Strict','secure'=>!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS']!=='off']);
-session_start();
-$_SESSION['csrf']=$_SESSION['csrf']??bin2hex(random_bytes(32));
+require __DIR__.'/lib/Http.php';
+chapitourSession();
 require __DIR__.'/lib/Panel.php';
 try {
     $method=$_SERVER['REQUEST_METHOD']; $input=[]; $action='state';
     if ($method==='POST') {
         if (!hash_equals($_SESSION['csrf'],$_SERVER['HTTP_X_CSRF_TOKEN']??'')) { throw new PanelError('Actualiza la página e intenta de nuevo.',403); }
-        if ((int)($_SERVER['CONTENT_LENGTH']??0)>20000) { throw new PanelError('Solicitud demasiado grande.',413); }
-        $raw=file_get_contents('php://input',false,null,0,20001);
-        if (strlen($raw)>20000) { throw new PanelError('Solicitud demasiado grande.',413); }
-        $input=json_decode($raw,true);
-        if (!is_array($input) || !is_string($input['action']??null)) { throw new PanelError('Solicitud no válida.',422); }
-        $action=$input['action'];
+        $multipart=strpos(strtolower($_SERVER['CONTENT_TYPE']??''),'multipart/form-data;')===0;
+        if ($multipart) {
+            if ((int)($_SERVER['CONTENT_LENGTH']??0)>5*1024*1024+8192) { throw new PanelError('La foto no puede superar 5 MB.',413); }
+            if (($_POST['action']??'')!=='upload_avatar') { throw new PanelError('Solicitud no válida.',422); }
+            $action='upload_avatar';
+        } else {
+            if ((int)($_SERVER['CONTENT_LENGTH']??0)>20000) { throw new PanelError('Solicitud demasiado grande.',413); }
+            $raw=file_get_contents('php://input',false,null,0,20001);
+            if (strlen($raw)>20000) { throw new PanelError('Solicitud demasiado grande.',413); }
+            $input=json_decode($raw,true);
+            if (!is_array($input) || !is_string($input['action']??null)) { throw new PanelError('Solicitud no válida.',422); }
+            $action=$input['action'];
+        }
     } elseif ($method!=='GET' || ($_GET['action']??'state')!=='state') {
         throw new PanelError('Método no permitido.',405);
     }
