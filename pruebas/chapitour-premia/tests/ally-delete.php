@@ -35,6 +35,17 @@ $panel->handle('save_promotion',['business_id'=>$businessId,'description'=>'Ofer
 $businessBefore=q('SELECT * FROM cp_negocios WHERE id=?',[$businessId])->fetch();
 $promosBefore=q('SELECT * FROM cp_promociones WHERE negocio_id=?',[$businessId])->fetchAll();
 $metaBefore=q('SELECT m.* FROM cp_panel_promociones m JOIN cp_promociones p ON p.id=m.promocion_id WHERE p.negocio_id=?',[$businessId])->fetchAll();
+// A redeemed prize and legacy audit payloads must survive physical removal of their actor.
+q('INSERT INTO cp_visitantes(identidad_hash,ip_hash,referido_token) VALUES (?,?,?)',[hash('sha256','visitor-'.$tag),hash('sha256','ip-'.$tag),bin2hex(random_bytes(16))]);
+$visitor=(int)$db->lastInsertId();$campaign=(int)q('SELECT id FROM cp_campanas ORDER BY id LIMIT 1')->fetchColumn();
+q('INSERT INTO cp_cliente_visitantes(cliente_id,visitante_id) VALUES (?,?)',[$client,$visitor]);
+q("INSERT INTO cp_oportunidades(visitante_id,campana_id,origen,origen_clave) VALUES (?,?,'access-qa',?)",[$visitor,$campaign,$tag]);$opportunity=(int)$db->lastInsertId();
+$redeemedCode='ACCESS-'.$tag;
+q("INSERT INTO cp_premios(oportunidad_id,visitante_id,campana_id,negocio_id,promocion_id,codigo,solicitud_id,titulo,descripcion,condiciones,creado_at,vence_at,redimido_at,redimido_por) VALUES (?,?,?,?,?,?,?,'Premio QA','Beneficio QA','Solo pruebas',UTC_TIMESTAMP(),DATE_ADD(UTC_TIMESTAMP(),INTERVAL 72 HOUR),UTC_TIMESTAMP(),?)",[$opportunity,$visitor,$campaign,$businessId,$promosBefore[0]['id'],$redeemedCode,$tag,$accountId]);
+$redeemedId=(int)$db->lastInsertId();
+foreach (['{"origen":"qa","conservar":true}','["evento previo"]','texto legado no JSON'] as $payload) {
+    q("INSERT INTO cp_auditoria(usuario_id,accion,entidad_id,datos) VALUES (?,'qa_historial',?,?)",[$accountId,$redeemedId,$payload]);
+}
 $prizesBefore=q('SELECT * FROM cp_premios ORDER BY id')->fetchAll();$detailsBefore=q('SELECT * FROM cp_premio_detalles ORDER BY premio_id')->fetchAll();
 $delete=['id'=>$businessId,'account_id'=>$accountId,'confirm'=>$businessId];
 q('UPDATE cp_usuarios SET cambiar_password=0 WHERE id=?',[$accountId]);
@@ -51,12 +62,18 @@ verifyAlly($b['email']===''&&$b['account_id']===null,'El panel no ofrece crear u
 verifyAlly($businessBefore===q('SELECT * FROM cp_negocios WHERE id=?',[$businessId])->fetch(),'Se modificó la página o publicación del negocio.');
 verifyAlly($promosBefore===q('SELECT * FROM cp_promociones WHERE negocio_id=?',[$businessId])->fetchAll(),'Se modificaron las promociones.');
 verifyAlly($metaBefore===q('SELECT m.* FROM cp_panel_promociones m JOIN cp_promociones p ON p.id=m.promocion_id WHERE p.negocio_id=?',[$businessId])->fetchAll(),'Se retiró una aprobación.');
-verifyAlly($prizesBefore===q('SELECT * FROM cp_premios ORDER BY id')->fetchAll(),'Cambió el historial de premios.');
+foreach($prizesBefore as &$prize){if((string)$prize['redimido_por']===$accountId){$prize['redimido_por']=null;}}unset($prize);
+verifyAlly($prizesBefore===q('SELECT * FROM cp_premios ORDER BY id')->fetchAll(),'Cambió el beneficio, estado o vigencia de los premios.');
+verifyAlly(array_values(array_filter($state['codes'],fn($c)=>$c['code']===$redeemedCode))[0]['status']==='Redimido','El código volvió a estar activo.');
+rejectedAlly(fn()=>$panel->handle('redeem',['code'=>$redeemedCode,'confirm'=>$redeemedCode]),409);
 verifyAlly($detailsBefore===q('SELECT * FROM cp_premio_detalles ORDER BY premio_id')->fetchAll(),'Cambió el beneficio de los códigos.');
-$retired=q('SELECT * FROM cp_usuarios WHERE id=?',[$accountId])->fetch();
-verifyAlly((int)$retired['activo']===0&&(int)$retired['version_sesion']===2,'No se revocó el acceso.');
-verifyAlly($retired['usuario']!==$email&&!password_verify($password,$retired['password_hash']),'No se liberó el correo o la contraseña.');
-verifyAlly((int)$retired['negocio_id']===(int)$businessId,'Se perdió la asociación histórica del acceso.');
+verifyAlly(!q('SELECT id FROM cp_usuarios WHERE id=?',[$accountId])->fetch(),'La cuenta debe desaparecer físicamente.');
+$history=q("SELECT usuario_id,datos FROM cp_auditoria WHERE accion='qa_historial' AND entidad_id=? ORDER BY id",[$redeemedId])->fetchAll();
+verifyAlly(count($history)===3,'Se borró el historial.');
+foreach($history as $event){$data=json_decode($event['datos'],true);verifyAlly($event['usuario_id']===null&&(int)$data['usuario_eliminado_id']===(int)$accountId,'Falta la identidad histórica del acceso eliminado.');}
+verifyAlly(json_decode($history[0]['datos'],true)['conservar']===true,'Cambió un dato de auditoría.');
+verifyAlly(json_decode($history[1]['datos'],true)['datos_previos']==='["evento previo"]','Cambió una auditoría antigua.');
+verifyAlly(json_decode($history[2]['datos'],true)['datos_previos']==='texto legado no JSON','Cambió un registro antiguo no JSON.');
 verifyAlly((int)q("SELECT COUNT(*) FROM cp_auditoria WHERE accion='cuenta_aliado_eliminada' AND entidad_id=? AND usuario_id=?",[$accountId,$admin])->fetchColumn()===1,'Falta la auditoría de eliminación.');
 authAlly((int)$accountId);verifyAlly($panel->actor()===null,'La sesión anterior del aliado sigue válida.');
 authAlly(null);verifyAlly($publicBefore===businessAlly($panel->state(),$businessId),'El negocio dejó de aparecer igual en la portada.');
@@ -82,8 +99,7 @@ rejectedAlly(fn()=>$panel->handle('save_business',['business_id'=>$other['id'],'
 verifyAlly(q('SELECT usuario FROM cp_usuarios WHERE id=?',[$legacy])->fetchColumn()===$legacyEmail,'Un intento fallido no revirtió el archivado.');
 $state=$panel->handle('save_business',['business_id'=>$businessId,'email'=>$legacyEmail,'password'=>$newPassword]);
 verifyAlly(businessAlly($state,$businessId)['email']===$legacyEmail,'No se reutilizó el correo de una eliminación anterior.');
-verifyAlly(q('SELECT usuario FROM cp_usuarios WHERE id=?',[$legacy])->fetchColumn()!==$legacyEmail,'La cuenta anterior mantiene ocupado el correo.');
-verifyAlly((int)q('SELECT activo FROM cp_usuarios WHERE id=?',[$legacy])->fetchColumn()===0,'Se reactivó la cuenta antigua.');
+verifyAlly(!q('SELECT id FROM cp_usuarios WHERE id=?',[$legacy])->fetch(),'La cuenta antigua sigue en la base de datos.');
 foreach([$adminEmail,'access-client-'.$tag.'@example.invalid'] as $reserved){rejectedAlly(fn()=>$panel->handle('save_business',['name'=>'Conflicto QA','email'=>$reserved,'password'=>$password]),409);}
 $inactiveAdminEmail='inactive-admin-'.$tag.'@example.invalid';
 q("INSERT INTO cp_usuarios(usuario,password_hash,rol,activo,cambiar_password) VALUES (?,?,'admin',0,0)",[$inactiveAdminEmail,$hash]);

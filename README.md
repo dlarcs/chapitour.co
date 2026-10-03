@@ -76,3 +76,22 @@ La confirmación identifica el negocio y el correo y envía el ID del acceso con
 Pruebas aisladas: `tests/ally-delete.php` ejecuta 40 comprobaciones para cada copia (principal y pruebas), incluyendo reutilización, compatibilidad con eliminaciones anteriores, reversión en errores, permisos, sesiones e historial. `tests/ally-access.cjs` verifica en Chrome a 1440 y 390 px cancelar/confirmar, conservar el catálogo y promociones, revocar sesiones y recrear el acceso con el mismo correo. Se usa únicamente la base temporal `chapitour_panels_qa`.
 
 Publicado en Hostinger mediante `chapitour-accesos-20261003.zip` (seis archivos de ejecución, sin SQL ni configuración privada). El respaldo previo está en `/private/tmp/chapitour-accesos-respaldo-20261003.zip`. Tras publicar, portada y ambas API respondieron HTTP 200 y los dos JavaScript coincidieron byte a byte con la versión probada. Chrome verificó la carga de la portada y su catálogo, sin modificar cuentas reales.
+
+
+## Eliminación física de accesos de aliados (actualización posterior)
+
+Por solicitud del propietario, «Eliminar acceso» ahora borra el registro de `cp_usuarios`, incluyendo correo y contraseña. Sustituye la conservación de una cuenta inactiva descrita anteriormente. Mantiene el negocio y las promociones, deja las redenciones con su fecha original y retira únicamente la referencia al usuario eliminado. La auditoría guarda su ID anterior, sin conservar una cuenta. Si un acceso de aliado figura como aprobador en datos antiguos, la operación exige confirmar esas promociones desde una cuenta administradora antes de borrarlo, para evitar retirar ofertas de la ruleta.
+
+Las cuentas de cliente son independientes: al crear un aliado se explica específicamente si el correo aún pertenece a un cliente. La confirmación de eliminación informa que el borrado de la cuenta es definitivo. No cambia la eliminación del perfil de cliente desde su propio panel.
+
+Validación: 46 comprobaciones PHP en cada copia, incluyendo registros de auditoría antiguos, ausencia física de la cuenta, revocación de sesiones, reutilización del correo y rechazo de códigos ya redimidos. El flujo de eliminación/recreación pasó en Chrome local a 1440 y 390 px. El SQL de mantenimiento para retirar cuentas concretas se validó con datos sintéticos y las diez relaciones de clientes, conservando negocios, promociones y premios.
+
+Publicado mediante `chapitour-borrado-cuentas-20261003.zip` (seis archivos); respaldo previo en `/private/tmp/chapitour-borrado-cuentas-respaldo-20261003.zip`. La portada y ambas API respondieron HTTP 200; los dos JavaScript publicados coinciden byte a byte con los probados.
+
+Tras la confirmación del propietario, se eliminaron en producción el cliente ID 8 y el acceso de aliado ID 8, restringiendo cada operación también a su correo. phpMyAdmin informó una fila eliminada en cada tabla; una consulta independiente posterior confirmó cero cuentas con los dos correos, ausencia de ambos registros y ausencia de sus vínculos Google y giros pendientes. No se modificaron negocios, promociones ni premios. Las dos referencias históricas de auditoría del aliado conservaron su ID anterior en JSON. Los contadores auxiliares basados en `ROW_COUNT()` no reflejaron las eliminaciones al ejecutarse desde phpMyAdmin; la verificación se basó en las respuestas de cada DELETE y en la consulta posterior, no en esos contadores.
+
+## Canvas Tattoo · 3 de octubre de 2026
+
+Se completó la ficha existente del negocio ID 11, sin duplicarla ni modificar su acceso o sus promociones. En `cp_negocios` quedaron la categoría `Tatuajes y piercings`, el WhatsApp `573146446837`, la página `experiencias/canvas-tattoo/index.php` y el logo `experiencias/canvas-tattoo/logo.svg`. La ruta local redirige únicamente a `https://www.canvastattoocolombia.com/`. El logo es una copia sin modificaciones del archivo `Diseñosintítulo.svg` utilizado por su web oficial; no depende de cargar una imagen de terceros en la portada.
+
+Se publicaron los dos archivos mediante `chapitour-canvas-20261003.zip`. Verificación: sintaxis PHP correcta, redirección HTTP 302 a la web oficial, logo publicado idéntico al original, datos correctos en la API pública y tarjeta con el logo visible en Chrome. La información pública anterior se conservó fuera del sitio en `/private/tmp/chapitour-canvas-before.json`.
