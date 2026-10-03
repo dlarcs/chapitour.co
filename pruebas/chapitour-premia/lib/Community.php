@@ -40,7 +40,7 @@ final class ChapitourCommunity
     }
     private function scoreSql(): string {
         // One score per account. No points from clicks, request parameters or unauthenticated activity.
-        return "SELECT c.id,COALESCE(p.nombre_publico,'') AS nombre_publico,COALESCE(p.visible,0) AS visible,
+        return "SELECT c.id,COALESCE(NULLIF(TRIM(p.nombre_publico),''),CONCAT('Chapi-',UPPER(LEFT(SHA2(CONCAT('chapitour-ranking-',c.id),256),6)))) AS nombre_publico,COALESCE(p.visible,1) AS visible,
             LEAST(10,COALESCE(v.cantidad,0)) AS visitas,
             LEAST(25,COALESCE(q.cantidad,0)*5) AS preguntas,
             LEAST(45,COALESCE(f.cantidad,0)*15) AS fotos,
@@ -55,29 +55,16 @@ final class ChapitourCommunity
             WHERE c.activo=1";
     }
     private function args(string $month): array { return [$month,$month,$month,$month]; }
-    private function demoEntries(): array {
-        // Display examples only: these are never accounts, activity records or prize recipients.
-        $names=['Valentina R.','Samuel C.','Mariana G.','Nicolás P.','Sofía M.','Mateo L.','Camila A.','Daniel V.','Isabela T.','Santiago B.','Luciana D.','Sebastián F.','Gabriela S.','Tomás H.','Manuela J.','Emiliano N.','Juliana O.','Alejandro E.','Sara K.','Martín U.'];
-        $scores=[78,75,72,69,65,60,55,50,45,40,35,30,25,20,17,15,12,10,7,5];
-        $entries=[];
-        foreach ($names as $i=>$name) { $entries[]=['name'=>$name,'score'=>$scores[$i],'demo'=>true]; }
-        return $entries;
-    }
     public function leaderboard(int $page=1,int $size=10): array {
         $month=$this->month();$ready=$this->ready();
         $size=max(1,min(20,$size));$page=max(1,min(10000,$page));$offset=($page-1)*$size;
         $result=['ready'=>$ready,'month'=>$month,'entries'=>[],'page'=>$page,'has_more'=>false,'total'=>0,'real_total'=>0,'demo_total'=>0];
         if (!$ready) { return $result; }
-        $realTotal=(int)$this->query("SELECT COUNT(*) FROM cp_panel_comunidad p JOIN cp_clientes c ON c.id=p.cliente_id WHERE c.activo=1 AND p.visible=1 AND TRIM(p.nombre_publico)<>''")->fetchColumn();
+        $realTotal=(int)$this->query("SELECT COUNT(*) FROM cp_clientes c LEFT JOIN cp_panel_comunidad p ON p.cliente_id=c.id WHERE c.activo=1 AND COALESCE(p.visible,1)=1")->fetchColumn();
         $result['real_total']=$realTotal;
-        $result['demo_total']=max(0,20-$realTotal);
-        $result['total']=$realTotal+$result['demo_total'];
+        $result['total']=$realTotal;
         $rows=$this->query('SELECT nombre_publico,puntos FROM ('.$this->scoreSql().") score WHERE visible=1 AND TRIM(nombre_publico)<>'' ORDER BY puntos DESC,nombre_publico ASC,id ASC LIMIT ".$size.' OFFSET '.$offset,$this->args($month))->fetchAll(PDO::FETCH_ASSOC);
         foreach ($rows as $row) { $result['entries'][]=['name'=>$row['nombre_publico'],'score'=>(int)$row['puntos']]; }
-        // Genuine participants always precede examples, even when their score is zero.
-        $demoStart=max($realTotal,$offset);
-        $demoLength=max(0,min(20,$offset+$size)-$demoStart);
-        if ($demoLength>0) { $result['entries']=array_merge($result['entries'],array_slice($this->demoEntries(),$demoStart,$demoLength)); }
         $result['has_more']=$offset+count($result['entries'])<$result['total'];
         return $result;
     }
@@ -89,6 +76,10 @@ final class ChapitourCommunity
         $args=$this->args($this->month());
         $row=$this->query('SELECT * FROM ('.$this->scoreSql().') score WHERE id=?',array_merge($args,[$id]))->fetch(PDO::FETCH_ASSOC);
         if (!$row) { return $result; }
+        // Existing registered clients without preferences get a stable nickname.
+        // Explicit visibility choices are never changed by reading the ranking.
+        $result['public_name']=$row['nombre_publico'];
+        $result['visible']=(bool)$row['visible'];
         $result['score']=(int)$row['puntos'];
         $result['breakdown']=['visits'=>(int)$row['visitas'],'questions'=>(int)$row['preguntas'],'photos'=>(int)$row['fotos'],'sharing'=>(int)$row['compartir']];
         if ($result['visible']) {
@@ -97,6 +88,16 @@ final class ChapitourCommunity
             $result['points_to_climb']=$higher['siguiente']===null?null:(int)$higher['siguiente']-$result['score'];
         }
         return $result;
+    }
+    public function registerMember(int $id): void {
+        $this->requireReady();
+        if (!$this->db->inTransaction()) { throw new LogicException('El perfil inicial requiere la transacción de registro.'); }
+        // Publish a nickname, never the Google name or email. Existing choices are preserved.
+        $alias=$this->defaultAlias($id);
+        $this->query('INSERT INTO cp_panel_comunidad(cliente_id,nombre_publico,visible) VALUES (?,?,1) ON DUPLICATE KEY UPDATE cliente_id=VALUES(cliente_id)',[$id,$alias]);
+    }
+    private function defaultAlias(int $id): string {
+        return 'Chapi-'.strtoupper(substr(hash('sha256','chapitour-ranking-'.$id),0,6));
     }
     public function savePreferences(int $id,string $alias,bool $visible): void {
         $this->requireReady();
@@ -124,7 +125,7 @@ final class ChapitourCommunity
     }
     public function savePhoto(int $id,?string $jpeg): void {
         $this->requireReady();
-        $this->query('INSERT INTO cp_panel_comunidad(cliente_id,foto,foto_version) VALUES (?,?,?) ON DUPLICATE KEY UPDATE foto=VALUES(foto),foto_version=VALUES(foto_version)',[$id,$jpeg,$jpeg===null?null:bin2hex(random_bytes(16))]);
+        $this->query('INSERT INTO cp_panel_comunidad(cliente_id,nombre_publico,visible,foto,foto_version) VALUES (?,?,1,?,?) ON DUPLICATE KEY UPDATE foto=VALUES(foto),foto_version=VALUES(foto_version)',[$id,$this->defaultAlias($id),$jpeg,$jpeg===null?null:bin2hex(random_bytes(16))]);
     }
     public function photo(int $id): ?string {
         if (!$this->ready()) { return null; }

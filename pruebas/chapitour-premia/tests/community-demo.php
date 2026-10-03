@@ -1,56 +1,52 @@
 <?php
+// Regression for the former demo-filled ranking: only registered accounts remain.
 declare(strict_types=1);
 $socket=$argv[1]??'';
-if (PHP_SAPI!=='cli' || !preg_match('#^/private/tmp/chapitour-panel-qa\.[A-Za-z0-9]+/mysql\.sock$#',$socket)) { throw new RuntimeException('Solo QA temporal.'); }
-require __DIR__.'/../lib/Community.php';
-$db=new PDO('mysql:unix_socket='.$socket.';dbname=chapitour_panels_qa;charset=utf8mb4','root','',[PDO::ATTR_ERRMODE=>PDO::ERRMODE_EXCEPTION,PDO::ATTR_EMULATE_PREPARES=>false]);
-$db->exec("SET time_zone='+00:00'");
-$community=new ChapitourCommunity($db);
-$checks=0;$snapshots=[];
-function check($ok,string $message):void { global $checks;if(!$ok)throw new RuntimeException($message);$checks++; }
-function counts(PDO $db):array {
-    $counts=[];
-    foreach(['cp_clientes','cp_premios','cp_panel_giros','cp_panel_puntos_visitas','cp_panel_meta_fotos','cp_panel_meta_preguntas'] as $table) { $counts[$table]=(int)$db->query('SELECT COUNT(*) FROM '.$table)->fetchColumn(); }
-    return $counts;
-}
-check($community->ready(),'Primero prepara el esquema QA de comunidad.');
-$before=counts($db);
+if(PHP_SAPI!=='cli'||!preg_match('#^/private/tmp/chapitour-panel-qa\.[A-Za-z0-9]+/mysql\.sock$#',$socket))throw new RuntimeException('Solo QA temporal.');
+require __DIR__.'/../../../premia/lib/Community.php';
+$db=new PDO('mysql:unix_socket='.$socket.';dbname=chapitour_panels_qa;charset=utf8mb4','root','',[PDO::ATTR_ERRMODE=>PDO::ERRMODE_EXCEPTION,PDO::ATTR_EMULATE_PREPARES=>false]);$db->exec("SET time_zone='+00:00'");
+$community=new ChapitourCommunity($db);$checks=0;$snapshots=[];
+function check($ok,string $message):void {global $checks;if(!$ok)throw new RuntimeException($message);$checks++;}
+function counts(PDO $db):array{$counts=[];foreach(['cp_clientes','cp_premios','cp_panel_giros','cp_panel_puntos_visitas','cp_panel_meta_fotos','cp_panel_meta_preguntas'] as $table)$counts[$table]=(int)$db->query('SELECT COUNT(*) FROM '.$table)->fetchColumn();return $counts;}
+check($community->ready(),'Primero prepara el esquema QA.');$before=counts($db);
 $db->beginTransaction();
-try {
-    // Only this transaction sees the fixture changes; roll back all of them on completion.
-    $db->exec('UPDATE cp_panel_comunidad SET visible=0');
+try{
+    $db->exec("INSERT INTO cp_panel_comunidad(cliente_id,nombre_publico,visible) SELECT id,'',0 FROM cp_clientes WHERE activo=1 ON DUPLICATE KEY UPDATE visible=0");
     $ids=$db->query('SELECT id FROM cp_clientes WHERE activo=1 ORDER BY id LIMIT 21')->fetchAll(PDO::FETCH_COLUMN);
-    check(count($ids)===21,'Se necesitan 21 cuentas de las pruebas anteriores.');
-    $previous=0;
-    foreach([0,1,5,10,19,20,21] as $realCount) {
-        for($i=$previous;$i<$realCount;$i++) { $community->savePreferences((int)$ids[$i],sprintf('Participante QA %02d',$i+1),true); }
-        $previous=$realCount;
-        $full=$community->leaderboard(1,20);
-        $demos=array_filter($full['entries'],static function(array $e):bool { return $e['demo']??false; });
-        check($full['real_total']===$realCount && $full['demo_total']===max(0,20-$realCount),'Los ejemplos se reemplazan uno por uno: '.$realCount);
-        check($full['total']===max(20,$realCount) && count($full['entries'])===20,'La lista mantiene al menos veinte entradas: '.$realCount);
-        check(count($demos)===max(0,20-$realCount),'Cantidad exacta de ejemplos visibles: '.$realCount);
-        foreach($full['entries'] as $i=>$entry) {
-            check(($entry['demo']??false)===($i>=$realCount),'Las cuentas reales siempre aparecen primero.');
-            check(array_keys($entry)===(($entry['demo']??false)?['name','score','demo']:['name','score']),'El listado no expone datos privados.');
+    check(count($ids)===21,'Se necesitan 21 cuentas QA.');$previous=0;
+    foreach([0,1,5,10,19,20,21] as $realCount){
+        for($i=$previous;$i<$realCount;$i++)$community->savePreferences((int)$ids[$i],sprintf('Participante QA %02d',$i+1),true);
+        $previous=$realCount;$full=$community->leaderboard(1,20);
+        check($full['total']===$realCount && $full['real_total']===$realCount && $full['demo_total']===0,'Cuenta únicamente personas registradas: '.$realCount);
+        check(count($full['entries'])===min(20,$realCount),'No completa la lista con relleno: '.$realCount);
+        $score=PHP_INT_MAX;
+        foreach($full['entries'] as $entry){
+            check(array_keys($entry)===['name','score'],'Solo alias y puntaje, sin datos privados o perfiles de ejemplo');
+            check(strncmp($entry['name'],'Participante QA ',16)===0,'La entrada pertenece a una cuenta de prueba registrada');
+            check($entry['score']<=$score,'Orden descendente por puntaje');$score=$entry['score'];
         }
         $top=$community->leaderboard(1,10);$second=$community->leaderboard(2,10);
-        check(array_merge($top['entries'],$second['entries'])===$full['entries'],'Paginación sin duplicar ni saltar perfiles: '.$realCount);
-        check($top['has_more'] && $second['has_more']===($realCount>20),'Paginación cuenta ejemplos y personas: '.$realCount);
-        $after=$community->leaderboard(2,20);
-        check(count($after['entries'])===max(0,$realCount-20) && !$after['has_more'],'Fin de lista correcto: '.$realCount);
-        $empty=$community->leaderboard(10000,20);
-        check($empty['entries']===[] && !$empty['has_more'],'No se repiten ejemplos fuera de rango.');
-        if($realCount===1) { check($community->member((int)$ids[0])['position']===1 && $community->member((int)$ids[0])['points_to_climb']===null,'Los puntajes ficticios no afectan la posición real.'); }
-        if($realCount===0) { check(count(array_unique(array_column($full['entries'],'name')))===20,'Veinte nombres ficticios distintos.'); }
+        check(array_merge($top['entries'],$second['entries'])===$full['entries'],'Paginación sin duplicados ni saltos');
+        check($top['has_more']===($realCount>10) && $second['has_more']===($realCount>20),'Fin de página con cantidad real');
+        $after=$community->leaderboard(2,20);check(count($after['entries'])===max(0,$realCount-20) && !$after['has_more'],'Fin de lista');
+        $empty=$community->leaderboard(10000,20);check(!$empty['entries'] && !$empty['has_more'],'Fuera de rango no inventa filas');
         $snapshots[(string)$realCount]=['top'=>$top,'full'=>$full,'next'=>$after];
     }
-    check(counts($db)===$before,'Leer ejemplos no crea cuentas, puntos, retos, giros ni premios.');
+    check(counts($db)===$before,'La consulta no crea cuentas, puntos, retos, giros ni premios');
     $community->savePreferences((int)$ids[20],'Participante QA 21',false);
-    check($community->leaderboard()['demo_total']===0,'Una cuenta privada no ocupa un espacio público.');
+    check($community->leaderboard()['total']===20,'Respeta una cuenta que elige ocultarse');
     $stmt=$db->prepare('UPDATE cp_clientes SET activo=0 WHERE id=?');$stmt->execute([$ids[19]]);
-    check($community->leaderboard()['real_total']===19 && $community->leaderboard()['demo_total']===1,'Una cuenta inactiva no ocupa un espacio público.');
+    check($community->leaderboard()['total']===19,'No publica cuentas inactivas');
+    // Existing registration with no public-profile row is listed with a stable nickname.
+    $id=(int)$ids[18];$stmt=$db->prepare('DELETE FROM cp_panel_comunidad WHERE cliente_id=?');$stmt->execute([$id]);
+    $profile=$community->member($id);$alias=$profile['public_name'];
+    check($profile['visible'] && preg_match('/^Chapi-[A-F0-9]{6}$/',$alias)===1,'Cuenta existente sin preferencias se incorpora con alias automático');
+    check($community->member($id)['public_name']===$alias,'Alias estable entre consultas');
+    $stmt=$db->prepare('SELECT COUNT(*) FROM cp_panel_comunidad WHERE cliente_id=?');$stmt->execute([$id]);check((int)$stmt->fetchColumn()===0,'Lectura no modifica la base');
+    $community->savePhoto($id,null);check($community->member($id)['visible'] && $community->member($id)['public_name']===$alias,'Foto no oculta la cuenta ni cambia su alias');
+    $community->savePreferences($id,'Alias elegido',false);$community->savePhoto($id,null);$community->registerMember($id);
+    check(!$community->member($id)['visible'] && $community->member($id)['public_name']==='Alias elegido','Preferencias explícitas se conservan');
     file_put_contents(dirname($socket).'/community-demo-ui.json',json_encode($snapshots,JSON_UNESCAPED_UNICODE|JSON_THROW_ON_ERROR));
-} finally { $db->rollBack(); }
-check(counts($db)===$before,'Se restauran todos los datos QA.');
-echo "PASS $checks comprobaciones: veinte ejemplos etiquetados, reemplazo automático, prioridad real, privacidad, paginación y ausencia de premios o cuentas ficticias.\n";
+}finally{$db->rollBack();}
+check(counts($db)===$before,'Datos temporales restaurados');
+echo "PASS $checks comprobaciones: solo registros reales, sin relleno, alias estable/editable, privacidad, orden, paginación y ausencia de cambios en premios.\n";

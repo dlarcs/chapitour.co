@@ -10,7 +10,7 @@ La página principal (`index.php`) sirve Chapitour te premia desde el 2 de octub
 - La ruleta aparece automáticamente cuando hay un giro disponible. La portada invita a crear cuenta con Google y no incluye un botón para abrir la ruleta.
 - Cada giro genera un solo código, aunque se repita la solicitud. El código vence a las 72 horas. Abrir WhatsApp no redime el premio.
 - Las vistas visibles se actualizan cada 30 segundos y al volver a la pestaña. Las lecturas automáticas no suman visitas ni emiten premios; se evita reemplazar formularios y se descartan respuestas que hayan quedado atrasadas frente a una acción.
-- Los perfiles ficticios del ranking conservan sus etiquetas y se sustituyen por participantes reales visibles. No son cuentas ni receptores de premios.
+- El ranking contiene exclusivamente clientes registrados y activos. No se completa con perfiles de ejemplo; conserva los alias y las preferencias de ocultarse.
 
 ## Configuración y despliegue
 
@@ -55,3 +55,11 @@ Pruebas aisladas: `tests/guest-welcome.php` (53 comprobaciones), `tests/guest-ed
 Paquete de despliegue: `chapitour-bienvenida-20261003.zip`, nueve archivos, sin configuración privada ni SQL. Respaldo local de las versiones anteriores: `/private/tmp/chapitour-bienvenida-respaldo-20261003.zip`.
 
 Verificación tras publicar: portada, API y recursos HTTP 200; JS/CSS de producción y JS antiguo idénticos a la versión probada; ambas API sin campos de frecuencia y la biblioteca protegida con HTTP 403. Chrome mostró automáticamente la ruleta de bienvenida con botón habilitado, cuatro aliados con ofertas elegibles y portada con registro Google sin botón de ruleta. No se giró ni se emitieron códigos de producción en esta comprobación.
+
+## Ranking de participantes registrados · 3 de octubre de 2026
+
+Se eliminó el catálogo de veinte perfiles de relleno, junto con sus avisos y estilos, tanto en producción como en la versión antigua de pruebas. La consulta y la paginación usan únicamente cuentas activas de `cp_clientes`. Las cuentas existentes sin preferencias reciben un alias estable al consultarlas; las nuevas crean su perfil público dentro de la transacción de registro. El alias inicial no publica el nombre de Google ni el correo. Puede cambiarse u ocultarse desde Mi perfil, y esas decisiones se conservan al volver a ingresar. Una foto no cambia la visibilidad del perfil.
+
+No se borran cuentas ni premios y no hace falta SQL de migración: los perfiles de relleno estaban definidos en el código. La lista muestra el número real de participantes y un estado vacío si no hay ninguno.
+
+Verificación local: 278 comprobaciones del ranking (cuentas, alias, preferencias, orden y paginación), 58 del registro/premios y Chrome con 0/5/19/20/21 participantes a 1440/390/320 px. Paquete de diez archivos: `chapitour-ranking-real-20261003.zip`; respaldo previo local: `/private/tmp/chapitour-ranking-respaldo-20261003.zip`.

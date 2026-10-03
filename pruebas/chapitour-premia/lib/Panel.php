@@ -182,6 +182,7 @@ final class ChapitourPanel
         $visitor=(int)$this->db->lastInsertId();
         $this->query('INSERT INTO cp_cliente_visitantes(cliente_id,visitante_id) VALUES (?,?)',[$id,$visitor]);
         $this->rewards()->welcome($id);
+        $this->community()->registerMember($id);
         return ['id'=>$id,'version_sesion'=>1];
     }
     private function googleLogin(array $input): void {
