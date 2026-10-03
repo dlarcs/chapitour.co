@@ -1,0 +1,61 @@
+const assert = require('node:assert/strict');
+const fs = require('node:fs');
+const {chromium, request} = require('playwright');
+const qa = process.env.CHAPITOUR_QA_DIR;
+if (!/^\/private\/tmp\/chapitour-panel-qa\.[A-Za-z0-9]+$/.test(qa || '')) throw new Error('Solo QA temporal.');
+const fixture = JSON.parse(fs.readFileSync(qa+'/ally-access-ui.json','utf8'));
+const origin = process.env.CHAPITOUR_TEST_ORIGIN || 'http://127.0.0.1:8798';
+if (!['localhost','127.0.0.1'].includes(new URL(origin).hostname)) throw new Error('Solo servidor local.');
+const base = origin+fixture.base;
+const api = origin+(fixture.base==='/'?'/premia/':fixture.base)+'api.php';
+(async()=>{
+  const admin=await request.newContext(),ally=await request.newContext(),guest=await request.newContext();let browser;
+  async function call(http,action,data={},expected=200) {
+    const state=await(await http.get(api)).json();
+    const response=await http.post(api,{headers:{'X-CSRF-Token':state.csrf},data:{action,...data}});
+    const body=await response.json();assert.equal(response.status(),expected,JSON.stringify(body));return body;
+  }
+  try {
+    await call(admin,'login',{email:fixture.admin_email,password:fixture.password});
+    await call(ally,'login',{email:fixture.email,password:fixture.account_password});
+    await call(ally,'change_password',{current_password:fixture.account_password,new_password:'Qa-ui-ally-456!',confirm_password:'Qa-ui-ally-456!'});
+    const before=await(await guest.get(api)).json();
+    const publicBusiness=s=>s.businesses.find(b=>b.id===fixture.business_id);
+    browser=await chromium.launch({channel:'chrome',headless:true});
+    const context=await browser.newContext({storageState:await admin.storageState(),viewport:{width:1440,height:1000}});
+    const page=await context.newPage(),errors=[];page.on('pageerror',e=>errors.push(e.message));
+    let deletions=0;page.on('request',r=>{if(r.method()==='POST'&&r.url()===api&&r.postDataJSON()?.action==='delete_business')deletions++;});
+    await page.goto(base+'#aliados');
+    const card=page.locator('.ally-account').filter({has:page.getByRole('heading',{name:fixture.business_name,exact:true})});
+    await card.getByRole('button',{name:'Eliminar acceso de '+fixture.business_name,exact:true}).click();
+    const dialog=page.getByRole('dialog');
+    assert((await dialog.innerText()).includes(fixture.email));
+    assert((await dialog.innerText()).includes('El negocio seguirá visible en la página principal'));
+    await page.screenshot({path:qa+'/eliminar-acceso-desktop.png'});
+    await dialog.getByRole('button',{name:'Cancelar',exact:true}).click();assert.equal(deletions,0);
+    await card.getByRole('button',{name:'Eliminar acceso de '+fixture.business_name,exact:true}).click();
+    await dialog.getByRole('button',{name:'Confirmar eliminación',exact:true}).click();
+    await card.getByText('Sin cuenta de acceso',{exact:true}).waitFor();
+    assert.equal(await card.getByRole('button',{name:'Eliminar acceso'}).count(),0);
+    const after=await(await guest.get(api)).json();
+    assert.deepEqual(publicBusiness(after),publicBusiness(before),'El negocio sigue publicado con el mismo enlace');
+    assert.deepEqual(after.promotions.filter(p=>p.business_id===fixture.business_id),before.promotions.filter(p=>p.business_id===fixture.business_id));
+    assert.equal((await(await ally.get(api)).json()).user,null,'La sesión del acceso eliminado queda revocada');
+    await page.setViewportSize({width:390,height:844});
+    await card.getByRole('button',{name:'Crear acceso',exact:true}).click();
+    const form=page.locator('[data-form="business"]');
+    assert.equal(await form.locator('[name="business_id"]').inputValue(),fixture.business_id);
+    await form.locator('[name="email"]').fill(fixture.email);
+    await form.locator('[name="password"]').fill('Qa-ui-recreated-456!');
+    await page.screenshot({path:qa+'/recrear-acceso-mobile.png'});
+    assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));
+    await form.getByRole('button',{name:'Crear aliado'}).click();
+    await card.getByText(fixture.email,{exact:true}).waitFor();
+    await page.reload();await card.getByText(fixture.email,{exact:true}).waitFor();
+    await call(ally,'login',{email:fixture.email,password:'Qa-ui-ally-456!'},401);
+    const recreated=await call(ally,'login',{email:fixture.email,password:'Qa-ui-recreated-456!'});
+    assert.equal(recreated.user.business_id,fixture.business_id);assert.equal(recreated.user.must_change_password,true);
+    assert.equal(deletions,1);assert.deepEqual(errors,[]);
+    console.log('PASS Chrome '+fixture.base+': confirmar/cancelar, conservar portada y promociones, revocar sesión y recrear con el mismo correo (1440/390 px).');
+  } finally {if(browser)await browser.close();await admin.dispose();await ally.dispose();await guest.dispose();}
+})().catch(e=>{console.error(e);process.exitCode=1;});

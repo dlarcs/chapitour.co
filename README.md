@@ -63,3 +63,16 @@ Se eliminó el catálogo de veinte perfiles de relleno, junto con sus avisos y e
 No se borran cuentas ni premios y no hace falta SQL de migración: los perfiles de relleno estaban definidos en el código. La lista muestra el número real de participantes y un estado vacío si no hay ninguno.
 
 Verificación local: 278 comprobaciones del ranking (cuentas, alias, preferencias, orden y paginación), 58 del registro/premios y Chrome con 0/5/19/20/21 participantes a 1440/390/320 px. Paquete de diez archivos: `chapitour-ranking-real-20261003.zip`; respaldo previo local: `/private/tmp/chapitour-ranking-respaldo-20261003.zip`.
+
+Verificación en Hostinger: las API de producción y pruebas reportaron 23 participantes registrados y cero perfiles de demostración. La portada cargó la versión nueva; JS y CSS coincidieron byte a byte con los archivos probados. Chrome mostró el conteo y la lista de alias ordenada por puntaje. No se crearon cuentas, premios ni cambios de preferencias en producción durante la comprobación.
+
+
+## Cuentas de aliados: correo reutilizable y negocio independiente
+
+El botón de administración «Eliminar acceso» revoca la cuenta y sus sesiones, conservando el negocio publicado, su página, las promociones y los códigos. El registro de usuario permanece inactivo para conservar las referencias de auditoría y redención; el correo queda libre. Al crear un acceso también se liberan correos retenidos por cuentas de aliado inactivas de la versión anterior, dentro de la misma transacción. Las cuentas activas, de clientes y de administradores mantienen sus restricciones. No requiere migración SQL ni reactiva negocios ocultados previamente.
+
+La confirmación identifica el negocio y el correo y envía el ID del acceso concreto: un diálogo antiguo no puede eliminar la cuenta que lo reemplazó. Después de eliminarlo, la tarjeta ofrece «Crear acceso» para asociar el correo y una nueva contraseña temporal al mismo negocio.
+
+Pruebas aisladas: `tests/ally-delete.php` ejecuta 40 comprobaciones para cada copia (principal y pruebas), incluyendo reutilización, compatibilidad con eliminaciones anteriores, reversión en errores, permisos, sesiones e historial. `tests/ally-access.cjs` verifica en Chrome a 1440 y 390 px cancelar/confirmar, conservar el catálogo y promociones, revocar sesiones y recrear el acceso con el mismo correo. Se usa únicamente la base temporal `chapitour_panels_qa`.
+
+Publicado en Hostinger mediante `chapitour-accesos-20261003.zip` (seis archivos de ejecución, sin SQL ni configuración privada). El respaldo previo está en `/private/tmp/chapitour-accesos-respaldo-20261003.zip`. Tras publicar, portada y ambas API respondieron HTTP 200 y los dos JavaScript coincidieron byte a byte con la versión probada. Chrome verificó la carga de la portada y su catálogo, sin modificar cuentas reales.

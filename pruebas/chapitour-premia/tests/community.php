@@ -12,12 +12,12 @@ function auth(?int $id,string $kind='client'):void {$_SESSION=['csrf'=>'qa'];if(
 function client(string $name):array {$email='comunidad-'.bin2hex(random_bytes(6)).'@example.invalid';query('INSERT INTO cp_clientes(nombre,email,password_hash) VALUES (?,?,?)',[$name,$email,password_hash('Qa-comunidad-456!',PASSWORD_BCRYPT)]);return ['id'=>(int)$GLOBALS['db']->lastInsertId(),'email'=>$email,'name'=>$name];}
 $panel=new ChapitourPanel($db);auth(100,'staff');$panel->state();$community=new ChapitourCommunity($db);check($community->ready(),'Instalación aditiva');
 $a=client('Nombre privado QA');$b=client('Otra persona privada');$ui=client('Perfil QA');$other=client('Otro perfil QA');
-auth($a['id']);$state=$panel->state();check(!$state['user']['community']['visible'] && $state['user']['photo_url']===null,'Perfil inicialmente privado y sin foto');
+auth($a['id']);$state=$panel->state();check($state['user']['community']['visible'] && $state['user']['photo_url']===null && preg_match('/^Chapi-[A-F0-9]{6}$/',$state['user']['community']['public_name']),'Perfil registrado con alias automático y sin foto');
 check(!in_array($a['name'],array_column($state['leaderboard']['entries'],'name'),true),'No publica automáticamente el nombre de Google');
 $profile=['email'=>$a['email'],'name'=>$a['name'],'city'=>'Bogotá','public_name'=>'Luna QA','ranking_visible'=>'1'];
 $state=$panel->handle('profile',$profile);check($state['user']['community']['visible'],'Participación pública voluntaria');
-$public=$community->leaderboard();foreach($public['entries'] as $entry){check(array_keys($entry)===(($entry['demo']??false)?['name','score','demo']:['name','score']),'Solo nombre público, calificación y etiqueta de ejemplo cuando aplica');}
-check(in_array('Luna QA',array_column($public['entries'],'name'),true),'Alias aparece en la portada');
+$public=$community->leaderboard();foreach($public['entries'] as $entry){check(array_keys($entry)===['name','score'],'Solo alias y puntaje de cuentas registradas');}
+$names=[];for($page=1;$page<=100;$page++){$ranking=$community->leaderboard($page,20);$names=array_merge($names,array_column($ranking['entries'],'name'));if(!$ranking['has_more'])break;}check(in_array('Luna QA',$names,true),'Alias aparece en la lista paginada');
 reject(static function()use($panel,$profile){$panel->handle('profile',array_replace($profile,['name'=>'No debe guardarse','public_name'=>'']));},422);
 check($panel->state()['user']['name']===$a['name'],'Preferencias inválidas no guardan cambios parciales');
 $month=$community->month();$start=strtotime(substr($month,0,7).'-05 12:00:00 UTC');$prizes=query('SELECT COUNT(*) FROM cp_premios')->fetchColumn();

@@ -23,8 +23,8 @@ header("Content-Security-Policy: default-src 'self'; script-src 'self' https://a
   <meta name="twitter:card" content="summary_large_image">
   <title>Chapitour te premia · Lugares y experiencias en Chapinero, Bogotá</title>
   <link rel="icon" href="/premia/assets/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="/premia/assets/app.css?v=20261003-ranking-real-1">
-  <script defer src="/premia/assets/app.js?v=20261003-ranking-real-1"></script>
+  <link rel="stylesheet" href="/premia/assets/app.css?v=20261003-accesos-1">
+  <script defer src="/premia/assets/app.js?v=20261003-accesos-1"></script>
 </head>
 <body>
   <a class="skip-link" href="#main">Saltar al contenido</a>

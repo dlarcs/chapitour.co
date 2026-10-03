@@ -1,60 +1,93 @@
 <?php
 declare(strict_types=1);
-// Run after panel-fixtures.php setup, exclusively against its temporary database.
+// Synthetic records only, in the isolated QA database. Test both copies in separate processes.
 $socket=$argv[1]??'';
 if (PHP_SAPI!=='cli' || !preg_match('#^/private/tmp/chapitour-panel-qa\.[A-Za-z0-9]+/mysql\.sock$#',$socket)) {
     throw new RuntimeException('Solo se permite la instancia temporal de QA.');
 }
-require __DIR__.'/../lib/Panel.php';
+$production=($argv[2]??'production')==='production';
+require $production?__DIR__.'/../../../premia/lib/Panel.php':__DIR__.'/../lib/Panel.php';
+ini_set('session.save_path',dirname($socket));session_start();
 $db=new PDO('mysql:unix_socket='.$socket.';dbname=chapitour_panels_qa;charset=utf8mb4','root','',[
-    PDO::ATTR_ERRMODE=>PDO::ERRMODE_EXCEPTION,PDO::ATTR_DEFAULT_FETCH_MODE=>PDO::FETCH_ASSOC,
-    PDO::ATTR_EMULATE_PREPARES=>false
+    PDO::ATTR_ERRMODE=>PDO::ERRMODE_EXCEPTION,PDO::ATTR_DEFAULT_FETCH_MODE=>PDO::FETCH_ASSOC,PDO::ATTR_EMULATE_PREPARES=>false
 ]);
-$checks=0;
-function verifyAlly(bool $ok,string $message): void {
-    global $checks;
-    if (!$ok) { throw new RuntimeException($message); }
-    $checks++;
-}
+$db->exec("SET time_zone='+00:00'");$checks=0;
+function q(string $sql,array $args=[]): PDOStatement { global $db;$s=$db->prepare($sql);$s->execute($args);return $s; }
+function verifyAlly(bool $ok,string $message): void { global $checks;if(!$ok){throw new RuntimeException($message);}$checks++; }
 function rejectedAlly(callable $fn,int $status): void {
-    try { $fn(); } catch (PanelError $e) { verifyAlly($e->getCode()===$status,'Código de rechazo incorrecto.'); return; }
-    throw new RuntimeException('La eliminación debía ser rechazada.');
+    try{$fn();}catch(PanelError $e){verifyAlly($e->getCode()===$status,'Rechazo incorrecto: '.$e->getMessage());return;}
+    throw new RuntimeException('La acción debía ser rechazada.');
 }
-$db->exec("SET time_zone='+00:00'");
-$db->exec('UPDATE cp_usuarios SET cambiar_password=0 WHERE id=100');
-$panel=new ChapitourPanel($db);
-$panel->installSchema();
-$delete=['id'=>'1','confirm'=>'1'];
-foreach ([null,['kind'=>'client','id'=>100,'version'=>1],['kind'=>'staff','id'=>101,'version'=>1]] as $auth) {
-    $_SESSION=['csrf'=>'qa-only','auth'=>$auth];
-    rejectedAlly(fn()=>$panel->handle('delete_business',$delete),403);
+function authAlly(?int $id,string $kind='staff',int $version=1): void {
+    $_SESSION=['csrf'=>'qa-only'];if($id!==null){$_SESSION['auth']=['kind'=>$kind,'id'=>$id,'version'=>$version];}
 }
-$_SESSION=['csrf'=>'qa-only','auth'=>['kind'=>'staff','id'=>100,'version'=>1]];
-rejectedAlly(fn()=>$panel->handle('delete_business',['id'=>'1','confirm'=>'wrong']),422);
-verifyAlly((int)$db->query('SELECT activo FROM cp_negocios WHERE id=1')->fetchColumn()===1,'Confirmación inválida modificó el negocio.');
-$prizes=$db->query('SELECT * FROM cp_premios ORDER BY id')->fetchAll();
-$details=$db->query('SELECT * FROM cp_premio_detalles ORDER BY premio_id')->fetchAll();
-$db->exec("UPDATE cp_promociones SET activa=1 WHERE negocio_id=1");
-$db->exec("UPDATE cp_panel_promociones m JOIN cp_promociones p ON p.id=m.promocion_id SET m.publicacion='approved',m.aprobada_por=100,m.aprobada_at=UTC_TIMESTAMP() WHERE p.negocio_id=1");
-$state=$panel->handle('delete_business',$delete);
-verifyAlly(!in_array('1',array_column($state['businesses'],'id'),true),'El aliado sigue en el listado.');
-verifyAlly(!in_array('1',array_column($state['promotions'],'business_id'),true),'Las ofertas siguen en el listado.');
-verifyAlly((int)$db->query('SELECT activo FROM cp_negocios WHERE id=1')->fetchColumn()===0,'El negocio no quedó inactivo.');
-verifyAlly((int)$db->query('SELECT activo FROM cp_usuarios WHERE id=101')->fetchColumn()===0,'El acceso sigue activo.');
-verifyAlly((int)$db->query('SELECT version_sesion FROM cp_usuarios WHERE id=101')->fetchColumn()===2,'No se revocaron las sesiones.');
-verifyAlly((int)$db->query('SELECT MAX(activa) FROM cp_promociones WHERE negocio_id=1')->fetchColumn()===0,'Una promoción sigue activa.');
-verifyAlly((int)$db->query("SELECT COUNT(*) FROM cp_panel_promociones m JOIN cp_promociones p ON p.id=m.promocion_id WHERE p.negocio_id=1 AND (m.publicacion<>'draft' OR m.aprobada_por IS NOT NULL OR m.aprobada_at IS NOT NULL)")->fetchColumn()===0,'No se retiró la aprobación.');
-verifyAlly($prizes===$db->query('SELECT * FROM cp_premios ORDER BY id')->fetchAll(),'Cambió el historial de premios.');
-verifyAlly($details===$db->query('SELECT * FROM cp_premio_detalles ORDER BY premio_id')->fetchAll(),'Cambió el beneficio de los códigos.');
-verifyAlly(count($state['codes'])===count($prizes),'El administrador perdió el historial.');
-verifyAlly((int)$db->query("SELECT COUNT(*) FROM cp_auditoria WHERE accion='aliado_eliminado' AND entidad_id=1 AND usuario_id=100")->fetchColumn()===1,'Falta la auditoría.');
-verifyAlly((int)$db->query('SELECT activo FROM cp_usuarios WHERE id=100')->fetchColumn()===1,'Se modificó el administrador.');
-$_SESSION=['csrf'=>'qa-only','auth'=>['kind'=>'staff','id'=>101,'version'=>1]];
-verifyAlly($panel->actor()===null,'La sesión anterior del aliado sigue válida.');
-$_SESSION=['csrf'=>'qa-only','auth'=>['kind'=>'staff','id'=>100,'version'=>1]];
-verifyAlly((int)$db->query("SELECT COUNT(*) FROM cp_usuarios WHERE negocio_id=2 AND rol='aliado'")->fetchColumn()===0,'El caso sin cuenta necesita un negocio sin usuario.');
-$state=$panel->handle('delete_business',['id'=>'2','confirm'=>'2']);
-verifyAlly(!in_array('2',array_column($state['businesses'],'id'),true),'No se puede retirar un aliado sin cuenta.');
-$_SESSION=['csrf'=>'qa-only'];
-verifyAlly(!array_intersect(['1','2'],array_column($panel->state()['businesses'],'id')),'El catálogo público muestra aliados eliminados.');
-echo "PASS eliminar aliado: $checks comprobaciones (permisos, confirmación, cuentas, promociones e historial).\n";
+function businessAlly(array $state,string $id): array {return array_values(array_filter($state['businesses'],fn($b)=>$b['id']===$id))[0];}
+$tag=bin2hex(random_bytes(6));$adminEmail='access-admin-'.$tag.'@example.invalid';$email='access-ally-'.$tag.'@example.invalid';
+$password='Qa-access-old-456!';$newPassword='Qa-access-new-456!';$hash=password_hash($password,PASSWORD_BCRYPT);
+q("INSERT INTO cp_usuarios(usuario,password_hash,rol,activo,cambiar_password) VALUES (?,?,'admin',1,0)",[$adminEmail,$hash]);$admin=(int)$db->lastInsertId();
+q('INSERT INTO cp_clientes(nombre,email,password_hash) VALUES (?,?,?)',['Cliente QA acceso','access-client-'.$tag.'@example.invalid',$hash]);$client=(int)$db->lastInsertId();
+authAlly($admin);$panel=new ChapitourPanel($db);$panel->installSchema();
+$state=$panel->handle('save_business',['name'=>'Negocio QA acceso '.$tag,'email'=>$email,'password'=>$password]);
+$b=array_values(array_filter($state['businesses'],fn($b)=>$b['email']===$email))[0];$businessId=$b['id'];$accountId=$b['account_id'];
+verifyAlly((int)$accountId>0,'Falta la identidad de la cuenta en administración.');
+q('UPDATE cp_negocios SET pagina=?,logo=? WHERE id=?',['/Capital_Queer/','/qa-logo.svg',$businessId]);
+$panel->handle('save_promotion',['business_id'=>$businessId,'description'=>'Oferta sintética QA acceso','publication'=>'approved','whatsapp'=>'10000000','included'=>'Servicio QA','hours'=>'Horario QA','restrictions'=>'Solo QA aislado','confirmed'=>true]);
+$businessBefore=q('SELECT * FROM cp_negocios WHERE id=?',[$businessId])->fetch();
+$promosBefore=q('SELECT * FROM cp_promociones WHERE negocio_id=?',[$businessId])->fetchAll();
+$metaBefore=q('SELECT m.* FROM cp_panel_promociones m JOIN cp_promociones p ON p.id=m.promocion_id WHERE p.negocio_id=?',[$businessId])->fetchAll();
+$prizesBefore=q('SELECT * FROM cp_premios ORDER BY id')->fetchAll();$detailsBefore=q('SELECT * FROM cp_premio_detalles ORDER BY premio_id')->fetchAll();
+$delete=['id'=>$businessId,'account_id'=>$accountId,'confirm'=>$businessId];
+q('UPDATE cp_usuarios SET cambiar_password=0 WHERE id=?',[$accountId]);
+foreach([null,'client','ally'] as $role){authAlly($role===null?null:($role==='client'?$client:(int)$accountId),$role==='client'?'client':'staff');rejectedAlly(fn()=>$panel->handle('delete_business',$delete),403);}
+authAlly(null);$publicBefore=businessAlly($panel->state(),$businessId);
+verifyAlly(!array_key_exists('account_id',$publicBefore)&&!array_key_exists('email',$publicBefore),'La portada expone datos del acceso.');
+authAlly($admin);
+rejectedAlly(fn()=>$panel->handle('delete_business',array_merge($delete,['confirm'=>'wrong'])),422);
+rejectedAlly(fn()=>$panel->handle('delete_business',['id'=>$businessId,'confirm'=>$businessId]),422);
+rejectedAlly(fn()=>$panel->handle('delete_business',array_merge($delete,['account_id'=>(string)$admin])),409);
+rejectedAlly(fn()=>$panel->handle('save_business',['name'=>'Duplicado QA','email'=>strtoupper($email),'password'=>$password]),409);
+$state=$panel->handle('delete_business',$delete);$b=businessAlly($state,$businessId);
+verifyAlly($b['email']===''&&$b['account_id']===null,'El panel no ofrece crear un nuevo acceso.');
+verifyAlly($businessBefore===q('SELECT * FROM cp_negocios WHERE id=?',[$businessId])->fetch(),'Se modificó la página o publicación del negocio.');
+verifyAlly($promosBefore===q('SELECT * FROM cp_promociones WHERE negocio_id=?',[$businessId])->fetchAll(),'Se modificaron las promociones.');
+verifyAlly($metaBefore===q('SELECT m.* FROM cp_panel_promociones m JOIN cp_promociones p ON p.id=m.promocion_id WHERE p.negocio_id=?',[$businessId])->fetchAll(),'Se retiró una aprobación.');
+verifyAlly($prizesBefore===q('SELECT * FROM cp_premios ORDER BY id')->fetchAll(),'Cambió el historial de premios.');
+verifyAlly($detailsBefore===q('SELECT * FROM cp_premio_detalles ORDER BY premio_id')->fetchAll(),'Cambió el beneficio de los códigos.');
+$retired=q('SELECT * FROM cp_usuarios WHERE id=?',[$accountId])->fetch();
+verifyAlly((int)$retired['activo']===0&&(int)$retired['version_sesion']===2,'No se revocó el acceso.');
+verifyAlly($retired['usuario']!==$email&&!password_verify($password,$retired['password_hash']),'No se liberó el correo o la contraseña.');
+verifyAlly((int)$retired['negocio_id']===(int)$businessId,'Se perdió la asociación histórica del acceso.');
+verifyAlly((int)q("SELECT COUNT(*) FROM cp_auditoria WHERE accion='cuenta_aliado_eliminada' AND entidad_id=? AND usuario_id=?",[$accountId,$admin])->fetchColumn()===1,'Falta la auditoría de eliminación.');
+authAlly((int)$accountId);verifyAlly($panel->actor()===null,'La sesión anterior del aliado sigue válida.');
+authAlly(null);verifyAlly($publicBefore===businessAlly($panel->state(),$businessId),'El negocio dejó de aparecer igual en la portada.');
+rejectedAlly(fn()=>$panel->handle('login',['email'=>$email,'password'=>$password]),401);
+authAlly($admin);$state=$panel->handle('save_business',['business_id'=>$businessId,'email'=>$email,'password'=>$newPassword]);$newAccount=businessAlly($state,$businessId)['account_id'];
+verifyAlly($newAccount!==$accountId,'Se reutilizó la identidad histórica en vez de crear una cuenta nueva.');
+rejectedAlly(fn()=>$panel->handle('delete_business',$delete),409);
+verifyAlly((int)q('SELECT activo FROM cp_usuarios WHERE id=?',[$newAccount])->fetchColumn()===1,'Una confirmación antigua eliminó la cuenta nueva.');
+authAlly(null);rejectedAlly(fn()=>$panel->handle('login',['email'=>$email,'password'=>$password]),401);
+$state=$panel->handle('login',['email'=>$email,'password'=>$newPassword]);
+verifyAlly($state['user']['role']==='ally'&&$state['user']['must_change_password'],'El nuevo acceso no inicia sesión con cambio de contraseña obligatorio.');
+$state=$panel->handle('change_password',['current_password'=>$newPassword,'new_password'=>'Qa-access-final-456!','confirm_password'=>'Qa-access-final-456!']);
+verifyAlly(array_column($state['businesses'],'id')===[$businessId],'La cuenta nueva ve otro negocio.');
+authAlly((int)$accountId);verifyAlly($panel->actor()===null,'Recrear el acceso reactivó una sesión vieja.');
+authAlly($admin);$panel->handle('delete_business',array_merge($delete,['account_id'=>$newAccount]));
+$state=$panel->handle('save_business',['name'=>'Otro negocio QA '.$tag,'email'=>$email,'password'=>$password]);$other=array_values(array_filter($state['businesses'],fn($b)=>$b['email']===$email))[0];
+verifyAlly($other['id']!==$businessId,'El correo no se puede reutilizar con otro negocio.');
+verifyAlly($businessBefore===q('SELECT * FROM cp_negocios WHERE id=?',[$businessId])->fetch(),'Reasignar el correo modificó el negocio anterior.');
+// Compatibility: older deleted allies still occupy their original email.
+$legacyEmail='legacy-ally-'.$tag.'@example.invalid';
+q("INSERT INTO cp_usuarios(negocio_id,usuario,password_hash,rol,activo,cambiar_password) VALUES (?,?,?,'aliado',0,0)",[$businessId,$legacyEmail,$hash]);$legacy=(int)$db->lastInsertId();
+rejectedAlly(fn()=>$panel->handle('save_business',['business_id'=>$other['id'],'email'=>$legacyEmail,'password'=>$password]),409);
+verifyAlly(q('SELECT usuario FROM cp_usuarios WHERE id=?',[$legacy])->fetchColumn()===$legacyEmail,'Un intento fallido no revirtió el archivado.');
+$state=$panel->handle('save_business',['business_id'=>$businessId,'email'=>$legacyEmail,'password'=>$newPassword]);
+verifyAlly(businessAlly($state,$businessId)['email']===$legacyEmail,'No se reutilizó el correo de una eliminación anterior.');
+verifyAlly(q('SELECT usuario FROM cp_usuarios WHERE id=?',[$legacy])->fetchColumn()!==$legacyEmail,'La cuenta anterior mantiene ocupado el correo.');
+verifyAlly((int)q('SELECT activo FROM cp_usuarios WHERE id=?',[$legacy])->fetchColumn()===0,'Se reactivó la cuenta antigua.');
+foreach([$adminEmail,'access-client-'.$tag.'@example.invalid'] as $reserved){rejectedAlly(fn()=>$panel->handle('save_business',['name'=>'Conflicto QA','email'=>$reserved,'password'=>$password]),409);}
+$inactiveAdminEmail='inactive-admin-'.$tag.'@example.invalid';
+q("INSERT INTO cp_usuarios(usuario,password_hash,rol,activo,cambiar_password) VALUES (?,?,'admin',0,0)",[$inactiveAdminEmail,$hash]);
+rejectedAlly(fn()=>$panel->handle('save_business',['name'=>'Conflicto QA','email'=>$inactiveAdminEmail,'password'=>$password]),409);
+verifyAlly((int)q('SELECT activo FROM cp_usuarios WHERE id=?',[$admin])->fetchColumn()===1,'Cambió el acceso del administrador.');
+file_put_contents(dirname($socket).'/ally-access-ui.json',json_encode(['admin_email'=>$adminEmail,'password'=>$password,'business_id'=>$businessId,'business_name'=>$businessBefore['nombre'],'email'=>$legacyEmail,'account_password'=>$newPassword,'base'=>$production?'/':'/pruebas/chapitour-premia/'],JSON_UNESCAPED_SLASHES));
+echo 'PASS '.($production?'principal':'pruebas').": $checks comprobaciones de permisos, correo reutilizable, sesiones, portada, promociones e historial.\n";

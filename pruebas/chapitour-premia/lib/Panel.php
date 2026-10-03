@@ -278,6 +278,13 @@ final class ChapitourPanel
         $this->logout();
     }
     private function logout(): void { $_SESSION = ['csrf'=>bin2hex(random_bytes(32))]; session_regenerate_id(true); }
+    private function retireAllyAccess(int $accountId): void {
+        // Keep the account ID for redemption/audit references, but release its email and revoke access.
+        $this->query("UPDATE cp_usuarios SET usuario=?,password_hash=?,activo=0,version_sesion=version_sesion+1 WHERE id=? AND rol='aliado'", [
+            'eliminada-'.$accountId.'-'.bin2hex(random_bytes(8)).'@deleted.invalid',
+            password_hash(bin2hex(random_bytes(24)),PASSWORD_BCRYPT),$accountId
+        ]);
+    }
     private function saveBusiness(array $input): void {
         $a = $this->requireActor(['admin']);
         $email = mb_strtolower($this->text($input, 'email', 100));
@@ -286,7 +293,11 @@ final class ChapitourPanel
         $name = $this->text($input, 'name', 80, $existing==='');
         $this->accountLock(function () use ($a, $input, $email, $hash, $existing, $name) {
             $this->transaction(function () use ($a, $input, $email, $hash, $existing, $name) {
-                $this->requireActor(['admin'], true); $this->uniqueEmail($email);
+                $this->requireActor(['admin'], true);
+                // Accounts deleted by earlier versions kept their email; release only inactive ally accesses.
+                $previous=$this->row("SELECT id FROM cp_usuarios WHERE usuario=? AND rol='aliado' AND activo=0 FOR UPDATE",[$email]);
+                if ($previous) { $this->retireAllyAccess((int)$previous['id']); $this->audit($a,'acceso_aliado_archivado',(int)$previous['id']); }
+                $this->uniqueEmail($email);
                 if ($existing !== '') {
                     $id = $this->id($input,'business_id');
                     if (!$this->row('SELECT id FROM cp_negocios WHERE id=? AND activo=1 FOR UPDATE', [$id])) { $this->error('Negocio no encontrado.',404); }
@@ -302,15 +313,19 @@ final class ChapitourPanel
     }
     private function deleteBusiness(array $input): void {
         $a = $this->requireActor(['admin']); $id = $this->id($input,'id');
-        if ((string)($input['confirm'] ?? '') !== (string)$id) { $this->error('Confirma el aliado que quieres eliminar.'); }
-        $this->transaction(function () use ($a,$id) {
-            $this->requireActor(['admin'],true);
-            if (!$this->row('SELECT id FROM cp_negocios WHERE id=? FOR UPDATE', [$id])) { $this->error('Negocio no encontrado.',404); }
-            $this->query('UPDATE cp_negocios SET activo=0 WHERE id=?', [$id]);
-            $this->query("UPDATE cp_usuarios SET activo=0,version_sesion=version_sesion+1 WHERE negocio_id=? AND rol='aliado'", [$id]);
-            $this->query('UPDATE cp_promociones SET activa=0 WHERE negocio_id=?', [$id]);
-            $this->query("UPDATE cp_panel_promociones m JOIN cp_promociones p ON p.id=m.promocion_id SET m.publicacion='draft',m.aprobada_por=NULL,m.aprobada_at=NULL WHERE p.negocio_id=? AND m.publicacion<>'archived'", [$id]);
-            $this->audit($a,'aliado_eliminado',$id);
+        if ((string)($input['confirm'] ?? '') !== (string)$id) { $this->error('Confirma la cuenta de acceso que quieres eliminar.'); }
+        $accountId=$this->id($input,'account_id');
+        $this->accountLock(function () use ($a,$id,$accountId) {
+            $this->transaction(function () use ($a,$id,$accountId) {
+                $this->requireActor(['admin'],true);
+                if (!$this->row('SELECT id FROM cp_negocios WHERE id=? FOR UPDATE', [$id])) { $this->error('Negocio no encontrado.',404); }
+                // Bind the confirmation to this access, so a stale dialog cannot delete its replacement.
+                if (!$this->row("SELECT id FROM cp_usuarios WHERE id=? AND negocio_id=? AND rol='aliado' AND activo=1 FOR UPDATE",[$accountId,$id])) {
+                    $this->error('Esta cuenta ya no está disponible. Actualiza el panel.',409);
+                }
+                $this->retireAllyAccess($accountId);
+                $this->audit($a,'cuenta_aliado_eliminada',$accountId);
+            });
         });
     }
     private function savePromotion(array $input): void {
@@ -444,8 +459,9 @@ final class ChapitourPanel
             $item=['id'=>(string)$b['id'],'name'=>$b['nombre'],'category'=>$b['categoria'],'slug'=>$b['slug'],'icon'=>$style[0],'color'=>$style[1],
                 'path'=>$this->safePath($b['pagina']),'image'=>$this->safePath($b['logo']),'whatsapp'=>$b['whatsapp']];
             if ($a && $a['role']==='admin') {
-                $account=$this->row("SELECT usuario FROM cp_usuarios WHERE negocio_id=? AND rol='aliado' AND activo=1 ORDER BY id LIMIT 1",[$b['id']]);
+                $account=$this->row("SELECT id,usuario FROM cp_usuarios WHERE negocio_id=? AND rol='aliado' AND activo=1 ORDER BY id LIMIT 1",[$b['id']]);
                 $item['email']=$account['usuario']??'';
+                $item['account_id']=$account?(string)$account['id']:null;
             }
             $base['businesses'][]=$item;
         }
