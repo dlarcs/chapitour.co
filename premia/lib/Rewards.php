@@ -102,9 +102,14 @@ final class ChapitourRewards
         if ($configured && $a && $a['role']==='client') {
             $ticket=$this->query('SELECT id,ciclo FROM cp_panel_giros WHERE cliente_id=? AND premio_id IS NULL ORDER BY id LIMIT 1',[$a['db_id']])->fetch(PDO::FETCH_ASSOC) ?: null;
         }
-        $reason=!$configured?'configuration_pending':(!$a?'login_required':($a['role']!=='client'?'client_required':(!$offers?'promotions_pending':(!$ticket?'visits_pending':'ready'))));
-        return ['enabled'=>(bool)($configured && $offers),'welcome_on_registration'=>true,'visits_per_reward'=>8,'new_visit_after'=>14400,'replaces_previous_rule'=>true,
-            'monthly_visit_reset'=>$configured?(bool)$p['reinicio_mensual']:null,'setup_required'=>!$this->ready(),
+        $guestAvailable=false;
+        if (!$a) {
+            $visitor=$this->guestVisitorId();
+            $guestAvailable=$this->guestIdentity()!==null && (!$visitor || (!$this->guestOwner($visitor) && !$this->guestAward($visitor)));
+            if ($configured && $guestAvailable) { $ticket=['id'=>'guest-welcome','ciclo'=>0]; }
+        }
+        $reason=!$configured?'configuration_pending':($a && $a['role']!=='client'?'client_required':(!$a && !$guestAvailable?'login_required':(!$offers?'promotions_pending':(!$ticket?'visits_pending':'ready'))));
+        return ['enabled'=>(bool)($configured && $offers),'setup_required'=>!$this->ready(),
             'eligible_promotions'=>count($offers),'wheel_business_ids'=>array_map(static function($o){return (string)$o['negocio_id'];},$offers),
             'can_spin'=>$reason==='ready','reason'=>$reason,'ticket_id'=>$ticket?(string)$ticket['id']:null,
             'ticket_kind'=>$ticket?((int)$ticket['ciclo']===0?'welcome':'visits'):null];
@@ -142,39 +147,120 @@ final class ChapitourRewards
             $origin=(int)$g['ciclo']===0?'panel_bienvenida':'panel_8_visitas';
             $this->query('INSERT INTO cp_oportunidades(visitante_id,campana_id,origen,origen_clave,mostrada_at,consumida_at) VALUES (?,?,?,?,UTC_TIMESTAMP(),UTC_TIMESTAMP())',[$visitor,$p['campana_id'],$origin,'cuenta:'.$a['db_id'].':ciclo:'.$g['ciclo']]);
             $opportunity=$this->db->lastInsertId();
-            $createdAt=(string)$this->query('SELECT UTC_TIMESTAMP()')->fetchColumn();
-            $month=(int)(new DateTimeImmutable($createdAt,new DateTimeZone('UTC')))->setTimezone(new DateTimeZone('America/Bogota'))->format('n');
-            $months=['ENE','FEB','MAR','ABR','MAY','JUN','JUL','AGO','SEP','OCT','NOV','DIC'];
-            $prefix='CHAPI-'.$months[$month-1].'-';
-            $prize=null; $minimum=100; $maximum=999999; $attempt=0;
-            while ($prize===null) {
-                if ($attempt<30) { $code=$prefix.random_int($minimum,$maximum); }
-                else {
-                    $code=$this->availableCode($prefix,$minimum,$maximum);
-                    if ($code===null) {
-                        if ($maximum>intdiv(PHP_INT_MAX-9,10)) { throw new PanelError('No pudimos asignar un código disponible. Tu giro se conserva; intenta de nuevo.',503); }
-                        $minimum=$maximum+1; $maximum=$maximum*10+9; $attempt=0;
-                        continue;
-                    }
-                }
-                try {
-                    $this->query('INSERT INTO cp_premios(oportunidad_id,visitante_id,campana_id,negocio_id,promocion_id,codigo,solicitud_id,titulo,descripcion,condiciones,porcentaje,creado_at,vence_at) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,DATE_ADD(?,INTERVAL 72 HOUR))',
-                        [$opportunity,$visitor,$p['campana_id'],$offer['negocio_id'],$offer['id'],$code,'panel-giro-'.$g['id'],$offer['titulo'],$offer['descripcion'],$offer['condiciones'],$offer['porcentaje'],$createdAt,$createdAt]);
-                    $prize=$this->db->lastInsertId();
-                    break;
-                } catch (PDOException $e) {
-                    // The unique index protects every issued code, including expired or redeemed ones.
-                    // Retry only a code collision; other database errors must roll back the whole spin.
-                    if ((int)($e->errorInfo[1]??0)!==1062 || !preg_match('/for key [\'`](?:[^\'`]+\.)?codigo[\'`]/i',(string)($e->errorInfo[2]??''))) { throw $e; }
-                    $attempt++;
-                    if ($attempt>=60) { throw new PanelError('No pudimos asignar un código disponible. Tu giro se conserva; intenta de nuevo.',503); }
-                }
-            }
-            $this->query('INSERT INTO cp_premio_detalles(premio_id,negocio,direccion,whatsapp) VALUES (?,?,?,?)',[$prize,$offer['nombre'],$offer['direccion'],$offer['whatsapp_confirmado']]);
-            $this->query('UPDATE cp_panel_giros SET premio_id=? WHERE id=?',[$prize,$g['id']]);
-            $this->query('UPDATE cp_promociones SET entregados=entregados+1 WHERE id=?',[$offer['id']]);
-            $this->query("INSERT INTO cp_auditoria(accion,entidad_id,datos) VALUES ('premio_generado',?,?)",[$prize,json_encode(['origen'=>'paneles','cliente_id'=>$a['db_id'],'giro_id'=>$g['id']])]);
+            $issued=$this->issue((int)$visitor,(int)$p['campana_id'],(int)$opportunity,$offer,'panel-giro-'.$g['id'],['origen'=>'paneles','cliente_id'=>$a['db_id'],'giro_id'=>$g['id']]);
+            $this->query('UPDATE cp_panel_giros SET premio_id=? WHERE id=?',[$issued['id'],$g['id']]);
+            $code=$issued['code'];
             return $code;
         });
+    }
+
+    private function guestIdentity(): ?string {
+        $token=$_COOKIE['CHAPITOUR_WELCOME']??'';
+        return is_string($token) && preg_match('/^[a-f0-9]{64}$/D',$token) ? hash('sha256','panel-welcome-v1:'.$token) : null;
+    }
+    public function guestVisitorId(): ?int {
+        $identity=$this->guestIdentity();
+        if ($identity===null) { return null; }
+        $id=$this->query('SELECT id FROM cp_visitantes WHERE identidad_hash=?',[$identity])->fetchColumn();
+        return $id===false?null:(int)$id;
+    }
+    private function guestVisitorLock(): int {
+        if (!$this->db->inTransaction()) { throw new LogicException('El visitante requiere una transacción.'); }
+        $identity=$this->guestIdentity();
+        if ($identity===null) { throw new PanelError('Actualiza la página para preparar tu bienvenida.',422); }
+        // Take an exclusive duplicate-row lock immediately; INSERT IGNORE can deadlock
+        // when simultaneous retries later upgrade their shared locks to FOR UPDATE.
+        $this->query('INSERT INTO cp_visitantes(identidad_hash,ip_hash,referido_token) VALUES (?,?,?) ON DUPLICATE KEY UPDATE id=LAST_INSERT_ID(id)',[$identity,hash('sha256',random_bytes(32)),bin2hex(random_bytes(16))]);
+        $visitor=(int)$this->db->lastInsertId();
+        // Read by the already locked primary key, without upgrading a secondary-index gap lock.
+        $stored=$this->query('SELECT identidad_hash FROM cp_visitantes WHERE id=? FOR UPDATE',[$visitor])->fetchColumn();
+        if ($stored!==$identity) { throw new PanelError('No pudimos preparar tu bienvenida. Intenta de nuevo.',503); }
+        return $visitor;
+    }
+    private function guestOwner(int $visitor) {
+        return $this->query('SELECT cliente_id FROM cp_cliente_visitantes WHERE visitante_id=?'.($this->db->inTransaction()?' FOR UPDATE':''),[$visitor])->fetchColumn();
+    }
+    private function guestAward(int $visitor): ?array {
+        return $this->query("SELECT id,codigo FROM cp_premios WHERE visitante_id=? AND solicitud_id='guest-welcome'".($this->db->inTransaction()?' FOR UPDATE':''),[$visitor])->fetch(PDO::FETCH_ASSOC) ?: null;
+    }
+    public function attachGuest(int $clientId): void {
+        // Authentication owns the transaction and the client lock. Never transfer another account's visitor.
+        if ($this->guestIdentity()===null) { return; }
+        $visitor=$this->guestVisitorLock();
+        $owner=$this->guestOwner($visitor);
+        if ($owner && (int)$owner!==$clientId) { return; }
+        if (!$owner) { $this->query('INSERT INTO cp_cliente_visitantes(cliente_id,visitante_id) VALUES (?,?)',[$clientId,$visitor]); }
+        $prize=$this->guestAward($visitor);
+        if ($prize) {
+            // Registration already created cycle zero. Its reward is the one won before signing up.
+            $this->query('UPDATE cp_panel_giros SET premio_id=? WHERE cliente_id=? AND ciclo=0 AND premio_id IS NULL',[$prize['id'],$clientId]);
+        }
+    }
+    public function spinGuest(string $ticket): string {
+        if ($ticket!=='guest-welcome') { throw new PanelError('Actualiza la ruleta e intenta de nuevo.',422); }
+        if (!$this->ready()) { throw new PanelError('La ruleta todavía no está disponible.',503); }
+        // InnoDB can choose a victim when different visitors compete for the last offer.
+        // Each failed transaction rolls back completely; retrying cannot issue twice.
+        for ($attempt=0; ; $attempt++) {
+            try { return $this->spinGuestTransaction(); }
+            catch (PDOException $e) {
+                if ($attempt>=3 || !in_array((int)($e->errorInfo[1]??0),[1213,1205],true)) { throw $e; }
+                usleep(random_int(10000,40000));
+            }
+        }
+    }
+    private function spinGuestTransaction(): string {
+        $this->db->beginTransaction();
+        try {
+            $visitor=$this->guestVisitorLock();
+            if ($this->guestOwner($visitor)) { throw new PanelError('Ingresa a tu cuenta para consultar tus promociones.',403); }
+            $prize=$this->guestAward($visitor);
+            if ($prize) { $this->db->commit(); return $prize['codigo']; }
+            $policy=$this->policy(true);
+            if ($policy['reinicio_mensual']===null) { throw new PanelError('La ruleta se está preparando. Intenta más tarde.',503); }
+            $offers=$this->offers(true);
+            if (!$offers) { throw new PanelError('Pronto tendremos promociones disponibles. Tu bienvenida se conserva.',422); }
+            $offer=$offers[random_int(0,count($offers)-1)];
+            $this->query("INSERT INTO cp_oportunidades(visitante_id,campana_id,origen,origen_clave,mostrada_at,consumida_at) VALUES (?,?,'panel_invitado','bienvenida',UTC_TIMESTAMP(),UTC_TIMESTAMP())",[$visitor,$policy['campana_id']]);
+            $opportunity=(int)$this->db->lastInsertId();
+            $issued=$this->issue($visitor,(int)$policy['campana_id'],$opportunity,$offer,'guest-welcome',['origen'=>'bienvenida_invitado']);
+            $this->db->commit(); return $issued['code'];
+        } catch (Throwable $e) {
+            if ($this->db->inTransaction()) { $this->db->rollBack(); } throw $e;
+        }
+    }
+    private function issue(int $visitor,int $campaign,int $opportunity,array $offer,string $requestId,array $audit): array {
+        $createdAt=(string)$this->query('SELECT UTC_TIMESTAMP()')->fetchColumn();
+        $month=(int)(new DateTimeImmutable($createdAt,new DateTimeZone('UTC')))->setTimezone(new DateTimeZone('America/Bogota'))->format('n');
+        $months=['ENE','FEB','MAR','ABR','MAY','JUN','JUL','AGO','SEP','OCT','NOV','DIC'];
+        $prefix='CHAPI-'.$months[$month-1].'-';
+        $prize=null; $minimum=100; $maximum=999999; $attempt=0;
+        while ($prize===null) {
+            if ($attempt<30) { $code=$prefix.random_int($minimum,$maximum); }
+            else {
+                $code=$this->availableCode($prefix,$minimum,$maximum);
+                if ($code===null) {
+                    if ($maximum>intdiv(PHP_INT_MAX-9,10)) { throw new PanelError('No pudimos asignar un código disponible. Tu giro se conserva; intenta de nuevo.',503); }
+                    $minimum=$maximum+1; $maximum=$maximum*10+9; $attempt=0;
+                    continue;
+                }
+            }
+            try {
+                $this->query('INSERT INTO cp_premios(oportunidad_id,visitante_id,campana_id,negocio_id,promocion_id,codigo,solicitud_id,titulo,descripcion,condiciones,porcentaje,creado_at,vence_at) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,DATE_ADD(?,INTERVAL 72 HOUR))',
+                    [$opportunity,$visitor,$campaign,$offer['negocio_id'],$offer['id'],$code,$requestId,$offer['titulo'],$offer['descripcion'],$offer['condiciones'],$offer['porcentaje'],$createdAt,$createdAt]);
+                $prize=$this->db->lastInsertId();
+                break;
+            } catch (PDOException $e) {
+                // The unique index protects every issued code, including expired or redeemed ones.
+                // Retry only a code collision; other database errors must roll back the whole spin.
+                if ((int)($e->errorInfo[1]??0)!==1062 || !preg_match('/for key [\'`](?:[^\'`]+\.)?codigo[\'`]/i',(string)($e->errorInfo[2]??''))) { throw $e; }
+                $attempt++;
+                if ($attempt>=60) { throw new PanelError('No pudimos asignar un código disponible. Tu giro se conserva; intenta de nuevo.',503); }
+            }
+        }
+        $this->query('INSERT INTO cp_premio_detalles(premio_id,negocio,direccion,whatsapp) VALUES (?,?,?,?)',[$prize,$offer['nombre'],$offer['direccion'],$offer['whatsapp_confirmado']]);
+        $this->query('UPDATE cp_promociones SET entregados=entregados+1 WHERE id=?',[$offer['id']]);
+        $this->query("INSERT INTO cp_auditoria(accion,entidad_id,datos) VALUES ('premio_generado',?,?)",[$prize,json_encode($audit)]);
+        return ['id'=>(int)$prize,'code'=>$code];
     }
 }

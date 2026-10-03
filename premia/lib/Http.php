@@ -10,4 +10,14 @@ function chapitourSession(): void {
         'httponly'=>true,'samesite'=>'Strict','secure'=>!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS']!=='off']);
     session_start();
     $_SESSION['csrf']=$_SESSION['csrf']??bin2hex(random_bytes(32));
+    // A server-issued bearer cookie remembers the welcome reward without creating an account.
+    // Only its hash is stored in MySQL; the token never appears in JSON or localStorage.
+    $welcome=$_COOKIE['CHAPITOUR_WELCOME']??'';
+    if (!is_string($welcome) || !preg_match('/^[a-f0-9]{64}$/D',$welcome)) {
+        $welcome=bin2hex(random_bytes(32));
+        setcookie('CHAPITOUR_WELCOME',$welcome,['expires'=>time()+31536000,
+            'path'=>rtrim(dirname($_SERVER['SCRIPT_NAME']),'/').'/',
+            'httponly'=>true,'samesite'=>'Strict','secure'=>!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS']!=='off']);
+        $_COOKIE['CHAPITOUR_WELCOME']=$welcome;
+    }
 }

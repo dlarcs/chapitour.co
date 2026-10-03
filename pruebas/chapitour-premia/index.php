@@ -14,7 +14,7 @@ header("Content-Security-Policy: default-src 'self'; script-src 'self' https://a
   <title>Chapitour te premia · Pruebas</title>
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="assets/app.css?v=11">
-  <script defer src="assets/app.js?v=11"></script>
+  <script defer src="assets/app.js?v=20261003"></script>
 </head>
 <body>
   <a class="skip-link" href="#main">Saltar al contenido</a>

@@ -168,6 +168,13 @@ final class ChapitourPanel
             $this->error('Correo o usuario y contraseña incorrectos.', 401);
         }
         if ($staff && $staff['rol']==='admin') { $this->installSchema(); $this->rewards()->install(); $this->installGoogleSchema(); $this->monthlyChallenges()->install(); $this->community()->install(); }
+        if (!$staff) {
+            $this->transaction(function () use ($row) {
+                $current=$this->row('SELECT activo,version_sesion FROM cp_clientes WHERE id=? FOR UPDATE',[$row['id']]);
+                if (!$current || !(int)$current['activo'] || $current['version_sesion']!==$row['version_sesion']) { $this->error('Vuelve a iniciar sesión.',403); }
+                $this->rewards()->attachGuest((int)$row['id']);
+            });
+        }
         $this->signIn($staff ? 'staff' : 'client', $row);
         $this->audit($this->actor(), 'inicio_sesion');
     }
@@ -196,6 +203,7 @@ final class ChapitourPanel
                 if ($linked) {
                     if (!(int)$linked['activo']) { $this->error('Esta cuenta está desactivada.',403); }
                     if ($current && $current['db_id']!==(int)$linked['id']) { $this->error('La cuenta de Google corresponde a otro cliente.',409); }
+                    $this->rewards()->attachGuest((int)$linked['id']);
                     return $linked;
                 }
                 if ($this->row('SELECT id FROM cp_usuarios WHERE usuario=?',[$identity['email']])) { $this->error('Este correo corresponde a un administrador o aliado. Ingresa con tu contraseña.',409); }
@@ -210,6 +218,7 @@ final class ChapitourPanel
                     $row=$this->createClient($identity['email'],$identity['name']);
                 }
                 $this->query('INSERT INTO cp_panel_google(cliente_id,subject_hash) VALUES (?,?)',[$row['id'],$identity['subject_hash']]);
+                $this->rewards()->attachGuest((int)$row['id']);
                 return $row;
             });
         });
@@ -363,10 +372,14 @@ final class ChapitourPanel
             $this->audit($a,'promocion_eliminada',$id);
         });
     }
-    private function codeQuery(array $a, ?string $code = null, bool $lock = false): PDOStatement {
+    private function codeQuery(?array $a, ?string $code = null, bool $lock = false): PDOStatement {
         $sql='SELECT p.*,COALESCE(d.negocio,n.nombre) AS negocio_nombre,COALESCE(NULLIF(d.whatsapp,\'\'),n.whatsapp) AS telefono FROM cp_premios p JOIN cp_negocios n ON n.id=p.negocio_id LEFT JOIN cp_premio_detalles d ON d.premio_id=p.id WHERE 1=1'; $args=[];
-        if ($a['role']==='ally') { $sql.=' AND p.negocio_id=?'; $args[]=$a['business_id']; }
-        if ($a['role']==='client') { $sql.=' AND EXISTS (SELECT 1 FROM cp_cliente_visitantes cv WHERE cv.visitante_id=p.visitante_id AND cv.cliente_id=?)'; $args[]=$a['db_id']; }
+        if ($a && $a['role']==='ally') { $sql.=' AND p.negocio_id=?'; $args[]=$a['business_id']; }
+        if ($a && $a['role']==='client') { $sql.=' AND EXISTS (SELECT 1 FROM cp_cliente_visitantes cv WHERE cv.visitante_id=p.visitante_id AND cv.cliente_id=?)'; $args[]=$a['db_id']; }
+        if (!$a) {
+            $sql.=" AND p.visitante_id=? AND p.solicitud_id='guest-welcome' AND NOT EXISTS (SELECT 1 FROM cp_cliente_visitantes cv WHERE cv.visitante_id=p.visitante_id)";
+            $args[]=$this->rewards()->guestVisitorId()??0;
+        }
         if ($code!==null) { $sql.=' AND p.codigo=?'; $args[]=$code; }
         $sql.=' ORDER BY p.creado_at DESC,p.id DESC'.($lock?' FOR UPDATE':'');
         return $this->query($sql,$args);
@@ -384,7 +397,8 @@ final class ChapitourPanel
         });
     }
     private function whatsapp(array $input): array {
-        $a=$this->requireActor(['client']);
+        $a=$this->actor();
+        if ($a) { $this->requireActor(['client']); }
         $p=$this->codeQuery($a,$this->text($input,'code',40))->fetch(PDO::FETCH_ASSOC);
         if (!$p) { $this->error('Código no encontrado.',404); }
         $c=$this->codeDto($p);
@@ -458,7 +472,7 @@ final class ChapitourPanel
                     'publication'=>($p['publicacion']==='approved' && (int)$p['activa']===1)?'approved':'draft','included'=>$p['incluidos']??'','hours'=>$p['horarios']??'','restrictions'=>$p['restricciones']??''];
             }
         }
-        if ($a) { foreach ($this->codeQuery($a)->fetchAll(PDO::FETCH_ASSOC) as $p) { $base['codes'][]=$this->codeDto($p); } }
+        foreach ($this->codeQuery($a)->fetchAll(PDO::FETCH_ASSOC) as $p) { $base['codes'][]=$this->codeDto($p); }
         if ($a && $a['role']==='client' && $ready) { $base['challenges']=$this->challenges($a); }
         return $base;
     }
@@ -492,12 +506,19 @@ final class ChapitourPanel
             case 'record_photo':
             case 'answer_questions': $this->completeChallenge($action,$input); break;
             case 'prepare_spin':
-                $a=$this->requireActor(['client']);
+                $a=$this->actor();
+                if ($a) { $this->requireActor(['client']); }
                 if (!$this->rewards()->status($a)['can_spin']) { $this->error('Aún no hay un giro disponible con promociones aprobadas.'); }
                 break;
             case 'spin':
-                $a=$this->requireActor(['client']);
-                $code=$this->rewards()->spin($a,$this->text($input,'ticket_id',20));
+                $a=$this->actor();
+                if ($a) {
+                    $this->requireActor(['client']);
+                    $code=$this->rewards()->spin($a,$this->text($input,'ticket_id',20));
+                } else {
+                    $this->limit('guest-spin-ip:'.($_SERVER['REMOTE_ADDR']??'local'),30,10);
+                    $code=$this->rewards()->spinGuest($this->text($input,'ticket_id',20));
+                }
                 return array_merge($this->state(),['won_code'=>$code]);
             default: $this->error('Acción no disponible.',404);
         }

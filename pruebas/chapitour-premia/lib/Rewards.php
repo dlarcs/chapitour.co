@@ -103,8 +103,8 @@ final class ChapitourRewards
             $ticket=$this->query('SELECT id,ciclo FROM cp_panel_giros WHERE cliente_id=? AND premio_id IS NULL ORDER BY id LIMIT 1',[$a['db_id']])->fetch(PDO::FETCH_ASSOC) ?: null;
         }
         $reason=!$configured?'configuration_pending':(!$a?'login_required':($a['role']!=='client'?'client_required':(!$offers?'promotions_pending':(!$ticket?'visits_pending':'ready'))));
-        return ['enabled'=>(bool)($configured && $offers),'welcome_on_registration'=>true,'visits_per_reward'=>8,'new_visit_after'=>14400,'replaces_previous_rule'=>true,
-            'monthly_visit_reset'=>$configured?(bool)$p['reinicio_mensual']:null,'setup_required'=>!$this->ready(),
+        return ['enabled'=>(bool)($configured && $offers),
+            'setup_required'=>!$this->ready(),
             'eligible_promotions'=>count($offers),'wheel_business_ids'=>array_map(static function($o){return (string)$o['negocio_id'];},$offers),
             'can_spin'=>$reason==='ready','reason'=>$reason,'ticket_id'=>$ticket?(string)$ticket['id']:null,
             'ticket_kind'=>$ticket?((int)$ticket['ciclo']===0?'welcome':'visits'):null];
