@@ -1,12 +1,11 @@
 <?php
 $base = rtrim($_SERVER['DOCUMENT_ROOT'], '/');
 
-// Ruta original de los archivos.
-// Cámbiala por la carpeta real de Street Grill cuando corresponda.
+// Base pública de los recursos de Street Grill.
 $assetsPath = '/gastronomia/streetgrill';
 
-$cssPath = $assetsPath . '/gastronomia/streetgrill/actividades/actividades/actividades.css';
-$jsPath  = $assetsPath . '/gastronomia/streetgrill/actividades/actividades/actividades.js';
+$cssPath = $assetsPath . '/actividades/actividades/actividades.css';
+$jsPath  = $assetsPath . '/actividades/actividades/actividades.js';
 
 $cssFile = $base . $cssPath;
 $jsFile  = $base . $jsPath;

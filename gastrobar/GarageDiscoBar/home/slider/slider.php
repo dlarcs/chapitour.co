@@ -35,7 +35,7 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
         <small>4.8 / 5</small>
       </div>
 
-      <a href="https://wa.me/573007795016?text=Hola%20quiero%20conocer%20Garage%209-39C">Conocer más</a>
+      <a href="https://wa.me/573156175056?text=Hola%20quiero%20conocer%20Garage%209-39C">Conocer más</a>
     </div>
   </article>
 
@@ -61,7 +61,7 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
         <small>4.8 / 5</small>
       </div>
 
-      <a href="https://wa.me/573007795016?text=Hola%20quiero%20información%20sobre%20Garage%209-39C">Contactar</a>
+      <a href="https://wa.me/573156175056?text=Hola%20quiero%20información%20sobre%20Garage%209-39C">Contactar</a>
     </div>
   </article>
 
@@ -87,7 +87,7 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
         <small>4.8 / 5</small>
       </div>
 
-      <a href="https://wa.me/573007795016?text=Hola%20quiero%20reservar%20en%20Garage%209-39C">Reservar</a>
+      <a href="https://wa.me/573156175056?text=Hola%20quiero%20reservar%20en%20Garage%209-39C">Reservar</a>
     </div>
   </article>
 

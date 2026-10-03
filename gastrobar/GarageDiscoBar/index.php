@@ -71,12 +71,12 @@
         "description": "Disco bar y gastrobar LGBTIQ+ en Chapinero, Bogotá, ideal para disfrutar rumba, música, comida, bebidas y un ambiente diverso, libre y lleno de energía.",
         "url": "https://chapitour.co/gastrobar/GarageDiscoBar/",
         "image": "https://chapitour.co/gastrobar/GarageDiscoBar/img/general11.jpg",
-        "telephone": "+573007795016",
+        "telephone": "+573156175056",
         "servesCuisine": "Gastrobar",
         "priceRange": "$$",
         "address": {
           "@type": "PostalAddress",
-          "streetAddress": "Cra. 9 #39C",
+          "streetAddress": "Calle 59 #9-39",
           "addressLocality": "Chapinero",
           "addressRegion": "Bogotá D.C.",
           "addressCountry": "CO"

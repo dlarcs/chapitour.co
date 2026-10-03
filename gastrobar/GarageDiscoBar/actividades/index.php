@@ -19,7 +19,7 @@
   <meta name="description" content="Descubre Chapinero, Bogotá con Chapitour: cafés, restaurantes, bares, cultura, alojamiento, planes locales y lugares para visitar.">
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
   <meta name="googlebot" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
-  <link rel="canonical" href="https://www.chapitour.co/">
+  <link rel="canonical" href="https://chapitour.co/gastrobar/GarageDiscoBar/actividades/index.php">
   <meta name="theme-color" content="#005548">
 
   <!-- Open Graph: WhatsApp / Facebook -->
@@ -27,7 +27,7 @@
   <meta property="og:site_name" content="Chapitour">
   <meta property="og:title" content="Chapitour | Lugares para visitar en Chapinero, Bogotá">
   <meta property="og:description" content="Explora Chapinero, Bogotá: cafés, restaurantes, bares, cultura, planes locales, alojamiento y lugares para visitar.">
-  <meta property="og:url" content="https://www.chapitour.co/">
+  <meta property="og:url" content="https://chapitour.co/gastrobar/GarageDiscoBar/actividades/index.php">
   <meta property="og:image" content="https://www.chapitour.co/gastrobar/GarageDiscoBar/img/general11.jpg">
   <meta property="og:image:secure_url" content="https://www.chapitour.co/gastrobar/GarageDiscoBar/img/general11.jpg">
   <meta property="og:image:type" content="image/jpeg">
@@ -94,7 +94,7 @@
     href="https://wa.me/573156175056?text=Hola%20vengo%20desde%20la%20web%20de%20Garage%209-39C"
     target="_blank" rel="noopener"
     aria-label="Chatear por WhatsApp">
-    <img src="../../global/img/img_whatsApp.png"
+    <img src="/global/img/img_whatsApp.png"
       alt="Contactar a Garage 9-39C por WhatsApp" decoding="async">
   </a>
 </body>

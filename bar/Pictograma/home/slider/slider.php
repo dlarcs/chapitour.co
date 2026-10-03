@@ -42,7 +42,7 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
       </div>
 
       <a
-        href="https://wa.me/573138846378?text=Hola%2C%20vengo%20desde%20Chapitour%20y%20quiero%20conocer%20m%C3%A1s%20sobre%20Pictogramas%20Cafe%20Bar."
+        href="https://wa.me/573502835648?text=Hola%2C%20vengo%20desde%20Chapitour%20y%20quiero%20conocer%20m%C3%A1s%20sobre%20Pictogramas%20Cafe%20Bar."
       >
         Reservar o contactar
       </a>
@@ -102,7 +102,7 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
       </div>
 
       <a
-        href="https://wa.me/573138846378?text=Hola%2C%20vengo%20desde%20Chapitour%20y%20quiero%20informaci%C3%B3n%20sobre%20la%20bolirana%20de%20Pictogramas%20Cafe%20Bar."
+        href="https://wa.me/573502835648?text=Hola%2C%20vengo%20desde%20Chapitour%20y%20quiero%20informaci%C3%B3n%20sobre%20la%20bolirana%20de%20Pictogramas%20Cafe%20Bar."
       >
         Consultar por WhatsApp
       </a>

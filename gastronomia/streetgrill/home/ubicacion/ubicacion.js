@@ -1,16 +1,21 @@
-const featuredPlaces = document.querySelectorAll('.visible');
+(() => {
+  const sections = document.querySelectorAll('.visible');
 
-if (featuredPlaces) {
+  if (!('IntersectionObserver' in window)) {
+    sections.forEach((section) => section.classList.add('is-visible'));
+    return;
+  }
+
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
-        featuredPlaces.classList.add('is-visible');
-        observer.unobserve(featuredPlaces);
+        entry.target.classList.add('is-visible');
+        observer.unobserve(entry.target);
       }
     });
   }, {
     threshold: 0.3
   });
 
-  observer.observe(featuredPlaces);
-}
+  sections.forEach((section) => observer.observe(section));
+})();

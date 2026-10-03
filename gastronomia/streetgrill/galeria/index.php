@@ -20,7 +20,7 @@
   <meta name="description" content="Conoce la galería de Street Grill en Chapinero, Bogotá: carnes al barril, carnes ahumadas, hamburguesas artesanales y una experiencia de gastrobar cargada de sabor.">
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
   <meta name="googlebot" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
-  <link rel="canonical" href="https://www.chapitour.co/">
+  <link rel="canonical" href="https://chapitour.co/gastronomia/streetgrill/galeria/index.php">
   <meta name="theme-color" content="#005548">
 
   <!-- Open Graph: WhatsApp / Facebook -->
@@ -28,7 +28,7 @@
   <meta property="og:site_name" content="Street Grill">
   <meta property="og:title" content="Street Grill | Carnes al barril y sabor ahumado en Chapinero">
   <meta property="og:description" content="Descubre Street Grill en Chapinero, Bogotá: carne al barril, carnes ahumadas, bondiola, hamburguesas artesanales y mucho sabor a la parrilla.">
-  <meta property="og:url" content="https://www.chapitour.co/">
+  <meta property="og:url" content="https://chapitour.co/gastronomia/streetgrill/galeria/index.php">
   <meta property="og:image" content="https://www.chapitour.co/gastronomia/streetgrill/img/logo.jpeg">
   <meta property="og:image:secure_url" content="https://www.chapitour.co/gastronomia/streetgrill/img/logo.jpeg">
   <meta property="og:image:type" content="image/jpeg">
@@ -39,7 +39,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Street Grill | Gastrobar de carnes al barril en Chapinero">
   <meta name="twitter:description" content="Carne al barril, sabor ahumado, hamburguesas artesanales y preparaciones hechas para los amantes de la carne en Chapinero, Bogotá.">
-  <meta name="twitter:image" content="https://www.chapitour.co/home/gastronomia/streetgrill/img/logo.jpeg">
+  <meta name="twitter:image" content="https://chapitour.co/gastronomia/streetgrill/img/logo.jpeg">
 
   <!-- Iconos -->
   <link rel="icon" href="/gastronomia/streetgrill/img/logo.jpeg">
@@ -108,7 +108,7 @@
     href="https://wa.me/573143580355?text=Hola%2C%20vengo%20desde%20la%20web%20de%20Street%20Grill"
     target="_blank" rel="noopener"
     aria-label="Chatear con Street Grill por WhatsApp">
-    <img src="../../global/img/img_whatsApp.png"
+    <img src="/global/img/img_whatsApp.png"
       alt="Contactar a Street Grill por WhatsApp" decoding="async">
   </a>
 

@@ -35,13 +35,13 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
 
   <nav id="chapitour-menu" class="chapitour-menu" aria-label="Menú principal">
     <div class="menu-inner">
-      <a href="../../bar/CapitalQueer/menu/index.php">Menú</a>
+      <a href="/bar/CapitalQueer/actividades/index.php">Planes</a>
       <a href="../../bar/CapitalQueer/galeria/index.php">Galería</a>
       <a href="../../bar/CapitalQueer/reservas/index.php">Reservas</a>
       <a href="#acerca_nosotros">Nosotros</a>
       <a href="#ubicacion">Redes sociales</a>
       <a href="#ubicacion">Ubicación</a>
-      <a href="https://wa.me/573138846378?text=Hola%20vengo%20desde%20la%20web%20de%20Bar%20Restaurant">Contactanos</a>
+      <a href="https://wa.me/573007795016?text=Hola%2C%20vengo%20desde%20Chapitour%20y%20quiero%20informaci%C3%B3n%20sobre%20Capital%20Queer.">Contáctanos</a>
 
 
 

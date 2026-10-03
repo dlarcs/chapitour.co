@@ -1,18 +1,18 @@
 <?php
 $base = rtrim($_SERVER['DOCUMENT_ROOT'], '/');
 
-$cssFile = $base . '/bar/Gran&Chela_Club/home/nav/nav.css';
-$jsFile  = $base . '/bar/Gran&Chela_Club/home/nav/nav.js';
+$cssFile = $base . '/bar/Gran&Chela_Club/global/pag_nav/pag_nav.css';
+$jsFile  = $base . '/bar/Gran&Chela_Club/global/pag_nav/pag_nav.js';
 
 $cssVer = is_file($cssFile) ? filemtime($cssFile) : '';
 $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
 ?>
 
-<link rel="stylesheet" href="../../bar/Gran&Chela_Club/home/nav/nav.css<?= $cssVer ? '?v=' . $cssVer : '' ?>">
+<link rel="stylesheet" href="../../../bar/Gran&Chela_Club/global/pag_nav/pag_nav.css<?= $cssVer ? '?v=' . $cssVer : '' ?>">
 
 <header class="chapitour-header">
-  <a href="../../bar/Gran&Chela_Club/index.php" class="chapitour-logo" aria-label="Ir al inicio">
-    <h1>Gran&Chela Club</h1>
+  <a href="../../../bar/Gran&Chela_Club/index.php" class="chapitour-logo" aria-label="Ir al inicio">
+    <span>Gran&amp;Chela Club</span>
   </a>
 
   <div class="chapitour-actions">
@@ -36,11 +36,11 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
   <nav id="chapitour-menu" class="chapitour-menu" aria-label="Menú principal">
     <div class="menu-inner">
       <a href="/bar/Gran&Chela_Club/actividades/index.php">Planes</a>
-      <a href="../../bar/Gran&Chela_Club/galeria/index.php">Galería</a>
-      <a href="../../bar/Gran&Chela_Club/reservas/index.php">Reservas</a>
-      <a href="#acerca_nosotros">Nosotros</a>
-      <a href="#ubicacion">Redes sociales</a>
-      <a href="#ubicacion">Ubicación</a>
+      <a href="../../../bar/Gran&Chela_Club/galeria/index.php">Galería</a>
+      <a href="../../../bar/Gran&Chela_Club/reservas/index.php">Reservas</a>
+      <a href="../../../bar/Gran&Chela_Club/index.php#acerca_nosotros">Nosotros</a>
+      <a href="../../../bar/Gran&Chela_Club/index.php#redes_sociales">Redes sociales</a>
+      <a href="../../../bar/Gran&Chela_Club/index.php#ubicacion">Ubicación</a>
       <a href="https://wa.me/573224680419?text=Hola%2C%20vengo%20desde%20Chapitour%20y%20quiero%20informaci%C3%B3n%20sobre%20Gran%26Chela%20Club.">Contáctanos</a>
 
 
@@ -48,4 +48,4 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
     </div>
   </nav>
 </header>
-<script defer src="../../bar/Gran&Chela_Club/home/nav/nav.js<?= $jsVer ? '?v=' . $jsVer : '' ?>"></script>
+<script defer src="../../../bar/Gran&Chela_Club/global/pag_nav/pag_nav.js<?= $jsVer ? '?v=' . $jsVer : '' ?>"></script>

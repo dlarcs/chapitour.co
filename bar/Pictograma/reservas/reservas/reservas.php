@@ -1,14 +1,14 @@
 <?php
 $base = rtrim($_SERVER['DOCUMENT_ROOT'], '/');
 
-$cssFile = $base . '/bar/CapitalQueer/reservas/reservas/reservas.css';
-$jsFile  = $base . '/bar/CapitalQueer/reservas/reservas/reservas.js';
+$cssFile = $base . '/bar/Pictograma/reservas/reservas/reservas.css';
+$jsFile  = $base . '/bar/Pictograma/reservas/reservas/reservas.js';
 
 $cssVer = is_file($cssFile) ? filemtime($cssFile) : '';
 $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
 ?>
 
-<link rel="stylesheet" href="../../../bar/CapitalQueer/reservas/reservas/reservas.css<?= $cssVer ? '?v=' . $cssVer : '' ?>">
+<link rel="stylesheet" href="../../../bar/Pictograma/reservas/reservas/reservas.css<?= $cssVer ? '?v=' . $cssVer : '' ?>">
 
 <section class="business-section visible">
   <span class="section-label">Reservas</span>
@@ -113,7 +113,7 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
       </div>
     </div>
 
-    <a  href="../../../bar/CapitalQueer/index.php" class="btn btn30">
+    <a  href="../../../bar/Pictograma/index.php" class="btn btn30">
       Pagar anticipo
     </a> -->
     <button class="btn btn30" type="submit">Reservar</button>
@@ -126,4 +126,4 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
 
 </section>
 
-<script defer src="../../../bar/CapitalQueer/reservas/reservas/reservas.js<?= $jsVer ? '?v=' . $jsVer : '' ?>"></script>
+<script defer src="../../../bar/Pictograma/reservas/reservas/reservas.js<?= $jsVer ? '?v=' . $jsVer : '' ?>"></script>

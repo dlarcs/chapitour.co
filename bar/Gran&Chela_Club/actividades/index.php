@@ -19,7 +19,7 @@
   <meta name="description" content="Descubre Chapinero, Bogotá con Chapitour: cafés, restaurantes, bares, cultura, alojamiento, planes locales y lugares para visitar.">
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
   <meta name="googlebot" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
-  <link rel="canonical" href="https://www.chapitour.co/bar/Gran&Chela_Club/index.php/">
+  <link rel="canonical" href="https://chapitour.co/bar/Gran&Chela_Club/actividades/index.php">
   <meta name="theme-color" content="#005548">
 
   <!-- Open Graph: WhatsApp / Facebook -->
@@ -27,7 +27,7 @@
   <meta property="og:site_name" content="Chapitour">
   <meta property="og:title" content="Chapitour | Lugares para visitar en Chapinero, Bogotá">
   <meta property="og:description" content="Explora Chapinero, Bogotá: cafés, restaurantes, bares, cultura, planes locales, alojamiento y lugares para visitar.">
-  <meta property="og:url" content="https://www.chapitour.co/">
+  <meta property="og:url" content="https://chapitour.co/bar/Gran&Chela_Club/actividades/index.php">
   <meta property="og:image" content="https://www.chapitour.co/bar/Gran&Chela_Club/img/logo.jpg">
   <meta property="og:image:secure_url" content="https://www.chapitour.co/bar/Gran&Chela_Club/img/logo.jpg">
   <meta property="og:image:type" content="image/jpeg">

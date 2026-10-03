@@ -24,7 +24,7 @@
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
   <meta name="googlebot" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
 
-  <link rel="canonical" href="https://www.chapitour.co/">
+  <link rel="canonical" href="https://chapitour.co/gastronomia/streetgrill/reservas/index.php">
 
   <meta name="theme-color" content="#111111">
 
@@ -42,7 +42,7 @@
     content="Planea tu visita a Street Grill en Chapinero y disfruta carne al barril, carnes ahumadas, hamburguesas, chorizos y preparaciones llenas de sabor."
   >
 
-  <meta property="og:url" content="https://www.chapitour.co/">
+  <meta property="og:url" content="https://chapitour.co/gastronomia/streetgrill/reservas/index.php">
 
   <meta
     property="og:image"
@@ -139,7 +139,7 @@
   >
 
     <img
-      src="../../global/img/img_whatsApp.png"
+      src="/global/img/img_whatsApp.png"
       alt="Contactar a Street Grill por WhatsApp"
       decoding="async"
     >

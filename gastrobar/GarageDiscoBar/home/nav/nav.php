@@ -35,13 +35,13 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
 
   <nav id="chapitour-menu" class="chapitour-menu" aria-label="Menú principal">
     <div class="menu-inner">
-      <a href="../../gastrobar/GarageDiscoBar/menu/index.php">Menú</a>
+      <a href="/gastrobar/GarageDiscoBar/img/Garage_Menu.pdf">Menú</a>
       <a href="../../gastrobar/GarageDiscoBar/galeria/index.php">Galería</a>
       <a href="../../gastrobar/GarageDiscoBar/reservas/index.php">Reservas</a>
       <a href="#acerca_nosotros">Nosotros</a>
       <a href="#ubicacion">Redes sociales</a>
       <a href="#ubicacion">Ubicación</a>
-      <a href="https://wa.me/573138846378?text=Hola%20vengo%20desde%20la%20web%20de%20Bar%20Restaurant">Contactanos</a>
+      <a href="https://wa.me/573156175056?text=Hola%2C%20vengo%20desde%20Chapitour%20y%20quiero%20informaci%C3%B3n%20sobre%20Garage%20Disco%20Bar.">Contáctanos</a>
 
 
 

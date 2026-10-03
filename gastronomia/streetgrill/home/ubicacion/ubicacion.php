@@ -1,16 +1,16 @@
 <?php
 $base = rtrim($_SERVER['DOCUMENT_ROOT'], '/');
 
-$cssFile = $base . '/gastrobar/GarageDiscoBar/home/ubicacion/ubicacion.css';
-$jsFile  = $base . '/gastrobar/GarageDiscoBar/home/ubicacion/ubicacion.js';
+$cssFile = $base . '/gastronomia/streetgrill/home/ubicacion/ubicacion.css';
+$jsFile  = $base . '/gastronomia/streetgrill/home/ubicacion/ubicacion.js';
 
 $cssVer = is_file($cssFile) ? filemtime($cssFile) : '';
 $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
 
-$googleMapsLink = 'https://maps.app.goo.gl/EnKkPuRb64VNMnQ77';
+$googleMapsLink = 'https://www.google.com/maps/search/?api=1&query=Street%20Grill%2C%20Cra.%209%20%2357-85%2C%20Chapinero%2C%20Bogot%C3%A1';
 ?>
 
-<link rel="stylesheet" href="../../gastrobar/GarageDiscoBar/home/ubicacion/ubicacion.css<?= $cssVer ? '?v=' . $cssVer : '' ?>">
+<link rel="stylesheet" href="../../gastronomia/streetgrill/home/ubicacion/ubicacion.css<?= $cssVer ? '?v=' . $cssVer : '' ?>">
 
 <section class="business-location-social business-section visible">
   <div class="business-location-social__inner">
@@ -80,4 +80,4 @@ $googleMapsLink = 'https://maps.app.goo.gl/EnKkPuRb64VNMnQ77';
   </div>
 </section>
 
-<script defer src="../../gastrobar/GarageDiscoBar/home/ubicacion/ubicacion.js<?= $jsVer ? '?v=' . $jsVer : '' ?>"></script>
+<script defer src="../../gastronomia/streetgrill/home/ubicacion/ubicacion.js<?= $jsVer ? '?v=' . $jsVer : '' ?>"></script>

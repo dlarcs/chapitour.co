@@ -19,7 +19,7 @@
   <meta name="description" content="Descubre Chapinero, Bogotá con Chapitour: cafés, restaurantes, bares, cultura, alojamiento, planes locales y lugares para visitar.">
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
   <meta name="googlebot" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
-  <link rel="canonical" href="https://www.chapitour.co/">
+  <link rel="canonical" href="https://chapitour.co/bar/Gran&Chela_Club/galeria/index.php">
   <meta name="theme-color" content="#005548">
 
   <!-- Open Graph: WhatsApp / Facebook -->
@@ -27,9 +27,9 @@
   <meta property="og:site_name" content="Chapitour">
   <meta property="og:title" content="Chapitour | Lugares para visitar en Chapinero, Bogotá">
   <meta property="og:description" content="Explora Chapinero, Bogotá: cafés, restaurantes, bares, cultura, planes locales, alojamiento y lugares para visitar.">
-  <meta property="og:url" content="https://www.chapitour.co/">
-  <meta property="og:image" content="https://www.chapitour.co/bar/Gran&Chela_Club/img/general18.jpg">
-  <meta property="og:image:secure_url" content="https://www.chapitour.co/bar/Gran&Chela_Club/img/general18.jpg">
+  <meta property="og:url" content="https://chapitour.co/bar/Gran&Chela_Club/galeria/index.php">
+  <meta property="og:image" content="https://www.chapitour.co/bar/Gran&Chela_Club/img/logo.jpg">
+  <meta property="og:image:secure_url" content="https://www.chapitour.co/bar/Gran&Chela_Club/img/logo.jpg">
   <meta property="og:image:type" content="image/jpeg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
@@ -38,13 +38,13 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Chapitour | Lugares para visitar en Chapinero, Bogotá">
   <meta name="twitter:description" content="Descubre cafés, restaurantes, cultura, bares, alojamiento y planes locales en Chapinero, Bogotá.">
-  <meta name="twitter:image" content="https://www.chapitour.co/home/bar/Gran&Chela_Club/img/general18.jpg">
+  <meta name="twitter:image" content="https://chapitour.co/bar/Gran&Chela_Club/img/logo.jpg">
 
   <!-- Iconos -->
-  <link rel="icon" href="/bar/Gran&Chela_Club/img/general18.jpg">
-  <link rel="icon" type="image/png" sizes="32x32" href="/bar/Gran&Chela_Club/img/general18.jpg">
-  <link rel="icon" type="image/png" sizes="16x16" href="/bar/Gran&Chela_Club/img/general18.jpg">
-  <link rel="apple-touch-icon" sizes="180x180" href="/bar/Gran&Chela_Club/img/general18.jpg">
+  <link rel="icon" href="/bar/Gran&Chela_Club/img/logo.jpg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/bar/Gran&Chela_Club/img/logo.jpg">
+  <link rel="icon" type="image/png" sizes="16x16" href="/bar/Gran&Chela_Club/img/logo.jpg">
+  <link rel="apple-touch-icon" sizes="180x180" href="/bar/Gran&Chela_Club/img/logo.jpg">
 
   <!-- CSS -->
   <link rel="stylesheet" href="../../../bar/Gran&Chela_Club/galeria/style.css<?= $cssVer ? '?v=' . $cssVer : '' ?>">

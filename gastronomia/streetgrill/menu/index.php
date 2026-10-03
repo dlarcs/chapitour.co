@@ -19,7 +19,7 @@
   <meta name="description" content="Conoce el menú de Street Grill en Chapinero, Bogotá: carnes al barril, carnes ahumadas, bondiola de cerdo, hamburguesas artesanales, chorizos, choripán y acompañamientos.">
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
   <meta name="googlebot" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
-  <link rel="canonical" href="https://www.chapitour.co/">
+  <link rel="canonical" href="https://chapitour.co/gastronomia/streetgrill/menu/index.php">
   <meta name="theme-color" content="#005548">
 
   <!-- Open Graph: WhatsApp / Facebook -->
@@ -27,7 +27,7 @@
   <meta property="og:site_name" content="Street Grill">
   <meta property="og:title" content="Street Grill | Carnes al barril en Chapinero, Bogotá">
   <meta property="og:description" content="Descubre Street Grill, un gastrobar de carnes al barril en Chapinero con carnes ahumadas, bondiola, hamburguesas artesanales, chorizos y mucho sabor.">
-  <meta property="og:url" content="https://www.chapitour.co/">
+  <meta property="og:url" content="https://chapitour.co/gastronomia/streetgrill/menu/index.php">
   <meta property="og:image" content="https://www.chapitour.co/gastronomia/streetgrill/img/logo.jpeg">
   <meta property="og:image:secure_url" content="https://www.chapitour.co/gastronomia/streetgrill/img/logo.jpeg">
   <meta property="og:image:type" content="image/jpeg">
@@ -38,13 +38,13 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Street Grill | Carnes al barril en Chapinero">
   <meta name="twitter:description" content="Carnes ahumadas, bondiola, hamburguesas artesanales, chorizos y preparaciones al barril en Street Grill, Chapinero, Bogotá.">
-  <meta name="twitter:image" content="https://www.chapitour.co/home/gastronomia/streetgrill/img/logo.jpeg">
+  <meta name="twitter:image" content="https://chapitour.co/gastronomia/streetgrill/img/logo.jpeg">
 
   <!-- Iconos -->
   <link rel="icon" href="/gastronomia/streetgrill/img/logo.jpeg">
-  <link rel="icon" type="image/png" sizes="32x32" href="../gastronomia/streetgrill/img/logo.jpeg">
-  <link rel="icon" type="image/png" sizes="16x16" href="../gastronomia/streetgrill/img/logo.jpeg">
-  <link rel="apple-touch-icon" sizes="180x180" href="../gastronomia/streetgrill/img/logo.jpeg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/gastronomia/streetgrill/img/logo.jpeg">
+  <link rel="icon" type="image/png" sizes="16x16" href="/gastronomia/streetgrill/img/logo.jpeg">
+  <link rel="apple-touch-icon" sizes="180x180" href="/gastronomia/streetgrill/img/logo.jpeg">
 
   <!-- CSS -->
   <link rel="stylesheet" href="../../../gastronomia/streetgrill/menu/style.css<?= $cssVer ? '?v=' . $cssVer : '' ?>">
@@ -109,7 +109,7 @@
     rel="noopener"
     aria-label="Chatear con Street Grill por WhatsApp">
     <img
-      src="../../global/img/img_whatsApp.png"
+      src="/global/img/img_whatsApp.png"
       alt="Contactar a Street Grill por WhatsApp"
       decoding="async">
   </a>

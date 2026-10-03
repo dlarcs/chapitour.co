@@ -11,10 +11,8 @@
   $base = rtrim($_SERVER['DOCUMENT_ROOT'], '/');
 
   $cssFile = $base . '/gastronomia/streetgrill/style.css';
-  $jsFile  = $base . '/gastronomia/streetgrill/app.js';
 
   $cssVer = is_file($cssFile) ? filemtime($cssFile) : '';
-  $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
   ?>
 
   <!-- SEO principal para Google -->
@@ -132,8 +130,6 @@
   }
   </script>
 
-  <!-- JS -->
-  <script defer src="../../gastronomia/streetgrill/app.js<?= $jsVer ? '?v=' . $jsVer : '' ?>"></script>
 </head>
 
 <body>

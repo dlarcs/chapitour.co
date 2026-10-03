@@ -31,3 +31,13 @@ Se guardó una copia del `index.php` anterior en la raíz privada de la cuenta d
 La revisión de producción encontró que Pictogramas había sido recreado con un identificador nuevo y sin página o imagen. `premia/lib/Catalog.php` asocia los nombres exactos de los seis negocios conocidos con sus páginas existentes cuando falta esa información, preservando los datos configurados y sin aprobar ofertas. Las metas reconocen esa misma asociación. `tests/catalog.php SOCKET_QA` pasó 25 comprobaciones; todos los cambios de prueba se revirtieron.
 
 Verificación final en Chrome sobre `https://chapitour.co/`: portada nueva sin banda de pruebas, actualización automática del enlace de Pictogramas, ruleta con cinco aliados elegibles y controles de registro/ingreso para invitados. El botón oficial de Google cargó desde la portada principal; no se completó un registro ni se emitieron premios reales para verificarlo.
+
+## Correcciones de aliados del 3 de octubre de 2026
+
+Se corrigieron las rutas de recursos, iconos y metadatos de las páginas de aliados, se restauró la navegación interna de Gran&Chela y se eliminó la referencia al `app.js` inexistente de Street Grill. Pictogramas usa sus propios archivos de reservas. Los enlaces a menús inexistentes llevan a las actividades publicadas de Capital Queer, Gran&Chela y Pictogramas; Garage abre su carta PDF existente.
+
+Los contactos de navegación y carruseles usan los números publicados en la sección de ubicación de cada aliado. Street Grill abre una búsqueda de Google Maps con su nombre y dirección publicada, en lugar de la ficha de Garage. La dirección y el teléfono de los datos estructurados de Garage coinciden con su sección de contacto. También se corrigieron 16 scripts de animación: variables locales y observación de cada elemento por separado.
+
+Verificación local: 26 páginas renderizadas, 1.117 referencias, cero rutas ausentes, cero recursos de otro aliado y cero avisos PHP. La prueba en Chrome verificó navegación, contactos y carga de recursos en las 26 páginas, sin errores de JavaScript; incluyó una reserva de Pictogramas y una consulta de Street Grill con WhatsApp interceptado, sin enviar mensajes, y navegación móvil de Gran&Chela. Pasaron la sintaxis de los 29 archivos PHP y 16 JavaScript, y `git diff --check`.
+
+Se publicaron 45 archivos mediante `chapitour-aliados-rutas-20261003.zip`, conservado fuera de `public_html`. Las 26 páginas públicas y los 16 scripts modificados devolvieron HTTP 200 y coincidieron con la versión probada (ignorando únicamente las marcas de versión de los recursos en el HTML). El paquete anterior de los 44 archivos existentes quedó en `/private/tmp/chapitour-aliados-antes-20261003.zip`; el archivo de navegación de Gran&Chela es nuevo.

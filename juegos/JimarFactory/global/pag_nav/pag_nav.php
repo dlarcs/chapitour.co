@@ -41,7 +41,7 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
       <a href="../../../juegos/JimarFactory/index.php#acerca_nosotros">Nosotros</a>
       <a href="../../../juegos/JimarFactory/index.php#redes_sociales">Redes sociales</a>
       <a href="../../../juegos/JimarFactory/index.php#ubicacion">Ubicación</a>
-      <a href="https://wa.me/573138846378?text=Hola%20vengo%20desde%20la%20web%20de%20Bar%20Restaurant">Contactanos</a>
+      <a href="https://wa.me/573165180649?text=Hola%2C%20vengo%20desde%20Chapitour%20y%20quiero%20informaci%C3%B3n%20sobre%20Jimar%20Factory.">Contáctanos</a>
 
 
 
