@@ -24,11 +24,11 @@ const root=socket.replace('/mysql.sock',''),fixtures=JSON.parse(fs.readFileSync(
     const originalUrl=await page.locator('.profile-photo img').getAttribute('src');
     const download=await first.http.get(base+originalUrl);assert.equal(download.status(),200);assert.equal(download.headers()['content-type'],'image/jpeg');assert(download.headers()['cache-control'].includes('no-store'));const originalBytes=await download.body();assert(originalBytes.length<300000);
     await page.reload();await page.locator('.profile-photo img').waitFor();assert.equal(await page.locator('.profile-photo img').evaluate(img=>img.naturalWidth),512);
-    await page.fill('[name="public_name"]','Chapi <b>QA</b>');await page.check('[name="ranking_visible"]');await page.locator('[data-form="profile"] button[type="submit"]').click();
+    await page.fill('[name="name"]','Chapi <b>QA</b>');await page.check('[name="ranking_visible"]');await page.locator('[data-form="profile"] button[type="submit"]').click();
     await page.getByText('Cambios guardados.',{exact:true}).waitFor();
     const fresh=await(await guest.http.get(base+'api.php')).json();assert(fresh.leaderboard.entries.every(e=>Object.keys(e).join(',')===(e.demo?'name,score,demo':'name,score')));
     assert(!JSON.stringify(fresh).includes(fixtures.client.email));assert(!JSON.stringify(fresh).includes('photo_url'));
-    const publicPage=await browser.newPage({viewport:{width:1440,height:1100}});await publicPage.goto(base+'#comunidad');await publicPage.locator('#comunidad .ranking-table').waitFor();
+    const publicPage=await browser.newPage({viewport:{width:1440,height:1100}});await publicPage.goto(base+'#comunidad');await publicPage.locator('#comunidad .ranking-table').waitFor();assert(await publicPage.locator('#explorar').evaluate(el=>el.nextElementSibling?.id==='comunidad'));
     assert.equal(await publicPage.locator('#comunidad .ranking-table img').count(),0);assert.equal(await publicPage.locator('#comunidad .ranking-table b').count(),0);assert((await publicPage.locator('#comunidad .ranking-table').innerText()).includes('Chapi <b>QA</b>'));
     await publicPage.locator('#comunidad').screenshot({path:root+'/ranking-desktop.png'});
     await publicPage.locator('[data-action="ranking-page"]').click();await publicPage.locator('.ranking-pagination').waitFor();await publicPage.locator('[data-action="ranking-page"][data-page="2"]').click();await publicPage.getByText('Página 2',{exact:true}).waitFor();await publicPage.keyboard.press('Escape');
@@ -46,6 +46,6 @@ const root=socket.replace('/mysql.sock',''),fixtures=JSON.parse(fs.readFileSync(
     await page.uncheck('[name="ranking_visible"]');await page.locator('[data-form="profile"] button[type="submit"]').click();await page.getByText('Cambios guardados.',{exact:true}).waitFor();
     const hidden=await(await guest.http.get(base+'api.php')).json();assert(!hidden.leaderboard.entries.some(e=>e.name==='Chapi <b>QA</b>'));
     assert.deepEqual(errors,[]);
-    console.log('PASS Chrome: ranking público sin datos privados, paginación, alias escapado, perfil móvil 320/390px, subir/cambiar/quitar foto, JPEG 512px, persistencia, CSRF, aislamiento y rechazo de archivos inválidos.');
+    console.log('PASS Chrome: ranking público sin datos privados, paginación, nombre escapado, perfil móvil 320/390px, subir/cambiar/quitar foto, JPEG 512px, persistencia, CSRF, aislamiento y rechazo de archivos inválidos.');
   } finally {if(browser)await browser.close();for(const c of contexts)await c.dispose();}
 })().catch(e=>{console.error(e);process.exitCode=1;});

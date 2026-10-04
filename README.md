@@ -10,7 +10,7 @@ La página principal (`index.php`) sirve Chapitour te premia desde el 2 de octub
 - La ruleta aparece automáticamente cuando hay un giro disponible. La portada invita a crear cuenta con Google y no incluye un botón para abrir la ruleta.
 - Cada giro genera un solo código, aunque se repita la solicitud. El código vence a las 72 horas. Abrir WhatsApp no redime el premio.
 - Las vistas visibles se actualizan cada 30 segundos y al volver a la pestaña. Las lecturas automáticas no suman visitas ni emiten premios; se evita reemplazar formularios y se descartan respuestas que hayan quedado atrasadas frente a una acción.
-- El ranking contiene exclusivamente clientes registrados y activos. No se completa con perfiles de ejemplo; conserva los alias y las preferencias de ocultarse.
+- El ranking contiene exclusivamente clientes registrados y activos. No se completa con perfiles de ejemplo; muestra el nombre de la cuenta y conserva las preferencias de ocultarse.
 
 ## Configuración y despliegue
 
@@ -122,3 +122,26 @@ Se completó el registro activo existente ID 13, `Gastro Bar Street Grill`, con 
 - `cp_panel_fichas` guarda la preferencia por negocio, separada de `cp_negocios.activo`, la página y los accesos. La migración aditiva `premia/database/fichas_cp.sql` se instala al acceder como administrador; sin preferencias previas se conserva la visibilidad de las páginas existentes. La copia de pruebas incluye la misma migración.
 - La acción `set_card_visibility` exige administrador y CSRF, valida el estado solicitado y guarda el cambio en una transacción con auditoría. Ocultar no afecta cuentas, promociones, premios ni enlaces de WhatsApp; crear una cuenta continúa sin publicar una ficha.
 - Verificación aislada: `tests/catalog-whatsapp.php` pasó 43 comprobaciones por versión. `tests/card-visibility.cjs` comprobó mostrar/ocultar, recarga, recuperación de errores, fichas pendientes, orden y estado vacío en Chrome a 1440, 390 y 320 px. Los cambios de visibilidad de estas pruebas usan exclusivamente datos de QA.
+
+
+## Ranking con nombres y nueva ubicación · 4 de octubre de 2026
+
+El ranking aparece inmediatamente después de las fichas de aliados y antes de «Cómo funciona», tanto en la portada principal como en la copia de pruebas. La lista principal, la paginación y Mi perfil usan el nombre completo guardado en `cp_clientes.nombre`, que al registrarse con Google procede del nombre de esa cuenta. Se reemplaza así el uso público de alias automáticos o personalizados. Cambiar «Nombre y apellido» en Mi perfil actualiza también el ranking; la opción de ocultarse sigue vigente. El aviso de registro y los textos de comunidad explican este comportamiento.
+
+No requiere migración SQL: el campo histórico de alias queda conservado pero ya no determina el nombre mostrado. Correos y fotografías siguen fuera del ranking.
+
+Validación local: 281 comprobaciones de ranking y paginación, 58 de registro Google y premios, 34 de comunidad y puntos; Chrome comprobó el orden después de los aliados, las listas de 0/5/19/20/21 participantes, nombres largos y escape de HTML a 1440/390/320 px. Chrome también verificó el guardado del nombre desde Mi perfil, ocultarse del ranking y la persistencia de fotografías privadas. Sintaxis PHP/JavaScript y `git diff --check` correctos. Cambios locales pendientes de publicación.
+
+El título de comunidad anuncia el tour de fin de mes para quien acumule más puntos. El texto invita a explorar aliados, responder preguntas y registrar fotos con etiquetas; el botón lleva a registrarse para participar o a Mis retos para sumar puntos. Este cambio de texto también está pendiente de publicación.
+
+### Próxima meta y avance personal
+
+La sección del ranking muestra una tarjeta con el puntaje, posición y puntos para alcanzar la siguiente posición. Sugiere una foto con etiquetas (+15) o una pregunta pendiente (+5) según el avance y los lugares disponibles, respetando los límites mensuales. El botón abre directamente el formulario correspondiente. Al guardar una actividad se actualiza la sugerencia con el estado devuelto por la API. También contempla primer lugar, nombre oculto, metas aún no preparadas y metas completadas; no ofrece los puntos de compartir pendientes de verificación. Los invitados ven una invitación al registro y no un progreso ficticio.
+
+`tests/ranking-motivation.cjs` pasó en Chrome para las dos portadas con datos sintéticos: transición tras registrar una foto, límites, preguntas disponibles, primer lugar, privacidad y móvil de 390/320 px. Se revisaron las capturas y la sintaxis PHP/JavaScript. Los índices actualizan la versión de JS/CSS para evitar caché anterior al publicar. Pendiente de publicación.
+
+## Recordatorio de promociones por correo · 4 de octubre de 2026
+
+Se preparó el recordatorio para las últimas 24 horas de cada premio, desde `admin@chapitour.co` por SMTP de Hostinger al correo del cliente. El proceso CLI usa una tabla de seguimiento para evitar reenvíos, excluye premios redimidos/vencidos y cuentas inactivas, y funciona mediante cron cada cinco minutos. Incluye HTML/texto, código y vencimiento en Bogotá.
+
+Pasaron 39 comprobaciones con base desechable y SMTP simulado, incluido el modo de prueba restringido al remitente. La dependencia PHPMailer y su versión están en Composer. Configuración y activación en [premia/EMAIL_REMINDERS.md](premia/EMAIL_REMINDERS.md). El 4 de octubre de 2026 se guardó la configuración privada y Hostinger aceptó un correo de prueba dirigido a `admin@chapitour.co`; la recepción en bandeja no se ha confirmado. Pendiente de publicación y cron en Hostinger; aún no está enviando recordatorios automáticos.

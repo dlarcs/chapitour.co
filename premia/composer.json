@@ -2,6 +2,10 @@
   "name": "chapitour/premia",
   "description": "Acceso de clientes a Chapitour te premia",
   "type": "project",
-  "require": { "php": "^8.0", "firebase/php-jwt": "^6.11 || ^7.0" },
+  "require": {
+    "php": "^8.0",
+    "firebase/php-jwt": "^6.11 || ^7.0",
+    "phpmailer/phpmailer": "^7.0"
+  },
   "config": { "platform": { "php": "8.0.28" }, "sort-packages": true }
 }

@@ -23,6 +23,7 @@ const fixtures=JSON.parse(fs.readFileSync(root+'/community-demo-ui.json'));
     for(const count of [0,5,19,20,21]) {
       realCount=count;
       await page.goto(base+'?qa-community='+count+'#comunidad');await page.locator('#comunidad .ranking-card').waitFor();
+      assert(await page.locator('#explorar').evaluate(el=>el.nextElementSibling?.id==='comunidad'));
       assert.equal(await page.locator('#comunidad .ranking-table .ranking-entry').count(),Math.min(10,count));
       assert.equal(await page.locator('#comunidad .ranking-examples-heading').count(),0);
       assert.equal(await page.locator('#comunidad .ranking-demo-notice').count(),0);
@@ -49,7 +50,12 @@ const fixtures=JSON.parse(fs.readFileSync(root+'/community-demo-ui.json'));
       assert.equal(await page.getByRole('dialog').getByText('Perfil ficticio',{exact:true}).count(),0);
       await page.keyboard.press('Escape');
     }
+    fixtures[5].top.entries[0].name='María <b>Fernanda</b> Pérez '+ 'Á'.repeat(50);
+    await page.reload();await page.locator('#comunidad .ranking-card').waitFor();
+    assert.equal(await page.locator('#comunidad .ranking-table b').count(),0);
+    assert((await page.locator('#comunidad .ranking-table').innerText()).includes('María <b>Fernanda</b> Pérez'));
+    assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));
     assert.deepEqual(errors,[]);
-    console.log('PASS Chrome: solo registros reales, estado vacío, conteos 0/5/19/20/21, sin avisos ni perfiles de ejemplo, paginación y móvil 390/320px.');
+    console.log('PASS Chrome: ranking después de aliados, nombres escapados y largos, solo registros reales, estado vacío, conteos 0/5/19/20/21, sin avisos ni perfiles de ejemplo, paginación y móvil 390/320px.');
   } finally { if(browser)await browser.close();await http.dispose(); }
 })().catch(e=>{console.error(e);process.exitCode=1;});

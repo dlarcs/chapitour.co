@@ -50,16 +50,16 @@ $subject='guest-google-'.bin2hex(random_bytes(10));$email=$subject.'@example.inv
 $registered=$panel->handle('google_login',['credential'=>token()]);$guestClientId=(int)substr($registered['user']['id'],7);
 check(count($registered['codes'])===1 && $registered['codes'][0]['code']===$guestCode,'Google vincula premio de invitado');
 check(!$registered['campaign']['can_spin'],'Registrarse no duplica bienvenida');
-$community=new ChapitourCommunity($db);$initialAlias=$registered['user']['community']['public_name'];
-check($registered['user']['community']['visible'] && preg_match('/^Chapi-[A-F0-9]{6}$/',$initialAlias)===1,'Registro entra automáticamente con alias, sin publicar nombre de Google');
+$community=new ChapitourCommunity($db);$initialName=$registered['user']['community']['public_name'];
+check($registered['user']['community']['visible'] && $initialName==='Cliente Google QA','Registro entra automáticamente con el nombre de Google');
 $allNames=[];for($page=1;$page<=100;$page++){$ranking=$community->leaderboard($page,20);$allNames=array_merge($allNames,array_column($ranking['entries'],'name'));if(!$ranking['has_more'])break;}
-check(in_array($initialAlias,$allNames,true),'Cuenta recién registrada aparece en la lista pública');
-$profile=['name'=>$registered['user']['name'],'email'=>$registered['user']['email'],'city'=>'','public_name'=>'Alias QA '.bin2hex(random_bytes(4)),'ranking_visible'=>'1'];
+check(in_array($initialName,$allNames,true),'Cuenta recién registrada aparece en la lista pública');
+$profile=['name'=>'María Fernanda Pérez QA','email'=>$registered['user']['email'],'city'=>'','ranking_visible'=>'1'];
 $updated=$panel->handle('profile',$profile);
-check($updated['user']['community']['public_name']===$profile['public_name'],'Puede personalizar el alias');
+check($updated['user']['community']['public_name']===$profile['name'],'Actualizar el nombre del perfil actualiza el ranking');
 $panel->handle('profile',array_replace($profile,['ranking_visible'=>'0']));
 $db->beginTransaction();$community->registerMember($guestClientId);$db->commit();
-check(!$community->member($guestClientId)['visible'] && $community->member($guestClientId)['public_name']===$profile['public_name'],'Inicialización idempotente respeta alias y preferencia de ocultarse');
+check(!$community->member($guestClientId)['visible'] && $community->member($guestClientId)['public_name']===$profile['name'],'Inicialización idempotente respeta nombre y preferencia de ocultarse');
 
 check((int)query('SELECT COUNT(*) FROM cp_panel_giros WHERE cliente_id=? AND premio_id IS NOT NULL',[$guestClientId])->fetchColumn()===1,'Bienvenida de cuenta consumida por premio previo');
 $panel->handle('logout',[]);
@@ -67,7 +67,7 @@ check(!$panel->state()['codes'] && !$panel->state()['campaign']['can_spin'],'Des
 rejected(static function()use($panel){$panel->handle('spin',['ticket_id'=>'guest-welcome']);},403);
 $registered=$panel->handle('google_login',['credential'=>token()]);
 check(count($registered['codes'])===1 && !$registered['campaign']['can_spin'],'Reingresar conserva un premio');
-check(!$registered['user']['community']['visible'] && $registered['user']['community']['public_name']===$profile['public_name'],'Reingresar respeta privacidad y alias editado');
+check(!$registered['user']['community']['visible'] && $registered['user']['community']['public_name']===$profile['name'],'Reingresar respeta privacidad y nombre editado');
 $panel->handle('logout',[]);
 $panel->handle('login',['email'=>'laurazoro@gmail.com','password'=>'Qa-admin-new-456!']);
 $redeemed=$panel->handle('redeem',['code'=>$guestCode,'confirm'=>$guestCode]);

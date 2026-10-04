@@ -40,7 +40,7 @@ final class ChapitourCommunity
     }
     private function scoreSql(): string {
         // One score per account. No points from clicks, request parameters or unauthenticated activity.
-        return "SELECT c.id,COALESCE(NULLIF(TRIM(p.nombre_publico),''),CONCAT('Chapi-',UPPER(LEFT(SHA2(CONCAT('chapitour-ranking-',c.id),256),6)))) AS nombre_publico,COALESCE(p.visible,1) AS visible,
+        return "SELECT c.id,COALESCE(NULLIF(TRIM(c.nombre),''),'Participante') AS nombre_publico,COALESCE(p.visible,1) AS visible,
             LEAST(10,COALESCE(v.cantidad,0)) AS visitas,
             LEAST(25,COALESCE(q.cantidad,0)*5) AS preguntas,
             LEAST(45,COALESCE(f.cantidad,0)*15) AS fotos,
@@ -71,12 +71,12 @@ final class ChapitourCommunity
     public function member(int $id): array {
         $result=['ready'=>$this->ready(),'public_name'=>'','visible'=>false,'photo_url'=>null,'score'=>0,'position'=>null,'points_to_climb'=>null,'breakdown'=>['visits'=>0,'questions'=>0,'photos'=>0,'sharing'=>0]];
         if (!$result['ready']) { return $result; }
-        $profile=$this->query('SELECT nombre_publico,visible,foto_version FROM cp_panel_comunidad WHERE cliente_id=?',[$id])->fetch(PDO::FETCH_ASSOC);
-        if ($profile) { $result['public_name']=$profile['nombre_publico'];$result['visible']=(bool)$profile['visible'];$result['photo_url']=$profile['foto_version']?'avatar.php?v='.$profile['foto_version']:null; }
+        $profile=$this->query('SELECT visible,foto_version FROM cp_panel_comunidad WHERE cliente_id=?',[$id])->fetch(PDO::FETCH_ASSOC);
+        if ($profile) { $result['visible']=(bool)$profile['visible'];$result['photo_url']=$profile['foto_version']?'avatar.php?v='.$profile['foto_version']:null; }
         $args=$this->args($this->month());
         $row=$this->query('SELECT * FROM ('.$this->scoreSql().') score WHERE id=?',array_merge($args,[$id]))->fetch(PDO::FETCH_ASSOC);
         if (!$row) { return $result; }
-        // Existing registered clients without preferences get a stable nickname.
+        // Use the account name saved at registration, including the Google display name.
         // Explicit visibility choices are never changed by reading the ranking.
         $result['public_name']=$row['nombre_publico'];
         $result['visible']=(bool)$row['visible'];
@@ -92,17 +92,12 @@ final class ChapitourCommunity
     public function registerMember(int $id): void {
         $this->requireReady();
         if (!$this->db->inTransaction()) { throw new LogicException('El perfil inicial requiere la transacción de registro.'); }
-        // Publish a nickname, never the Google name or email. Existing choices are preserved.
-        $alias=$this->defaultAlias($id);
-        $this->query('INSERT INTO cp_panel_comunidad(cliente_id,nombre_publico,visible) VALUES (?,?,1) ON DUPLICATE KEY UPDATE cliente_id=VALUES(cliente_id)',[$id,$alias]);
+        // Keep existing visibility choices; the displayed name comes from cp_clientes.
+        $this->query('INSERT INTO cp_panel_comunidad(cliente_id,visible) VALUES (?,1) ON DUPLICATE KEY UPDATE cliente_id=VALUES(cliente_id)',[$id]);
     }
-    private function defaultAlias(int $id): string {
-        return 'Chapi-'.strtoupper(substr(hash('sha256','chapitour-ranking-'.$id),0,6));
-    }
-    public function savePreferences(int $id,string $alias,bool $visible): void {
+    public function savePreferences(int $id,bool $visible): void {
         $this->requireReady();
-        if (($visible && $alias==='') || mb_strlen($alias)>40) { throw new PanelError('Elige un nombre público de entre 1 y 40 caracteres para aparecer en el ranking.',422); }
-        $this->query('INSERT INTO cp_panel_comunidad(cliente_id,nombre_publico,visible) VALUES (?,?,?) ON DUPLICATE KEY UPDATE nombre_publico=VALUES(nombre_publico),visible=VALUES(visible)',[$id,$alias,$visible?1:0]);
+        $this->query('INSERT INTO cp_panel_comunidad(cliente_id,visible) VALUES (?,?) ON DUPLICATE KEY UPDATE visible=VALUES(visible)',[$id,$visible?1:0]);
     }
     public function prepareUpload(array $file): string {
         $this->requireReady();
@@ -125,7 +120,7 @@ final class ChapitourCommunity
     }
     public function savePhoto(int $id,?string $jpeg): void {
         $this->requireReady();
-        $this->query('INSERT INTO cp_panel_comunidad(cliente_id,nombre_publico,visible,foto,foto_version) VALUES (?,?,1,?,?) ON DUPLICATE KEY UPDATE foto=VALUES(foto),foto_version=VALUES(foto_version)',[$id,$this->defaultAlias($id),$jpeg,$jpeg===null?null:bin2hex(random_bytes(16))]);
+        $this->query('INSERT INTO cp_panel_comunidad(cliente_id,visible,foto,foto_version) VALUES (?,1,?,?) ON DUPLICATE KEY UPDATE foto=VALUES(foto),foto_version=VALUES(foto_version)',[$id,$jpeg,$jpeg===null?null:bin2hex(random_bytes(16))]);
     }
     public function photo(int $id): ?string {
         if (!$this->ready()) { return null; }

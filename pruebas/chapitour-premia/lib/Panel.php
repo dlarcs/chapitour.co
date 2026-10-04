@@ -265,17 +265,16 @@ final class ChapitourPanel
         $a = $this->requireActor(['client']);
         $email = mb_strtolower($this->text($input, 'email', 150));
         $name = $this->text($input, 'name', 80); $city = $this->text($input, 'city', 80, false);
-        $preferences=array_key_exists('public_name',$input)||array_key_exists('ranking_visible',$input);
-        $alias=$preferences?$this->text($input,'public_name',40,false):'';
+        $preferences=array_key_exists('ranking_visible',$input);
         $visible=$input['ranking_visible']??'0';
         if ($preferences && !in_array($visible,['0','1'],true)) { $this->error('Revisa tu preferencia para aparecer en el ranking.'); }
-        $this->accountLock(function () use ($a, $email, $name, $city, $preferences, $alias, $visible) {
-            $this->transaction(function () use ($a, $email, $name, $city, $preferences, $alias, $visible) {
+        $this->accountLock(function () use ($a, $email, $name, $city, $preferences, $visible) {
+            $this->transaction(function () use ($a, $email, $name, $city, $preferences, $visible) {
                 $this->requireActor(['client'], true); $this->uniqueEmail($email, $a['db_id']);
                 if ($email!==$a['email'] && $this->googleSchemaReady() && $this->row('SELECT cliente_id FROM cp_panel_google WHERE cliente_id=?',[$a['db_id']])) { $this->error('El correo de esta cuenta está vinculado a Google. Puedes actualizar tu nombre y ciudad.'); }
                 $this->query('UPDATE cp_clientes SET nombre=?,email=? WHERE id=?', [$name,$email,$a['db_id']]);
                 $this->query('INSERT INTO cp_panel_clientes(cliente_id,ciudad) VALUES (?,?) ON DUPLICATE KEY UPDATE ciudad=VALUES(ciudad)', [$a['db_id'],$city]);
-                if ($preferences) { $this->community()->savePreferences($a['db_id'],$alias,$visible==='1'); }
+                if ($preferences) { $this->community()->savePreferences($a['db_id'],$visible==='1'); }
             });
         });
     }

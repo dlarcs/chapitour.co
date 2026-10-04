@@ -3,7 +3,7 @@
 declare(strict_types=1);
 $socket=$argv[1]??'';
 if(PHP_SAPI!=='cli'||!preg_match('#^/private/tmp/chapitour-panel-qa\.[A-Za-z0-9]+/mysql\.sock$#',$socket))throw new RuntimeException('Solo QA temporal.');
-require __DIR__.'/../../../premia/lib/Community.php';
+require (getenv('CHAPITOUR_TEST_APP')==='legacy'?__DIR__.'/../lib/Community.php':__DIR__.'/../../../premia/lib/Community.php');
 $db=new PDO('mysql:unix_socket='.$socket.';dbname=chapitour_panels_qa;charset=utf8mb4','root','',[PDO::ATTR_ERRMODE=>PDO::ERRMODE_EXCEPTION,PDO::ATTR_EMULATE_PREPARES=>false]);$db->exec("SET time_zone='+00:00'");
 $community=new ChapitourCommunity($db);$checks=0;$snapshots=[];
 function check($ok,string $message):void {global $checks;if(!$ok)throw new RuntimeException($message);$checks++;}
@@ -15,13 +15,17 @@ try{
     $ids=$db->query('SELECT id FROM cp_clientes WHERE activo=1 ORDER BY id LIMIT 21')->fetchAll(PDO::FETCH_COLUMN);
     check(count($ids)===21,'Se necesitan 21 cuentas QA.');$previous=0;
     foreach([0,1,5,10,19,20,21] as $realCount){
-        for($i=$previous;$i<$realCount;$i++)$community->savePreferences((int)$ids[$i],sprintf('Participante QA %02d',$i+1),true);
+        for($i=$previous;$i<$realCount;$i++){
+            $stmt=$db->prepare('UPDATE cp_clientes SET nombre=? WHERE id=?');$stmt->execute([sprintf('Participante QA %02d',$i+1),$ids[$i]]);
+            $stmt=$db->prepare('UPDATE cp_panel_comunidad SET nombre_publico=? WHERE cliente_id=?');$stmt->execute(['Alias anterior '.$i,$ids[$i]]);
+            $community->savePreferences((int)$ids[$i],true);
+        }
         $previous=$realCount;$full=$community->leaderboard(1,20);
         check($full['total']===$realCount && $full['real_total']===$realCount && $full['demo_total']===0,'Cuenta únicamente personas registradas: '.$realCount);
         check(count($full['entries'])===min(20,$realCount),'No completa la lista con relleno: '.$realCount);
         $score=PHP_INT_MAX;
         foreach($full['entries'] as $entry){
-            check(array_keys($entry)===['name','score'],'Solo alias y puntaje, sin datos privados o perfiles de ejemplo');
+            check(array_keys($entry)===['name','score'],'Solo nombre y puntaje, sin correos, fotos o perfiles de ejemplo');
             check(strncmp($entry['name'],'Participante QA ',16)===0,'La entrada pertenece a una cuenta de prueba registrada');
             check($entry['score']<=$score,'Orden descendente por puntaje');$score=$entry['score'];
         }
@@ -33,20 +37,27 @@ try{
         $snapshots[(string)$realCount]=['top'=>$top,'full'=>$full,'next'=>$after];
     }
     check(counts($db)===$before,'La consulta no crea cuentas, puntos, retos, giros ni premios');
-    $community->savePreferences((int)$ids[20],'Participante QA 21',false);
+    $community->savePreferences((int)$ids[20],false);
     check($community->leaderboard()['total']===20,'Respeta una cuenta que elige ocultarse');
     $stmt=$db->prepare('UPDATE cp_clientes SET activo=0 WHERE id=?');$stmt->execute([$ids[19]]);
     check($community->leaderboard()['total']===19,'No publica cuentas inactivas');
-    // Existing registration with no public-profile row is listed with a stable nickname.
+    // Existing accounts use their complete name even without public-profile preferences.
     $id=(int)$ids[18];$stmt=$db->prepare('DELETE FROM cp_panel_comunidad WHERE cliente_id=?');$stmt->execute([$id]);
-    $profile=$community->member($id);$alias=$profile['public_name'];
-    check($profile['visible'] && preg_match('/^Chapi-[A-F0-9]{6}$/',$alias)===1,'Cuenta existente sin preferencias se incorpora con alias automático');
-    check($community->member($id)['public_name']===$alias,'Alias estable entre consultas');
+    $profile=$community->member($id);$name=$profile['public_name'];
+    check($profile['visible'] && $name==='Participante QA 19','Cuenta existente sin preferencias muestra su nombre');
+    check($community->member($id)['public_name']===$name,'Nombre estable entre consultas');
     $stmt=$db->prepare('SELECT COUNT(*) FROM cp_panel_comunidad WHERE cliente_id=?');$stmt->execute([$id]);check((int)$stmt->fetchColumn()===0,'Lectura no modifica la base');
-    $community->savePhoto($id,null);check($community->member($id)['visible'] && $community->member($id)['public_name']===$alias,'Foto no oculta la cuenta ni cambia su alias');
-    $community->savePreferences($id,'Alias elegido',false);$community->savePhoto($id,null);$community->registerMember($id);
-    check(!$community->member($id)['visible'] && $community->member($id)['public_name']==='Alias elegido','Preferencias explícitas se conservan');
+    $community->savePhoto($id,null);check($community->member($id)['visible'] && $community->member($id)['public_name']===$name,'Foto no oculta la cuenta ni cambia su nombre');
+    $community->savePreferences($id,false);$community->savePhoto($id,null);$community->registerMember($id);
+    check(!$community->member($id)['visible'] && $community->member($id)['public_name']===$name,'Preferencias explícitas se conservan');
+    $longName=str_repeat('Á',65).' Pérez';
+    $stmt=$db->prepare('UPDATE cp_clientes SET nombre=? WHERE id=?');$stmt->execute([$longName,$id]);
+    $community->savePreferences($id,true);
+    check($community->member($id)['public_name']===$longName,'Nombre completo mayor de 40 caracteres sin truncar');
+    check(in_array($longName,array_column($community->leaderboard(1,20)['entries'],'name'),true),'Nombre largo en la lista pública');
+    $stmt->execute(['Ana <b>María</b> Pérez',$id]);
+    check($community->member($id)['public_name']==='Ana <b>María</b> Pérez','Conserva el nombre para que la interfaz lo escape');
     file_put_contents(dirname($socket).'/community-demo-ui.json',json_encode($snapshots,JSON_UNESCAPED_UNICODE|JSON_THROW_ON_ERROR));
 }finally{$db->rollBack();}
 check(counts($db)===$before,'Datos temporales restaurados');
-echo "PASS $checks comprobaciones: solo registros reales, sin relleno, alias estable/editable, privacidad, orden, paginación y ausencia de cambios en premios.\n";
+echo "PASS $checks comprobaciones: solo registros reales, sin relleno, nombres completos de la cuenta, privacidad, orden, paginación y ausencia de cambios en premios.\n";
