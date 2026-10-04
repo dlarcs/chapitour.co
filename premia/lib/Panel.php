@@ -16,6 +16,7 @@ final class ChapitourPanel
     private $googleSchema;
     private $monthlyChallenges;
     private $community;
+    private $cardsSchema;
     public function __construct(PDO $db, ?ChapitourGoogleAuth $googleAuth=null) { $this->db = $db; $this->googleAuth=$googleAuth??new ChapitourGoogleAuth(); }
     private function googleSchemaReady(): bool {
         if ($this->googleSchema===null) { $this->googleSchema=(bool)$this->query("SELECT COUNT(*) FROM information_schema.tables WHERE table_schema=DATABASE() AND table_name='cp_panel_google'")->fetchColumn(); }
@@ -24,6 +25,32 @@ final class ChapitourPanel
     private function installGoogleSchema(): void {
         if ($this->googleSchemaReady()) { return; }
         $this->db->exec(file_get_contents(__DIR__.'/../database/google_cp.sql'));$this->googleSchema=true;
+    }
+    private function cardsSchemaReady(): bool {
+        if ($this->cardsSchema===null) { $this->cardsSchema=(bool)$this->query("SELECT COUNT(*) FROM information_schema.tables WHERE table_schema=DATABASE() AND table_name='cp_panel_fichas'")->fetchColumn(); }
+        return $this->cardsSchema;
+    }
+    private function installCardsSchema(): void {
+        if ($this->cardsSchemaReady()) { return; }
+        $this->db->exec(file_get_contents(__DIR__.'/../database/fichas_cp.sql')); $this->cardsSchema=true;
+    }
+    private function setCardVisibility(array $input): void {
+        $this->requireActor(['admin']);
+        $id=$this->id($input,'id');
+        if (!isset($input['visible']) || !is_bool($input['visible'])) { $this->error('Selecciona si quieres mostrar u ocultar la ficha.'); }
+        $visible=$input['visible'];
+        $this->installCardsSchema();
+        $this->transaction(function () use ($id,$visible) {
+            $a=$this->requireActor(['admin'],true);
+            $b=$this->row('SELECT pagina FROM cp_negocios WHERE id=? AND activo=1 FOR UPDATE',[$id]);
+            if (!$b) { $this->error('No encontramos este negocio.',404); }
+            $ready=$this->safePath($b['pagina'])!=='';
+            if ($visible && !$ready) { $this->error('Este negocio aún no tiene una página preparada para publicar su ficha.'); }
+            $preference=$this->row('SELECT visible FROM cp_panel_fichas WHERE negocio_id=?',[$id]);
+            $wasVisible=$ready && (!$preference || (bool)$preference['visible']);
+            $this->query('INSERT INTO cp_panel_fichas(negocio_id,visible) VALUES (?,?) ON DUPLICATE KEY UPDATE visible=VALUES(visible)',[$id,$visible?1:0]);
+            if ($wasVisible!==$visible) { $this->audit($a,$visible?'ficha_mostrada':'ficha_ocultada',$id); }
+        });
     }
     private function rewards(): ChapitourRewards {
         if (!$this->rewards) { $this->rewards=new ChapitourRewards($this->db); }
@@ -167,7 +194,7 @@ final class ChapitourPanel
         if ($staff && $staff['rol']==='aliado' && !$this->row('SELECT id FROM cp_negocios WHERE id=? AND activo=1', [$staff['negocio_id']])) {
             $this->error('Correo o usuario y contraseña incorrectos.', 401);
         }
-        if ($staff && $staff['rol']==='admin') { $this->installSchema(); $this->rewards()->install(); $this->installGoogleSchema(); $this->monthlyChallenges()->install(); $this->community()->install(); }
+        if ($staff && $staff['rol']==='admin') { $this->installSchema(); $this->rewards()->install(); $this->installGoogleSchema(); $this->monthlyChallenges()->install(); $this->community()->install(); $this->installCardsSchema(); }
         if (!$staff) {
             $this->transaction(function () use ($row) {
                 $current=$this->row('SELECT activo,version_sesion FROM cp_clientes WHERE id=? FOR UPDATE',[$row['id']]);
@@ -318,6 +345,7 @@ final class ChapitourPanel
                     if (!$this->row('SELECT id FROM cp_negocios WHERE id=? AND activo=1 FOR UPDATE', [$id])) { $this->error('Negocio no encontrado.',404); }
                     if ($this->row("SELECT id FROM cp_usuarios WHERE negocio_id=? AND rol='aliado' AND activo=1", [$id])) { $this->error('Este negocio ya tiene una cuenta activa.',409); }
                 } else {
+                    // An access needs a business record, but only an explicitly configured page publishes its card.
                     $this->query("INSERT INTO cp_negocios(slug,nombre,categoria) VALUES (?,?,'Aliado de Chapitour')", ['aliado-'.bin2hex(random_bytes(10)),$name]);
                     $id = (int)$this->db->lastInsertId();
                 }
@@ -395,7 +423,7 @@ final class ChapitourPanel
         });
     }
     private function codeQuery(?array $a, ?string $code = null, bool $lock = false): PDOStatement {
-        $sql='SELECT p.*,COALESCE(d.negocio,n.nombre) AS negocio_nombre,COALESCE(NULLIF(d.whatsapp,\'\'),n.whatsapp) AS telefono FROM cp_premios p JOIN cp_negocios n ON n.id=p.negocio_id LEFT JOIN cp_premio_detalles d ON d.premio_id=p.id WHERE 1=1'; $args=[];
+        $sql='SELECT p.*,COALESCE(d.negocio,n.nombre) AS negocio_nombre,COALESCE(NULLIF(d.whatsapp,\'\'),n.whatsapp) AS telefono,COALESCE(NULLIF(d.direccion,\'\'),n.direccion) AS negocio_direccion,n.pagina AS negocio_pagina FROM cp_premios p JOIN cp_negocios n ON n.id=p.negocio_id LEFT JOIN cp_premio_detalles d ON d.premio_id=p.id WHERE 1=1'; $args=[];
         if ($a && $a['role']==='ally') { $sql.=' AND p.negocio_id=?'; $args[]=$a['business_id']; }
         if ($a && $a['role']==='client') { $sql.=' AND EXISTS (SELECT 1 FROM cp_cliente_visitantes cv WHERE cv.visitante_id=p.visitante_id AND cv.cliente_id=?)'; $args[]=$a['db_id']; }
         if (!$a) {
@@ -426,7 +454,17 @@ final class ChapitourPanel
         $c=$this->codeDto($p);
         if ($c['status']!=='Activo') { $this->error('Este código ya fue redimido o está vencido.',409); }
         if (!preg_match('/^[1-9][0-9]{7,14}$/',$p['telefono'])) { $this->error('El WhatsApp del negocio está pendiente de confirmar.'); }
-        $message='Hola, '.$c['business_name'].'. Quiero redimir la promoción: '.$c['description'].' Mi código único es '.$c['code'].'.';
+        $address=trim($p['negocio_direccion']);
+        $path=$this->safePath($p['negocio_pagina']);
+        $message=implode("\n",[
+            'Hola, '.$c['business_name'].'. Quiero redimir mi promoción de Chapitour.',
+            '',
+            'Negocio: '.$c['business_name'],
+            'Promoción: '.$c['description'],
+            'Código único: '.$c['code'],
+            'Dirección: '.($address!==''?$address:'Por confirmar con el negocio.'),
+            'Página del negocio: '.($path!==''?'https://chapitour.co/'.$path:'Aún no publicada en Chapitour.')
+        ]);
         return ['whatsapp_url'=>'https://wa.me/'.$p['telefono'].'?text='.rawurlencode($message)];
     }
     private function codeDto(array $p): array {
@@ -458,7 +496,7 @@ final class ChapitourPanel
     public function state(): array {
         $a=$this->actor(); $ready=$this->schemaReady();
         // An already authenticated administrator can apply this additive update without signing out.
-        if ($ready && $a && $a['role']==='admin' && !$a['must_change_password']) { $this->rewards()->install(); $this->installGoogleSchema(); $this->monthlyChallenges()->install(); $this->community()->install(); }
+        if ($ready && $a && $a['role']==='admin' && !$a['must_change_password']) { $this->rewards()->install(); $this->installGoogleSchema(); $this->monthlyChallenges()->install(); $this->community()->install(); $this->installCardsSchema(); }
         $base=['csrf'=>$_SESSION['csrf'],'user'=>null,'businesses'=>[],'promotions'=>[],'codes'=>[],'challenges'=>[],
             'storage'=>'mysql','setup_required'=>!$ready,'server_time'=>time(),'campaign'=>$this->rewards()->status($a),'google_auth'=>$this->googleAuth->settings()];
         if (!$this->googleSchemaReady()) { $base['google_auth']['enabled']=false; }
@@ -472,15 +510,17 @@ final class ChapitourPanel
         }
         $args=[]; $where='WHERE n.activo=1';
         if ($a && $a['role']==='ally') { $where.=' AND n.id=?'; $args[]=$a['business_id']; }
-        $rows=$this->query('SELECT n.* FROM cp_negocios n '.$where.' ORDER BY n.id',$args)->fetchAll(PDO::FETCH_ASSOC);
+        $cardsReady=$this->cardsSchemaReady();
+        $rows=$this->query('SELECT n.*,'.($cardsReady?'COALESCE(f.visible,1)':'1').' AS ficha_visible FROM cp_negocios n '.($cardsReady?'LEFT JOIN cp_panel_fichas f ON f.negocio_id=n.id ':'').$where.' ORDER BY n.id',$args)->fetchAll(PDO::FETCH_ASSOC);
         $styles=['street-grill'=>['flame','pink'],'capital-queer'=>['sparkles','pink'],'gran-chela'=>['beer','yellow'],'garage-disco-bar'=>['music','purple'],'pictogramas'=>['coffee','cyan'],'jimar-factory'=>['target','cyan']];
         foreach ($rows as $b) {
             $key=ChapitourCatalog::key($b['slug'],$b['nombre']);$page=ChapitourCatalog::page($key);
             $style=$styles[$key]??['store','purple'];
             $item=['id'=>(string)$b['id'],'name'=>$b['nombre'],'category'=>$b['categoria']==='Aliado de Chapitour'?$page['category']:$b['categoria'],'slug'=>$b['slug'],'icon'=>$style[0],'color'=>$style[1],
-                'path'=>$this->safePath($b['pagina'])?:$page['path'],'image'=>$this->safePath($b['logo'])?:$page['image'],'whatsapp'=>$b['whatsapp']];
+                'path'=>$this->safePath($b['pagina'])?:$page['path'],'image'=>$this->safePath($b['logo'])?:$page['image'],'whatsapp'=>$b['whatsapp'],'published'=>$this->safePath($b['pagina'])!=='' && (bool)$b['ficha_visible']];
             if ($a && $a['role']==='admin') {
                 $account=$this->row("SELECT id,usuario FROM cp_usuarios WHERE negocio_id=? AND rol='aliado' AND activo=1 ORDER BY id LIMIT 1",[$b['id']]);
+                $item['page_ready']=$this->safePath($b['pagina'])!=='';
                 $item['email']=$account['usuario']??'';
                 $item['account_id']=$account?(string)$account['id']:null;
             }
@@ -520,6 +560,7 @@ final class ChapitourPanel
                 return array_merge($this->state(),['ranking_page'=>$this->community()->leaderboard($page,20)]);
             case 'delete_account': $this->deleteAccount($input); break;
             case 'save_business': $this->saveBusiness($input); break;
+            case 'set_card_visibility': $this->setCardVisibility($input); break;
             case 'delete_business': $this->deleteBusiness($input); break;
             case 'save_promotion': $this->savePromotion($input); break;
             case 'delete_promotion': $this->deletePromotion($input); break;

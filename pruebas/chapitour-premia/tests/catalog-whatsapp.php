@@ -1,0 +1,90 @@
+<?php
+declare(strict_types=1);
+$socket=$argv[1]??'';
+if(PHP_SAPI!=='cli'||!preg_match('#^/private/tmp/chapitour-panel-qa\.[A-Za-z0-9]+/mysql\.sock$#',$socket))throw new RuntimeException('Solo QA temporal.');
+$production=($argv[2]??'production')==='production';
+require $production?__DIR__.'/../../../premia/lib/Panel.php':__DIR__.'/../lib/Panel.php';
+ini_set('session.save_path',dirname($socket));session_start();
+$db=new PDO('mysql:unix_socket='.$socket.';dbname=chapitour_panels_qa;charset=utf8mb4','root','',[PDO::ATTR_ERRMODE=>PDO::ERRMODE_EXCEPTION,PDO::ATTR_DEFAULT_FETCH_MODE=>PDO::FETCH_ASSOC]);
+$db->exec("SET time_zone='+00:00'");$checks=0;
+function q(string $sql,array $args=[]):PDOStatement{global $db;$s=$db->prepare($sql);$s->execute($args);return $s;}
+function check(bool $ok,string $why):void{global $checks;if(!$ok)throw new RuntimeException($why);$checks++;}
+function auth(int $id,string $kind='staff'):void{$_SESSION=['csrf'=>'qa','auth'=>['id'=>$id,'kind'=>$kind,'version'=>1]];}
+function findBusiness(array $state,string $id):array{foreach($state['businesses'] as $b)if($b['id']===$id)return $b;throw new RuntimeException('Falta el negocio.');}
+function rejected(callable $fn,int $status):void{try{$fn();}catch(PanelError $e){check($e->getCode()===$status,'Estado inesperado.');return;}throw new RuntimeException('Debía rechazar la acción.');}
+function message(array $response):string{parse_str(parse_url($response['whatsapp_url'],PHP_URL_QUERY),$params);return $params['text'];}
+$tag=bin2hex(random_bytes(6));$hash=password_hash('Qa-only-456!',PASSWORD_BCRYPT);
+q("INSERT INTO cp_usuarios(usuario,password_hash,rol,activo,cambiar_password) VALUES (?,?,'admin',1,0)",['catalog-admin-'.$tag.'@example.invalid',$hash]);$admin=(int)$db->lastInsertId();
+auth($admin);$panel=new ChapitourPanel($db);$panel->installSchema();
+$email='catalog-ally-'.$tag.'@example.invalid';
+// Even a familiar name with legacy presentation metadata must not auto-publish a new access.
+$state=$panel->handle('save_business',['name'=>'Capital Queer','email'=>$email,'password'=>'Qa-only-456!','pagina'=>'bar/CapitalQueer/index.php','published'=>true]);
+$b=array_values(array_filter($state['businesses'],fn($b)=>$b['email']===$email))[0];$id=$b['id'];$account=$b['account_id'];
+check($b['published']===false,'Crear una cuenta publicó una ficha.');
+check($b['page_ready']===false,'Una ruta de catálogo se confundió con una ficha preparada.');
+rejected(fn()=>$panel->handle('set_card_visibility',['id'=>$id,'visible'=>true]),422);
+check(q('SELECT pagina FROM cp_negocios WHERE id=?',[$id])->fetchColumn()==='','El formulario de cuenta aceptó una publicación.');
+q('UPDATE cp_usuarios SET cambiar_password=0 WHERE id=?',[$account]);auth((int)$account);
+$ally=$panel->state();check(count($ally['businesses'])===1&&$ally['businesses'][0]['id']===$id,'El aliado sin ficha no puede acceder a su negocio.');
+auth($admin);
+q('UPDATE cp_negocios SET pagina=?,direccion=? WHERE id=?',['bar/Gran&Chela_Club/index.php','Carrera QA #7-8, Bogotá',$id]);
+check(findBusiness($panel->state(),$id)['published']===true,'La ficha configurada no aparece como publicada.');
+check(findBusiness($panel->state(),$id)['page_ready']===true,'No detectó la página preparada.');
+$state=$panel->handle('save_promotion',['business_id'=>$id,'description'=>'Beneficio de prueba: café & postre','publication'=>'approved','whatsapp'=>'10000000','included'=>'Solo QA','hours'=>'Solo QA','restrictions'=>'Solo QA','confirmed'=>true]);
+$promo=(int)q('SELECT id FROM cp_promociones WHERE negocio_id=?',[$id])->fetchColumn();
+q('INSERT INTO cp_clientes(nombre,email,password_hash) VALUES (?,?,?)',['Cliente QA','catalog-client-'.$tag.'@example.invalid',$hash]);$client=(int)$db->lastInsertId();
+q('INSERT INTO cp_visitantes(identidad_hash,ip_hash,referido_token) VALUES (?,?,?)',[hash('sha256','v-'.$tag),hash('sha256','ip-'.$tag),bin2hex(random_bytes(16))]);$visitor=(int)$db->lastInsertId();
+q('INSERT INTO cp_cliente_visitantes(cliente_id,visitante_id) VALUES (?,?)',[$client,$visitor]);
+$campaign=(int)q('SELECT id FROM cp_campanas ORDER BY id LIMIT 1')->fetchColumn();
+q("INSERT INTO cp_oportunidades(visitante_id,campana_id,origen,origen_clave) VALUES (?,?,'qa',?)",[$visitor,$campaign,$tag]);$opportunity=(int)$db->lastInsertId();
+$code='QA-WA-'.$tag;
+q("INSERT INTO cp_premios(oportunidad_id,visitante_id,campana_id,negocio_id,promocion_id,codigo,solicitud_id,titulo,descripcion,condiciones,creado_at,vence_at) VALUES (?,?,?,?,?,?,?,'Oferta QA','Beneficio de prueba: café & postre','Solo QA',UTC_TIMESTAMP(),DATE_ADD(UTC_TIMESTAMP(),INTERVAL 72 HOUR))",[$opportunity,$visitor,$campaign,$id,$promo,$code,$tag]);$prize=(int)$db->lastInsertId();
+q('INSERT INTO cp_premio_detalles(premio_id,negocio,direccion,whatsapp) VALUES (?,?,?,?)',[$prize,'Negocio del premio QA','Calle QA #1-2, Bogotá','10000000']);
+$businessBefore=q('SELECT * FROM cp_negocios WHERE id=?',[$id])->fetch();
+$promotionBefore=q('SELECT * FROM cp_promociones WHERE id=?',[$promo])->fetch();
+$accountBefore=q('SELECT * FROM cp_usuarios WHERE id=?',[$account])->fetch();
+$prizeBefore=q('SELECT * FROM cp_premios WHERE id=?',[$prize])->fetch();
+auth($admin);
+foreach(['true',1,null,[]] as $invalid)rejected(fn()=>$panel->handle('set_card_visibility',['id'=>$id,'visible'=>$invalid]),422);
+rejected(fn()=>$panel->handle('set_card_visibility',['id'=>'4294967295','visible'=>true]),404);
+$state=$panel->handle('set_card_visibility',['id'=>$id,'visible'=>false]);
+check(findBusiness($state,$id)['published']===false&&findBusiness($state,$id)['page_ready']===true,'Ocultar no separa publicación y página.');
+$panel->handle('set_card_visibility',['id'=>$id,'visible'=>false]);
+check((int)q("SELECT COUNT(*) FROM cp_auditoria WHERE accion='ficha_ocultada' AND entidad_id=?",[$id])->fetchColumn()===1,'Reintentar ocultar duplica el cambio.');
+$_SESSION=['csrf'=>'qa'];$fresh=new ChapitourPanel($db);
+check(findBusiness($fresh->state(),$id)['published']===false,'La preferencia no persiste en una nueva sesión pública.');
+rejected(fn()=>$fresh->handle('set_card_visibility',['id'=>$id,'visible'=>true]),403);
+auth((int)$account);rejected(fn()=>$fresh->handle('set_card_visibility',['id'=>$id,'visible'=>true]),403);
+auth($client,'client');rejected(fn()=>$fresh->handle('set_card_visibility',['id'=>$id,'visible'=>true]),403);
+check($businessBefore===q('SELECT * FROM cp_negocios WHERE id=?',[$id])->fetch(),'Ocultar alteró el negocio o su página.');
+check($promotionBefore===q('SELECT * FROM cp_promociones WHERE id=?',[$promo])->fetch(),'Ocultar alteró una promoción.');
+check($accountBefore===q('SELECT * FROM cp_usuarios WHERE id=?',[$account])->fetch(),'Ocultar alteró el acceso del aliado.');
+check($prizeBefore===q('SELECT * FROM cp_premios WHERE id=?',[$prize])->fetch(),'Ocultar alteró un premio emitido.');
+auth($client,'client');$before=q('SELECT * FROM cp_premios WHERE id=?',[$prize])->fetch();
+$response=$panel->handle('whatsapp',['code'=>$code,'direccion'=>'Manipulada','pagina'=>'https://ejemplo.invalid']);$text=message($response);
+check(strpos($response['whatsapp_url'],'https://wa.me/10000000?text=')===0,'Contacto incorrecto.');
+foreach(['Negocio: Negocio del premio QA','Promoción: Beneficio de prueba: café & postre','Código único: '.$code,'Dirección: Calle QA #1-2, Bogotá','Página del negocio: https://chapitour.co/bar/Gran&Chela_Club/index.php'] as $part)check(strpos($text,$part)!==false,'Falta '.$part);
+check(strpos($text,'Manipulada')===false,'Aceptó dirección enviada por el navegador.');
+check($before===q('SELECT * FROM cp_premios WHERE id=?',[$prize])->fetch(),'Abrir WhatsApp redimió o cambió el premio.');
+q("UPDATE cp_premio_detalles SET direccion='' WHERE premio_id=?",[$prize]);
+check(strpos(message($panel->handle('whatsapp',['code'=>$code])),'Dirección: Carrera QA #7-8, Bogotá')!==false,'Premio antiguo sin dirección no usa la del negocio.');
+q("UPDATE cp_negocios SET direccion='',pagina='https://ejemplo.invalid' WHERE id=?",[$id]);
+$text=message($panel->handle('whatsapp',['code'=>$code]));
+check(strpos($text,'Dirección: Por confirmar con el negocio.')!==false,'Inventó una dirección faltante.');
+check(strpos($text,'Página del negocio: Aún no publicada en Chapitour.')!==false&&strpos($text,'ejemplo.invalid')===false,'Enlace no permitido.');
+check(findBusiness($panel->state(),$id)['published']===false,'Una ruta no válida publicó una ficha.');
+auth($admin);rejected(fn()=>$panel->handle('set_card_visibility',['id'=>$id,'visible'=>true]),422);auth($client,'client');
+q("UPDATE cp_premios SET vence_at=DATE_SUB(UTC_TIMESTAMP(),INTERVAL 1 SECOND) WHERE id=?",[$prize]);rejected(fn()=>$panel->handle('whatsapp',['code'=>$code]),409);
+q("UPDATE cp_premios SET vence_at=DATE_ADD(UTC_TIMESTAMP(),INTERVAL 72 HOUR),redimido_at=UTC_TIMESTAMP() WHERE id=?",[$prize]);rejected(fn()=>$panel->handle('whatsapp',['code'=>$code]),409);
+q("UPDATE cp_premios SET redimido_at=NULL WHERE id=?",[$prize]);
+$_SESSION=['csrf'=>'qa'];rejected(fn()=>$panel->handle('whatsapp',['code'=>$code]),$production?404:403);
+auth($admin);q('UPDATE cp_negocios SET pagina=? WHERE id=?',['bar/CapitalQueer/index.php',$id]);
+check(findBusiness($panel->state(),$id)['published']===false,'Editar la página perdió la preferencia de ocultar.');
+$state=$panel->handle('set_card_visibility',['id'=>$id,'visible'=>true]);
+check(findBusiness($state,$id)['published']===true,'Mostrar no volvió a publicar la ficha.');
+$_SESSION=['csrf'=>'qa'];check(findBusiness((new ChapitourPanel($db))->state(),$id)['published']===true,'Mostrar no persiste para visitantes.');auth($admin);
+$businessBefore=q('SELECT * FROM cp_negocios WHERE id=?',[$id])->fetch();
+$state=$panel->handle('delete_business',['id'=>$id,'confirm'=>$id,'account_id'=>$account]);
+check(findBusiness($state,$id)['published']===true,'Eliminar acceso retiró la ficha pública.');
+check($businessBefore===q('SELECT * FROM cp_negocios WHERE id=?',[$id])->fetch(),'Eliminar acceso cambió el negocio.');
+echo 'PASS '.($production?'principal':'pruebas').": $checks comprobaciones de visibilidad persistente, permisos, WhatsApp y conservación de cuentas, promociones y premios.\n";

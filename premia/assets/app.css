@@ -92,3 +92,17 @@ body.modal-open{overflow:hidden}dialog{background:radial-gradient(ellipse at 50%
 
 /* Public ranking information at registration. */
 .registration-ranking-note{line-height:1.7;text-align:left;padding:12px 14px;border:1px solid #3d3348;border-radius:10px;background:#24172b50}
+
+/* Visibilidad de las fichas, independiente de las cuentas y las promociones. */
+.admin-tabs{overflow-x:auto}.admin-tabs .nav-item{flex-shrink:0;white-space:nowrap}
+.cards-count{flex-shrink:0;border:1px solid #45415d;border-radius:20px;padding:9px 13px;color:var(--cyan);font-size:12px}
+.cards-help{color:#b3b4c9;font-size:12px;line-height:1.7;margin-bottom:22px;max-width:760px}
+.public-cards-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.visibility-card{display:flex;flex-direction:column;min-width:0;border:1px solid #343349;border-radius:13px;padding:20px;background:linear-gradient(145deg,#1d1a30,#121420)}
+.visibility-card-header{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:19px}
+.card-logo{width:56px;height:56px;border-radius:12px;display:grid;place-items:center;overflow:hidden;background:#090b12;flex-shrink:0}.card-logo img{width:100%;height:100%;object-fit:contain}.card-logo>.icon{width:28px;height:28px}
+.card-visibility{display:inline-flex;align-items:center;gap:5px;font-size:10px;line-height:1.5;padding:5px 8px;border:1px solid #45415d;border-radius:20px}.card-visibility .icon{width:13px;height:13px;flex-shrink:0}.card-visibility.is-visible{color:#69ebc4;border-color:#2c73634d;background:#143d3533}.card-visibility.is-hidden{color:#c5b9de;background:#aa81ec0d}.card-visibility.is-pending{color:var(--yellow);border-color:#77733866}
+.visibility-card h3{font-size:16px;margin-bottom:7px;overflow-wrap:anywhere}.visibility-card>p{color:#acabc0;font-size:11px;line-height:1.6;margin-bottom:20px}
+.visibility-card-actions{margin-top:auto;display:flex;flex-direction:column;gap:12px}.visibility-card-actions>.btn{width:100%;font-size:12px;min-height:44px}.card-preview{display:flex;align-items:center;justify-content:center;gap:8px;color:#c4b3de;font-size:12px;min-height:36px}.card-preview:hover{color:white}.card-preview .icon{width:14px;height:14px}.card-pending-note{color:#acabc0;font-size:11px;line-height:1.6}.public-cards-empty{grid-column:1/-1}
+@media(max-width:1200px){.public-cards-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:600px){.public-cards-grid{grid-template-columns:1fr}.public-cards-panel .section-heading{align-items:flex-start;flex-direction:column;gap:14px}.visibility-card{padding:18px}.admin-tabs{gap:0}.admin-tabs .nav-item{padding:12px 10px}.cards-count{font-size:11px}}

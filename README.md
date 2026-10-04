@@ -95,3 +95,30 @@ Tras la confirmación del propietario, se eliminaron en producción el cliente I
 Se completó la ficha existente del negocio ID 11, sin duplicarla ni modificar su acceso o sus promociones. En `cp_negocios` quedaron la categoría `Tatuajes y piercings`, el WhatsApp `573146446837`, la página `experiencias/canvas-tattoo/index.php` y el logo `experiencias/canvas-tattoo/logo.svg`. La ruta local redirige únicamente a `https://www.canvastattoocolombia.com/`. El logo es una copia sin modificaciones del archivo `Diseñosintítulo.svg` utilizado por su web oficial; no depende de cargar una imagen de terceros en la portada.
 
 Se publicaron los dos archivos mediante `chapitour-canvas-20261003.zip`. Verificación: sintaxis PHP correcta, redirección HTTP 302 a la web oficial, logo publicado idéntico al original, datos correctos en la API pública y tarjeta con el logo visible en Chrome. La información pública anterior se conservó fuera del sitio en `/private/tmp/chapitour-canvas-before.json`.
+
+## Ficha de Street Grill restaurada · 3 de octubre de 2026
+
+Se completó el registro activo existente ID 13, `Gastro Bar Street Grill`, con la página `gastronomia/streetgrill/index.php`, el logo `gastronomia/streetgrill/img/logo.jpeg` y la categoría `Gastronomía`. La actualización en producción se restringió a su ID, slug y nombre; no creó otro negocio ni modificó cuentas, teléfono, promociones o códigos. Ambos recursos existentes respondieron correctamente; la API pública y Chrome confirmaron el logo y el enlace en la misma ficha. Copia de los datos públicos anteriores: `/private/tmp/chapitour-streetgrill-before.json`. No fue necesario desplegar archivos de ejecución.
+
+### Catálogo público y BogoPork — 2026-10-03
+
+- Orden de portada: Canvas Tattoo primero, Gastro Bar Street Grill sexto y Capital Queer último; los demás conservan su orden relativo. Aplicado también a la copia de pruebas, sin alterar la selección de premios.
+- Ale (negocio 12, sin cuentas ni promociones) quedó inactivo en producción; no se borró historial.
+- BogoPork (negocio 14) apunta a `gastronomia/bogopork/index.php`, con logo local, categoría Gastronomía y dirección Carrera 8B #57-14, Chapinero, Bogotá. Se conservó su WhatsApp 573053861333.
+- Fuente de datos: https://www.instagram.com/bogopork/ y https://linktr.ee/bogopork/, consultados el 2026-10-03. Menú enlazado desde el Linktree oficial, sin copiar precios ni crear promociones. Fotografías del carrusel https://www.instagram.com/bogopork/p/C-84QxIJtht/; crédito @renekimaru_art visible en la página.
+- Verificación: PHP/JS sin errores de sintaxis; navegación, imágenes, enlaces y orden del catálogo comprobados a 1440, 390 y 320 px.
+
+### Accesos independientes y WhatsApp — 2026-10-03
+
+- La portada solo muestra registros con `published=true`, calculado desde una ruta válida configurada explícitamente en `cp_negocios.pagina`. Crear una cuenta no configura esa ruta; los metadatos por nombre no publican fichas. El panel de administración conserva todos los negocios y distingue «Ficha publicada» de «Sin ficha pública». Eliminar o recrear un acceso conserva la publicación existente.
+- El mensaje de redención incluye negocio, promoción, código, dirección y URL absoluta de su página. Conserva la dirección del premio si existe y usa la dirección actual del negocio si el premio antiguo no la guardó. No acepta estos datos del navegador ni marca el premio como redimido. Los datos ausentes se indican como pendientes, sin inventarlos.
+- Se completaron únicamente campos vacíos de producción: página y dirección de Pictogramas (ID 8), dirección de Canvas Tattoo (ID 11, Carrera 13 #60-19, según su web oficial) y Street Grill (ID 13, Carrera 9 #57-85, según su página existente). Las ocho fichas previas conservan su orden.
+- Verificado en MySQL temporal: 21 comprobaciones por cada copia (principal/pruebas), incluyendo permisos, alta de cuenta con nombre conocido, publicación explícita, eliminación de acceso, contenido del mensaje, acentos/enlaces y rechazo de códigos vencidos o redimidos. Chrome local comprobó que un acceso nuevo permanece en el panel y no aparece en portada, en ambas copias.
+- Publicado mediante `chapitour-accesos-whatsapp-20261003.zip` (seis archivos). Respaldo previo fuera del sitio: `/private/tmp/chapitour-accesos-whatsapp-before-20261003.zip`. API de producción con ocho fichas publicadas, ambos JavaScript idénticos a los probados y nueva versión de caché confirmados.
+
+### Fichas públicas — 2026-10-03
+
+- Administración → Fichas públicas permite mostrar u ocultar cada ficha del listado principal, con su estado y un enlace para revisar la página. Los negocios sin una ruta preparada no pueden publicarse desde este control.
+- `cp_panel_fichas` guarda la preferencia por negocio, separada de `cp_negocios.activo`, la página y los accesos. La migración aditiva `premia/database/fichas_cp.sql` se instala al acceder como administrador; sin preferencias previas se conserva la visibilidad de las páginas existentes. La copia de pruebas incluye la misma migración.
+- La acción `set_card_visibility` exige administrador y CSRF, valida el estado solicitado y guarda el cambio en una transacción con auditoría. Ocultar no afecta cuentas, promociones, premios ni enlaces de WhatsApp; crear una cuenta continúa sin publicar una ficha.
+- Verificación aislada: `tests/catalog-whatsapp.php` pasó 43 comprobaciones por versión. `tests/card-visibility.cjs` comprobó mostrar/ocultar, recarga, recuperación de errores, fichas pendientes, orden y estado vacío en Chrome a 1440, 390 y 320 px. Los cambios de visibilidad de estas pruebas usan exclusivamente datos de QA.
