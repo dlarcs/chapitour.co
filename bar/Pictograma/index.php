@@ -50,7 +50,7 @@
 
   <meta
     property="og:description"
-    content="Disfruta cócteles, granizados, micheladas, bolivianas, cervezas, café y bolirana en Pictogramas Cafe Bar, ubicado en Chapinero, Bogotá."
+    content="Disfruta cócteles, granizados, micheladas,  cervezas, café y bolirana en Pictogramas Cafe Bar, ubicado en Chapinero, Bogotá."
   >
 
   <meta
@@ -151,7 +151,7 @@
         "@type": "BarOrPub",
         "@id": "https://chapitour.co/bar/Pictograma/index.php#bar",
         "name": "Pictogramas Cafe Bar",
-        "description": "Pictogramas Cafe Bar es un lugar en Chapinero para disfrutar cócteles, granizados, licores, micheladas, bolivianas, cervezas, café y partidas de bolirana en un ambiente agradable para compartir con amigos.",
+        "description": "Pictogramas Cafe Bar es un lugar en Chapinero para disfrutar cócteles, granizados, licores, micheladas,  cervezas, café y partidas de bolirana en un ambiente agradable para compartir con amigos.",
         "url": "https://chapitour.co/bar/Pictograma/index.php",
         "image": "https://chapitour.co/bar/Pictograma/img/logo.jpeg",
         "telephone": "+573502835648",
@@ -160,7 +160,7 @@
           "Granizados",
           "Licores",
           "Micheladas",
-          "Bolivianas",
+          "",
           "Cervezas",
           "Café"
         ],

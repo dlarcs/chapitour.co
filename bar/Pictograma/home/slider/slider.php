@@ -63,7 +63,7 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
       <h1>Bebidas para disfrutar</h1>
 
       <p>
-        Encuentra cócteles, granizados, licores, micheladas, bolivianas,
+        Encuentra cócteles, granizados, licores, micheladas,
         cervezas y café para acompañar tus mejores momentos.
       </p>
 

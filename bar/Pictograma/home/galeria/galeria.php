@@ -17,7 +17,7 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
 
   <p>
     Un espacio agradable para compartir con amigos, disfrutar cócteles, granizados,
-    licores, micheladas, bolivianas, cervezas y café, mientras te diviertes jugando bolirana.
+    licores, micheladas, cervezas y café, mientras te diviertes jugando bolirana.
   </p>
 
   <div class="gallery-grid">

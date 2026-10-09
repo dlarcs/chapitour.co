@@ -19,7 +19,7 @@
   <!-- SEO principal para Google -->
   <meta
     name="description"
-    content="Reserva en Pictogramas Cafe Bar, un lugar en Chapinero para disfrutar cócteles, granizados, licores, micheladas, bolivianas, cervezas, café y divertidas partidas de bolirana."
+    content="Reserva en Pictogramas Cafe Bar, un lugar en Chapinero para disfrutar cócteles, granizados, licores, micheladas,  cervezas, café y divertidas partidas de bolirana."
   >
 
   <meta
@@ -136,7 +136,7 @@
         "@type": "BarOrPub",
         "@id": "https://www.chapitour.co/bar/Pictograma/index.php#bar",
         "name": "Pictogramas Cafe Bar",
-        "description": "Pictogramas Cafe Bar es un lugar en Chapinero para disfrutar cócteles, granizados, licores, micheladas, bolivianas, cervezas, café y partidas de bolirana en un ambiente agradable para compartir con amigos.",
+        "description": "Pictogramas Cafe Bar es un lugar en Chapinero para disfrutar cócteles, granizados, licores, micheladas,  cervezas, café y partidas de bolirana en un ambiente agradable para compartir con amigos.",
         "url": "https://www.chapitour.co/bar/Pictograma/index.php",
         "image": "https://www.chapitour.co/bar/Pictograma/img/logo.jpeg",
         "telephone": "+57 313 884 6378",
@@ -144,7 +144,7 @@
           "Cócteles",
           "Granizados",
           "Micheladas",
-          "Bolivianas",
+          "",
           "Cervezas",
           "Café"
         ],

@@ -18,7 +18,7 @@
   <!-- SEO principal para Google -->
   <meta
     name="description"
-    content="Descubre las actividades y promociones de Pictogramas Cafe Bar. Disfruta cócteles, granizados, licores, micheladas, bolivianas, cervezas, café y partidas de bolirana en un ambiente ideal para compartir."
+    content="Descubre las actividades y promociones de Pictogramas Cafe Bar. Disfruta cócteles, granizados, licores, micheladas,  cervezas, café y partidas de bolirana en un ambiente ideal para compartir."
   >
 
   <meta
@@ -49,7 +49,7 @@
 
   <meta
     property="og:description"
-    content="Conoce las actividades y promociones de Pictogramas Cafe Bar. Disfruta cócteles, granizados, micheladas, bolivianas, cervezas, café, licores y divertidas partidas de bolirana."
+    content="Conoce las actividades y promociones de Pictogramas Cafe Bar. Disfruta cócteles, granizados, micheladas,  cervezas, café, licores y divertidas partidas de bolirana."
   >
 
   <meta
@@ -88,7 +88,7 @@
 
   <meta
     name="twitter:description"
-    content="Descubre cócteles, granizados, licores, micheladas, bolivianas, cervezas, café y bolirana en Pictogramas Cafe Bar."
+    content="Descubre cócteles, granizados, licores, micheladas,  cervezas, café y bolirana en Pictogramas Cafe Bar."
   >
 
   <meta
@@ -135,14 +135,13 @@
         "@type": "BarOrPub",
         "@id": "https://www.chapitour.co/bar/Pictograma/index.php#bar",
         "name": "Pictogramas Cafe Bar",
-        "description": "Pictogramas Cafe Bar es un espacio para disfrutar cócteles, granizados, licores, micheladas, bolivianas, cervezas y café. También cuenta con bolirana para compartir y divertirse con amigos.",
+        "description": "Pictogramas Cafe Bar es un espacio para disfrutar cócteles, granizados, licores, micheladas,  cervezas y café. También cuenta con bolirana para compartir y divertirse con amigos.",
         "url": "https://www.chapitour.co/bar/Pictograma/index.php",
         "image": "https://www.chapitour.co/bar/Pictograma/img/logo.jpeg",
         "servesCuisine": [
           "Cócteles",
           "Granizados",
           "Micheladas",
-          "Bolivianas",
           "Cervezas",
           "Café"
         ],

@@ -19,7 +19,7 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
     <p>
       Pictogramas Cafe Bar es un lugar pensado para compartir, disfrutar y pasar
       un buen momento con amigos. Nuestra propuesta reúne cócteles, granizados,
-      licores, micheladas, bolivianas, cervezas y café en un ambiente agradable
+      licores, micheladas, cervezas y café en un ambiente agradable
       y lleno de buena energía.
     </p>
 

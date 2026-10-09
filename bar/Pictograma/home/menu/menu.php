@@ -41,7 +41,7 @@ $jsVer  = is_file($jsFile) ? filemtime($jsFile) : '';
       <div>
         <h3>Cócteles y bebidas</h3>
         <p class="descripcion-card">
-          Disfruta cócteles, granizados, licores, micheladas, bolivianas y cervezas
+          Disfruta cócteles, granizados, licores, micheladas y cervezas
           preparadas para acompañar tus mejores momentos.
         </p>
       </div>
